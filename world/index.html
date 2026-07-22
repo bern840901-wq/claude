@@ -69,6 +69,9 @@
   .sw-brand__mark .seal-tilde{position:absolute;left:0;top:-4px;width:36px;display:flex;justify-content:center;font-family:'Caveat',cursive;font-weight:700;font-size:20px;line-height:1;color:#E8410E;transform:rotate(-5deg);}
   .sw-brand__mark .seal-yeok{position:absolute;right:-2px;bottom:0;font-family:'Gaegu',cursive;font-weight:700;font-size:12px;line-height:1;color:#E8410E;transform:rotate(4deg);}
   .sw-root .sw-brand__name{font-family:'Noto Serif TC','Noto Serif KR',serif;font-weight:900;}
+  .sw-backlink{text-decoration:none;font-weight:600;font-size:.88rem;color:#14110D;border:1.5px solid rgba(20,17,13,.3);padding:9px 16px;border-radius:999px;white-space:nowrap;transition:transform .2s,border-color .2s;}
+  .sw-backlink:hover{transform:rotate(-1deg) translateY(-1px);border-color:#E8410E;color:#E8410E;}
+  @media (max-width:860px){.sw-backlink{display:none}}
 
   </style>
 </head>
@@ -191,6 +194,7 @@
       container.querySelectorAll('.sw-nav__item').forEach((b, i) => { if (secs[i]) b.textContent = secs[i].label || ''; });
       container.querySelectorAll('.sw-route__label').forEach((r, i) => { if (secs[i]) r.textContent = secs[i].label || ''; });
       const topcta = container.querySelector('.sw-topcta'); if (topcta) topcta.textContent = W.topCta[l];
+      const back = container.querySelector('.sw-backlink'); if (back) back.textContent = W.copy[l][6].cta.secondary.label + ' \u2197';
       const hint = container.querySelector('.sw-hint span'); if (hint) hint.textContent = W.hints[l];
       document.querySelectorAll('.lang-pill button').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
       const url = new URL(location.href); url.searchParams.set('lang', l); history.replaceState(null, '', url);
@@ -213,6 +217,14 @@
       document.body.appendChild(n);
     }
 
+
+    // persistent "back to the full portfolio" link in the topbar (plan B: the
+    // original site stays the homepage; this page lives at /world)
+    const topbar = container.querySelector('.sw-topbar');
+    const backLink = document.createElement('a');
+    backLink.className = 'sw-backlink';
+    backLink.href = W.site;
+    topbar.insertBefore(backLink, container.querySelector('.sw-topcta'));
 
     // intro: click to skip, auto-remove after the hide animation
     const intro = document.getElementById('sw-intro');

@@ -1,32 +1,36 @@
-# 游宏斌作品集 — scroll-world 改造版
+# 游宏斌作品集 — scroll-world 電影頁
 
-原站 [twkrpuente.web.app](https://twkrpuente.web.app/) 的「scroll-world」重製：
+原站 [twkrpuente.web.app](https://twkrpuente.web.app/) 的「scroll-world」姊妹頁：
 捲動即推動一台攝影機，從日出機場出發，一鏡到底穿過 7 個真實口譯工作場景
 （政府會談廳 → 技術談判室 → 電視攝影棚 → 展會大廳 → 口譯筆記書房 → 首爾夜景收尾）。
 
 - **文案 100% 原站原文**（中／韓／英／西四語，右下角切換；切語言只換文字，鏡頭不動）
-- **目前為 PREVIZ 佔位模式**：`world-config.js` 首行 `USE_PLACEHOLDERS = true`，
-  以品牌色扁平插畫預覽整條旅程；Higgsfield 實景渲染完成後改為 `false` 即上線
-- 品牌沿用原站：米色紙 `#EDE6D5`・墨黑 `#14110D`・朱紅 `#E8410E`
+- **實景影片已完成**：桌機 16:9 七支（1080p）＋手機原生 9:16 七支（Veo 3.1 生成，逐格鎖接縫）
+- **原站印章語言已移植**：手繪橋開場動畫、譯~역 印章 logo、蓋章式細節
+- 架構採**方案 B**：原站當首頁，本頁掛在 `/world/` 子路徑（見 `DEPLOY.md`）
 
 ## 檔案
 
 | 檔案 | 說明 |
 |---|---|
-| `index.html` | 頁面入口：主題、字型、語言切換、掛載引擎 |
-| `scrub-engine.js` | scroll-world 捲動引擎（skill 原版，未改） |
-| `world-config.js` | 7 景設定 + 四語文案（自原站字典逐字生成，勿手改文案） |
-| `assets/stills/ph-*.svg` | 佔位場景圖（7 橫式 + 7 直式） |
-| `pipeline/` | Higgsfield 渲染管線：prompts、批次腳本、費用估算、QA 清單 |
+| `world/index.html` | 頁面入口：主題、開場動畫、語言切換、掛載引擎 |
+| `world/scrub-engine.js` | scroll-world 捲動引擎（skill 原版，未改） |
+| `world/world-config.js` | 7 景設定 + 四語文案（自原站字典逐字生成，勿手改文案） |
+| `world/assets/vid/*.mp4` | 桌機 16:9（`<id>.mp4`）＋手機 9:16（`<id>-m.mp4`）鏡頭鏈 |
+| `world/assets/stills/` | 各景海報（= 影片第一格）＋早期佔位插畫（ph-*.svg） |
+| `pipeline/` | 當初的 Higgsfield 渲染管線（prompts、腳本、QA 清單），留檔備用 |
+| `DEPLOY.md` | 上線步驟（Firebase）＋原站入口按鈕貼片 |
 
 ## 本機預覽
 
 ```bash
-npx http-server -p 8080   # 或任何靜態伺服器
-# open http://localhost:8080/?lang=zh   (zh / ko / en / es)
+npx http-server -p 8080
+# open http://localhost:8080/world/?lang=zh   (zh / ko / en / es)
 ```
 
-## 下一步：實景渲染
+## 製作記事
 
-見 [`pipeline/README.md`](pipeline/README.md) — 需要 `higgsfield auth login`
-（瀏覽器 OAuth）與約 890–1130 credits（桌機＋手機原生 9:16 兩條鏈）。
+- 桌機與手機是兩條獨立渲染的鏡頭鏈（手機非裁切），皆採 Architecture A
+  連續前進長鏡頭：每段起始畫格 = 上一段實際渲染的最後一格
+- 影片由 Google Flow（Veo 3.1）人工接力生成，共 20 支（含重roll），
+  Higgsfield credits 僅在初期校準時花費 7 點
