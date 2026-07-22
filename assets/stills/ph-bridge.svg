@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" width="1536" height="1024">
+  <defs>
+    <pattern id="gr" width="6" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r=".7" fill="#14110D"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E8410E" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#E8410E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lamp" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F5D9A8" stop-opacity=".9"/>
+      <stop offset="100%" stop-color="#F5D9A8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1536" height="1024" fill="#EDE6D5"/>
+  
+  <rect y="620" width="1536" height="404" fill="#E2D9C4"/>
+  <circle cx="1050" cy="430" r="150" fill="#E8410E" opacity=".85"/>
+  <circle cx="1050" cy="430" r="260" fill="url(#glow)" opacity=".5"/>
+  <rect y="600" width="1536" height="26" fill="#C9BFA8"/>
+  <!-- sea -->
+  <g stroke="#C9BFA8" stroke-width="5" opacity=".8">
+    <path d="M80 700 h180 M340 760 h140 M980 720 h180 M1240 780 h130 M600 820 h200"/>
+  </g>
+  <!-- left shore: Taiwan-ish island mound -->
+  <path d="M-20 640 Q120 520 260 610 Q330 650 380 640 L380 1024 L-20 1024 Z" fill="#14110D"/>
+  <!-- right shore: globe arc -->
+  <path d="M1250 660 A420 420 0 0 1 1536 560 L1536 1024 L1250 1024 Z" fill="#14110D" opacity=".92"/>
+  <!-- suspension bridge -->
+  <g stroke="#14110D" stroke-width="14" fill="none">
+    <path d="M300 640 H1300"/>
+    <path d="M420 400 V640 M1150 400 V640" stroke-width="18"/>
+    <path d="M300 640 Q420 420 540 640" stroke-width="8"/>
+    <path d="M420 400 Q780 560 1150 400" stroke-width="8"/>
+    <path d="M1040 640 Q1150 430 1290 640" stroke-width="8"/>
+  </g>
+  <g stroke="#14110D" stroke-width="5" opacity=".7">
+    <path d="M520 560 V640 M640 590 V640 M780 610 V640 M920 595 V640 M1060 560 V640"/>
+  </g>
+  <!-- walking figure with briefcase -->
+  
+  <g transform="translate(700,620) scale(1.15)" fill="#14110D" opacity="1">
+    <circle cx="0" cy="-46" r="11"/>
+    <path d="M-14 -34 Q0 -42 14 -34 L12 8 Q0 12 -12 8 Z"/>
+  </g>
+  <rect x="716" y="596" width="26" height="20" rx="3" fill="#E8410E"/>
+  <g fill="#14110D" opacity=".65">
+    <path d="M350 260 q14 -16 28 0 q14 -16 28 0" stroke="#14110D" stroke-width="6" fill="none"/>
+    <path d="M470 210 q12 -14 24 0 q12 -14 24 0" stroke="#14110D" stroke-width="5" fill="none"/>
+  </g>
+  <rect width="1536" height="1024" fill="url(#gr)" opacity=".05"/>
+  <text x="1518" y="1008" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="15" letter-spacing="3" fill="#14110D" opacity=".32">PREVIZ · 佔位圖</text>
+</svg>

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" width="1536" height="1024">
+  <defs>
+    <pattern id="gr" width="6" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r=".7" fill="#14110D"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E8410E" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#E8410E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lamp" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F5D9A8" stop-opacity=".9"/>
+      <stop offset="100%" stop-color="#F5D9A8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1536" height="1024" fill="#EDE6D5"/>
+  
+  <rect y="680" width="1536" height="344" fill="#E2D9C4"/>
+  <!-- ceiling trusses + daylight -->
+  <g stroke="#C9BFA8" stroke-width="8" opacity=".9">
+    <path d="M0 120 H1536 M0 200 H1536"/>
+    <path d="M100 120 L180 200 M340 120 L420 200 M580 120 L660 200 M820 120 L900 200 M1060 120 L1140 200 M1300 120 L1380 200"/>
+  </g>
+  <!-- booths left-right in perspective -->
+  <g>
+    <path d="M60 360 h380 v300 h-380 z" fill="#D8CDB4"/>
+    <path d="M60 360 h380 l-40 -80 h-300 z" fill="#E8410E"/>
+    <rect x="120" y="470" width="120" height="80" rx="6" fill="#EDE6D5"/>
+    <path d="M1100 360 h380 v300 h-380 z" fill="#D8CDB4"/>
+    <path d="M1100 360 h380 l-40 -80 h-300 z" fill="#14110D"/>
+    <rect x="1300" y="470" width="120" height="80" rx="6" fill="#EDE6D5"/>
+  </g>
+  <!-- hanging banners -->
+  <g>
+    <rect x="600" y="150" width="90" height="190" fill="#E8410E"/>
+    <rect x="730" y="150" width="90" height="160" fill="#14110D"/>
+    <rect x="860" y="150" width="90" height="190" fill="#C9BFA8"/>
+  </g>
+  <!-- aisle -->
+  <path d="M620 1024 L740 400 L820 400 L980 1024 Z" fill="#C9BFA8" opacity=".5"/>
+  <!-- crowd -->
+  
+  <g transform="translate(500,700) scale(1)" fill="#14110D" opacity="1">
+    <circle cx="0" cy="-46" r="11"/>
+    <path d="M-14 -34 Q0 -42 14 -34 L12 8 Q0 12 -12 8 Z"/>
+  </g> 
+  <g transform="translate(1010,690) scale(1)" fill="#14110D" opacity="1">
+    <circle cx="0" cy="-46" r="11"/>
+    <path d="M-14 -34 Q0 -42 14 -34 L12 8 Q0 12 -12 8 Z"/>
+  </g> 
+  <g transform="translate(760,620) scale(0.9)" fill="#14110D" opacity="1">
+    <circle cx="0" cy="-46" r="11"/>
+    <path d="M-14 -34 Q0 -42 14 -34 L12 8 Q0 12 -12 8 Z"/>
+  </g>
+  
+  <g transform="translate(680,720) scale(1.05)" fill="#14110D" opacity="1">
+    <circle cx="0" cy="-46" r="11"/>
+    <path d="M-14 -34 Q0 -42 14 -34 L12 8 Q0 12 -12 8 Z"/>
+  </g> 
+  <g transform="translate(880,730) scale(1.05)" fill="#14110D" opacity="0.9">
+    <circle cx="0" cy="-46" r="11"/>
+    <path d="M-14 -34 Q0 -42 14 -34 L12 8 Q0 12 -12 8 Z"/>
+  </g>
+  
+  <g transform="translate(280,740) scale(1.1)" fill="#14110D" opacity="0.8">
+    <circle cx="0" cy="-46" r="11"/>
+    <path d="M-14 -34 Q0 -42 14 -34 L12 8 Q0 12 -12 8 Z"/>
+  </g> 
+  <g transform="translate(1240,745) scale(1.1)" fill="#14110D" opacity="0.8">
+    <circle cx="0" cy="-46" r="11"/>
+    <path d="M-14 -34 Q0 -42 14 -34 L12 8 Q0 12 -12 8 Z"/>
+  </g>
+  <rect x="672" y="700" width="22" height="16" rx="3" fill="#E8410E"/>
+  <rect width="1536" height="1024" fill="url(#gr)" opacity=".05"/>
+  <text x="1518" y="1008" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="15" letter-spacing="3" fill="#14110D" opacity=".32">PREVIZ · 佔位圖</text>
+</svg>

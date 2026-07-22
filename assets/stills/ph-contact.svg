@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" width="1536" height="1024">
+  <defs>
+    <pattern id="gr" width="6" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r=".7" fill="#14110D"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E8410E" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#E8410E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lamp" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F5D9A8" stop-opacity=".9"/>
+      <stop offset="100%" stop-color="#F5D9A8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1536" height="1024" fill="#EDE6D5"/>
+  
+  <rect width="1536" height="1024" fill="#14110D"/>
+  <circle cx="1150" cy="230" r="90" fill="#E8410E"/>
+  <circle cx="1150" cy="230" r="180" fill="url(#glow)" opacity=".55"/>
+  <!-- skyline -->
+  <g fill="#EDE6D5" opacity=".14">
+    <rect x="60" y="560" width="120" height="464"/>
+    <rect x="220" y="480" width="90" height="544"/>
+    <rect x="350" y="620" width="140" height="404"/>
+    <rect x="540" y="520" width="100" height="504"/>
+    <rect x="1240" y="560" width="120" height="464"/>
+    <rect x="1400" y="500" width="100" height="524"/>
+  </g>
+  <!-- lit windows -->
+  <g fill="#F5D9A8" opacity=".8">
+    <rect x="240" y="510" width="16" height="12"/><rect x="270" y="540" width="16" height="12"/>
+    <rect x="90" y="600" width="16" height="12"/><rect x="120" y="640" width="16" height="12"/>
+    <rect x="560" y="550" width="16" height="12"/><rect x="590" y="590" width="16" height="12"/>
+    <rect x="1270" y="600" width="16" height="12"/><rect x="1430" y="540" width="16" height="12"/>
+  </g>
+  <!-- Namsan tower -->
+  <g fill="#EDE6D5" opacity=".9">
+    <path d="M820 470 L840 690 H800 Z"/>
+    <rect x="796" y="440" width="48" height="26" rx="12"/>
+    <path d="M818 380 h6 v60 h-6 z"/>
+    <path d="M700 690 q120 -90 240 0 z" opacity=".5"/>
+  </g>
+  <circle cx="821" cy="392" r="7" fill="#E8410E"/>
+  <!-- desk in front of window -->
+  <path d="M0 820 L1536 820 L1536 1024 L0 1024 Z" fill="#221D15"/>
+  <rect x="600" y="770" width="240" height="46" rx="8" fill="#EDE6D5" opacity=".92"/>
+  <path d="M600 770 l120 34 l120 -34" stroke="#C9BFA8" stroke-width="6" fill="none"/>
+  <circle cx="1010" cy="784" r="26" fill="url(#lamp)"/>
+  <path d="M986 812 a30 22 0 0 1 52 0 z" fill="#E8410E"/>
+  <rect width="1536" height="1024" fill="url(#gr)" opacity=".05"/>
+  <text x="1518" y="1008" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="15" letter-spacing="3" fill="#14110D" opacity=".32">PREVIZ · 佔位圖</text>
+</svg>

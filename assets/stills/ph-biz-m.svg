@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" width="1080" height="1920">
+  <defs>
+    <pattern id="gr" width="6" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r=".7" fill="#14110D"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E8410E" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#E8410E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lamp" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F5D9A8" stop-opacity=".9"/>
+      <stop offset="100%" stop-color="#F5D9A8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1080" height="1920" fill="#EDE6D5"/>
+  
+  <rect y="1220" width="1080" height="700" fill="#E2D9C4"/>
+  <rect x="90" y="260" width="620" height="420" rx="10" fill="#D8CDB4"/>
+  <g stroke="#14110D" stroke-width="8" opacity=".8" fill="none">
+    <rect x="90" y="260" width="620" height="420" rx="10"/>
+    <path d="M400 260 V680 M90 470 H710"/>
+  </g>
+  <g fill="#14110D" opacity=".75">
+    <circle cx="260" cy="380" r="52"/><circle cx="260" cy="380" r="20" fill="#D8CDB4"/>
+    <circle cx="340" cy="430" r="34"/><circle cx="340" cy="430" r="12" fill="#D8CDB4"/>
+    <rect x="450" y="540" width="200" height="90" rx="8"/>
+  </g>
+  <circle cx="600" cy="360" r="26" fill="#E8410E" opacity=".85"/>
+  <rect x="780" y="300" width="220" height="320" rx="8" fill="#C9BFA8"/>
+  <g stroke="#14110D" stroke-width="5" fill="none" opacity=".75">
+    <rect x="810" y="340" width="110" height="90"/>
+    <path d="M810 480 h160 M810 520 h120"/>
+    <circle cx="900" cy="580" r="30"/>
+  </g>
+  <path d="M870 580 h60 M900 550 v60" stroke="#E8410E" stroke-width="5"/>
+  <path d="M180 1290 L900 1290 L1020 1560 L60 1560 Z" fill="#14110D"/>
+  <g>
+    <rect x="420" y="1330" width="110" height="64" rx="6" fill="#EDE6D5" opacity=".9"/>
+    <rect x="600" y="1340" width="84" height="54" rx="27" fill="#E8410E"/>
+  </g>
+  
+  <g transform="translate(300,1265) scale(1.15)" fill="#14110D" opacity="1">
+    <circle cx="0" cy="-46" r="11"/>
+    <path d="M-14 -34 Q0 -42 14 -34 L12 8 Q0 12 -12 8 Z"/>
+  </g> 
+  <g transform="translate(800,1262) scale(1.1)" fill="#14110D" opacity="1">
+    <circle cx="0" cy="-46" r="11"/>
+    <path d="M-14 -34 Q0 -42 14 -34 L12 8 Q0 12 -12 8 Z"/>
+  </g>
+  <rect width="1080" height="1920" fill="url(#gr)" opacity=".05"/>
+  <text x="1062" y="1904" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="15" letter-spacing="3" fill="#14110D" opacity=".32">PREVIZ · 佔位圖</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" width="1080" height="1920">
+  <defs>
+    <pattern id="gr" width="6" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r=".7" fill="#14110D"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E8410E" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#E8410E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lamp" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F5D9A8" stop-opacity=".9"/>
+      <stop offset="100%" stop-color="#F5D9A8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1080" height="1920" fill="#EDE6D5"/>
+  
+  <rect y="1150" width="1080" height="770" fill="#E2D9C4"/>
+  <circle cx="740" cy="760" r="130" fill="#E8410E" opacity=".85"/>
+  <circle cx="740" cy="760" r="230" fill="url(#glow)" opacity=".5"/>
+  <rect y="1130" width="1080" height="22" fill="#C9BFA8"/>
+  <g stroke="#C9BFA8" stroke-width="5" opacity=".8">
+    <path d="M60 1250 h150 M300 1330 h120 M700 1270 h150 M840 1380 h110 M420 1450 h170"/>
+  </g>
+  <path d="M-20 1170 Q90 1050 210 1140 Q270 1180 320 1170 L320 1920 L-20 1920 Z" fill="#14110D"/>
+  <path d="M850 1180 A380 380 0 0 1 1080 1090 L1080 1920 L850 1920 Z" fill="#14110D" opacity=".92"/>
+  <g stroke="#14110D" stroke-width="12" fill="none">
+    <path d="M240 1170 H900"/>
+    <path d="M330 960 V1170 M810 960 V1170" stroke-width="16"/>
+    <path d="M330 960 Q570 1100 810 960" stroke-width="7"/>
+  </g>
+  <g stroke="#14110D" stroke-width="4" opacity=".7">
+    <path d="M420 1090 V1170 M510 1120 V1170 M600 1128 V1170 M690 1115 V1170"/>
+  </g>
+  
+  <g transform="translate(520,1150) scale(1.2)" fill="#14110D" opacity="1">
+    <circle cx="0" cy="-46" r="11"/>
+    <path d="M-14 -34 Q0 -42 14 -34 L12 8 Q0 12 -12 8 Z"/>
+  </g>
+  <rect x="537" y="1124" width="26" height="20" rx="3" fill="#E8410E"/>
+  <g stroke="#14110D" stroke-width="6" fill="none" opacity=".8">
+    <path d="M240 560 q14 -16 28 0 q14 -16 28 0"/>
+    <path d="M360 500 q12 -14 24 0 q12 -14 24 0"/>
+  </g>
+  <rect width="1080" height="1920" fill="url(#gr)" opacity=".05"/>
+  <text x="1062" y="1904" text-anchor="end" font-family="ui-monospace,Menlo,monospace" font-size="15" letter-spacing="3" fill="#14110D" opacity=".32">PREVIZ · 佔位圖</text>
+</svg>

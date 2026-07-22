@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>游宏斌｜台韓口筆譯・駐首爾 유홍빈</title>
+  <meta name="description" content="游宏斌（유홍빈）— 駐首爾中韓口筆譯・溝通顧問。政府訪團、企業談判、媒體採訪、展會口譯。Bridging Intercultural Communication." />
+  <meta property="og:title" content="游宏斌 유홍빈｜台韓口筆譯・駐首爾 — Bridging Intercultural Communication" />
+  <meta property="og:description" content="대만 출신 한중 통번역사 · 駐首爾中韓口筆譯・溝通顧問。政府訪團、企業談判、媒體採訪、展會口譯。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Noto+Serif+TC:wght@700;900&family=Noto+Serif+KR:wght@700;900&family=Noto+Sans+TC:wght@500;700&family=Space+Mono:wght@400;700&display=swap" />
+  <style>
+    /* Brand theme — same palette as twkrpuente.web.app */
+    :root, .sw-root {
+      --sw-bg: #EDE6D5;
+      --sw-ink: #14110D;
+      --sw-ink-soft: #6d6558;
+      --sw-accent: #E8410E;
+      --sw-font-display: 'Noto Serif TC', 'Noto Serif KR', 'Bricolage Grotesque', serif;
+      --sw-font-body: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    ::selection { background: #E8410E; color: #EDE6D5; }
+    html { scrollbar-color: #14110D #E2D9C4; }
+
+    /* language switcher */
+    .lang-pill {
+      position: fixed; z-index: 70; right: clamp(14px, 2.4vw, 30px); bottom: calc(18px + env(safe-area-inset-bottom));
+      display: flex; gap: 2px; padding: 4px; border-radius: 999px;
+      background: rgba(237, 230, 213, .82); backdrop-filter: blur(8px);
+      border: 1.5px solid rgba(20, 17, 13, .18);
+    }
+    .lang-pill button {
+      font: 700 12px/1 'Space Mono', monospace; letter-spacing: .04em;
+      color: #6d6558; background: transparent; border: 0; cursor: pointer;
+      padding: 8px 11px; border-radius: 999px; transition: color .2s, background .2s;
+    }
+    .lang-pill button:hover { color: #14110D; }
+    .lang-pill button.on { color: #EDE6D5; background: #14110D; }
+
+    /* previz ribbon (placeholder mode only) */
+    .previz-note {
+      position: fixed; z-index: 70; left: 50%; transform: translateX(-50%);
+      bottom: calc(18px + env(safe-area-inset-bottom));
+      font: 400 11px/1.4 'Space Mono', monospace; letter-spacing: .1em;
+      color: rgba(20, 17, 13, .55); background: rgba(237, 230, 213, .8);
+      border: 1px solid rgba(20, 17, 13, .14); border-radius: 999px; padding: 7px 14px;
+      pointer-events: none; white-space: nowrap;
+    }
+    @media (max-width: 860px) { .previz-note { display: none; } }
+  </style>
+</head>
+<body>
+  <div id="top"></div>
+  <div id="world"></div>
+
+  <script src="scrub-engine.js"></script>
+  <script src="world-config.js"></script>
+  <script>
+  (function () {
+    const W = window.WORLD;
+    const PH = window.USE_PLACEHOLDERS;
+
+    // language: ?lang= param > localStorage > default
+    const param = new URLSearchParams(location.search).get('lang');
+    let lang = W.langs.includes(param) ? param : (localStorage.getItem('sw-lang') || W.defaultLang);
+    if (!W.langs.includes(lang)) lang = W.defaultLang;
+
+    const HTML_LANG = { zh: 'zh-Hant', ko: 'ko', en: 'en', es: 'es' };
+
+    function assetsFor(scene) {
+      if (PH) return {
+        still: 'assets/stills/ph-' + scene.id + '.svg',
+        stillMobile: 'assets/stills/ph-' + scene.id + '-m.svg',
+        clip: null, clipMobile: null,
+      };
+      return {
+        still: 'assets/stills/' + scene.id + '.webp',
+        stillMobile: 'assets/stills/' + scene.id + '-m.webp',
+        clip: 'assets/vid/' + scene.id + '.mp4',
+        clipMobile: 'assets/vid/' + scene.id + '-m.mp4',
+      };
+    }
+
+    function sectionsFor(l) {
+      return W.scenes.map((scene, i) => Object.assign(
+        { id: scene.id, accent: '#E8410E', scroll: scene.scroll, linger: scene.linger },
+        assetsFor(scene),
+        W.copy[l][i]
+      ));
+    }
+
+    // ---- mount once ----
+    const container = document.getElementById('world');
+    mountScrollWorld(container, {
+      brand: { name: W.brandName, href: '#top' },
+      cta: { label: W.topCta[lang], href: 'mailto:' + W.email },
+      hint: W.hints[lang],
+      diveScroll: 1.3,
+      crossfade: 0.08,               // architecture A: legs chain directly, tiny dissolve
+      sections: sectionsFor(lang),
+      connectors: [],                // continuous forward take — no connectors
+    });
+
+    // ---- language switching: swap copy in place (video chain untouched) ----
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const pad = n => String(n).padStart(2, '0');
+
+    function applyLanguage(l) {
+      lang = l;
+      localStorage.setItem('sw-lang', l);
+      document.documentElement.lang = HTML_LANG[l];
+      document.title = W.titles[l];
+      const secs = sectionsFor(l);
+      const N = secs.length;
+      container.querySelectorAll('.sw-copy').forEach((c, i) => {
+        const s = secs[i]; if (!s) return;
+        c.innerHTML =
+          '<span class="sw-copy__num">' + pad(i + 1) + ' / ' + pad(N) + '</span>' +
+          (s.eyebrow ? '<span class="sw-copy__eyebrow">' + esc(s.eyebrow) + '</span>' : '') +
+          (s.title ? '<h2 class="sw-copy__title">' + esc(s.title) + '</h2>' : '') +
+          (s.body ? '<p class="sw-copy__body">' + esc(s.body) + '</p>' : '') +
+          (s.tags && s.tags.length ? '<ul class="sw-copy__tags">' + s.tags.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul>' : '') +
+          (s.cta ? '<div class="sw-copy__cta">' +
+            (s.cta.primary ? '<a class="sw-btn sw-btn--primary" href="' + esc(s.cta.primary.href) + '">' + esc(s.cta.primary.label) + '</a>' : '') +
+            (s.cta.secondary ? '<a class="sw-btn sw-btn--ghost" href="' + esc(s.cta.secondary.href) + '">' + esc(s.cta.secondary.label) + '</a>' : '') +
+            '</div>' : '');
+      });
+      container.querySelectorAll('.sw-nav__item').forEach((b, i) => { if (secs[i]) b.textContent = secs[i].label || ''; });
+      container.querySelectorAll('.sw-route__label').forEach((r, i) => { if (secs[i]) r.textContent = secs[i].label || ''; });
+      const topcta = container.querySelector('.sw-topcta'); if (topcta) topcta.textContent = W.topCta[l];
+      const hint = container.querySelector('.sw-hint span'); if (hint) hint.textContent = W.hints[l];
+      document.querySelectorAll('.lang-pill button').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
+      const url = new URL(location.href); url.searchParams.set('lang', l); history.replaceState(null, '', url);
+    }
+
+    // switcher UI
+    const pill = document.createElement('div'); pill.className = 'lang-pill';
+    const NAMES = { zh: '中', ko: '한', en: 'EN', es: 'ES' };
+    W.langs.forEach(l => {
+      const b = document.createElement('button');
+      b.dataset.lang = l; b.textContent = NAMES[l];
+      b.addEventListener('click', () => applyLanguage(l));
+      pill.appendChild(b);
+    });
+    document.body.appendChild(pill);
+
+    if (PH) {
+      const n = document.createElement('div'); n.className = 'previz-note';
+      n.textContent = 'PREVIZ — 場景為佔位圖，待 Higgsfield 實景渲染';
+      document.body.appendChild(n);
+    }
+
+    applyLanguage(lang);
+  })();
+  </script>
+</body>
+</html>
