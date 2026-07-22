@@ -7,7 +7,7 @@ window.MOBILE_READY = true;
 window.WORLD = {
   "brandName": "游宏斌 YU HUNG PIN",
   "email": "twkrbridge@gmail.com",
-  "site": "https://twkrpuente.web.app/",
+  "site": "https://twkrpuente.web.app/home/",
   "langs": [
     "zh",
     "ko",
@@ -72,12 +72,23 @@ window.WORLD = {
         "label": "橋",
         "eyebrow": "臺灣 ⇄ 韓國 · 中韓口筆譯",
         "title": "讓每一句話，都真正相通。",
+        "role": "臺韓口筆譯員 · 赴韓溝通顧問 · 慶熙大學韓語博士候選人 · 國立大學英語主修・西語高級（C1）",
         "body": "以韓語博士級的語言深度，承接從政府高層會談到產業技術談判的跨領域口譯。",
         "tags": [
           "60+ 口筆譯案件",
           "政府・企業・媒體",
           "2026 接案中"
-        ]
+        ],
+        "cta": {
+          "primary": {
+            "label": "洽詢合作",
+            "href": "mailto:twkrbridge@gmail.com"
+          },
+          "secondary": {
+            "label": "查看作品集",
+            "href": "https://twkrpuente.web.app/home/"
+          }
+        }
       },
       {
         "label": "政府·官方",
@@ -152,7 +163,7 @@ window.WORLD = {
           },
           "secondary": {
             "label": "查看作品集",
-            "href": "https://twkrpuente.web.app/"
+            "href": "https://twkrpuente.web.app/home/"
           }
         }
       }
@@ -162,12 +173,23 @@ window.WORLD = {
         "label": "다리",
         "eyebrow": "대만 ⇄ 한국 · 한중 통번역",
         "title": "말이 통하게 해드리겠습니다.",
+        "role": "대만인 통번역사 · 대만 비즈니스 커뮤니케이션 컨설턴트 · 경희대학교 한국어학 박사수료 · 학부 영어 전공·스페인어 고급(C1)",
         "body": "한국어 박사급 언어 전문성으로, 정부 고위급 회담부터 산업 기술 협상까지 폭넓은 분야의 통역을 수행합니다.",
         "tags": [
           "통번역 60여 건",
           "정부·기업·미디어",
           "2026 의뢰 가능"
-        ]
+        ],
+        "cta": {
+          "primary": {
+            "label": "함께 일하기",
+            "href": "mailto:twkrbridge@gmail.com"
+          },
+          "secondary": {
+            "label": "포트폴리오 보기",
+            "href": "https://twkrpuente.web.app/home/"
+          }
+        }
       },
       {
         "label": "정부·공공",
@@ -242,7 +264,7 @@ window.WORLD = {
           },
           "secondary": {
             "label": "포트폴리오 보기",
-            "href": "https://twkrpuente.web.app/"
+            "href": "https://twkrpuente.web.app/home/"
           }
         }
       }
@@ -252,12 +274,23 @@ window.WORLD = {
         "label": "Bridge",
         "eyebrow": "TAIWAN ⇄ KOREA · KOREAN–CHINESE",
         "title": "I’ll make sure your words get through.",
+        "role": "Taiwanese Korean–Chinese Interpreter · Communication Consultant · PhD Candidate, Kyung Hee University · BA in English, C1 Spanish",
         "body": "Bringing PhD-level command of Korean to interpretation that spans high-level government talks to technical industry negotiations.",
         "tags": [
           "60+ engagements",
           "Government / Business / Media",
           "Booking for 2026"
-        ]
+        ],
+        "cta": {
+          "primary": {
+            "label": "Work with me",
+            "href": "mailto:twkrbridge@gmail.com"
+          },
+          "secondary": {
+            "label": "See the portfolio",
+            "href": "https://twkrpuente.web.app/home/"
+          }
+        }
       },
       {
         "label": "Government",
@@ -332,7 +365,7 @@ window.WORLD = {
           },
           "secondary": {
             "label": "See the portfolio",
-            "href": "https://twkrpuente.web.app/"
+            "href": "https://twkrpuente.web.app/home/"
           }
         }
       }
@@ -342,12 +375,23 @@ window.WORLD = {
         "label": "Puente",
         "eyebrow": "TAIWÁN ⇄ COREA · CHINO–COREANO",
         "title": "Haré que sus palabras lleguen.",
+        "role": "Intérprete taiwanés coreano–chino · Asesor de comunicación · Doctorando en Lingüística Coreana, Univ. Kyung Hee · grado en inglés, español C1",
         "body": "Con la profundidad lingüística de un doctorando en coreano, cubro desde reuniones gubernamentales de alto nivel hasta negociaciones técnicas industriales.",
         "tags": [
           "Más de 60 encargos",
           "Gobierno / Empresas / Medios",
           "Agenda 2026 abierta"
-        ]
+        ],
+        "cta": {
+          "primary": {
+            "label": "Trabajemos juntos",
+            "href": "mailto:twkrbridge@gmail.com"
+          },
+          "secondary": {
+            "label": "Ver portafolio",
+            "href": "https://twkrpuente.web.app/home/"
+          }
+        }
       },
       {
         "label": "Gobierno",
@@ -422,7 +466,7 @@ window.WORLD = {
           },
           "secondary": {
             "label": "Ver portafolio",
-            "href": "https://twkrpuente.web.app/"
+            "href": "https://twkrpuente.web.app/home/"
           }
         }
       }

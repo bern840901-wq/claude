@@ -1,29 +1,44 @@
-# 上線指南 — 方案 B（Cloud Shell 版，照你平常的流程）
+# 上線指南 — 方案 A（Cloud Shell 版）
 
-你平常的部署環境：Google Cloud Shell，專案 `portfolio-c3321`，
-網站資料夾 `~/portfolio-site/twkrpuente/`（原站的 index.html 在裡面）。
+網址規劃：
 
-## 步驟
+```
+twkrpuente.web.app/       ← scroll-world 電影頁（新首頁）
+twkrpuente.web.app/home/  ← 原站（完整作品集，內容原封不動）
+```
+
+電影頁到作品集的通道（客戶隨時可跳過電影）：
+- 開場動畫下方就有「查看作品集 →」按鈕
+- 頂欄常駐朱紅「查看作品集 ↗」膠囊（手機也看得到）
+- 第 1 景 hero 與最後一景各有「查看作品集」CTA
+
+## 部署步驟
 
 **① 下載網站包**（電腦瀏覽器）
-GitHub 開這個倉庫 → 左上角切到分支 `claude/scroll-world-skill-setup-hkgxfz`
-→ 綠色 **Code** → **Download ZIP**（約 117MB）
+GitHub 開倉庫 → 切到分支 `claude/scroll-world-skill-setup-hkgxfz`
+→ **Code → Download ZIP**（約 117MB）
 
-**② 上傳到 Cloud Shell**
-Cloud Shell 右上 ⋮ → **Upload** → 選剛下載的 zip
+**② 上傳到 Cloud Shell**：右上 ⋮ → **Upload** → 選 zip
 
-**③ 貼上這串指令**（解壓＋把 world 放進網站資料夾）
+**③ 解壓＋放進網站資料夾**（原站自動搬到 home/）：
 
 ```bash
 cd ~
 unzip -o -q claude-*.zip
-cp -r ~/claude-*/world ~/portfolio-site/twkrpuente/world
-ls ~/portfolio-site/twkrpuente/world
+cd ~/portfolio-site/twkrpuente
+rm -rf world
+cp -r ~/claude-*/home .
+cp ~/claude-*/index.html ~/claude-*/scrub-engine.js ~/claude-*/world-config.js .
+cp -r ~/claude-*/assets .
+ls
 ```
 
-（最後一行應該列出 index.html、scrub-engine.js、world-config.js、assets）
+（`ls` 應該看到：`assets  home  index.html  scrub-engine.js  world-config.js`）
 
-**④ 部署**（跟你平常同一行）
+> 注意：這一步會把根目錄的 index.html 換成電影頁 — 原站完整保存在
+> `home/index.html`（zip 裡已附，跟你現在線上的版本相同）。
+
+**④ 部署**（跟你平常同一行）：
 
 ```bash
 cd ~/portfolio-site
@@ -31,24 +46,17 @@ firebase deploy --only hosting:twkrpuente --project portfolio-c3321
 ```
 
 **⑤ 驗收**
-- https://twkrpuente.web.app/ → 原站，跟現在一模一樣
-- https://twkrpuente.web.app/world/ → 電影頁 🎬
+- https://twkrpuente.web.app/ → 電影頁（橋動畫開場）
+- https://twkrpuente.web.app/home/ → 原站作品集
 
-## 之後更新 world 的方式
+## 反悔切回方案 B？
 
-重複 ①②③④ 即可（cp 會直接覆蓋舊檔）。
+跟 Claude 說一聲即可 — 兩包檔案都在，只是對調誰當 index.html。
 
 ## 上線後檢查
 
-- [ ] 原站首頁一切如常
-- [ ] /world/ 桌機：橋動畫開場 → 7 景一鏡到底
-- [ ] /world/ 手機：直式影片（非橫式裁切）、滑動順暢
-- [ ] /world/ 頂欄「查看作品集 ↗」→ 回原站；結尾「洽詢合作」→ 開信箱
-
----
-
-## 附：本倉庫也能整包直接部署（備用方式）
-
-倉庫根目錄已含 firebase.json（public="."）與原站單檔 index.html，
-在任何裝了 firebase-tools 的機器上 `firebase deploy --only hosting
---project portfolio-c3321` 即可整站部署。平常用上面的 Cloud Shell 流程就好。
+- [ ] 首頁：橋動畫開場（動畫下方有「查看作品集 →」）→ 7 景一鏡到底
+- [ ] 手機：直式影片、頂欄可見「查看作品集」膠囊
+- [ ] 瀏覽器語言 = 韓文/英文/西文時，文案自動切換（zh 為預設）
+- [ ] /home/ 原站一切如常
+- [ ] Google Analytics（G-NVSBEEP9CR）兩頁都有計數
