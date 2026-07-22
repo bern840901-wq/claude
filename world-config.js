@@ -27,6 +27,12 @@ window.WORLD = {
     "en": "scroll",
     "es": "desplázate"
   },
+  "skips": {
+    "zh": "忍心跳過",
+    "ko": "아쉽지만 건너뛰기",
+    "en": "skip the film",
+    "es": "saltar la película"
+  },
   "topCta": {
     "zh": "洽詢合作",
     "ko": "함께 일하기",
@@ -72,13 +78,7 @@ window.WORLD = {
         "label": "橋",
         "eyebrow": "臺灣 ⇄ 韓國 · 中韓口筆譯",
         "title": "讓每一句話，都真正相通。",
-        "role": "臺韓口筆譯員 · 赴韓溝通顧問 · 慶熙大學韓語博士候選人 · 國立大學英語主修・西語高級（C1）",
         "body": "以韓語博士級的語言深度，承接從政府高層會談到產業技術談判的跨領域口譯。",
-        "tags": [
-          "60+ 口筆譯案件",
-          "政府・企業・媒體",
-          "2026 接案中"
-        ],
         "cta": {
           "primary": {
             "label": "洽詢合作",
@@ -151,8 +151,10 @@ window.WORLD = {
         "label": "聯繫",
         "eyebrow": "연락처",
         "title": "一起把話，說清楚。",
+        "role": "臺韓口筆譯員 · 赴韓溝通顧問 · 慶熙大學韓語博士候選人 · 國立大學英語主修・西語高級（C1）",
         "body": "如有口筆譯需求或合作洽詢，歡迎透過以下方式聯繫。 ✉ 來信 24 小時內回覆",
         "tags": [
+          "60+ 口筆譯案件",
           "首爾，韓國",
           "2026 接案中"
         ],
@@ -173,13 +175,7 @@ window.WORLD = {
         "label": "다리",
         "eyebrow": "대만 ⇄ 한국 · 한중 통번역",
         "title": "말이 통하게 해드리겠습니다.",
-        "role": "대만인 통번역사 · 대만 비즈니스 커뮤니케이션 컨설턴트 · 경희대학교 한국어학 박사수료 · 학부 영어 전공·스페인어 고급(C1)",
         "body": "한국어 박사급 언어 전문성으로, 정부 고위급 회담부터 산업 기술 협상까지 폭넓은 분야의 통역을 수행합니다.",
-        "tags": [
-          "통번역 60여 건",
-          "정부·기업·미디어",
-          "2026 의뢰 가능"
-        ],
         "cta": {
           "primary": {
             "label": "함께 일하기",
@@ -252,8 +248,10 @@ window.WORLD = {
         "label": "연락처",
         "eyebrow": "聯繫",
         "title": "정확하게, 전하겠습니다.",
+        "role": "대만인 통번역사 · 대만 비즈니스 커뮤니케이션 컨설턴트 · 경희대학교 한국어학 박사수료 · 학부 영어 전공·스페인어 고급(C1)",
         "body": "통역·번역 의뢰 및 협업 문의는 아래로 연락주세요. ✉ 문의 메일은 24시간 이내에 회신드립니다",
         "tags": [
+          "통번역 60여 건",
           "서울, 대한민국",
           "2026 의뢰 가능"
         ],
@@ -274,13 +272,7 @@ window.WORLD = {
         "label": "Bridge",
         "eyebrow": "TAIWAN ⇄ KOREA · KOREAN–CHINESE",
         "title": "I’ll make sure your words get through.",
-        "role": "Taiwanese Korean–Chinese Interpreter · Communication Consultant · PhD Candidate, Kyung Hee University · BA in English, C1 Spanish",
         "body": "Bringing PhD-level command of Korean to interpretation that spans high-level government talks to technical industry negotiations.",
-        "tags": [
-          "60+ engagements",
-          "Government / Business / Media",
-          "Booking for 2026"
-        ],
         "cta": {
           "primary": {
             "label": "Work with me",
@@ -353,8 +345,10 @@ window.WORLD = {
         "label": "Contact",
         "eyebrow": "연락처",
         "title": "Let's get it across.",
+        "role": "Taiwanese Korean–Chinese Interpreter · Communication Consultant · PhD Candidate, Kyung Hee University · BA in English, C1 Spanish",
         "body": "For interpretation, translation inquiries or collaboration, please reach out. ✉ Inquiries answered within 24 hours",
         "tags": [
+          "60+ engagements",
           "Seoul, Korea",
           "Open for 2026"
         ],
@@ -375,13 +369,7 @@ window.WORLD = {
         "label": "Puente",
         "eyebrow": "TAIWÁN ⇄ COREA · CHINO–COREANO",
         "title": "Haré que sus palabras lleguen.",
-        "role": "Intérprete taiwanés coreano–chino · Asesor de comunicación · Doctorando en Lingüística Coreana, Univ. Kyung Hee · grado en inglés, español C1",
         "body": "Con la profundidad lingüística de un doctorando en coreano, cubro desde reuniones gubernamentales de alto nivel hasta negociaciones técnicas industriales.",
-        "tags": [
-          "Más de 60 encargos",
-          "Gobierno / Empresas / Medios",
-          "Agenda 2026 abierta"
-        ],
         "cta": {
           "primary": {
             "label": "Trabajemos juntos",
@@ -454,8 +442,10 @@ window.WORLD = {
         "label": "Contacto",
         "eyebrow": "연락처",
         "title": "Que el mensaje llegue claro.",
+        "role": "Intérprete taiwanés coreano–chino · Asesor de comunicación · Doctorando en Lingüística Coreana, Univ. Kyung Hee · grado en inglés, español C1",
         "body": "Para consultas de interpretación, traducción o colaboración, no dude en contactarme. ✉ Respuesta en menos de 24 horas",
         "tags": [
+          "Más de 60 encargos",
           "Seúl, Corea",
           "Disponible 2026"
         ],
