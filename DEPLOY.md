@@ -27,13 +27,13 @@ cd ~
 unzip -o -q claude-*.zip
 cd ~/portfolio-site/twkrpuente
 rm -rf world
-cp -r ~/claude-*/home .
-cp ~/claude-*/index.html ~/claude-*/scrub-engine.js ~/claude-*/world-config.js .
+cp -r ~/claude-*/home ~/claude-*/cv .
+cp ~/claude-*/index.html ~/claude-*/scrub-engine.js ~/claude-*/world-config.js ~/claude-*/og.png .
 cp -r ~/claude-*/assets .
 ls
 ```
 
-（`ls` 應該看到：`assets  home  index.html  scrub-engine.js  world-config.js`）
+（`ls` 應該看到：`assets  cv  home  index.html  og.png  scrub-engine.js  world-config.js`）
 
 > 注意：這一步會把根目錄的 index.html 換成電影頁 — 原站完整保存在
 > `home/index.html`（zip 裡已附，跟你現在線上的版本相同）。

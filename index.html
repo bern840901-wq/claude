@@ -7,6 +7,11 @@
   <meta name="description" content="游宏斌（유홍빈）— 駐首爾中韓口筆譯・溝通顧問。政府訪團、企業談判、媒體採訪、展會口譯。Bridging Intercultural Communication." />
   <meta property="og:title" content="游宏斌 유홍빈｜台韓口筆譯・駐首爾 — Bridging Intercultural Communication" />
   <meta property="og:description" content="대만 출신 한중 통번역사 · 駐首爾中韓口筆譯・溝通顧問。政府訪團、企業談判、媒體採訪、展會口譯。" />
+  <meta property="og:image" content="https://twkrpuente.web.app/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://twkrpuente.web.app/" />
+  <meta name="twitter:card" content="summary_large_image" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NVSBEEP9CR"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -65,7 +70,7 @@
   @keyframes yStamp{from{opacity:0;transform:rotate(14deg) scale(2.1)}to{opacity:1;transform:rotate(4deg) scale(1)}}
   @keyframes yBang{from{opacity:0;transform:rotate(12deg) translateY(-2px) scale(1.5)}to{opacity:1;transform:rotate(4deg) translateY(8px) scale(1)}}
   @keyframes yPress{0%,100%{transform:none}45%{transform:scale(1.06) rotate(-1deg)}}
-  #sw-intro{animation:introHide .6s ease 2.6s both}
+  #sw-intro.done{animation:introHide .6s ease both}
   @media (prefers-reduced-motion: reduce){ #sw-intro{display:none} }
   .sw-root .sw-copy__num, .sw-root .sw-copy__eyebrow{font-family:'Space Mono',monospace;}
   .sw-root .sw-copy__eyebrow{letter-spacing:.18em;}
@@ -83,6 +88,8 @@
     .sw-root .sw-brand__name{display:none;}
     .sw-root .sw-topcta{font-size:.8rem;padding:9px 14px;}
   }
+  .snd-btn{position:fixed;z-index:70;right:clamp(14px,2.4vw,30px);bottom:calc(66px + env(safe-area-inset-bottom));font:700 11px/1 'Space Mono',monospace;letter-spacing:.06em;color:#6d6558;background:rgba(237,230,213,.82);backdrop-filter:blur(8px);border:1.5px solid rgba(20,17,13,.18);border-radius:999px;padding:9px 13px;cursor:pointer;transition:color .2s,border-color .2s;}
+  .snd-btn.on{color:#E8410E;border-color:#E8410E;}
   .sw-copy__role{margin:14px 0 0;font-size:.86rem;line-height:1.6;letter-spacing:.02em;color:#6d6558;}
   @media (max-width:860px){.sw-copy__role{display:none}}
   /* ===== copy fitting: wider column, height-aware type scale ===== */
@@ -118,11 +125,11 @@
 <body>
   <div id="top"></div>
 <!-- ===== INTRO ===== -->
-  <div aria-hidden="true" id="sw-intro" style="position:fixed;inset:0;z-index:9999;background:#14110D;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:introHide .6s ease 2.6s both">
+  <div aria-hidden="true" id="sw-intro" style="position:fixed;inset:0;z-index:9999;background:#14110D;display:flex;align-items:center;justify-content:center;cursor:pointer">
     <span style="position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.28em;color:rgba(237,230,213,.45);white-space:nowrap;animation:bfade .6s ease 1.4s both">TAP TO SKIP</span>
+    <span id="sw-intro-prog" style="position:absolute;bottom:58px;left:50%;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.22em;color:rgba(237,230,213,.6);animation:bfade .6s ease .8s both">0%</span>
     <div style="position:relative;width:460px;height:170px;transform:scale(min(1, calc((100vw - 48px) / 460px)))">
       <div style="position:absolute;left:50%;bottom:-52px;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.24em;color:rgba(237,230,213,.4);white-space:nowrap;animation:bfade .6s ease 1.5s both">CLICK TO SKIP · 點擊跳過</div>
-      <a id="sw-intro-portfolio" href="https://twkrpuente.web.app/home/" style="position:absolute;left:50%;bottom:-92px;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:#EDE6D5;border:1.5px solid rgba(237,230,213,.5);border-radius:999px;padding:8px 16px;text-decoration:none;white-space:nowrap;animation:bfade .6s ease 1.6s both"></a>
       <svg width="460" height="92" viewBox="0 0 460 92" preserveAspectRatio="xMidYMax meet" style="display:block;overflow:visible;position:absolute;left:0;bottom:34px;max-width:100%">
         <g transform="translate(16,33) scale(.2)" style="animation:bfade .5s ease .05s both"><path d="M76 3 C84 5 94 12 98 18 C96 28 94 34 92 40 C88 52 84 62 80 71 C74 88 66 112 58 135 C53 148 47 166 44 176 C43 179 41 177 41 174 C40 171 39 174 38 177 C37 179 35 176 35 170 C34 163 30 156 16 146 C10 141 7 132 6 122 C6 116 8 110 9 104 C13 87 22 68 28 55 C34 43 41 33 47 26 C54 18 64 11 70 9 C72 7 74 4 76 3 Z" fill="#EDE6D5"></path></g>
         <path d="M40 70 H190" stroke="#EDE6D5" stroke-width="1.5" pathLength="1" style="stroke-dasharray:1;animation:bdraw .5s ease-out .3s both"></path>
@@ -242,6 +249,7 @@
       const back = container.querySelector('.sw-backlink'); if (back) back.textContent = W.skips[l] + ' \u2197';
       const hint = container.querySelector('.sw-hint span'); if (hint) hint.textContent = W.hints[l];
       document.querySelectorAll('.lang-pill button').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
+      if (typeof sndLabelUpdate === 'function') try { sndLabelUpdate(); } catch (e) {}
       const url = new URL(location.href); url.searchParams.set('lang', l); history.replaceState(null, '', url);
     }
 
@@ -271,17 +279,79 @@
     backLink.href = W.site;
     topbar.insertBefore(backLink, container.querySelector('.sw-topcta'));
 
-    // intro: click to skip, auto-remove after the hide animation
+    // intro doubles as the preloader: it holds until the first clip is cached
+    // (min 2.8s for the animation, max 9s), showing real fetch progress.
     const intro = document.getElementById('sw-intro');
     if (intro) {
-      intro.addEventListener('click', (e) => { if (e.target.id !== 'sw-intro-portfolio') intro.remove(); });
-      setTimeout(() => intro.remove(), 3700);
-      const ip = document.getElementById('sw-intro-portfolio');
-      if (ip) ip.textContent = W.copy[lang][6].cta.secondary.label + ' \u2192';
+      intro.addEventListener('click', () => intro.remove());
+      const prog = document.getElementById('sw-intro-prog');
+      const firstClip = (window.matchMedia('(hover: none) and (pointer: coarse)').matches || innerWidth <= 860) && window.MOBILE_READY
+        ? 'assets/vid/bridge-m.mp4' : 'assets/vid/bridge.mp4';
+      const minT = new Promise(r => setTimeout(r, 2800));
+      const load = (async () => {
+        try {
+          const res = await fetch(firstClip);
+          const total = +res.headers.get('content-length') || 0;
+          const reader = res.body.getReader();
+          let got = 0;
+          for (;;) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            got += value.length;
+            if (total && prog) prog.textContent = Math.min(99, Math.round(got / total * 100)) + '%';
+          }
+        } catch (e) {}
+      })();
+      Promise.race([Promise.all([minT, load]), new Promise(r => setTimeout(r, 9000))]).then(() => {
+        if (prog) prog.textContent = '100%';
+        intro.classList.add('done');
+        setTimeout(() => intro.remove(), 700);
+      });
     }
     // brand mark -> the original site's 譯~역 seal
     const mark = container.querySelector('.sw-brand__mark');
     if (mark) mark.innerHTML = '<span class="seal-yi">譯</span><span class="seal-tilde">~</span><span class="seal-yeok">역</span>';
+
+    // ambience — the films' own generated audio: ONE active track that follows
+    // the scene under the viewport, with a short crossfade at each boundary.
+    // Two <audio> elements max (robust on iOS; the first play() is fired inside
+    // the tap so the page's audio unlocks). Off by default; reduced-motion skips it.
+    const SND_LABEL = { zh: '\u97f3\u6548', ko: '\ud6a8\uacfc\uc74c', en: 'Sound', es: 'Sonido' };
+    const sndBtn = document.createElement('button');
+    sndBtn.className = 'snd-btn';
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.body.appendChild(sndBtn);
+    const sceneIds = W.scenes.map(s => s.id);
+    const widths = W.scenes.map(s => s.scroll || 1.3);
+    const VOL = 0.55;
+    let ambOn = false, elA = null, elB = null, active = null, curIdx = -1, ambRAF = 0;
+    function sndLabelUpdate() { sndBtn.textContent = '\u266a ' + SND_LABEL[lang] + (ambOn ? ' ON' : ' OFF'); sndBtn.classList.toggle('on', ambOn); }
+    function mkAudio() { const a = new Audio(); a.loop = true; a.preload = 'none'; a.volume = 0; return a; }
+    function activeSceneIndex() {
+      const vh = innerHeight, y = (scrollY || 0) + vh * 0.5;
+      let off = 0;
+      for (let i = 0; i < widths.length; i++) { const st = off * vh; off += widths[i]; if (y >= st && y < off * vh) return i; }
+      return Math.max(0, Math.min(widths.length - 1, Math.floor(y / vh)));
+    }
+    function fade(el, to, ms) {
+      if (!el) return; const from = el.volume, t0 = performance.now();
+      (function step(t) { const k = Math.min(1, (t - t0) / ms); el.volume = Math.max(0, Math.min(1, from + (to - from) * k));
+        if (k < 1) requestAnimationFrame(step); else if (to === 0) { try { el.pause(); } catch (e) {} } })(t0);
+    }
+    function playScene(i) {
+      curIdx = i;
+      const next = (active === elA) ? elB : elA;
+      try { next.src = 'assets/aud/' + sceneIds[i] + '.m4a'; next.currentTime = 0; } catch (e) {}
+      next.volume = 0; next.play().catch(() => {});
+      fade(next, VOL, 600); if (active) fade(active, 0, 600); active = next;
+    }
+    function ambLoop() { if (!ambOn) return; const i = activeSceneIndex(); if (i !== curIdx) playScene(i); ambRAF = requestAnimationFrame(ambLoop); }
+    sndBtn.addEventListener('click', () => {
+      ambOn = !ambOn;
+      if (ambOn) { if (!elA) { elA = mkAudio(); elB = mkAudio(); } active = null; playScene(activeSceneIndex()); ambLoop(); }
+      else { cancelAnimationFrame(ambRAF); fade(elA, 0, 300); fade(elB, 0, 300); }
+      sndLabelUpdate();
+    });
+    sndLabelUpdate();
 
     applyLanguage(lang);
   })();
