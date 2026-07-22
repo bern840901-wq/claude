@@ -28,10 +28,10 @@ window.WORLD = {
     "es": "desplázate"
   },
   "skips": {
-    "zh": "忍心跳過",
-    "ko": "아쉽지만 건너뛰기",
-    "en": "skip the film",
-    "es": "saltar la película"
+    "zh": "直接看作品集",
+    "ko": "바로 포트폴리오 보기",
+    "en": "Skip to portfolio",
+    "es": "Ir al portafolio"
   },
   "topCta": {
     "zh": "洽詢合作",
