@@ -9,7 +9,7 @@
   <meta property="og:description" content="대만 출신 한중 통번역사 · 駐首爾中韓口筆譯・溝通顧問。政府訪團、企業談判、媒體採訪、展會口譯。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Noto+Serif+TC:wght@700;900&family=Noto+Serif+KR:wght@700;900&family=Noto+Sans+TC:wght@500;700&family=Space+Mono:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Caveat:wght@700&family=Gaegu:wght@700&family=LXGW+WenKai+TC:wght@700&family=Noto+Serif+TC:wght@700;900&family=Noto+Serif+KR:wght@700;900&family=Noto+Sans+TC:wght@500;700&family=Space+Mono:wght@400;700&display=swap" />
   <style>
     /* Brand theme — same palette as twkrpuente.web.app */
     :root, .sw-root {
@@ -48,10 +48,69 @@
       pointer-events: none; white-space: nowrap;
     }
     @media (max-width: 860px) { .previz-note { display: none; } }
+
+  /* ===== seal language (ported from the original site) ===== */
+  @keyframes bdraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+  @keyframes bfade{from{opacity:0}to{opacity:1}}
+  @keyframes introHide{to{opacity:0;visibility:hidden}}
+  @keyframes introPop{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+  @keyframes yWrite{to{clip-path:inset(-40% -10% -40% -10%)}}
+  @keyframes yStamp{from{opacity:0;transform:rotate(14deg) scale(2.1)}to{opacity:1;transform:rotate(4deg) scale(1)}}
+  @keyframes yBang{from{opacity:0;transform:rotate(12deg) translateY(-2px) scale(1.5)}to{opacity:1;transform:rotate(4deg) translateY(8px) scale(1)}}
+  @keyframes yPress{0%,100%{transform:none}45%{transform:scale(1.06) rotate(-1deg)}}
+  #sw-intro{animation:introHide .6s ease 2.6s both}
+  @media (prefers-reduced-motion: reduce){ #sw-intro{display:none} }
+  .sw-root .sw-copy__num, .sw-root .sw-copy__eyebrow{font-family:'Space Mono',monospace;}
+  .sw-root .sw-copy__eyebrow{letter-spacing:.18em;}
+  .sw-root .sw-copy__tags li{background:rgba(237,230,213,.75);border:1.5px solid rgba(20,17,13,.35);color:#14110D;border-radius:7px;transition:transform .25s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
+  .sw-root .sw-copy__tags li:hover{transform:rotate(-2deg) scale(1.04);border-color:#E8410E;color:#E8410E;}
+  .sw-root .sw-brand__mark{background:none;box-shadow:none;border-radius:0;width:46px;height:44px;position:relative;}
+  .sw-brand__mark .seal-yi{position:absolute;left:0;bottom:0;width:36px;display:flex;align-items:flex-end;justify-content:center;font-family:'LXGW WenKai TC','Noto Serif KR',serif;font-weight:700;font-size:32px;line-height:1;color:#E8410E;}
+  .sw-brand__mark .seal-tilde{position:absolute;left:0;top:-4px;width:36px;display:flex;justify-content:center;font-family:'Caveat',cursive;font-weight:700;font-size:20px;line-height:1;color:#E8410E;transform:rotate(-5deg);}
+  .sw-brand__mark .seal-yeok{position:absolute;right:-2px;bottom:0;font-family:'Gaegu',cursive;font-weight:700;font-size:12px;line-height:1;color:#E8410E;transform:rotate(4deg);}
+  .sw-root .sw-brand__name{font-family:'Noto Serif TC','Noto Serif KR',serif;font-weight:900;}
+
   </style>
 </head>
 <body>
   <div id="top"></div>
+<!-- ===== INTRO ===== -->
+  <div aria-hidden="true" id="sw-intro" style="position:fixed;inset:0;z-index:9999;background:#14110D;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:introHide .6s ease 2.6s both">
+    <span style="position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.28em;color:rgba(237,230,213,.45);white-space:nowrap;animation:bfade .6s ease 1.4s both">TAP TO SKIP</span>
+    <div style="position:relative;width:460px;height:170px;transform:scale(min(1, calc((100vw - 48px) / 460px)))">
+      <div style="position:absolute;left:50%;bottom:-52px;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.24em;color:rgba(237,230,213,.4);white-space:nowrap;animation:bfade .6s ease 1.5s both">CLICK TO SKIP · 點擊跳過</div>
+      <svg width="460" height="92" viewBox="0 0 460 92" preserveAspectRatio="xMidYMax meet" style="display:block;overflow:visible;position:absolute;left:0;bottom:34px;max-width:100%">
+        <g transform="translate(16,33) scale(.2)" style="animation:bfade .5s ease .05s both"><path d="M76 3 C84 5 94 12 98 18 C96 28 94 34 92 40 C88 52 84 62 80 71 C74 88 66 112 58 135 C53 148 47 166 44 176 C43 179 41 177 41 174 C40 171 39 174 38 177 C37 179 35 176 35 170 C34 163 30 156 16 146 C10 141 7 132 6 122 C6 116 8 110 9 104 C13 87 22 68 28 55 C34 43 41 33 47 26 C54 18 64 11 70 9 C72 7 74 4 76 3 Z" fill="#EDE6D5"></path></g>
+        <path d="M40 70 H190" stroke="#EDE6D5" stroke-width="1.5" pathLength="1" style="stroke-dasharray:1;animation:bdraw .5s ease-out .3s both"></path>
+        <path d="M270 70 H408" stroke="#EDE6D5" stroke-width="1.5" pathLength="1" style="stroke-dasharray:1;animation:bdraw .5s ease-out .4s both"></path>
+        <path d="M60 70 Q150 24 196 28" stroke="#EDE6D5" stroke-width="1.5" fill="none" pathLength="1" style="stroke-dasharray:1;animation:bdraw .6s ease-out .65s both"></path>
+        <path d="M264 28 Q310 24 400 70" stroke="#EDE6D5" stroke-width="1.5" fill="none" pathLength="1" style="stroke-dasharray:1;animation:bdraw .6s ease-out .75s both"></path>
+        <path d="M105 48 V70" stroke="rgba(237,230,213,.55)" stroke-width="1" pathLength="1" style="stroke-dasharray:1;animation:bdraw .3s ease-out 1.1s both"></path>
+        <path d="M150 33 V70" stroke="rgba(237,230,213,.55)" stroke-width="1" pathLength="1" style="stroke-dasharray:1;animation:bdraw .3s ease-out 1.18s both"></path>
+        <path d="M310 33 V70" stroke="rgba(237,230,213,.55)" stroke-width="1" pathLength="1" style="stroke-dasharray:1;animation:bdraw .3s ease-out 1.26s both"></path>
+        <path d="M355 48 V70" stroke="rgba(237,230,213,.55)" stroke-width="1" pathLength="1" style="stroke-dasharray:1;animation:bdraw .3s ease-out 1.34s both"></path>
+        <circle cx="426" cy="55" r="15" fill="none" stroke="#EDE6D5" stroke-width="1.5" pathLength="1" style="stroke-dasharray:1;animation:bdraw .8s ease-out .9s both"></circle>
+        <ellipse cx="426" cy="55" rx="6.5" ry="15" fill="none" stroke="rgba(237,230,213,.5)" stroke-width="1" pathLength="1" style="stroke-dasharray:1;animation:bdraw .5s ease-out 1.3s both"></ellipse>
+        <path d="M411 55 H441" stroke="rgba(237,230,213,.5)" stroke-width="1" pathLength="1" style="stroke-dasharray:1;animation:bdraw .4s ease-out 1.42s both"></path>
+        <text x="26" y="88" text-anchor="middle" style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.18em;fill:rgba(237,230,213,.55);animation:bfade .5s ease 1.5s both">TAIWAN</text>
+        <text x="426" y="88" text-anchor="middle" style="font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.18em;fill:rgba(237,230,213,.55);animation:bfade .5s ease 1.58s both">WORLD</text>
+      </svg>
+      <span style="position:absolute;left:230px;bottom:56px;display:flex;align-items:center;gap:6px;animation:introPop .5s cubic-bezier(.16,1,.3,1) .4s both">
+        <span style="font-family:'Caveat',cursive;font-weight:700;font-size:50px;line-height:1;color:#EDE6D5;transform:rotate(-5deg) translateY(2px)">¡</span>
+        <span style="position:relative;width:84px;height:78px;display:inline-block;animation:yPress .3s ease 2.32s both">
+          <span style="position:absolute;left:0;bottom:0;width:64px;display:flex;align-items:flex-end;justify-content:center;font-family:'LXGW WenKai TC','Seoul Hangang','Noto Serif KR',serif;font-weight:700;font-size:55px;line-height:1;color:#EDE6D5;clip-path:inset(-40% 103% -40% -10%);animation:yWrite .6s cubic-bezier(.55,.06,.35,.96) .95s forwards">譯</span>
+          <span style="position:absolute;left:0;top:-7px;width:64px;display:flex;justify-content:center;font-family:'Caveat',cursive;font-weight:700;font-size:35px;line-height:1;color:#EDE6D5;transform:rotate(-5deg);clip-path:inset(-50% 103% -50% -10%);animation:yWrite .32s ease-out 1.62s forwards">~</span>
+          <span style="position:absolute;right:2px;bottom:37px;width:19px;display:flex;justify-content:center;color:rgba(237,230,213,.65);opacity:0;animation:bfade .4s ease 1.75s forwards"><svg width="10" height="18" viewBox="0 0 104 184" style="display:block"><path d="M76 3 C84 5 94 12 98 18 C96 28 94 34 92 40 C88 52 84 62 80 71 C74 88 66 112 58 135 C53 148 47 166 44 176 C43 179 41 177 41 174 C40 171 39 174 38 177 C37 179 35 176 35 170 C34 163 30 156 16 146 C10 141 7 132 6 122 C6 116 8 110 9 104 C13 87 22 68 28 55 C34 43 41 33 47 26 C54 18 64 11 70 9 C72 7 74 4 76 3 Z" fill="currentColor"></path></svg></span>
+          <span style="position:absolute;right:2px;bottom:23px;width:19px;display:flex;justify-content:center;gap:1px;font-family:'LXGW WenKai TC',cursive;font-weight:700;font-size:11px;line-height:1;color:rgba(237,230,213,.6);transform:rotate(-3deg);opacity:0;animation:bfade .4s ease 1.8s forwards">一<span style="font-size:8px;transform:translateY(-3px) rotate(12deg)">丶</span></span>
+          <span style="position:absolute;right:2px;bottom:1px;width:19px;height:19px;display:flex;align-items:center;justify-content:center;font-family:'Gaegu',cursive;font-weight:700;font-size:17px;line-height:1;color:#EDE6D5;transform:rotate(4deg);opacity:0;animation:yStamp .34s cubic-bezier(.16,1,.3,1) 1.92s forwards">역</span>
+        </span>
+        <span style="font-family:'Caveat',cursive;font-weight:700;font-size:50px;line-height:1;color:#EDE6D5;transform:rotate(4deg) translateY(8px);margin-left:-10px;opacity:0;animation:yBang .4s cubic-bezier(.16,1,.3,1) 2.1s forwards">!</span>
+      </span>
+      <div style="position:absolute;left:0;right:0;bottom:0;text-align:center;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.3em;color:rgba(237,230,213,.5);animation:bfade .5s ease 1.7s both">BRIDGING INTERCULTURAL COMMUNICATION</div>
+    </div>
+  </div>
+
+  
   <div id="world"></div>
 
   <script src="scrub-engine.js"></script>
@@ -153,6 +212,17 @@
       n.textContent = 'PREVIZ — 場景為佔位圖，待 Higgsfield 實景渲染';
       document.body.appendChild(n);
     }
+
+
+    // intro: click to skip, auto-remove after the hide animation
+    const intro = document.getElementById('sw-intro');
+    if (intro) {
+      intro.addEventListener('click', () => intro.remove());
+      setTimeout(() => intro.remove(), 3700);
+    }
+    // brand mark -> the original site's 譯~역 seal
+    const mark = container.querySelector('.sw-brand__mark');
+    if (mark) mark.innerHTML = '<span class="seal-yi">譯</span><span class="seal-tilde">~</span><span class="seal-yeok">역</span>';
 
     applyLanguage(lang);
   })();
