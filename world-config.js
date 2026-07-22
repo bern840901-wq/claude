@@ -3,7 +3,7 @@
    do not edit copy here by hand — it mirrors the source site.
    USE_PLACEHOLDERS: flip to false once the Higgsfield renders exist in assets/. */
 window.USE_PLACEHOLDERS = false;
-window.MOBILE_READY = false;
+window.MOBILE_READY = true;
 window.WORLD = {
   "brandName": "游宏斌 YU HUNG PIN",
   "email": "twkrbridge@gmail.com",
