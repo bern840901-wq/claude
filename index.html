@@ -74,11 +74,14 @@
         stillMobile: 'assets/stills/ph-' + scene.id + '-m.svg',
         clip: null, clipMobile: null,
       };
+      // MOBILE_READY flips on once the native 9:16 chain is rendered (pipeline §6b);
+      // until then phones fall back to the desktop clip (engine handles it).
+      const M = window.MOBILE_READY;
       return {
         still: 'assets/stills/' + scene.id + '.webp',
-        stillMobile: 'assets/stills/' + scene.id + '-m.webp',
+        stillMobile: M ? 'assets/stills/' + scene.id + '-m.webp' : undefined,
         clip: 'assets/vid/' + scene.id + '.mp4',
-        clipMobile: 'assets/vid/' + scene.id + '-m.mp4',
+        clipMobile: M ? 'assets/vid/' + scene.id + '-m.mp4' : undefined,
       };
     }
 
