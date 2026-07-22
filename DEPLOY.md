@@ -1,69 +1,54 @@
-# 上線指南 — 方案 B（一鍵部署版）
+# 上線指南 — 方案 B（Cloud Shell 版，照你平常的流程）
 
-這個倉庫現在**就是完整的網站**，結構：
+你平常的部署環境：Google Cloud Shell，專案 `portfolio-c3321`，
+網站資料夾 `~/portfolio-site/twkrpuente/`（原站的 index.html 在裡面）。
 
-```
-index.html      ← 你的原站（單檔版，原樣）      → twkrpuente.web.app/
-world/          ← scroll-world 電影頁＋全部影片  → twkrpuente.web.app/world/
-firebase.json   ← Firebase 設定（已寫好）
-.firebaserc     ← 專案代號（預設 twkrpuente，見下方確認方式）
-```
+## 步驟
 
-## 部署步驟（你的電腦，5 個指令）
+**① 下載網站包**（電腦瀏覽器）
+GitHub 開這個倉庫 → 左上角切到分支 `claude/scroll-world-skill-setup-hkgxfz`
+→ 綠色 **Code** → **Download ZIP**（約 117MB）
 
-1. 下載整個倉庫：GitHub 頁面 → 綠色 **Code** 按鈕 → **Download ZIP** → 解壓
+**② 上傳到 Cloud Shell**
+Cloud Shell 右上 ⋮ → **Upload** → 選剛下載的 zip
 
-2. 打開終端機，進入解壓出來的資料夾（把路徑換成你實際的位置）：
-
-   ```bash
-   cd ~/Downloads/claude-claude-scroll-world-skill-setup-hkgxfz
-   ```
-
-3. 安裝 Firebase 工具（裝過一次就不用再裝）：
-
-   ```bash
-   npm install -g firebase-tools
-   ```
-
-4. 登入 Google 帳號（會開瀏覽器，跟 Higgsfield 那次一樣的流程）：
-
-   ```bash
-   firebase login
-   ```
-
-5. 部署：
-
-   ```bash
-   firebase deploy --only hosting
-   ```
-
-完成後打開：
-- `https://twkrpuente.web.app/` → 原站，應該跟現在一模一樣
-- `https://twkrpuente.web.app/world/` → 電影頁 🎬
-
-## 如果第 5 步報「找不到專案 / Invalid project」
-
-你的專案代號可能不是 `twkrpuente`。執行：
+**③ 貼上這串指令**（解壓＋把 world 放進網站資料夾）
 
 ```bash
-firebase projects:list
+cd ~
+unzip -o -q claude-*.zip
+cp -r ~/claude-*/world ~/portfolio-site/twkrpuente/world
+ls ~/portfolio-site/twkrpuente/world
 ```
 
-找到你的專案 ID（Project ID 欄），然後：
+（最後一行應該列出 index.html、scrub-engine.js、world-config.js、assets）
+
+**④ 部署**（跟你平常同一行）
 
 ```bash
-firebase use <你的專案ID>
-firebase deploy --only hosting
+cd ~/portfolio-site
+firebase deploy --only hosting:twkrpuente --project portfolio-c3321
 ```
 
-## 給原站加入口按鈕（可選）
+**⑤ 驗收**
+- https://twkrpuente.web.app/ → 原站，跟現在一模一樣
+- https://twkrpuente.web.app/world/ → 電影頁 🎬
 
-原站想加「▶ 走進我的工作現場」按鈕連到 `/world/` 的話，把原站單檔傳給
-Claude 說「幫我加 world 入口按鈕」即可（原站是打包檔，手改不方便）。
+## 之後更新 world 的方式
+
+重複 ①②③④ 即可（cp 會直接覆蓋舊檔）。
 
 ## 上線後檢查
 
-- [ ] 原站首頁一切如常（介紹動畫、作品集、聯繫）
+- [ ] 原站首頁一切如常
 - [ ] /world/ 桌機：橋動畫開場 → 7 景一鏡到底
 - [ ] /world/ 手機：直式影片（非橫式裁切）、滑動順暢
 - [ ] /world/ 頂欄「查看作品集 ↗」→ 回原站；結尾「洽詢合作」→ 開信箱
+
+---
+
+## 附：本倉庫也能整包直接部署（備用方式）
+
+倉庫根目錄已含 firebase.json（public="."）與原站單檔 index.html，
+在任何裝了 firebase-tools 的機器上 `firebase deploy --only hosting
+--project portfolio-c3321` 即可整站部署。平常用上面的 Cloud Shell 流程就好。
