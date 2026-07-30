@@ -190,6 +190,9 @@
 
     const HTML_LANG = { zh: 'zh-Hant', ko: 'ko', en: 'en', es: 'es' };
 
+    // GA event helper — silently no-ops if gtag is blocked by the browser
+    const track = (name, params) => { try { window.gtag && gtag('event', name, params || {}); } catch (e) {} };
+
     function assetsFor(scene) {
       if (PH) return {
         still: 'assets/stills/ph-' + scene.id + '.svg',
@@ -270,7 +273,7 @@
     W.langs.forEach(l => {
       const b = document.createElement('button');
       b.dataset.lang = l; b.textContent = NAMES[l];
-      b.addEventListener('click', () => applyLanguage(l));
+      b.addEventListener('click', () => { applyLanguage(l); track('film_lang', { lang: l }); });
       pill.appendChild(b);
     });
     document.body.appendChild(pill);
@@ -324,7 +327,7 @@
     // (min 2.8s for the animation, max 9s), showing real fetch progress.
     const intro = document.getElementById('sw-intro');
     if (intro) {
-      intro.addEventListener('click', () => intro.remove());
+      intro.addEventListener('click', () => { intro.remove(); track('film_intro_skip'); });
       const prog = document.getElementById('sw-intro-prog');
       const firstClip = (window.matchMedia('(hover: none) and (pointer: coarse)').matches || innerWidth <= 860) && window.MOBILE_READY
         ? 'assets/vid/bridge-m.mp4' : 'assets/vid/bridge.mp4';
@@ -392,43 +395,94 @@
       ambOn = !ambOn;
       if (ambOn) { if (!elA) { elA = mkAudio(); elB = mkAudio(); } active = null; playScene(activeSceneIndex()); ambLoop(); }
       else { cancelAnimationFrame(ambRAF); fade(elA, 0, 300); fade(elB, 0, 300); sndOptOut = true; }
+      track('film_sound', { action: ambOn ? 'on' : 'off' });
       sndLabelUpdate();
     });
     sndLabelUpdate();
 
-    // ── film mode: autoplay scrolls the journey at cinema pace; any input pauses ──
-    const PLAY_LABEL  = { zh: '\u25b6 \u81ea\u52d5\u64ad\u653e', ko: '\u25b6 \uc790\ub3d9 \uc7ac\uc0dd', en: '\u25b6 Autoplay', es: '\u25b6 Reproducir' };
-    const PAUSE_LABEL = { zh: '\u275a\u275a \u66ab\u505c', ko: '\u275a\u275a \uc77c\uc2dc\uc815\uc9c0', en: '\u275a\u275a Pause', es: '\u275a\u275a Pausa' };
+    // ── film mode: the videos PLAY natively (real 24fps, no seek judder) and
+    // the page scroll follows playback time. Engine's seek loop stands down
+    // via window.__swNativePlay. Any wheel/touch/key input hands control back.
+    const PLAY_LABEL  = { zh: '▶ 自動播放', ko: '▶ 자동 재생', en: '▶ Autoplay', es: '▶ Reproducir' };
+    const PAUSE_LABEL = { zh: '❚❚ 暫停', ko: '❚❚ 일시정지', en: '❚❚ Pause', es: '❚❚ Pausa' };
     const playBtn = document.createElement('button');
     playBtn.className = 'sw-play';
     if (!REDUCE) document.body.appendChild(playBtn);
-    let playing = false, playRAF = 0, lastT = 0;
-    const PACE = 6000;   // ms per viewport-height of scroll — ~7-8s per scene
+    let playing = false, playRAF = 0, filmScene = -1;
     function playLabelUpdate() { playBtn.textContent = playing ? PAUSE_LABEL[lang] : PLAY_LABEL[lang]; playBtn.classList.toggle('on', playing); }
-    function stopPlay() { if (!playing) return; playing = false; cancelAnimationFrame(playRAF); playLabelUpdate(); }
-    function playTick(t) {
+    function sceneVideo(i) { const sc = container.querySelectorAll('.sw-scene')[i]; return sc ? sc.querySelector('video') : null; }
+    function segBounds(i) { const vh = innerHeight; let off = 0; for (let k = 0; k < i; k++) off += widths[k]; return [off * vh, (off + widths[i]) * vh]; }
+    function stopPlay() {
       if (!playing) return;
-      const dt = Math.min(50, t - lastT); lastT = t;
-      const max = document.querySelector('.sw-track').offsetHeight - innerHeight;
-      const next = Math.min(max, (scrollY || 0) + innerHeight * dt / PACE);
-      window.scrollTo(0, next);
-      if (next >= max - 1) { stopPlay(); return; }
-      playRAF = requestAnimationFrame(playTick);
+      playing = false; window.__swNativePlay = false;
+      cancelAnimationFrame(playRAF);
+      container.querySelectorAll('.sw-scene video').forEach(v => { try { v.pause(); } catch (e) {} });
+      playLabelUpdate();
+      track('film_autoplay', { action: 'pause' });
+    }
+    function startScene(i, fromStart) {
+      filmScene = i;
+      const v = sceneVideo(i);
+      if (v) { try { if (fromStart) v.currentTime = 0; } catch (e) {} v.muted = true; v.play().catch(() => {}); }
+    }
+    function filmTick() {
+      if (!playing) return;
+      const v = sceneVideo(filmScene);
+      if (v && v.readyState >= 2 && v.duration) {
+        const b = segBounds(filmScene);
+        const pr = Math.min(1, v.currentTime / v.duration);
+        window.scrollTo(0, b[0] + pr * (b[1] - b[0]));
+        if (pr >= 0.995 || v.ended) {
+          try { v.pause(); } catch (e) {}
+          if (filmScene < widths.length - 1) startScene(filmScene + 1, true);
+          else { stopPlay(); return; }
+        }
+      } else {
+        // clip not blob-loaded yet: park the scroll just inside the scene so the
+        // engine lazy-loads it; the still stays up until playback can begin.
+        const b = segBounds(filmScene);
+        if ((scrollY || 0) < b[0] + 2) window.scrollTo(0, b[0] + 2);
+      }
+      playRAF = requestAnimationFrame(filmTick);
     }
     playBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      playing = !playing;
-      if (playing) {
-        const max = document.querySelector('.sw-track').offsetHeight - innerHeight;
-        if ((scrollY || 0) >= max - 2) window.scrollTo(0, 0);   // replay from the top at the end
-        lastT = performance.now();
-        if (!ambOn && !sndOptOut) sndBtn.click();               // film mode brings its sound
-        playRAF = requestAnimationFrame(playTick);
-      }
+      if (playing) { stopPlay(); return; }
+      playing = true; window.__swNativePlay = true;
+      const max = document.querySelector('.sw-track').offsetHeight - innerHeight;
+      let i = activeSceneIndex(), fromStart = false;
+      if ((scrollY || 0) >= max - 2) { window.scrollTo(0, 0); i = 0; fromStart = true; }  // replay from the top
+      startScene(i, fromStart);
+      if (!ambOn && !sndOptOut) sndBtn.click();               // film mode brings its sound
+      playRAF = requestAnimationFrame(filmTick);
       playLabelUpdate();
+      track('film_autoplay', { action: 'play', scene: sceneIds[i] });
     });
     ['wheel', 'touchstart', 'keydown'].forEach(ev => addEventListener(ev, () => stopPlay(), { passive: true }));
     playLabelUpdate();
+
+    // ── GA: scene depth (each scene fires once) + completion + exit clicks ──
+    const seenScenes = new Set();
+    let completeFired = false;
+    function trackDepth() {
+      const i = activeSceneIndex();
+      if (!seenScenes.has(i)) {
+        seenScenes.add(i);
+        track('film_scene', { scene: sceneIds[i], index: i + 1 });
+        if (i === sceneIds.length - 1 && !completeFired) { completeFired = true; track('film_complete'); }
+      }
+    }
+    let depthTick = false;
+    addEventListener('scroll', () => { if (!depthTick) { depthTick = true; setTimeout(() => { depthTick = false; trackDepth(); }, 400); } }, { passive: true });
+    trackDepth();
+    document.addEventListener('click', (e) => {
+      const a = e.target && e.target.closest ? e.target.closest('a') : null;
+      if (!a) return;
+      if (a.classList.contains('sw-backlink')) track('film_exit', { target: 'portfolio_topbar' });
+      else if (a.classList.contains('sw-topcta')) track('film_exit', { target: 'contact_topbar' });
+      else if (a.classList.contains('sw-btn--primary')) track('film_exit', { target: 'contact_cta' });
+      else if (a.classList.contains('sw-btn--ghost')) track('film_exit', { target: 'portfolio_cta' });
+    }, true);
 
     applyLanguage(lang);
   })();

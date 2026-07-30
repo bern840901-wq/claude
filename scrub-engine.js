@@ -271,6 +271,9 @@ function mountScrollWorld(container, config) {
   }
 
   function raf() {
+    // Film mode (window.__swNativePlay): the page plays videos natively and
+    // derives scroll from playback time, so the seek loop must stand down.
+    if (window.__swNativePlay) { requestAnimationFrame(raf); return; }
     const eps = isMobile() ? 0.02 : 0.008;   // coarser seek step on phones = fewer decodes
     for (let i = 0; i < NSEG; i++) {
       const s = SEGMENTS[i];
