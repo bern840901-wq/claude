@@ -90,6 +90,13 @@
   }
   .sw-root .sw-hint{font-size:.8rem;font-weight:700;letter-spacing:.2em;color:#14110D;opacity:1;}
   .sw-root .sw-hint i{border-color:rgba(20,17,13,.55);width:24px;height:38px;}
+  .sw-play{position:fixed;z-index:71;left:50%;transform:translateX(-50%);bottom:calc(96px + env(safe-area-inset-bottom));font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:#EDE6D5;background:rgba(20,17,13,.88);border:1.5px solid #E8410E;border-radius:999px;padding:12px 20px;cursor:pointer;transition:transform .2s,background .2s;}
+  .sw-play:hover{transform:translateX(-50%) translateY(-2px);}
+  .sw-play.on{background:#E8410E;}
+  @media (max-width:860px){
+    .sw-play{left:auto;right:clamp(14px,2.4vw,30px);transform:none;bottom:calc(114px + env(safe-area-inset-bottom));font-size:11px;padding:10px 14px;}
+    .sw-play:hover{transform:none;}
+  }
   .snd-btn{position:fixed;z-index:70;right:clamp(14px,2.4vw,30px);bottom:calc(66px + env(safe-area-inset-bottom));font:700 11px/1 'Space Mono',monospace;letter-spacing:.06em;color:#6d6558;background:rgba(237,230,213,.82);backdrop-filter:blur(8px);border:1.5px solid rgba(20,17,13,.18);border-radius:999px;padding:9px 13px;cursor:pointer;transition:color .2s,border-color .2s;}
   .snd-btn.on{color:#E8410E;border-color:#E8410E;}
   .sw-copy__role{margin:14px 0 0;font-size:.86rem;line-height:1.6;letter-spacing:.02em;color:#6d6558;}
@@ -253,6 +260,7 @@
       const hint = container.querySelector('.sw-hint span'); if (hint) hint.textContent = W.hints[l];
       document.querySelectorAll('.lang-pill button').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
       if (typeof sndLabelUpdate === 'function') try { sndLabelUpdate(); } catch (e) {}
+      if (typeof playLabelUpdate === 'function') try { playLabelUpdate(); } catch (e) {}
       const url = new URL(location.href); url.searchParams.set('lang', l); history.replaceState(null, '', url);
     }
 
@@ -379,13 +387,48 @@
       fade(next, VOL, 600); if (active) fade(active, 0, 600); active = next;
     }
     function ambLoop() { if (!ambOn) return; const i = activeSceneIndex(); if (i !== curIdx) playScene(i); ambRAF = requestAnimationFrame(ambLoop); }
+    let sndOptOut = false;
     sndBtn.addEventListener('click', () => {
       ambOn = !ambOn;
       if (ambOn) { if (!elA) { elA = mkAudio(); elB = mkAudio(); } active = null; playScene(activeSceneIndex()); ambLoop(); }
-      else { cancelAnimationFrame(ambRAF); fade(elA, 0, 300); fade(elB, 0, 300); }
+      else { cancelAnimationFrame(ambRAF); fade(elA, 0, 300); fade(elB, 0, 300); sndOptOut = true; }
       sndLabelUpdate();
     });
     sndLabelUpdate();
+
+    // ── film mode: autoplay scrolls the journey at cinema pace; any input pauses ──
+    const PLAY_LABEL  = { zh: '\u25b6 \u81ea\u52d5\u64ad\u653e', ko: '\u25b6 \uc790\ub3d9 \uc7ac\uc0dd', en: '\u25b6 Autoplay', es: '\u25b6 Reproducir' };
+    const PAUSE_LABEL = { zh: '\u275a\u275a \u66ab\u505c', ko: '\u275a\u275a \uc77c\uc2dc\uc815\uc9c0', en: '\u275a\u275a Pause', es: '\u275a\u275a Pausa' };
+    const playBtn = document.createElement('button');
+    playBtn.className = 'sw-play';
+    if (!REDUCE) document.body.appendChild(playBtn);
+    let playing = false, playRAF = 0, lastT = 0;
+    const PACE = 6000;   // ms per viewport-height of scroll — ~7-8s per scene
+    function playLabelUpdate() { playBtn.textContent = playing ? PAUSE_LABEL[lang] : PLAY_LABEL[lang]; playBtn.classList.toggle('on', playing); }
+    function stopPlay() { if (!playing) return; playing = false; cancelAnimationFrame(playRAF); playLabelUpdate(); }
+    function playTick(t) {
+      if (!playing) return;
+      const dt = Math.min(50, t - lastT); lastT = t;
+      const max = document.querySelector('.sw-track').offsetHeight - innerHeight;
+      const next = Math.min(max, (scrollY || 0) + innerHeight * dt / PACE);
+      window.scrollTo(0, next);
+      if (next >= max - 1) { stopPlay(); return; }
+      playRAF = requestAnimationFrame(playTick);
+    }
+    playBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      playing = !playing;
+      if (playing) {
+        const max = document.querySelector('.sw-track').offsetHeight - innerHeight;
+        if ((scrollY || 0) >= max - 2) window.scrollTo(0, 0);   // replay from the top at the end
+        lastT = performance.now();
+        if (!ambOn && !sndOptOut) sndBtn.click();               // film mode brings its sound
+        playRAF = requestAnimationFrame(playTick);
+      }
+      playLabelUpdate();
+    });
+    ['wheel', 'touchstart', 'keydown'].forEach(ev => addEventListener(ev, () => stopPlay(), { passive: true }));
+    playLabelUpdate();
 
     applyLanguage(lang);
   })();
