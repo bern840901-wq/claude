@@ -83,6 +83,23 @@
   .sw-root .sw-brand__name{font-family:'Noto Serif TC','Noto Serif KR',serif;font-weight:900;}
   .sw-backlink{margin-left:auto;text-decoration:none;font-weight:700;font-size:.88rem;color:#E8410E;background:rgba(237,230,213,.85);border:1.5px solid #E8410E;padding:9px 16px;border-radius:999px;white-space:nowrap;transition:transform .2s,background .2s,color .2s;}
   .sw-backlink:hover{transform:rotate(-1deg) translateY(-1px);background:#E8410E;color:#EDE6D5;}
+  /* end card — unmistakable exits once the film has played out */
+  .sw-endcard{box-sizing:border-box;position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,26px);z-index:72;background:rgba(20,17,13,.93);backdrop-filter:blur(10px);border:1.5px solid rgba(232,65,14,.7);border-radius:18px;padding:20px 26px;display:flex;flex-direction:column;align-items:center;gap:14px;max-width:min(92vw,600px);box-shadow:0 20px 60px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .55s ease,transform .55s ease;}
+  .sw-endcard.show{opacity:1;transform:translate(-50%,0);pointer-events:auto;}
+  body.ec-on .sw-play,body.ec-on .snd-btn{opacity:0;pointer-events:none;}
+  .sw-play,.snd-btn{transition:opacity .4s ease,transform .2s,background .2s,color .2s,border-color .2s;}
+  .sw-endcard__line{color:#EDE6D5;font-weight:700;font-size:1.05rem;letter-spacing:.03em;text-align:center;line-height:1.4;}
+  .sw-endcard__row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+  .sw-endcard__row a{text-decoration:none;font-weight:700;font-size:.92rem;padding:11px 20px;border-radius:999px;white-space:nowrap;transition:transform .2s,background .2s,color .2s;}
+  .sw-endcard__row a:hover{transform:translateY(-2px) rotate(-1deg);}
+  .sw-endcard__row .ec-portfolio{background:#E8410E;color:#EDE6D5;}
+  .sw-endcard__row .ec-cv{background:rgba(237,230,213,.94);color:#14110D;border:1.5px solid rgba(20,17,13,.35);}
+  .sw-endcard__row .ec-contact{color:#EDE6D5;border:1.5px solid rgba(237,230,213,.55);}
+  @media (max-width:560px){
+    .sw-endcard{padding:15px 16px;gap:11px;bottom:calc(14px + env(safe-area-inset-bottom));width:92vw;}
+    .sw-endcard__line{font-size:.94rem;}
+    .sw-endcard__row a{font-size:.84rem;padding:10px 15px;}
+  }
   @media (max-width:860px){
     .sw-backlink{font-size:.78rem;padding:8px 12px;}
     .sw-root .sw-brand__name{display:none;}
@@ -254,6 +271,7 @@
           (s.cta ? '<div class="sw-copy__cta">' +
             (s.cta.primary ? '<a class="sw-btn sw-btn--primary" href="' + esc(s.cta.primary.href) + '">' + esc(s.cta.primary.label) + '</a>' : '') +
             (s.cta.secondary ? '<a class="sw-btn sw-btn--ghost" href="' + esc(s.cta.secondary.href) + '">' + esc(s.cta.secondary.label) + '</a>' : '') +
+            (s.cta.tertiary ? '<a class="sw-btn sw-btn--ghost sw-btn--cv" href="' + esc(s.cta.tertiary.href) + '">' + esc(s.cta.tertiary.label) + '</a>' : '') +
             '</div>' : '');
       });
       container.querySelectorAll('.sw-nav__item').forEach((b, i) => { if (secs[i]) b.textContent = secs[i].label || ''; });
@@ -261,6 +279,7 @@
       const topcta = container.querySelector('.sw-topcta'); if (topcta) topcta.textContent = W.topCta[l];
       const back = container.querySelector('.sw-backlink'); if (back) back.textContent = W.skips[l] + ' \u2197';
       const hint = container.querySelector('.sw-hint span'); if (hint) hint.textContent = W.hints[l];
+      endCardUpdate(l);
       document.querySelectorAll('.lang-pill button').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
       if (typeof sndLabelUpdate === 'function') try { sndLabelUpdate(); } catch (e) {}
       if (typeof playLabelUpdate === 'function') try { playLabelUpdate(); } catch (e) {}
@@ -461,6 +480,41 @@
     ['wheel', 'touchstart', 'keydown'].forEach(ev => addEventListener(ev, () => stopPlay(), { passive: true }));
     playLabelUpdate();
 
+    // ── end card: once the film has played out, make it unmissable that this
+    // was only the trailer — portfolio / CV / contact exits front and center.
+    // Appears near the end of the finale, retreats if the visitor scrolls back.
+    const endCard = document.createElement('div');
+    endCard.className = 'sw-endcard';
+    document.body.appendChild(endCard);
+    let endCardSeen = false;
+    function endCardUpdate(l) {
+      const E = (W.endcard && W.endcard[l]) || null; if (!E) return;
+      endCard.innerHTML =
+        '<div class="sw-endcard__line">' + esc(E.line) + '</div>' +
+        '<div class="sw-endcard__row">' +
+          '<a class="ec-portfolio" href="' + esc(W.site) + '">' + esc(E.portfolio) + ' →</a>' +
+          '<a class="ec-cv" href="/cv/">' + esc(E.cv) + '</a>' +
+          '<a class="ec-contact" href="mailto:' + esc(W.email) + '">' + esc(E.contact) + '</a>' +
+        '</div>';
+    }
+    function endCardCheck() {
+      const tr = document.querySelector('.sw-track'); if (!tr) return;
+      const max = tr.offsetHeight - innerHeight; if (max <= 0) return;
+      const pr = (scrollY || 0) / max;
+      if (pr >= 0.985) {
+        if (!endCard.classList.contains('show')) {
+          endCard.classList.add('show');
+          document.body.classList.add('ec-on');
+          if (!endCardSeen) { endCardSeen = true; track('film_end_card'); }
+        }
+      } else if (pr < 0.96 && endCard.classList.contains('show')) {
+        endCard.classList.remove('show');
+        document.body.classList.remove('ec-on');
+      }
+    }
+    addEventListener('scroll', endCardCheck, { passive: true });
+    addEventListener('resize', endCardCheck, { passive: true });
+
     // ── GA: scene depth (each scene fires once) + completion + exit clicks ──
     const seenScenes = new Set();
     let completeFired = false;
@@ -481,7 +535,11 @@
       if (a.classList.contains('sw-backlink')) track('film_exit', { target: 'portfolio_topbar' });
       else if (a.classList.contains('sw-topcta')) track('film_exit', { target: 'contact_topbar' });
       else if (a.classList.contains('sw-btn--primary')) track('film_exit', { target: 'contact_cta' });
+      else if (a.classList.contains('sw-btn--cv')) track('film_exit', { target: 'cv_cta' });
       else if (a.classList.contains('sw-btn--ghost')) track('film_exit', { target: 'portfolio_cta' });
+      else if (a.classList.contains('ec-portfolio')) track('film_exit', { target: 'portfolio_end' });
+      else if (a.classList.contains('ec-cv')) track('film_exit', { target: 'cv_end' });
+      else if (a.classList.contains('ec-contact')) track('film_exit', { target: 'contact_end' });
     }, true);
 
     applyLanguage(lang);

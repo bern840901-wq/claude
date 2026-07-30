@@ -39,6 +39,32 @@ window.WORLD = {
     "en": "Work with me",
     "es": "Trabajemos juntos"
   },
+  "endcard": {
+    "zh": {
+      "line": "這 7 個現場，只是預告。",
+      "portfolio": "查看作品集",
+      "cv": "CV",
+      "contact": "洽詢合作"
+    },
+    "ko": {
+      "line": "이 7개의 현장은 예고편일 뿐입니다.",
+      "portfolio": "포트폴리오 보기",
+      "cv": "CV",
+      "contact": "함께 일하기"
+    },
+    "en": {
+      "line": "These seven scenes are only the trailer.",
+      "portfolio": "See the portfolio",
+      "cv": "CV",
+      "contact": "Work with me"
+    },
+    "es": {
+      "line": "Estas siete escenas son solo el tráiler.",
+      "portfolio": "Ver portafolio",
+      "cv": "CV",
+      "contact": "Trabajemos juntos"
+    }
+  },
   "scenes": [
     {
       "id": "bridge",
@@ -166,6 +192,10 @@ window.WORLD = {
           "secondary": {
             "label": "查看作品集",
             "href": "https://twkrpuente.web.app/home/"
+          },
+          "tertiary": {
+            "label": "CV",
+            "href": "/cv/"
           }
         }
       }
@@ -263,6 +293,10 @@ window.WORLD = {
           "secondary": {
             "label": "포트폴리오 보기",
             "href": "https://twkrpuente.web.app/home/"
+          },
+          "tertiary": {
+            "label": "CV",
+            "href": "/cv/"
           }
         }
       }
@@ -360,6 +394,10 @@ window.WORLD = {
           "secondary": {
             "label": "See the portfolio",
             "href": "https://twkrpuente.web.app/home/"
+          },
+          "tertiary": {
+            "label": "CV",
+            "href": "/cv/"
           }
         }
       }
@@ -457,6 +495,10 @@ window.WORLD = {
           "secondary": {
             "label": "Ver portafolio",
             "href": "https://twkrpuente.web.app/home/"
+          },
+          "tertiary": {
+            "label": "CV",
+            "href": "/cv/"
           }
         }
       }
