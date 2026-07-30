@@ -88,6 +88,8 @@
     .sw-root .sw-brand__name{display:none;}
     .sw-root .sw-topcta{font-size:.8rem;padding:9px 14px;}
   }
+  .sw-root .sw-hint{font-size:.8rem;font-weight:700;letter-spacing:.2em;color:#14110D;opacity:1;}
+  .sw-root .sw-hint i{border-color:rgba(20,17,13,.55);width:24px;height:38px;}
   .snd-btn{position:fixed;z-index:70;right:clamp(14px,2.4vw,30px);bottom:calc(66px + env(safe-area-inset-bottom));font:700 11px/1 'Space Mono',monospace;letter-spacing:.06em;color:#6d6558;background:rgba(237,230,213,.82);backdrop-filter:blur(8px);border:1.5px solid rgba(20,17,13,.18);border-radius:999px;padding:9px 13px;cursor:pointer;transition:color .2s,border-color .2s;}
   .snd-btn.on{color:#E8410E;border-color:#E8410E;}
   .sw-copy__role{margin:14px 0 0;font-size:.86rem;line-height:1.6;letter-spacing:.02em;color:#6d6558;}
@@ -128,6 +130,7 @@
   <div aria-hidden="true" id="sw-intro" style="position:fixed;inset:0;z-index:9999;background:#14110D;display:flex;align-items:center;justify-content:center;cursor:pointer">
     <span style="position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.28em;color:rgba(237,230,213,.45);white-space:nowrap;animation:bfade .6s ease 1.4s both">TAP TO SKIP</span>
     <span id="sw-intro-prog" style="position:absolute;bottom:58px;left:50%;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.22em;color:rgba(237,230,213,.6);animation:bfade .6s ease .8s both">0%</span>
+    <span id="sw-intro-explain" style="position:absolute;bottom:104px;left:50%;transform:translateX(-50%);width:92vw;text-align:center;font-family:'Noto Serif TC','Noto Serif KR',serif;font-weight:700;font-size:clamp(14px,1.6vw,17px);letter-spacing:.12em;color:#EDE6D5;animation:bfade .8s ease 1.6s both"></span>
     <div style="position:relative;width:460px;height:170px;transform:scale(min(1, calc((100vw - 48px) / 460px)))">
       <div style="position:absolute;left:50%;bottom:-52px;transform:translateX(-50%);font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.24em;color:rgba(237,230,213,.4);white-space:nowrap;animation:bfade .6s ease 1.5s both">CLICK TO SKIP · 點擊跳過</div>
       <svg width="460" height="92" viewBox="0 0 460 92" preserveAspectRatio="xMidYMax meet" style="display:block;overflow:visible;position:absolute;left:0;bottom:34px;max-width:100%">
@@ -279,6 +282,36 @@
     backLink.href = W.site;
     topbar.insertBefore(backLink, container.querySelector('.sw-topcta'));
 
+    // one-line explanation inside the intro: scroll drives the camera, 7 scenes
+    const EXPLAIN = {
+      zh: '\u5f80\u4e0b\u6372\u52d5 \u00b7 \u8ddf\u8457\u93e1\u982d\u8d70\u904e 7 \u500b\u5de5\u4f5c\u73fe\u5834',
+      ko: '\uc2a4\ud06c\ub864\ud558\uba74 \uce74\uba54\ub77c\uac00 7\uac1c\uc758 \ud604\uc7a5\uc744 \uc548\ub0b4\ud569\ub2c8\ub2e4',
+      en: 'Scroll \u2014 the camera walks through 7 scenes',
+      es: 'Despl\u00e1zate \u2014 la c\u00e1mara recorre 7 escenas'
+    };
+    const explainEl = document.getElementById('sw-intro-explain');
+    if (explainEl) explainEl.textContent = EXPLAIN[lang] || EXPLAIN.zh;
+
+    // first-visit nudge: if nothing is scrolled shortly after the intro, glide
+    // down once so the visitor SEES scroll driving the camera. Any input cancels.
+    const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function armNudge() {
+      if (REDUCE) return;
+      let cancelled = false;
+      const cancel = () => { cancelled = true; ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(ev => removeEventListener(ev, cancel)); };
+      ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(ev => addEventListener(ev, cancel, { passive: true }));
+      setTimeout(() => {
+        if (cancelled || (scrollY || 0) > 30) return;
+        const target = innerHeight * 0.55, T = 1700, t0 = performance.now();
+        (function step(t) {
+          if (cancelled) return;
+          const k = Math.min(1, (t - t0) / T), e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+          window.scrollTo(0, target * e);
+          if (k < 1) requestAnimationFrame(step);
+        })(t0);
+      }, 3500);
+    }
+
     // intro doubles as the preloader: it holds until the first clip is cached
     // (min 2.8s for the animation, max 9s), showing real fetch progress.
     const intro = document.getElementById('sw-intro');
@@ -287,7 +320,7 @@
       const prog = document.getElementById('sw-intro-prog');
       const firstClip = (window.matchMedia('(hover: none) and (pointer: coarse)').matches || innerWidth <= 860) && window.MOBILE_READY
         ? 'assets/vid/bridge-m.mp4' : 'assets/vid/bridge.mp4';
-      const minT = new Promise(r => setTimeout(r, 2800));
+      const minT = new Promise(r => setTimeout(r, 4200));
       const load = (async () => {
         try {
           const res = await fetch(firstClip);
@@ -306,8 +339,9 @@
         if (prog) prog.textContent = '100%';
         intro.classList.add('done');
         setTimeout(() => intro.remove(), 700);
+        armNudge();
       });
-    }
+    } else { armNudge(); }
     // brand mark -> the original site's 譯~역 seal
     const mark = container.querySelector('.sw-brand__mark');
     if (mark) mark.innerHTML = '<span class="seal-yi">譯</span><span class="seal-tilde">~</span><span class="seal-yeok">역</span>';
