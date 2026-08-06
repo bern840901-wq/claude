@@ -67,6 +67,9 @@ const SCENES = [
   { id: 'contact', scroll: 1.6, linger: 0.4 },
 ];
 
+// the /cv/ page's entry label: 履歷 for zh, 이력서 for ko, CV elsewhere
+const CV_LABEL = { zh: '履歷', ko: '이력서', en: 'CV', es: 'CV' };
+
 function sectionsFor(lang) {
   const L = S[lang];
   const T = strengthTags[lang];
@@ -130,7 +133,7 @@ function sectionsFor(lang) {
       cta: {
         primary: { label: L.cta1, href: `mailto:${EMAIL}` },
         secondary: { label: L.cta2, href: SITE },
-        tertiary: { label: 'CV', href: '/cv/' },
+        tertiary: { label: CV_LABEL[lang], href: '/cv/' },
       },
     },
   ];
@@ -147,7 +150,7 @@ const endcard = Object.fromEntries(['zh', 'ko', 'en', 'es'].map(l => {
     en: 'These seven scenes are only the trailer.',
     es: 'Estas siete escenas son solo el tráiler.',
   };
-  return [l, { line: lines[l], portfolio: S[l].cta2, cv: 'CV', contact: S[l].cta1 }];
+  return [l, { line: lines[l], portfolio: S[l].cta2, cv: CV_LABEL[l], contact: S[l].cta1 }];
 }));
 
 const out = {
