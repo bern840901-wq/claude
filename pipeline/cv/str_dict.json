@@ -1,0 +1,1054 @@
+{
+ "zh": {
+  "navAbout": "關於",
+  "navWork": "作品",
+  "navClients": "客戶",
+  "navTimeline": "經歷",
+  "navEdu": "學歷",
+  "navContact": "聯繫",
+  "tagline": "臺灣 ⇄ 韓國 · 中韓口筆譯",
+  "role": "臺韓口筆譯員 · 赴韓溝通顧問 · 慶熙大學韓語博士候選人 · 國立大學英語主修・西語高級（C1）",
+  "lede": "以韓語博士級的語言深度，承接從政府高層會談到產業技術談判的跨領域口譯。",
+  "cta1": "洽詢合作",
+  "cta2": "查看作品集",
+  "heroTrust": "60+ 口筆譯案件 · 政府・企業・媒體 · 2026 接案中",
+  "stampHint": "點空白處，蓋個章",
+  "navSvc": "服務",
+  "svcLabel": "服務 / Services",
+  "svcHeading": "服務項目",
+  "svcSub": "從單日隨行到多日行程皆可承接；報價依內容專業度、時長與形式而定，歡迎來信洽詢。",
+  "svcFlowLabel": "合作流程 / Process",
+  "svcCta": "有類似需求？洽詢檔期",
+  "svcItems": [
+   {
+    "no": "01",
+    "t": "隨行口譯",
+    "d": "拜會、參訪、商務行程全程隨行——政府訪團與企業出差的在地語言支援。"
+   },
+   {
+    "no": "02",
+    "t": "會議・活動口譯",
+    "d": "會談、簽約儀式、記者會與展會現場的逐步口譯。"
+   },
+   {
+    "no": "03",
+    "t": "筆譯・審校",
+    "d": "公文書信、合約、新聞稿與簡報資料的中韓互譯與潤稿。"
+   },
+   {
+    "no": "04",
+    "t": "赴韓溝通顧問",
+    "d": "行前準備、資料在地化、現場溝通策略與後續聯繫窗口。"
+   },
+   {
+    "no": "05",
+    "t": "在地協調・現場支援",
+    "d": "行程中的臨時聯繫與突發狀況，由在地窗口即時協調處理——像在韓國多了一位自己人。"
+   }
+  ],
+  "svcSteps": [
+   {
+    "no": "01",
+    "t": "來信詢問",
+    "d": "告知日期、地點、主題與語言方向，並簡述行程內容。"
+   },
+   {
+    "no": "02",
+    "t": "確認檔期與報價",
+    "d": "依內容專業度、時長與形式報價；確認後即保留檔期。"
+   },
+   {
+    "no": "03",
+    "t": "準備與執行",
+    "d": "事前研究背景資料與專業術語，準時到場，把每一句話送達。"
+   }
+  ],
+  "svcCustomT": "完全客製",
+  "svcCustomD": "沒列到的需求？服務內容與行程皆可組合調整，歡迎來信討論。",
+  "tmLabel": "合作方回饋 / Words from Clients",
+  "tmFont": "'LXGW WenKai TC','Noto Serif TC','Seoul Hangang','Noto Serif KR',serif",
+  "tmQSize": "1.08rem",
+  "tmItems": [
+   {
+    "q": "「不只中韓，連英韓場合也能勝任消化的優秀人才。」",
+    "by": "訪團講者・大學教授"
+   },
+   {
+    "q": "「翻譯實力好到讓人以為是韓語母語者。」",
+    "by": "韓國企業對接窗口"
+   },
+   {
+    "q": "「您是我們名單上最優秀的第一人選。」",
+    "by": "貿易媒合機構"
+   },
+   {
+    "q": "「線上會議臨時狀況不斷，多虧他居中溝通，穩住了雙方的節奏。」",
+    "by": "跨國線上會議韓方主辦"
+   },
+   {
+    "q": "「希望下次出差還能對上你的檔期——我們需要你。」",
+    "by": "政府訪團聯絡窗口"
+   },
+   {
+    "q": "「沒有事前資料的即席口譯，依然流暢得驚人。」",
+    "by": "訪團隨團人員"
+   }
+  ],
+  "faqLabel": "常見問題 / FAQ",
+  "faqItems": [
+   {
+    "q": "需要提前多久預約？",
+    "a": "行程日期確定後，建議盡早來信；旺季檔期有限，越早洽詢越能確保時段。"
+   },
+   {
+    "q": "費用如何計算？",
+    "a": "口譯依時長（半日／全日）、內容專業度與形式報價；筆譯依字數、文件性質與交期估價。來信註明需求概要，即可收到正式報價。"
+   },
+   {
+    "q": "服務地區涵蓋哪裡？",
+    "a": "以首爾及首都圈為主，韓國全境亦可配合；台灣境內案件歡迎來信洽談。"
+   },
+   {
+    "q": "可以簽保密協議（NDA）嗎？",
+    "a": "可以。商務與技術場合簽署 NDA 行之有年，會議內容與相關資料一律保密。"
+   }
+  ],
+  "logoCap": "「譯」＝翻譯 — 台灣唸「ㄧˋ」，韓文是「역」（YEOK）",
+  "myStory": "我做口譯，出於一種很實在的使命感——既然我有這個能力，就想讓每一次跨語言的溝通都真正成立。不知不覺，旅居海外的時間已佔去人生的三分之一；這些年累積的國際視野、博士班的學術訓練、一場又一場不同現場的服務經驗，最後都沉澱成同一種東西：口譯席上的服務精神。",
+  "pcPre": "讓每一句話，都真正相",
+  "pcAcc": "通",
+  "pcPost": "。",
+  "onSiteLabel": "現場 / ON SITE",
+  "actsCredit": "「譯事三難：信、達、雅。」— 嚴復〈譯例言〉，1898",
+  "actsLead": "我守的三個字。",
+  "act1g": "忠於原意",
+  "act2g": "把話送達",
+  "act3g": "得體合宜",
+  "sndLabel": "音效",
+  "quote": "「口譯不是把話換成另一種語言，而是讓兩邊真的聽懂彼此。每一場會議，我都坐在兩種語言的正中間——那個位子，就是我的工作。」",
+  "quoteCap": "游宏斌 · 中韓口筆譯",
+  "ntLabel": "口譯筆記",
+  "ntLead": "筆記記的不是字，是邏輯。",
+  "ntSub": "逐步口譯的真功夫：符號記結構、箭頭記關係——句子聽完的瞬間，譯文已經在紙上。這是我每一場會議的工作痕跡。",
+  "ntP1": "聽",
+  "ntP2": "記",
+  "ntP3": "譯",
+  "ntSrcCap": "原文 · 中文",
+  "ntOutCap": "譯出 · 韓文",
+  "ntGloss": "",
+  "ntReplay": "再看一次",
+  "skipLabel": "跳到主內容",
+  "markLabel": "LOGO 設計理念 / THE MARK",
+  "markItems": [
+   {
+    "s": "譯",
+    "t": "譯 — 翻譯",
+    "d": "一個字就是我的工作。以楷書體書寫，向漢字書法與活字傳統致意。"
+   },
+   {
+    "s": "~",
+    "t": "波浪號 — 語氣",
+    "d": "手寫的一筆，代表語調、語感與言外之意——翻譯真正要送達的東西。"
+   },
+   {
+    "s": "¡ !",
+    "t": "西語驚嘆號 — 第三種語言",
+    "d": "西班牙文用 ¡ ! 把句子夾住。它們標記我的西語能力，也象徵一個意思由兩種語言一左一右扶著。"
+   },
+   {
+    "s": "ㄧˋ",
+    "t": "注音 — 台灣的讀法",
+    "d": "「譯」在台灣的發音記號。注音符號只在台灣使用——這是我的出身印記。"
+   },
+   {
+    "s": "역",
+    "t": "한글 — 韓國的讀法",
+    "d": "同一個「譯」字，韓文唸「역」（yeok）。像印章一樣蓋在字旁——我第二個家的語言。"
+   },
+   {
+    "s": "橋",
+    "t": "台灣島・吊橋・地球",
+    "d": "左岸是台灣島的輪廓，右岸是地球，字符立在中央作橋塔——從台灣出發，把話送到世界。"
+   },
+   {
+    "s": "P",
+    "t": "Puente — 網址的由來",
+    "d": "twkrpuente.web.app 的 puente 是西班牙文的「橋」——以語言與文化，連接台灣（TW）與韓國（KR）。"
+   }
+  ],
+  "stats": [
+   {
+    "num": "5",
+    "label": "種語言",
+    "sub": "中 · 臺 · 韓 · 英 · 西"
+   },
+   {
+    "num": "10",
+    "label": "年資歷",
+    "sub": "2016–2026"
+   },
+   {
+    "num": "4",
+    "label": "大主軸",
+    "sub": "政府 · 商務 · 媒體 · 展會"
+   },
+   {
+    "num": "60+",
+    "label": "案件",
+    "sub": "臺韓官方 · 企業 · 媒體"
+   }
+  ],
+  "aboutLabel": "關於 / About",
+  "aboutKo": "문화 간 소통",
+  "aboutHeading": "跨文化溝通",
+  "aboutDesc": "自 2017 年定居首爾，並曾旅居墨西哥、西班牙，走訪阿聯酋、法國、義大利、日本、新加坡等地，在不同文化與語言環境中累積國際視野與現場應變能力。持有韓國語教員資格證 2 級，現為慶熙大學韓國語學博士候選人，以學術深度支撐口譯實務。",
+  "strengths": [
+   {
+    "no": "01",
+    "title": "政府・官方場合",
+    "desc": "部會首長訪團・官方協定簽署・跨國機構交流"
+   },
+   {
+    "no": "02",
+    "title": "商務・技術談判",
+    "desc": "工廠驗貨・技術洽談・商機媒合・品牌在地化"
+   },
+   {
+    "no": "03",
+    "title": "媒體・影視採訪",
+    "desc": "電視台系列採訪・名人專訪・字幕翻譯・拍攝現場"
+   },
+   {
+    "no": "04",
+    "title": "展會・文化活動",
+    "desc": "國際展館接待・文化節隨隊・藝術表演巡迴"
+   }
+  ],
+  "clientsLabel": "服務實績",
+  "workLabel": "作品 / Selected Work",
+  "workHeading": "口筆譯作品集",
+  "workSub": "精選 2025–2026 代表性案件，附現場側記與專業術語對照。點擊任一案件查看完整內容；完整經歷見下方「口筆譯經歷」。",
+  "catAll": "全部",
+  "catGov": "政府·官方",
+  "catBiz": "商務·技術",
+  "catMedia": "媒體·影視",
+  "catExh": "展會·文化",
+  "drawerStory": "現場側記",
+  "drawerTerms": "專業術語對照",
+  "drawerVideos": "相關報導 · 電視播出",
+  "drawerPrev": "上一件",
+  "drawerNext": "下一件",
+  "copyLabel": "複製 Email",
+  "copied": "已複製",
+  "contactKo": "연락처",
+  "contactHeading": "一起把話，說清楚。",
+  "contactDesc": "如有口筆譯需求或合作洽詢，歡迎透過以下方式聯繫。",
+  "ctReply": "✉ 來信 24 小時內回覆",
+  "basedIn": "首爾，韓國",
+  "available": "2026 接案中",
+  "cursorView": "查看",
+  "cursorWrite": "來信",
+  "galleryLabel": "現場紀實 / On-site",
+  "brandLocal": "四語一橋",
+  "brandLocalSub": "ZH ⇌ KO 專攻 · EN / ES",
+  "brandLocalFont": "'Noto Serif TC','Seoul Hangang','Noto Serif KR',serif",
+  "tlHeading": "口筆譯經歷",
+  "tlSub": "2016–2026 · 60+ 場政府、企業與媒體的口筆譯案件，橫跨台韓兩地。",
+  "eduHeading": "語言能力 · 學歷 · 資格",
+  "eduDeg": "正規學歷",
+  "eduLang": "語言能力",
+  "langStudyLabel": "語言進修",
+  "certLabel": "資格與獎項",
+  "ledeH": "以<b style=\"color:var(--ac,#E8410E)\">韓語博士級的語言深度</b>，承接從政府高層會談到產業技術談判的跨領域口譯。",
+  "descH": "自 <strong style=\"color:#14110D;font-weight:700\">2017 年定居首爾</strong>，並曾旅居<strong style=\"color:#14110D;font-weight:700\">墨西哥、西班牙</strong>，走訪阿聯酋、法國、義大利、日本、新加坡等地，累積<strong style=\"color:#14110D;font-weight:700\">國際視野與現場應變能力</strong>。持有<strong style=\"color:#14110D;font-weight:700\">韓國語教員資格證 2 級</strong>，現為慶熙大學韓國語學博士候選人，以學術深度支撐口譯實務。"
+ },
+ "ko": {
+  "navAbout": "소개",
+  "navWork": "포트폴리오",
+  "navClients": "주요 고객",
+  "navTimeline": "경력",
+  "navEdu": "학력",
+  "navContact": "연락처",
+  "tagline": "대만 ⇄ 한국 · 한중 통번역",
+  "role": "대만인 통번역사 · 대만 비즈니스 커뮤니케이션 컨설턴트 · 경희대학교 한국어학 박사수료 · 학부 영어 전공·스페인어 고급(C1)",
+  "lede": "한국어 박사급 언어 전문성으로, 정부 고위급 회담부터 산업 기술 협상까지 폭넓은 분야의 통역을 수행합니다.",
+  "cta1": "함께 일하기",
+  "cta2": "포트폴리오 보기",
+  "heroTrust": "통번역 60여 건 · 정부·기업·미디어 · 2026 의뢰 가능",
+  "stampHint": "빈 곳을 누르면 도장이 찍힙니다",
+  "navSvc": "서비스",
+  "svcLabel": "서비스 / Services",
+  "svcHeading": "이런 일을 맡습니다",
+  "svcSub": "하루 수행부터 여러 날의 일정까지 맡습니다. 견적은 내용의 전문성·시간·형식에 따라 산정되며, 부담 없이 문의해 주세요.",
+  "svcFlowLabel": "진행 절차 / Process",
+  "svcCta": "비슷한 일정을 준비 중이신가요? 일정 문의",
+  "svcItems": [
+   {
+    "no": "01",
+    "t": "수행 통역",
+    "d": "방한하는 대만 파트너 응대부터 한국 팀의 대만 출장까지, 예방·시찰·비즈니스 일정 전 과정에 동행합니다."
+   },
+   {
+    "no": "02",
+    "t": "회의·행사 통역",
+    "d": "회담, 서명식, 기자회견, 전시회 현장의 순차통역을 맡습니다."
+   },
+   {
+    "no": "03",
+    "t": "번역·감수",
+    "d": "공문서, 계약서, 보도자료, 발표자료의 한중 번역과 감수를 진행합니다. 대만 시장용 자료는 간체가 아닌 대만 번체와 현지 표현으로 정확히 맞춥니다."
+   },
+   {
+    "no": "04",
+    "t": "대만 커뮤니케이션 컨설팅",
+    "d": "대만 진출과 협력을 준비하는 팀을 위해 사전 준비, 자료 현지화, 커뮤니케이션 전략과 후속 연락 창구까지 지원합니다."
+   },
+   {
+    "no": "05",
+    "t": "현지 코디네이션·현장 지원",
+    "d": "대만 측과의 급한 연락과 일정 중 돌발 상황을 바로 조율하고 처리합니다. 대만과 일할 때 믿고 맡길 수 있는 사람이 한 명 생기는 셈입니다."
+   }
+  ],
+  "svcSteps": [
+   {
+    "no": "01",
+    "t": "문의",
+    "d": "날짜·장소·주제와 언어 방향, 일정 개요를 알려 주세요."
+   },
+   {
+    "no": "02",
+    "t": "일정·견적 확정",
+    "d": "내용의 전문성과 시간, 형식에 따라 견적을 드리고, 확정 시 일정을 확보합니다."
+   },
+   {
+    "no": "03",
+    "t": "준비·수행",
+    "d": "배경 자료와 전문 용어를 미리 연구하고, 현장에서 모든 말이 온전히 전달되도록 합니다."
+   }
+  ],
+  "svcCustomT": "맞춤 구성",
+  "svcCustomD": "목록에 없는 요청도 괜찮습니다. 서비스 구성과 일정은 필요에 맞게 조정해 드리니, 편하게 상의해 주세요.",
+  "tmLabel": "함께한 분들의 한마디 / Words",
+  "tmFont": "'Seoul Hangang','Noto Serif KR','Nanum Myeongjo',serif",
+  "tmQSize": "1.05rem",
+  "tmItems": [
+   {
+    "q": "“중한만이 아니라 영한까지 소화하는 뛰어난 인재입니다.”",
+    "by": "방문단 강연자·대학교수"
+   },
+   {
+    "q": "“한국어 원어민인 줄 알았을 정도의 번역 실력입니다.”",
+    "by": "한국 기업 담당자"
+   },
+   {
+    "q": "“저희 명단에서 가장 우수한 1순위 후보십니다.”",
+    "by": "무역 매칭 기관"
+   },
+   {
+    "q": "“돌발 상황이 이어진 온라인 회의에서, 중간에서 소통하며 양측의 흐름을 잡아 주셨습니다.”",
+    "by": "국제 온라인 회의 한국 측 주최자"
+   },
+   {
+    "q": "“다음 출장에도 일정이 맞았으면 합니다. 저희는 당신이 필요합니다.”",
+    "by": "정부 방문단 연락 담당자"
+   },
+   {
+    "q": "“사전 자료 없는 즉석 통역인데도 놀라울 만큼 매끄러웠습니다.”",
+    "by": "방문단 수행원"
+   }
+  ],
+  "faqLabel": "자주 묻는 질문 / FAQ",
+  "faqItems": [
+   {
+    "q": "예약은 얼마나 미리 해야 하나요?",
+    "a": "일정이 확정되는 대로 가급적 빨리 문의해 주세요. 성수기에는 일정이 한정되어 있어, 일찍 문의하실수록 시간대 확보가 용이합니다."
+   },
+   {
+    "q": "비용은 어떻게 산정되나요?",
+    "a": "통역은 시간(반일/종일)과 내용의 전문성, 형식에 따라, 번역은 분량과 문서 성격, 납기에 따라 산정됩니다. 문의 시 대략적인 내용을 알려 주시면 정식 견적을 보내드립니다."
+   },
+   {
+    "q": "서비스 지역은 어디까지인가요?",
+    "a": "서울·수도권을 중심으로 하며, 한국 전역도 가능합니다. 대만 내 일정도 협의 가능합니다."
+   },
+   {
+    "q": "비밀유지계약(NDA) 체결이 가능한가요?",
+    "a": "가능합니다. 비즈니스·기술 분야에서 NDA 체결 경험이 많으며, 회의 내용과 자료는 일체 비밀로 유지합니다."
+   }
+  ],
+  "logoCap": "‘譯’은 ‘번역하다’ — 한국어로는 ‘역’, 대만에서는 ‘이(YI)’라고 읽습니다",
+  "myStory": "제가 통역을 하는 이유는 묵직한 사명감 때문입니다. 이 능력이 있는 만큼, 언어의 벽을 사이에 둔 모든 소통이 제대로 이루어지도록 돕고 싶습니다. 어느새 해외에서 보낸 시간이 인생의 3분의 1이 되었고, 그동안 쌓인 국제적인 감각과 박사과정의 학문적 훈련, 다양한 현장에서 다져진 경험은 결국 하나로 모여 통역석에서의 서비스 정신이 되었습니다.",
+  "pcPre": "말이 ",
+  "pcAcc": "통",
+  "pcPost": "하게 해드리겠습니다.",
+  "onSiteLabel": "현장 / ON SITE",
+  "actsCredit": "“신(信)·달(達)·아(雅)” — 옌푸 〈역례언〉, 1898",
+  "actsLead": "제가 지키는 세 글자입니다.",
+  "act1g": "원문에 충실하게",
+  "act2g": "뜻이 온전히 닿게",
+  "act3g": "품격 있는 언어로",
+  "sndLabel": "효과음",
+  "quote": "'통역은 말을 다른 언어로 옮기는 일이 아니라, 양쪽이 서로를 온전히 이해하도록 돕는 일입니다. 저는 늘 두 언어의 한가운데에 앉습니다. 그 자리가 바로 제 일터입니다.'",
+  "quoteCap": "유홍빈 · 한중 통번역사",
+  "ntLabel": "통역 노트테이킹",
+  "ntLead": "노트에 적는 것은 단어가 아니라 논리입니다.",
+  "ntSub": "순차통역의 실제 기술입니다. 기호는 구조를, 화살표는 관계를 담습니다 — 문장이 끝나는 순간, 통역문은 이미 종이 위에 있습니다. 매 회의마다 남는 저의 작업 흔적입니다.",
+  "ntP1": "듣기",
+  "ntP2": "노트",
+  "ntP3": "통역",
+  "ntSrcCap": "원문 · 중국어",
+  "ntOutCap": "통역 · 한국어",
+  "ntGloss": "",
+  "ntReplay": "다시 보기",
+  "skipLabel": "본문 바로가기",
+  "markLabel": "로고 이야기 / THE MARK",
+  "markItems": [
+   {
+    "s": "譯",
+    "t": "譯 — 번역",
+    "d": "제 일을 한 글자로. 해서체로 써서 한자 서예와 활자 전통에 경의를 표했습니다."
+   },
+   {
+    "s": "~",
+    "t": "물결표 — 뉘앙스",
+    "d": "손글씨 한 획은 어조와 뉘앙스, 행간의 의미를 뜻합니다. 통번역이 진짜 전달해야 하는 것들입니다."
+   },
+   {
+    "s": "¡ !",
+    "t": "스페인어 느낌표 — 세 번째 언어",
+    "d": "스페인어는 문장을 ¡ !로 감쌉니다. 제 스페인어 능력의 표시이자, 하나의 의미를 두 언어가 양쪽에서 받쳐 든다는 상징입니다."
+   },
+   {
+    "s": "ㄧˋ",
+    "t": "주음부호 — 대만의 발음",
+    "d": "대만에서만 쓰는 발음 기호로, 譯의 대만식 읽기 “이(yì)”를 표기했습니다. 제 뿌리의 표시입니다."
+   },
+   {
+    "s": "역",
+    "t": "한글 — 한국의 발음",
+    "d": "같은 글자 譯를 한국어로 읽으면 “역”. 도장처럼 곁에 찍어 제2의 고향의 언어를 담았습니다."
+   },
+   {
+    "s": "橋",
+    "t": "대만 섬 · 다리 · 지구",
+    "d": "왼쪽 기슭은 대만 섬, 오른쪽은 지구. 글자가 가운데 교탑이 되어 — 대만에서 세계로 말을 건넵니다."
+   },
+   {
+    "s": "P",
+    "t": "Puente — 주소에 담긴 뜻",
+    "d": "twkrpuente.web.app의 puente는 스페인어로 '다리'입니다. 언어와 문화로 대만(TW)과 한국(KR)을 잇습니다."
+   }
+  ],
+  "stats": [
+   {
+    "num": "5",
+    "label": "개 언어",
+    "sub": "중 · 대만어 · 한 · 영 · 서"
+   },
+   {
+    "num": "10",
+    "label": "년 경력",
+    "sub": "2016–2026"
+   },
+   {
+    "num": "4",
+    "label": "개 분야",
+    "sub": "공공 · 기업 · 미디어 · 전시"
+   },
+   {
+    "num": "60+",
+    "label": "건 경력",
+    "sub": "대만 · 한국 공공 · 기업"
+   }
+  ],
+  "aboutLabel": "소개 / About",
+  "aboutKo": "跨文化溝通",
+  "aboutHeading": "문화 간 소통",
+  "aboutDesc": "2017년부터 서울에 거주하며 멕시코·스페인에서 어학연수를 하고, 아랍에미리트·프랑스·이탈리아·일본·싱가포르 등을 다니며 국제적 감각과 현장 대응 능력을 쌓아왔습니다. 국립국어원 한국어교원 2급 자격을 보유하고, 경희대학교 한국어학 박사수료로 학문적 깊이를 바탕으로 통번역 실무에 임합니다.",
+  "strengths": [
+   {
+    "no": "01",
+    "title": "정부·공공기관",
+    "desc": "부처 장·차관 방문단·공식 협약 서명·국제기관 교류"
+   },
+   {
+    "no": "02",
+    "title": "비즈니스·기술협상",
+    "desc": "공장 검수·기술 협의·비즈니스 매칭·브랜드 현지화"
+   },
+   {
+    "no": "03",
+    "title": "미디어·영상 취재",
+    "desc": "방송 시리즈 취재·단독 인터뷰·자막 번역·촬영 현장"
+   },
+   {
+    "no": "04",
+    "title": "전시·문화행사",
+    "desc": "국제 전시 부스·문화 축제 동행·예술 공연 투어"
+   }
+  ],
+  "clientsLabel": "수행 실적",
+  "workLabel": "포트폴리오 / Work",
+  "workHeading": "통역·번역 포트폴리오",
+  "workSub": "2025–2026 대표 사례를 현장 노트·전문 용어와 함께 정리했습니다. 클릭하면 자세히 볼 수 있으며, 전체 경력은 아래 ‘경력’에서 확인하세요.",
+  "catAll": "전체",
+  "catGov": "정부·공공",
+  "catBiz": "비즈니스·기술",
+  "catMedia": "미디어·영상",
+  "catExh": "전시·문화",
+  "drawerStory": "현장 노트",
+  "drawerTerms": "전문 용어 대조",
+  "drawerVideos": "관련 보도 · 중국어 방송",
+  "drawerPrev": "이전 사례",
+  "drawerNext": "다음 사례",
+  "copyLabel": "이메일 복사",
+  "copied": "복사됨",
+  "contactKo": "聯繫",
+  "contactHeading": "정확하게, 전하겠습니다.",
+  "contactDesc": "통역·번역 의뢰 및 협업 문의는 아래로 연락주세요.",
+  "ctReply": "✉ 문의 메일은 24시간 이내에 회신드립니다",
+  "basedIn": "서울, 대한민국",
+  "available": "2026 의뢰 가능",
+  "cursorView": "보기",
+  "cursorWrite": "메일",
+  "galleryLabel": "현장 기록 / On-site",
+  "brandLocal": "네 언어, 하나의 다리",
+  "brandLocalSub": "ZH ⇌ KO 전문 · EN / ES",
+  "brandLocalFont": "'Seoul Hangang','Noto Serif KR','Nanum Myeongjo',serif",
+  "tlHeading": "통역·번역 경력",
+  "tlSub": "2016–2026 · 정부·기업·미디어 60여 건, 대만과 한국을 잇는 통번역.",
+  "eduHeading": "어학 능력 · 학력 · 자격",
+  "eduDeg": "정규 학력",
+  "eduLang": "어학 능력",
+  "langStudyLabel": "어학 연수",
+  "certLabel": "자격 및 수상",
+  "ledeH": "<b style=\"color:var(--ac,#E8410E)\">한국어 박사급 언어 전문성</b>으로, 정부 고위급 회담부터 산업 기술 협상까지 폭넓은 분야의 통역을 수행합니다.",
+  "descH": "<strong style=\"color:#14110D;font-weight:700\">2017년부터 서울에 거주</strong>하며 <strong style=\"color:#14110D;font-weight:700\">멕시코·스페인</strong>에서 어학연수를 하고, 아랍에미리트·프랑스·이탈리아·일본·싱가포르 등을 다니며 <strong style=\"color:#14110D;font-weight:700\">국제적 감각과 현장 대응 능력</strong>을 쌓아왔습니다. <strong style=\"color:#14110D;font-weight:700\">국립국어원 한국어교원 2급</strong> 자격을 보유하고, 경희대학교 한국어학 박사수료로 통번역 실무에 임합니다."
+ },
+ "en": {
+  "navAbout": "About",
+  "navWork": "Work",
+  "navClients": "Clients",
+  "navTimeline": "Timeline",
+  "navEdu": "Education",
+  "navContact": "Contact",
+  "tagline": "TAIWAN ⇄ KOREA · KOREAN–CHINESE",
+  "role": "Taiwanese Korean–Chinese Interpreter · Communication Consultant · PhD Candidate, Kyung Hee University · BA in English, C1 Spanish",
+  "lede": "Bringing PhD-level command of Korean to interpretation that spans high-level government talks to technical industry negotiations.",
+  "cta1": "Work with me",
+  "cta2": "See the portfolio",
+  "heroTrust": "60+ engagements · Government / Business / Media · Booking for 2026",
+  "stampHint": "Click any empty spot to stamp",
+  "navSvc": "Services",
+  "svcLabel": "Services",
+  "svcHeading": "What I take on",
+  "svcSub": "From a single day of escort interpreting to multi-day programs. Quotes depend on subject complexity, duration and format — just write.",
+  "svcFlowLabel": "How it works",
+  "svcCta": "Planning something similar? Check availability",
+  "svcItems": [
+   {
+    "no": "01",
+    "t": "Escort interpreting",
+    "d": "Full-itinerary support for official visits and business trips — courtesy calls, site visits, on-the-ground liaison."
+   },
+   {
+    "no": "02",
+    "t": "Meeting & event interpreting",
+    "d": "Consecutive interpreting for talks, signing ceremonies, press conferences and trade shows."
+   },
+   {
+    "no": "03",
+    "t": "Translation & review",
+    "d": "Korean–Chinese translation and revision of official documents, contracts, press releases and decks. Taiwan-market materials are localized in traditional Chinese with authentic Taiwanese phrasing — not mainland simplified."
+   },
+   {
+    "no": "04",
+    "t": "Taiwan–Korea communication consulting",
+    "d": "Pre-trip preparation, material localization, on-site strategy and follow-up liaison — whether your program lands in Seoul or Taipei."
+   },
+   {
+    "no": "05",
+    "t": "Local coordination & on-site support",
+    "d": "Last-minute liaison and unexpected situations, handled as they come up — like having your own person on the ground."
+   }
+  ],
+  "svcSteps": [
+   {
+    "no": "01",
+    "t": "Get in touch",
+    "d": "Share the dates, location, subject and language direction, with a brief outline of the program."
+   },
+   {
+    "no": "02",
+    "t": "Confirm & quote",
+    "d": "Quotes reflect complexity, duration and format; your dates are held once confirmed."
+   },
+   {
+    "no": "03",
+    "t": "Prepare & deliver",
+    "d": "I study the background and terminology in advance, arrive early, and make every word land."
+   }
+  ],
+  "svcCustomT": "Fully custom",
+  "svcCustomD": "Something not listed? Scope and itinerary can be shaped around your program — write and we will work it out.",
+  "tmLabel": "Words from clients",
+  "tmFont": "'Caveat',cursive",
+  "tmQSize": "1.34rem",
+  "tmItems": [
+   {
+    "q": "“Exceptional — handles not only Chinese–Korean but English–Korean settings with ease.”",
+    "by": "Delegation speaker, university professor"
+   },
+   {
+    "q": "“Translation skills so strong we assumed he was a native Korean speaker.”",
+    "by": "Korean corporate liaison"
+   },
+   {
+    "q": "“The finest first choice on our list.”",
+    "by": "Trade matchmaking organization"
+   },
+   {
+    "q": "“When surprises kept coming in an online meeting, he mediated and kept both sides on track.”",
+    "by": "Korean host, international online meeting"
+   },
+   {
+    "q": "“I hope our next trip lines up with your schedule — we need you.”",
+    "by": "Government delegation coordinator"
+   },
+   {
+    "q": "“Interpreting cold, with no advance materials, and still remarkably fluent.”",
+    "by": "Delegation staff member"
+   }
+  ],
+  "faqLabel": "FAQ",
+  "faqItems": [
+   {
+    "q": "How far in advance should I book?",
+    "a": "Write as soon as your dates are set — peak-season availability is limited, and earlier inquiries secure the slot."
+   },
+   {
+    "q": "How are fees calculated?",
+    "a": "Interpreting is quoted by duration (half or full day), subject complexity and format; translation by volume, document type and deadline. Send a brief outline and you will receive a formal quote."
+   },
+   {
+    "q": "Which areas do you cover?",
+    "a": "Seoul and the capital region primarily, with nationwide coverage available; assignments in Taiwan are open to discussion."
+   },
+   {
+    "q": "Can you sign an NDA?",
+    "a": "Yes. NDAs are routine in my business and technical work — meeting content and materials stay strictly confidential."
+   }
+  ],
+  "logoCap": "譯 MEANS “TRANSLATE” — SAID “YI” IN TAIWAN, “YEOK（역）” IN KOREA",
+  "myStory": "I interpret out of a grounded sense of mission — I have this ability, so I want every conversation across languages to truly land. Almost without noticing, I’ve now spent a third of my life abroad. The perspective of those years, the discipline of doctoral training, and service in every kind of setting have all settled into one thing: the spirit of service I bring to the interpreter’s seat.",
+  "pcPre": "I’ll make sure your words get ",
+  "pcAcc": "through",
+  "pcPost": ".",
+  "onSiteLabel": "ON SITE",
+  "actsCredit": "信達雅 — “THE THREE DIFFICULTIES OF TRANSLATION” · YAN FU, 1898",
+  "actsLead": "Three words I work by.",
+  "act1g": "True to the source",
+  "act2g": "Meaning that gets through",
+  "act3g": "Said with grace",
+  "sndLabel": "Sound",
+  "quote": "“Interpreting is not repeating words in another language — it is making sure both sides truly understand each other. In every meeting, I sit right between two languages. That seat is my job.”",
+  "quoteCap": "Hung-Pin Yu · Chinese–Korean Interpreter",
+  "ntLabel": "Interpreter’s Notes",
+  "ntLead": "Notes capture logic, not words.",
+  "ntSub": "The real craft of consecutive interpreting: symbols hold structure, arrows hold relations — by the time the sentence ends, the delivery is already on paper. A trace of every meeting I work.",
+  "ntP1": "Listen",
+  "ntP2": "Note",
+  "ntP3": "Deliver",
+  "ntSrcCap": "Source · Chinese",
+  "ntOutCap": "Delivery · Korean",
+  "ntGloss": "“Taiwan and Korea will co-host a cultural exchange forum in Seoul next year.”",
+  "ntReplay": "Replay",
+  "skipLabel": "Skip to content",
+  "markLabel": "THE MARK — DESIGN STORY",
+  "markItems": [
+   {
+    "s": "譯",
+    "t": "譯 — “to translate”",
+    "d": "My work in a single character, set in a calligraphic kai script as a nod to the Chinese brush-writing tradition."
+   },
+   {
+    "s": "~",
+    "t": "The tilde — nuance",
+    "d": "One handwritten stroke for tone, nuance and what lives between the lines — the things translation really carries."
+   },
+   {
+    "s": "¡ !",
+    "t": "Spanish exclamation marks — my third language",
+    "d": "Spanish wraps a sentence in ¡ !. They mark my Spanish, and picture one meaning held up by two languages, one on each side."
+   },
+   {
+    "s": "ㄧˋ",
+    "t": "Zhuyin — how Taiwan says it",
+    "d": "Phonetic symbols used only in Taiwan, spelling the Taiwanese reading “yì”. A mark of where I come from."
+   },
+   {
+    "s": "역",
+    "t": "Hangul — how Korea says it",
+    "d": "The same character read in Korean: “yeok”. Stamped beside the word like a seal — the language of my second home."
+   },
+   {
+    "s": "橋",
+    "t": "Island · bridge · globe",
+    "d": "Taiwan’s outline on the left bank, the globe on the right, the character standing as the bridge tower — carrying words from Taiwan to the world."
+   },
+   {
+    "s": "P",
+    "t": "Puente — the name in the URL",
+    "d": "The puente in twkrpuente.web.app is Spanish for “bridge” — connecting Taiwan (TW) and Korea (KR) through language and culture."
+   }
+  ],
+  "stats": [
+   {
+    "num": "5",
+    "label": "Languages",
+    "sub": "Ch · Tw · Ko · En · Es"
+   },
+   {
+    "num": "10",
+    "label": "Years",
+    "sub": "2016–2026"
+   },
+   {
+    "num": "4",
+    "label": "Fields",
+    "sub": "Gov · Biz · Media · Expo"
+   },
+   {
+    "num": "60+",
+    "label": "Cases",
+    "sub": "TW–KR gov · corp · media"
+   }
+  ],
+  "aboutLabel": "About",
+  "aboutKo": "문화 간 소통",
+  "aboutHeading": "Intercultural Communication",
+  "aboutDesc": "Seoul-based since 2017, with immersive experience living in Mexico and Spain and travels across the UAE, France, Italy, Japan and Singapore — building a genuinely international perspective. Holds a Korean Language Teacher Certificate (Level 2) and is a PhD candidate in Korean linguistics at Kyung Hee University.",
+  "strengths": [
+   {
+    "no": "01",
+    "title": "Government & Institutions",
+    "desc": "Ministerial delegations · official signings · inter-institutional exchanges"
+   },
+   {
+    "no": "02",
+    "title": "Business & Technical",
+    "desc": "Factory inspections · technical talks · matchmaking · brand localization"
+   },
+   {
+    "no": "03",
+    "title": "Media & Broadcast",
+    "desc": "TV series reporting · exclusive interviews · subtitles · on-site filming"
+   },
+   {
+    "no": "04",
+    "title": "Exhibition & Culture",
+    "desc": "Int'l expo hosting · festival escort · arts touring"
+   }
+  ],
+  "clientsLabel": "Selected Clients",
+  "workLabel": "Selected Work",
+  "workHeading": "Interpretation & Translation",
+  "workSub": "Featured 2025–2026 assignments, with field notes and bilingual terminology. Click any case to read more; the full record is in the Timeline below.",
+  "catAll": "All",
+  "catGov": "Government",
+  "catBiz": "Business",
+  "catMedia": "Media",
+  "catExh": "Exhibition",
+  "drawerStory": "Field note",
+  "drawerTerms": "Terminology",
+  "drawerVideos": "Broadcast links · in Mandarin",
+  "drawerPrev": "Previous case",
+  "drawerNext": "Next case",
+  "copyLabel": "Copy email",
+  "copied": "Copied",
+  "contactKo": "연락처",
+  "contactHeading": "Let's get it across.",
+  "contactDesc": "For interpretation, translation inquiries or collaboration, please reach out.",
+  "ctReply": "✉ Inquiries answered within 24 hours",
+  "basedIn": "Seoul, Korea",
+  "available": "Open for 2026",
+  "cursorView": "VIEW",
+  "cursorWrite": "MAIL",
+  "galleryLabel": "On-site / 現場紀實",
+  "brandLocal": "四語一橋",
+  "brandLocalSub": "ZH ⇌ KO · plus EN / ES · One Bridge",
+  "brandLocalFont": "'Noto Serif TC','Seoul Hangang','Noto Serif KR',serif",
+  "tlHeading": "Interpretation Timeline",
+  "tlSub": "2016–2026 · 60+ government, corporate and media assignments across Taiwan and Korea.",
+  "eduHeading": "Languages · Education · Credentials",
+  "eduDeg": "Education",
+  "eduLang": "Language Skills",
+  "langStudyLabel": "Language Study",
+  "certLabel": "Certifications & Awards",
+  "ledeH": "Bringing <b style=\"color:var(--ac,#E8410E)\">PhD-level command of Korean</b> to interpretation that spans high-level government talks to technical industry negotiations.",
+  "descH": "<strong style=\"color:#14110D;font-weight:700\">Seoul-based since 2017</strong>, with immersive experience living in <strong style=\"color:#14110D;font-weight:700\">Mexico and Spain</strong> and travels across the UAE, France, Italy, Japan and Singapore — building a <strong style=\"color:#14110D;font-weight:700\">genuinely international perspective</strong>. Holds a <strong style=\"color:#14110D;font-weight:700\">Korean Language Teacher Certificate (Level 2)</strong> and is a PhD candidate in Korean linguistics at Kyung Hee University."
+ },
+ "es": {
+  "navAbout": "Sobre mí",
+  "navWork": "Portafolio",
+  "navClients": "Clientes",
+  "navTimeline": "Trayectoria",
+  "navEdu": "Formación",
+  "navContact": "Contacto",
+  "tagline": "TAIWÁN ⇄ COREA · CHINO–COREANO",
+  "role": "Intérprete taiwanés coreano–chino · Asesor de comunicación · Doctorando en Lingüística Coreana, Univ. Kyung Hee · grado en inglés, español C1",
+  "lede": "Con la profundidad lingüística de un doctorando en coreano, cubro desde reuniones gubernamentales de alto nivel hasta negociaciones técnicas industriales.",
+  "cta1": "Trabajemos juntos",
+  "cta2": "Ver portafolio",
+  "heroTrust": "Más de 60 encargos · Gobierno / Empresas / Medios · Agenda 2026 abierta",
+  "stampHint": "Haga clic en un espacio vacío para sellar",
+  "navSvc": "Servicios",
+  "svcLabel": "Servicios",
+  "svcHeading": "Qué ofrezco",
+  "svcSub": "Desde un día de acompañamiento hasta programas de varios días. El presupuesto depende de la especialización, duración y formato: escríbame sin compromiso.",
+  "svcFlowLabel": "Cómo trabajamos",
+  "svcCta": "¿Prepara algo parecido? Consultar agenda",
+  "svcItems": [
+   {
+    "no": "01",
+    "t": "Interpretación de acompañamiento",
+    "d": "Apoyo durante todo el itinerario en visitas oficiales y viajes de negocios: reuniones, visitas, enlace local."
+   },
+   {
+    "no": "02",
+    "t": "Interpretación en reuniones y eventos",
+    "d": "Interpretación consecutiva en conversaciones, firmas, ruedas de prensa y ferias."
+   },
+   {
+    "no": "03",
+    "t": "Traducción y revisión",
+    "d": "Traducción coreano–chino de documentos oficiales, contratos, notas de prensa y presentaciones. Los materiales para el mercado taiwanés se localizan en chino tradicional con expresiones propias de Taiwán, no en simplificado."
+   },
+   {
+    "no": "04",
+    "t": "Asesoría de comunicación Taiwán–Corea",
+    "d": "Preparación previa, localización de materiales, estrategia in situ y seguimiento posterior, ya sea en Seúl o en Taipéi."
+   },
+   {
+    "no": "05",
+    "t": "Coordinación local y apoyo in situ",
+    "d": "Contactos de última hora e imprevistos, resueltos sobre el terreno al momento: como tener a alguien de confianza sobre el terreno."
+   }
+  ],
+  "svcSteps": [
+   {
+    "no": "01",
+    "t": "Primer contacto",
+    "d": "Indíqueme fechas, lugar, tema y dirección lingüística, con un breve resumen del programa."
+   },
+   {
+    "no": "02",
+    "t": "Agenda y presupuesto",
+    "d": "El presupuesto depende de la especialización, duración y formato; al confirmar, reservo las fechas."
+   },
+   {
+    "no": "03",
+    "t": "Preparación y ejecución",
+    "d": "Estudio el contexto y la terminología con antelación, llego puntual y hago que cada palabra llegue."
+   }
+  ],
+  "svcCustomT": "Servicio a medida",
+  "svcCustomD": "¿Algo que no aparece aquí? El alcance y el itinerario se adaptan a su programa: escríbame y lo vemos.",
+  "tmLabel": "Lo que dicen los clientes",
+  "tmFont": "'Caveat',cursive",
+  "tmQSize": "1.34rem",
+  "tmItems": [
+   {
+    "q": "«Un talento excepcional: domina no solo el chino-coreano, sino también el inglés-coreano.»",
+    "by": "Ponente de delegación, catedrático"
+   },
+   {
+    "q": "«Un nivel de traducción que hacía pensar que era hablante nativo de coreano.»",
+    "by": "Enlace de empresa coreana"
+   },
+   {
+    "q": "«La mejor primera opción de nuestra lista.»",
+    "by": "Organismo de matchmaking comercial"
+   },
+   {
+    "q": "«Entre imprevistos constantes en una reunión en línea, medió y mantuvo el ritmo de ambas partes.»",
+    "by": "Anfitrión coreano, reunión internacional en línea"
+   },
+   {
+    "q": "«Ojalá el próximo viaje coincida con su agenda: le necesitamos.»",
+    "by": "Coordinador de delegación gubernamental"
+   },
+   {
+    "q": "«Interpretación improvisada sin materiales previos, y aun así asombrosamente fluida.»",
+    "by": "Miembro de comitiva"
+   }
+  ],
+  "faqLabel": "Preguntas frecuentes",
+  "faqItems": [
+   {
+    "q": "¿Con cuánta antelación debo reservar?",
+    "a": "Escríbame en cuanto tenga las fechas: en temporada alta la agenda es limitada y consultar pronto asegura el horario."
+   },
+   {
+    "q": "¿Cómo se calculan los honorarios?",
+    "a": "La interpretación se cotiza por duración (media jornada o jornada completa), especialización y formato; la traducción, por volumen, tipo de documento y plazo. Envíe un breve resumen y recibirá un presupuesto formal."
+   },
+   {
+    "q": "¿Qué zonas cubre?",
+    "a": "Principalmente Seúl y su área metropolitana, con cobertura en toda Corea; encargos en Taiwán, a convenir."
+   },
+   {
+    "q": "¿Firma acuerdos de confidencialidad (NDA)?",
+    "a": "Sí. Es práctica habitual en mis encargos comerciales y técnicos: el contenido de las reuniones y los materiales se tratan con estricta confidencialidad."
+   }
+  ],
+  "logoCap": "譯 SIGNIFICA “TRADUCIR” — SE DICE “YI” EN TAIWÁN Y “YEOK（역）” EN COREA",
+  "myStory": "Interpreto por un profundo sentido de misión: si tengo esta capacidad, quiero que cada conversación entre lenguas funcione de verdad. Casi sin darme cuenta, llevo ya un tercio de mi vida en el extranjero. La perspectiva internacional de estos años, la disciplina del doctorado y el servicio en escenarios muy diversos se han ido decantando en una sola cosa: el espíritu de servicio que llevo conmigo al puesto de intérprete.",
+  "pcPre": "Haré que sus palabras ",
+  "pcAcc": "lleguen",
+  "pcPost": ".",
+  "onSiteLabel": "EN EL TERRENO",
+  "actsCredit": "信達雅 — “LAS TRES DIFICULTADES DE LA TRADUCCIÓN” · YAN FU, 1898",
+  "actsLead": "Tres palabras que me guían.",
+  "act1g": "Fiel al original",
+  "act2g": "Un mensaje que llega",
+  "act3g": "Dicho con elegancia",
+  "sndLabel": "Sonido",
+  "quote": "«Interpretar no es repetir palabras en otro idioma: es lograr que ambas partes se entiendan de verdad. En cada reunión me siento justo entre dos lenguas. Ese asiento es mi trabajo.»",
+  "quoteCap": "Hung-Pin Yu · Intérprete chino-coreano",
+  "ntLabel": "Notas del intérprete",
+  "ntLead": "Las notas capturan la lógica, no las palabras.",
+  "ntSub": "El verdadero oficio de la interpretación consecutiva: los símbolos guardan la estructura y las flechas, las relaciones — al terminar la frase, la interpretación ya está en el papel. La huella de cada reunión.",
+  "ntP1": "Escuchar",
+  "ntP2": "Anotar",
+  "ntP3": "Interpretar",
+  "ntSrcCap": "Original · chino",
+  "ntOutCap": "Interpretación · coreano",
+  "ntGloss": "«Taiwán y Corea organizarán juntos un foro de intercambio cultural en Seúl el próximo año.»",
+  "ntReplay": "Ver de nuevo",
+  "skipLabel": "Saltar al contenido",
+  "markLabel": "LA MARCA — HISTORIA DEL DISEÑO",
+  "markItems": [
+   {
+    "s": "譯",
+    "t": "譯 — “traducir”",
+    "d": "Mi trabajo en un solo carácter, escrito en estilo caligráfico kai, homenaje a la tradición de la caligrafía china."
+   },
+   {
+    "s": "~",
+    "t": "La tilde — el matiz",
+    "d": "Un trazo a mano para el tono, el matiz y lo que vive entre líneas: lo que la traducción realmente transmite."
+   },
+   {
+    "s": "¡ !",
+    "t": "Signos de exclamación — mi tercer idioma",
+    "d": "El español abraza la frase entre ¡ !. Marcan mi español y representan un significado sostenido por dos lenguas, una a cada lado."
+   },
+   {
+    "s": "ㄧˋ",
+    "t": "Zhuyin — cómo se dice en Taiwán",
+    "d": "Símbolos fonéticos que solo se usan en Taiwán: la lectura taiwanesa “yì”. La marca de mi origen."
+   },
+   {
+    "s": "역",
+    "t": "Hangul — cómo se dice en Corea",
+    "d": "El mismo carácter leído en coreano: “yeok”. Estampado como un sello: la lengua de mi segundo hogar."
+   },
+   {
+    "s": "橋",
+    "t": "Isla · puente · globo",
+    "d": "La silueta de Taiwán a la izquierda, el globo a la derecha y el carácter como torre del puente: llevar las palabras de Taiwán al mundo."
+   },
+   {
+    "s": "P",
+    "t": "Puente — el nombre en la dirección",
+    "d": "El puente de twkrpuente.web.app es exactamente eso: un puente que une Taiwán (TW) y Corea (KR) a través de la lengua y la cultura."
+   }
+  ],
+  "stats": [
+   {
+    "num": "5",
+    "label": "idiomas",
+    "sub": "Ch · Tw · Ko · En · Es"
+   },
+   {
+    "num": "10",
+    "label": "años",
+    "sub": "2016–2026"
+   },
+   {
+    "num": "4",
+    "label": "áreas",
+    "sub": "Gob · Empresa · Medios · Ferias"
+   },
+   {
+    "num": "60+",
+    "label": "proyectos",
+    "sub": "Gob · empresa · medios"
+   }
+  ],
+  "aboutLabel": "Sobre mí",
+  "aboutKo": "문화 간 소통",
+  "aboutHeading": "Comunicación Intercultural",
+  "aboutDesc": "Residente en Seúl desde 2017, habiendo vivido en México y España y visitado los Emiratos Árabes Unidos, Francia, Italia, Japón y Singapur, acumulando una sólida visión internacional y capacidad de adaptación. Posee el Certificado de Docente de Coreano Nivel 2 y es doctorando en lingüística coreana en la Universidad Kyung Hee.",
+  "strengths": [
+   {
+    "no": "01",
+    "title": "Gobierno e instituciones",
+    "desc": "Delegaciones ministeriales · firmas de acuerdos oficiales · intercambios interinstitucionales"
+   },
+   {
+    "no": "02",
+    "title": "Negocios y negociación técnica",
+    "desc": "Inspección de fábrica · consultas técnicas · matchmaking empresarial · localización de marca"
+   },
+   {
+    "no": "03",
+    "title": "Medios y audiovisual",
+    "desc": "Reportajes de TV en serie · entrevistas exclusivas · subtítulos · rodajes in situ"
+   },
+   {
+    "no": "04",
+    "title": "Ferias y cultura",
+    "desc": "Atención en ferias internacionales · acompañamiento en festivales · giras artísticas"
+   }
+  ],
+  "clientsLabel": "Clientes",
+  "workLabel": "Portafolio",
+  "workHeading": "Interpretación y Traducción",
+  "workSub": "Casos destacados de 2025–2026, con notas de campo y terminología bilingüe. Haz clic en cualquier caso para leer más; la trayectoria completa está abajo.",
+  "catAll": "Todos",
+  "catGov": "Gobierno",
+  "catBiz": "Negocios",
+  "catMedia": "Medios",
+  "catExh": "Ferias",
+  "drawerStory": "Nota de campo",
+  "drawerTerms": "Terminología",
+  "drawerVideos": "Reportajes emitidos · en mandarín",
+  "drawerPrev": "Caso anterior",
+  "drawerNext": "Caso siguiente",
+  "copyLabel": "Copiar email",
+  "copied": "Copiado",
+  "contactKo": "연락처",
+  "contactHeading": "Que el mensaje llegue claro.",
+  "contactDesc": "Para consultas de interpretación, traducción o colaboración, no dude en contactarme.",
+  "ctReply": "✉ Respuesta en menos de 24 horas",
+  "basedIn": "Seúl, Corea",
+  "available": "Disponible 2026",
+  "cursorView": "VER",
+  "cursorWrite": "MAIL",
+  "galleryLabel": "En el terreno / On-site",
+  "brandLocal": "四語一橋",
+  "brandLocalSub": "ZH ⇌ KO · más EN / ES · Un puente",
+  "brandLocalFont": "'Noto Serif TC','Seoul Hangang','Noto Serif KR',serif",
+  "tlHeading": "Trayectoria",
+  "tlSub": "2016–2026 · más de 60 encargos de gobierno, empresa y medios entre Taiwán y Corea.",
+  "eduHeading": "Idiomas · Formación · Credenciales",
+  "eduDeg": "Formación",
+  "eduLang": "Idiomas",
+  "langStudyLabel": "Estudios de idiomas",
+  "certLabel": "Certificaciones",
+  "ledeH": "Con la <b style=\"color:var(--ac,#E8410E)\">profundidad lingüística de un doctorando en coreano</b>, cubro desde reuniones gubernamentales de alto nivel hasta negociaciones técnicas industriales.",
+  "descH": "<strong style=\"color:#14110D;font-weight:700\">Residente en Seúl desde 2017</strong>, habiendo vivido en <strong style=\"color:#14110D;font-weight:700\">México y España</strong> y visitado los Emiratos Árabes Unidos, Francia, Italia, Japón y Singapur, acumulando una <strong style=\"color:#14110D;font-weight:700\">sólida visión internacional</strong>. Posee el <strong style=\"color:#14110D;font-weight:700\">Certificado de Docente de Coreano Nivel 2</strong> y es doctorando en lingüística coreana en la Universidad Kyung Hee."
+ }
+}
