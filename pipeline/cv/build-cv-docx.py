@@ -135,6 +135,20 @@ def sub_note(doc, text, lang, indent=1.64, before=0, after=3):
     return p
 
 
+
+def add_link(p, text, url, size, color, name, east, ulcolor='C9C4BA'):
+    from docx.opc.constants import RELATIONSHIP_TYPE as RT
+    from docx.text.run import Run
+    r_id = p.part.relate_to(url, RT.HYPERLINK, is_external=True)
+    hl = OxmlElement('w:hyperlink'); hl.set(qn('r:id'), r_id)
+    wr = OxmlElement('w:r'); wr.append(OxmlElement('w:rPr'))
+    t = OxmlElement('w:t'); t.set(qn('xml:space'), 'preserve'); t.text = text; wr.append(t)
+    hl.append(wr); p._p.append(hl)
+    run = Run(wr, p)
+    set_font(run, size, color, False, name, east, ul=ulcolor)
+    return run
+
+
 def build(lang):
     d = DATA[lang]
     KS, KA = CJK_SERIF[lang], CJK_SANS[lang]
@@ -222,7 +236,11 @@ def build(lang):
     c0, c1 = ft.rows[0].cells
     tcmar(c0, 170, 0, 0, 0); tcmar(c1, 110, 0, 0, 0)
     p = c0.paragraphs[0]; hairline_top(p, space='10')
-    r = p.add_run('twkrpuente.web.app   ·   © 游宏斌 YU HUNG PIN')
+    add_link(p, d['cta2'], 'https://twkrpuente.web.app/home/', 9.4, LIGHT, SANS, KA)
+    r = p.add_run('   ·   '); set_font(r, 9.4, LIGHT, False, SANS, KA)
+    add_link(p, '▶ ' + d['ui']['film'], 'https://twkrpuente.web.app/', 9.4, LIGHT, SANS, KA)
+    p2 = c0.add_paragraph(); p2.paragraph_format.space_before = Pt(4)
+    r = p2.add_run('twkrpuente.web.app   ·   © 游宏斌 YU HUNG PIN')
     set_font(r, 9.4, LIGHT, False, SANS, KA)
     pq = c1.paragraphs[0]; pq.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     pq.add_run().add_picture(f'{OUT}/qr.png', width=Cm(1.4))
