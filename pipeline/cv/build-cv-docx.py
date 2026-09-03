@@ -214,6 +214,16 @@ def build(lang):
         rowtable(doc, [(str(e['year']).split('–')[0], e['school'], '')], lang)
         sub_note(doc, strip(e['deg']), lang)
 
+    # ── research (KO title main, EN official small, zh/es translation) ──
+    if d.get('pubs'):
+        slabel(doc, d['ui']['research'], lang)
+        for x in d['pubs']:
+            rowtable(doc, [(str(x['y']), x['ko'], '')], lang)
+            sub_note(doc, x['en'], lang, after=1)
+            if x.get('tr'):
+                sub_note(doc, x['tr'], lang, after=1)
+            sub_note(doc, x['src'] + ' · ' + x['role'], lang, after=4)
+
     # ── languages ──
     slabel(doc, d['ui']['languages'], lang)
     for x in d['langs']:

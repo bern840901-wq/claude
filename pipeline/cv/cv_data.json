@@ -1346,5 +1346,83 @@
    "en": "Consecutive Interpretation",
    "es": "Interpretación consecutiva"
   }
- }
+ },
+ "PUBS": [
+  {
+   "y": 2026,
+   "ko": "BERTopic을 활용한 대만 한국어교육 연구 동향",
+   "en": "Research Trends in Korean Language Education in Taiwan Using BERTopic",
+   "zh": "運用 BERTopic 的臺灣韓語教育研究動向",
+   "es": "Tendencias de investigación en la enseñanza del coreano en Taiwán mediante BERTopic",
+   "src": {
+    "zh": "외국어로서의 한국어교육 82 · KCI 등재",
+    "ko": "외국어로서의 한국어교육 82 · KCI 등재",
+    "en": "Teaching Korean as a Foreign Language 82 · KCI-indexed",
+    "es": "Teaching Korean as a Foreign Language 82 · KCI"
+   },
+   "role": {
+    "zh": "單獨作者",
+    "ko": "단독 저자",
+    "en": "Sole author",
+    "es": "Autor único"
+   }
+  },
+  {
+   "y": 2026,
+   "ko": "BERTopic을 활용한 한국어교육 분야의 상호문화 연구 동향 분석",
+   "en": "A Topic Modeling Analysis of Intercultural Research Trends in Korean Language Education Using BERTopic",
+   "zh": "運用 BERTopic 的韓語教育領域跨文化研究動向分析",
+   "es": "Análisis de las tendencias de investigación intercultural en la enseñanza del coreano mediante topic modeling",
+   "src": {
+    "zh": "문화교류와 다문화교육 15(3) · KCI 등재",
+    "ko": "문화교류와 다문화교육 15(3) · KCI 등재",
+    "en": "Cultural Exchange and Multicultural Education 15(3) · KCI-indexed",
+    "es": "Cultural Exchange and Multicultural Education 15(3) · KCI"
+   },
+   "role": {
+    "zh": "共同作者",
+    "ko": "공동 저자",
+    "en": "Co-author",
+    "es": "Coautor"
+   }
+  },
+  {
+   "y": 2025,
+   "ko": "대만인 한국어 학습자의 즐거움 척도 개발 및 적용 방안 연구",
+   "en": "A Study on the Development and Application of a Korean Language Learning Enjoyment Scale for Taiwanese Learners",
+   "zh": "臺灣韓語學習者學習愉悅感量表之開發與應用研究",
+   "es": "Desarrollo y aplicación de una escala de disfrute del aprendizaje del coreano para estudiantes taiwaneses",
+   "src": {
+    "zh": "이중언어학 100 · KCI 등재",
+    "ko": "이중언어학 100 · KCI 등재",
+    "en": "Bilingual Research 100 · KCI-indexed",
+    "es": "Bilingual Research 100 · KCI"
+   },
+   "role": {
+    "zh": "第一作者",
+    "ko": "제1저자",
+    "en": "First author",
+    "es": "Primer autor"
+   }
+  },
+  {
+   "y": 2024,
+   "ko": "조선어교재에 나타난 학습 활동 연구 -김일성종합대학 출판 <조선어>(2022)를 중심으로-",
+   "en": "An Analysis of Learning Activities in North Korea Language Textbooks — Focusing on the 'Joseoneo' Publications of Kim Il Sung University (2022)",
+   "zh": "朝鮮語教材中的學習活動研究 — 以金日成綜合大學出版《조선어》（2022）為中心",
+   "es": "Análisis de las actividades de aprendizaje en los manuales de lengua de Corea del Norte — sobre las publicaciones «Joseoneo» de la Universidad Kim Il Sung (2022)",
+   "src": {
+    "zh": "한국언어문화 21(1) · KCI 등재",
+    "ko": "한국언어문화 21(1) · KCI 등재",
+    "en": "Journal of the International Network for Korean Language and Culture 21(1) · KCI-indexed",
+    "es": "Journal of the International Network for Korean Language and Culture 21(1) · KCI"
+   },
+   "role": {
+    "zh": "共同作者",
+    "ko": "공동 저자",
+    "en": "Co-author",
+    "es": "Coautor"
+   }
+  }
+ ]
 }

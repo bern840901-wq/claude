@@ -19,6 +19,7 @@ const UI = {
   work: { zh: S.zh.tlHeading + ' / WORK', ko: S.ko.tlHeading + ' / WORK', en: 'WORK', es: 'TRAYECTORIA' },
   clients: { zh: S.zh.clientsLabel + ' / CLIENTS', ko: S.ko.clientsLabel + ' / CLIENTS', en: 'SELECTED CLIENTS', es: 'CLIENTES DESTACADOS' },
   education: { zh: S.zh.eduDeg + ' / EDUCATION', ko: S.ko.eduDeg + ' / EDUCATION', en: 'EDUCATION', es: 'FORMACIÓN' },
+  research: { zh: '研究發表 / RESEARCH', ko: '연구 실적 / RESEARCH', en: 'RESEARCH', es: 'INVESTIGACIÓN' },
   languages: { zh: S.zh.eduLang + ' / LANGUAGES', ko: S.ko.eduLang + ' / LANGUAGES', en: 'LANGUAGES', es: 'IDIOMAS' },
   certs: { zh: S.zh.certLabel + ' / AWARDS', ko: S.ko.certLabel + ' / AWARDS', en: 'CERTIFICATIONS & AWARDS', es: 'CERTIFICACIONES Y PREMIOS' },
   film: { zh: '走進我的工作現場', ko: '현장 속으로', en: 'Walk through my world', es: 'Recorre mi mundo' },
@@ -48,6 +49,7 @@ for (const l of LANGS) {
       items: g.items.map(it => ({ name: pick(it.name, l), sub: pick(it.sub, l) })),
     })),
     edu: D.EDU.map(e => ({ year: e.year, school: pick(e.school, l), deg: pick(e.deg, l) })),
+    pubs: (D.PUBS || []).map(x => ({ y: x.y, ko: x.ko, en: x.en, tr: l === 'zh' ? x.zh : l === 'es' ? x.es : null, src: pick(x.src, l), role: pick(x.role, l) })),
     langs: D.LANGS.map(x => ({ name: pick(x.name, l), level: pick(x.level, l) })),
     certs: (D.CERTS[l] || D.CERTS.en).map(c => ({ name: c.name, issuer: c.issuer })),
     titleTag: { zh: '游宏斌 YU HUNG PIN — CV', ko: '유홍빈 YU HUNG PIN — CV', en: 'Yu Hung-Pin — CV', es: 'Yu Hung-Pin — CV' }[l],
@@ -132,6 +134,10 @@ function render(l){
   const clients = d.clients.map(g => '<div class="group"><div class="gtitle">'+esc(g.title)+'</div><div class="cl">'
     + g.items.map(it => '<span class="it'+'"><span class="nm">'+esc(it.name)+'</span>'+(it.sub?'<span class="sb">'+esc(it.sub)+'</span>':'')+'</span>').join('') + '</div></div>').join('');
   const edu = d.edu.map(e => '<div class="row"><span class="yr">'+esc(String(e.year).split('–')[0])+'</span><span class="ttl">'+esc(e.school)+'</span></div><div class="kv" style="margin:-6px 0 8px 62px"><span class="sub">'+esc(e.deg)+'</span></div>').join('');
+  const pubs = d.pubs.map(x => '<div class="row"><span class="yr">'+x.y+'</span><span class="ttl">'+esc(x.ko)+'</span></div>'
+    + '<div class="kv" style="margin:-6px 0 0 62px"><span class="sub">'+esc(x.en)+'</span></div>'
+    + (x.tr ? '<div class="kv" style="margin:-2px 0 0 62px"><span class="sub">'+esc(x.tr)+'</span></div>' : '')
+    + '<div class="kv" style="margin:-2px 0 10px 62px"><span class="sub">'+esc(x.src)+' · '+esc(x.role)+'</span></div>').join('');
   const langs = d.langs.map(x => '<div class="kv"><b>'+esc(x.name)+'</b> · <span class="sub">'+esc(x.level)+'</span></div>').join('');
   const certs = d.certs.map(c => '<div class="kv"><b>'+esc(c.name)+'</b><br><span class="sub">'+esc(c.issuer)+'</span></div>').join('');
   document.getElementById('app').innerHTML =
@@ -147,6 +153,7 @@ function render(l){
     + '<div class="kv" style="margin-bottom:12px"><span class="sub">'+esc(d.tlSub)+'</span></div>'+tlRows+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.clients)+'</div>'+clients+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.education)+'</div>'+edu+'</section>'
+    + '<section><div class="slabel">'+esc(d.ui.research)+'</div>'+pubs+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.languages)+'</div>'+langs+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.certs)+'</div>'+certs+'</section>'
     + '<div class="foot"><a href="/home/">'+esc(d.cta2)+'</a><a href="/">▶ '+esc(d.ui.film)+'</a><span>© 游宏斌 YU HUNG PIN</span></div>';
