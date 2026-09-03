@@ -50,7 +50,10 @@ for (const l of LANGS) {
     })),
     edu: D.EDU.map(e => ({ year: e.year, school: pick(e.school, l), deg: pick(e.deg, l) })),
     bio: (D.BIO || {})[l] || '',
-    pubs: (D.PUBS || []).map(x => ({ y: x.y, ko: x.ko, en: x.en, tr: l === 'zh' ? x.zh : l === 'es' ? x.es : null, src: pick(x.src, l), role: pick(x.role, l) })),
+    dl: { label: { zh: '下載履歷 PDF ↓', ko: '이력서 PDF 다운로드 ↓', en: 'Download CV (PDF) ↓', es: 'Descargar CV (PDF) ↓' }[l],
+          file: 'pdf/yu-hungpin-cv-' + l + '.pdf',
+          name: { zh: '游宏斌_CV_精選版.pdf', ko: '游宏斌_CV_KO.pdf', en: '游宏斌_CV_EN.pdf', es: '游宏斌_CV_ES.pdf' }[l] },
+    pubs: (D.PUBS || []).map(x => ({ y: x.y, cko: x.cko, cen: x.cen, tr: l === 'zh' ? x.zh : l === 'es' ? x.es : null, kci: l === 'zh' || l === 'ko' ? 'KCI 등재' : 'KCI-indexed' })),
     langs: D.LANGS.map(x => ({ name: pick(x.name, l), level: pick(x.level, l) })),
     certs: (D.CERTS[l] || D.CERTS.en).map(c => ({ name: c.name, issuer: c.issuer })),
     titleTag: { zh: '游宏斌 YU HUNG PIN — CV', ko: '유홍빈 YU HUNG PIN — CV', en: 'Yu Hung-Pin — CV', es: 'Yu Hung-Pin — CV' }[l],
@@ -102,6 +105,8 @@ section{margin-top:64px}
 .cl .sb{color:var(--light);font-size:12px}
 .mailrow{font-size:16px}
 .mail{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;border-color:var(--ac)}
+.dl{display:inline-block;margin-top:10px;font-size:13px;color:var(--mid);text-decoration:none;border-bottom:1px solid var(--rule)}
+.dl:hover{color:var(--ac);border-color:var(--ac)}
 .foot{margin-top:88px;border-top:1px solid var(--rule);padding-top:18px;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:12.5px;color:var(--light)}
 .langpill{position:fixed;top:18px;right:18px;display:flex;gap:2px;background:rgba(255,255,255,.9);backdrop-filter:blur(6px);border:1px solid var(--rule);border-radius:999px;padding:3px}
 .langpill button{font:500 11px/1 'Inter',sans-serif;letter-spacing:.05em;border:0;background:none;color:var(--light);padding:7px 10px;border-radius:999px;cursor:pointer}
@@ -135,10 +140,10 @@ function render(l){
   const clients = d.clients.map(g => '<div class="group"><div class="gtitle">'+esc(g.title)+'</div><div class="cl">'
     + g.items.map(it => '<span class="it'+'"><span class="nm">'+esc(it.name)+'</span>'+(it.sub?'<span class="sb">'+esc(it.sub)+'</span>':'')+'</span>').join('') + '</div></div>').join('');
   const edu = d.edu.map(e => '<div class="row"><span class="yr">'+esc(String(e.year).split('–')[0])+'</span><span class="ttl">'+esc(e.school)+'</span></div><div class="kv" style="margin:-6px 0 8px 62px"><span class="sub">'+esc(e.deg)+'</span></div>').join('');
-  const pubs = d.pubs.map(x => '<div class="row"><span class="yr">'+x.y+'</span><span class="ttl">'+esc(x.ko)+'</span></div>'
-    + '<div class="kv" style="margin:-6px 0 0 62px"><span class="sub">'+esc(x.en)+'</span></div>'
-    + (x.tr ? '<div class="kv" style="margin:-2px 0 0 62px"><span class="sub">'+esc(x.tr)+'</span></div>' : '')
-    + '<div class="kv" style="margin:-2px 0 10px 62px"><span class="sub">'+esc(x.src)+' · '+esc(x.role)+'</span></div>').join('');
+  const em = t => esc(t).replace(/유홍빈|Yu Hung-pin|Hungpin Yu/g, m => '<b style="font-weight:600">'+m+'</b>');
+  const pubs = d.pubs.map(x => '<div class="row"><span class="yr">'+x.y+'</span><span class="ttl">'+em(x.cko)+'</span><span class="typ">'+esc(x.kci)+'</span></div>'
+    + '<div class="kv" style="margin:-6px 0 0 62px"><span class="sub">'+em(x.cen)+'</span></div>'
+    + (x.tr ? '<div class="kv" style="margin:-2px 0 10px 62px"><span class="sub">'+esc(x.tr)+'</span></div>' : '<div style="height:10px"></div>')).join('');
   const langs = d.langs.map(x => '<div class="kv"><b>'+esc(x.name)+'</b> · <span class="sub">'+esc(x.level)+'</span></div>').join('');
   const certs = d.certs.map(c => '<div class="kv"><b>'+esc(c.name)+'</b><br><span class="sub">'+esc(c.issuer)+'</span></div>').join('');
   document.getElementById('app').innerHTML =
@@ -148,7 +153,8 @@ function render(l){
     + '<div class="loc">'+esc(d.based)+' · '+esc(d.avail)+'</div></header>'
     + '<section><div class="slabel">'+esc(d.ui.contact)+'</div>'
     + '<div class="mailrow"><a class="mail" href="mailto:twkrbridge@gmail.com">twkrbridge@gmail.com</a></div>'
-    + '<div class="kv"><span class="sub">'+esc(d.reply)+'</span></div></section>'
+    + '<div class="kv"><span class="sub">'+esc(d.reply)+'</span></div>'
+    + '<a class="dl" href="'+d.dl.file+'" download="'+esc(d.dl.name)+'">'+esc(d.dl.label)+'</a></section>'
     + '<section><div class="slabel">'+esc(d.ui.partners)+'</div>'+partners+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.work)+'</div>'
     + '<div class="kv" style="margin-bottom:12px"><span class="sub">'+esc(d.tlSub)+'</span></div>'+tlRows+'</section>'
