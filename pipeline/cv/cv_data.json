@@ -2,6 +2,14 @@
  "TL": [
   [
    2026,
+   "rep",
+   "government",
+   "駐韓國台北代表部・外交官員租約續約與新任官員承租交接・韓文業務代理",
+   "주한국타이베이대표부・외교관 임대차 갱신 및 신임 관원 인수 계약・한국어 업무 대행",
+   "Taipei Mission in Korea — diplomatic officer's lease renewal & handover to incoming officer; Korean-language representation"
+  ],
+  [
+   2026,
    "int",
    "media",
    "臺北流行音樂中心（北流／Taipei Music Center） × 朝鮮日報 梁序倫董事長 視訊專訪口譯（中譯韓逐步）",
@@ -1154,7 +1162,7 @@
    {
     "org": "駐韓國台北代表部",
     "period": "2020–至今",
-    "desc": "官方訪團·政府交流·現場支援"
+    "desc": "臺灣外交代表機構 · 等同大使館 · 官方訪團·政府交流·現場支援"
    },
    {
     "org": "VOICE IN × LG Smart TV",
@@ -1191,7 +1199,7 @@
    {
     "org": "주한국대만대표부",
     "period": "2020–현재",
-    "desc": "공식 방문단·정부 교류·현장 지원"
+    "desc": "대만 외교 대표 기관 · 대사관 기능 · 공식 방문단·정부 교류·현장 지원"
    },
    {
     "org": "VOICE IN × LG Smart TV",
@@ -1228,7 +1236,7 @@
    {
     "org": "Oficina de Representación de Taipéi en Corea",
     "period": "2020–presente",
-    "desc": "Delegaciones oficiales·intercambio gubernamental"
+    "desc": "Embajada de facto de Taiwán · delegaciones oficiales·intercambio gubernamental"
    },
    {
     "org": "VOICE IN × LG Smart TV",
@@ -1265,7 +1273,7 @@
    {
     "org": "Taipei Representative Office in Korea",
     "period": "2020–present",
-    "desc": "Official delegations·government exchanges·on-site support"
+    "desc": "Taiwan's de facto Embassy · official delegations·government exchanges·on-site support"
    },
    {
     "org": "VOICE IN × LG Smart TV",
@@ -1319,6 +1327,24 @@
    "ko": "자막 번역",
    "en": "Subtitle Translation",
    "es": "Traducción de subtítulos"
+  },
+  "rep": {
+   "zh": "業務代表",
+   "ko": "업무 담당",
+   "en": "Representative",
+   "es": "Representante"
+  },
+  "exh": {
+   "zh": "展會口譯",
+   "ko": "전시 통역",
+   "en": "Exhibition Interpretation",
+   "es": "Interpretación en ferias"
+  },
+  "con": {
+   "zh": "逐步口譯",
+   "ko": "순차통역",
+   "en": "Consecutive Interpretation",
+   "es": "Interpretación consecutiva"
   }
  }
 }
