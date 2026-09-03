@@ -1424,5 +1424,11 @@
     "es": "Coautor"
    }
   }
- ]
+ ],
+ "BIO": {
+  "zh": "游宏斌，慶熙大學韓國語學博士候選人（首爾）。研究關注臺灣學習者的韓語教育、韓語與臺灣台語的詞彙・音韻相似性、文化回應教學，以及以計算方法分析研究動向。近期成果包括臺灣韓語學習者學習愉悅感量表之開發（2025）、韓語教育領域跨文化研究動向之 BERTopic 分析（2026）。同時具十年以上中韓口筆譯實務經驗，目前研究將主題建模應用於多語學術語料。",
+  "ko": "유홍빈은 경희대학교 국어국문학과 한국어학 박사수료 연구자로, 대만인 학습자를 위한 한국어교육, 한국어와 대만어의 어휘·음운 유사성, 문화감응교수, 연구 동향의 계산적 분석을 연구한다. 최근 성과로 대만인 한국어 학습자 즐거움 척도 개발(2025), 한국어교육 분야 상호문화 연구 동향의 BERTopic 분석(2026)이 있다. 10년 이상의 한·중 통번역 실무 경험을 바탕으로, 현재 다국어 학술 말뭉치에 토픽 모델링을 적용하는 연구를 진행 중이다.",
+  "en": "Yu, Hungpin is a Ph.D. candidate in the Department of Korean Language and Literature at Kyung Hee University in Seoul, South Korea. His research interests include Korean language education for Taiwanese learners, lexical and phonological similarities between Korean and Taiwanese Taigi, culturally responsive teaching, and computational approaches to analyzing research trends. His recent work includes the development of a Korean language learning enjoyment scale for Taiwanese learners (2025) and a BERTopic-based analysis of intercultural research trends in Korean language education (2026). He has over a decade of professional experience as a Korean-Chinese interpreter and translator. His current research applies topic modeling to multilingual academic corpora.",
+  "es": "Yu Hung-pin es doctorando en Lingüística Coreana en la Universidad Kyung Hee (Seúl). Investiga la enseñanza del coreano a estudiantes taiwaneses, las similitudes léxicas y fonológicas entre el coreano y el taiwanés, la enseñanza culturalmente sensible y los métodos computacionales de análisis de tendencias. Entre sus trabajos recientes: una escala de disfrute del aprendizaje del coreano (2025) y un análisis con BERTopic de tendencias de investigación intercultural (2026). Cuenta con más de una década como intérprete y traductor coreano-chino."
+ }
 }

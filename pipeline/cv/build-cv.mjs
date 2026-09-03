@@ -49,6 +49,7 @@ for (const l of LANGS) {
       items: g.items.map(it => ({ name: pick(it.name, l), sub: pick(it.sub, l) })),
     })),
     edu: D.EDU.map(e => ({ year: e.year, school: pick(e.school, l), deg: pick(e.deg, l) })),
+    bio: (D.BIO || {})[l] || '',
     pubs: (D.PUBS || []).map(x => ({ y: x.y, ko: x.ko, en: x.en, tr: l === 'zh' ? x.zh : l === 'es' ? x.es : null, src: pick(x.src, l), role: pick(x.role, l) })),
     langs: D.LANGS.map(x => ({ name: pick(x.name, l), level: pick(x.level, l) })),
     certs: (D.CERTS[l] || D.CERTS.en).map(c => ({ name: c.name, issuer: c.issuer })),
@@ -153,7 +154,9 @@ function render(l){
     + '<div class="kv" style="margin-bottom:12px"><span class="sub">'+esc(d.tlSub)+'</span></div>'+tlRows+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.clients)+'</div>'+clients+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.education)+'</div>'+edu+'</section>'
-    + '<section><div class="slabel">'+esc(d.ui.research)+'</div>'+pubs+'</section>'
+    + '<section><div class="slabel">'+esc(d.ui.research)+'</div>'
+    + (d.bio ? '<div class="kv" style="margin-bottom:14px"><span class="sub" style="line-height:1.75">'+esc(d.bio)+'</span></div>' : '')
+    + pubs+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.languages)+'</div>'+langs+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.certs)+'</div>'+certs+'</section>'
     + '<div class="foot"><a href="/home/">'+esc(d.cta2)+'</a><a href="/">▶ '+esc(d.ui.film)+'</a><span>© 游宏斌 YU HUNG PIN</span></div>';

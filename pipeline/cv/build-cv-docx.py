@@ -217,6 +217,9 @@ def build(lang):
     # ── research (KO title main, EN official small, zh/es translation) ──
     if d.get('pubs'):
         slabel(doc, d['ui']['research'], lang)
+        if d.get('bio'):
+            pb = para(doc, after=8, line=1.5)
+            rb = pb.add_run(d['bio']); set_font(rb, 9.4, LIGHT, False, SANS, CJK_SANS[lang])
         for x in d['pubs']:
             rowtable(doc, [(str(x['y']), x['ko'], '')], lang)
             sub_note(doc, x['en'], lang, after=1)
