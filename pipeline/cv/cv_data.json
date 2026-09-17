@@ -84,25 +84,25 @@
    2026,
    "esc",
    "government",
-   "NAER 訪韓團 韓國教育開發院（KEDI）拜會",
-   "NAER 방한단 한국교육개발원(KEDI) 방문 수행",
-   "NAER (Taiwan) Delegation — KEDI (Korean Educational Development Institute)"
+   "韓國教育開發院（KEDI）拜會・NAER 訪韓團",
+   "한국교육개발원(KEDI) 방문 수행・NAER 방한단",
+   "KEDI (Korean Educational Development Institute) — NAER (Taiwan) delegation"
   ],
   [
    2026,
    "mtg",
    "government",
-   "NAER 訪韓團 韓國課程評鑑院（KICE）拜會",
-   "NAER 방한단 한국교육과정평가원(KICE) 방문 회의",
-   "NAER (Taiwan) Delegation — KICE (Korea Institute for Curriculum & Evaluation)"
+   "韓國課程評鑑院（KICE）拜會・NAER 訪韓團",
+   "한국교육과정평가원(KICE) 방문 회의・NAER 방한단",
+   "KICE (Korea Institute for Curriculum & Evaluation) — NAER (Taiwan) delegation"
   ],
   [
    2026,
    "esc",
    "government",
-   "NAER 訪韓團 韓國國際教育院（NIIED）拜會",
-   "NAER 방한단 한국국제교육원(NIIED) 방문 수행",
-   "NAER (Taiwan) Delegation — NIIED (National Institute for International Education)"
+   "韓國國際教育院（NIIED）拜會・NAER 訪韓團",
+   "한국국제교육원(NIIED) 방문 수행・NAER 방한단",
+   "NIIED (National Institute for International Education) — NAER (Taiwan) delegation"
   ],
   [
    2026,
@@ -132,49 +132,49 @@
    2026,
    "esc",
    "business",
-   "NTCU 研修團 Team Monolith (Codle.io) AI 程式教育平台 企業訪問",
-   "NTCU 연수단 Team Monolith(Codle.io) AI 코딩교육 플랫폼 기업 방문",
-   "NTCU (Taiwan) Delegation — Team Monolith (Codle.io), AI Coding Platform"
+   "Team Monolith (Codle.io) AI 程式教育平台 企業訪問・NTCU 研修團",
+   "Team Monolith(Codle.io) AI 코딩교육 플랫폼 기업 방문・NTCU 연수단",
+   "Team Monolith (Codle.io), AI Coding Platform — NTCU (Taiwan) delegation"
   ],
   [
    2026,
    "esc",
    "government",
-   "NTCU 研修團 KERIS 首爾 Edtech 軟體實驗室 機構參訪（建國大學）",
-   "NTCU 연수단 KERIS 서울 에듀테크 소프트랩 기관 참관（건국대）",
-   "NTCU (Taiwan) Delegation — KERIS Seoul EdTech Software Lab (Konkuk Univ.)"
+   "KERIS 首爾 Edtech 軟體實驗室 機構參訪（建國大學）・NTCU 研修團",
+   "KERIS 서울 에듀테크 소프트랩 기관 참관（건국대）・NTCU 연수단",
+   "KERIS Seoul EdTech Software Lab (Konkuk Univ.) — NTCU (Taiwan) delegation"
   ],
   [
    2026,
    "esc",
    "government",
-   "NTCU 研修團 首爾教育大學附小 數位學習課堂觀摩暨校長座談",
-   "NTCU 연수단 서울교대 부설초 디지털 수업 참관·교장 간담회",
-   "NTCU (Taiwan) Delegation — SNUE Affiliated Elementary, Class Observation"
+   "首爾教育大學附小 數位學習課堂觀摩暨校長座談・NTCU 研修團",
+   "서울교대 부설초 디지털 수업 참관·교장 간담회・NTCU 연수단",
+   "SNUE Affiliated Elementary, Class Observation — NTCU (Taiwan) delegation"
   ],
   [
    2026,
    "esc",
    "government",
-   "NTCU 研修團 首爾教育大學(SNUE) 校長 正式會面",
-   "NTCU 연수단 서울교육대학교(SNUE) 총장 공식 면담",
-   "NTCU (Taiwan) Delegation — SNUE, Meeting with the President"
+   "首爾教育大學(SNUE) 校長 正式會面・NTCU 研修團",
+   "서울교육대학교(SNUE) 총장 공식 면담・NTCU 연수단",
+   "SNUE, Meeting with the President — NTCU (Taiwan) delegation"
   ],
   [
    2026,
    "esc",
    "business",
-   "NTCU 研修團 韓國天才教育 Chunjae — Edtech AI 教科書產業交流",
-   "NTCU 연수단 천재교육 에듀테크 AI 교과서 사업 교류 방문",
-   "NTCU (Taiwan) Delegation — Chunjae Education (Korea), EdTech AI Textbooks"
+   "韓國天才教育 Chunjae — Edtech AI 教科書產業交流・NTCU 研修團",
+   "천재교육 에듀테크 AI 교과서 사업 교류 방문・NTCU 연수단",
+   "Chunjae Education (Korea), EdTech AI Textbooks — NTCU (Taiwan) delegation"
   ],
   [
    2026,
    "esc",
    "business",
-   "NTCU 研修團 Google Korea — Google for Education 韓國區負責人會面",
-   "NTCU 연수단 Google Korea — Google for Education 한국 총괄 면담",
-   "NTCU (Taiwan) Delegation — Google Korea, Google for Education"
+   "Google Korea — Google for Education 韓國區負責人會面・NTCU 研修團",
+   "Google Korea — Google for Education 한국 총괄 면담・NTCU 연수단",
+   "Google Korea, Google for Education — NTCU (Taiwan) delegation"
   ],
   [
    2026,
@@ -212,73 +212,73 @@
    2026,
    "int",
    "media",
-   "麻浦區 獨立書店 GOL 訪談",
-   "마포 독립서점 책방꼴 인터뷰",
-   "Independent Bookstore GOL, Mapo — Interview"
+   "麻浦區 獨立書店 GOL 訪談・《消失的國界》",
+   "마포 독립서점 책방꼴 인터뷰・<THE BORDERLESS WORLD>",
+   "Independent Bookstore GOL, Mapo — Interview ('The Borderless World')"
   ],
   [
    2026,
    "int",
    "media",
-   "NEWMIX 即溶咖啡 品牌訪談",
-   "NEWMIX 믹스커피 브랜드 인터뷰",
-   "NEWMIX Instant Coffee — Brand Interview"
+   "NEWMIX 即溶咖啡 品牌訪談・《消失的國界》",
+   "NEWMIX 믹스커피 브랜드 인터뷰・<THE BORDERLESS WORLD>",
+   "NEWMIX Instant Coffee — Brand Interview ('The Borderless World')"
   ],
   [
    2026,
    "int",
    "government",
-   "麻浦區廳 車海營 區議員 專訪",
-   "마포구 차해영 구의원 인터뷰",
-   "Councilor Cha Hae-young, Mapo — Interview"
+   "麻浦區廳 車海營 區議員 專訪・《消失的國界》",
+   "마포구 차해영 구의원 인터뷰・<THE BORDERLESS WORLD>",
+   "Councilor Cha Hae-young, Mapo — Interview ('The Borderless World')"
   ],
   [
    2026,
    "int",
    "media",
-   "《我是遺物整理師》原型 金璽別 專訪",
-   "<나는 유품정리사입니다> 원형 김새별 인터뷰",
-   "Kim Sae-byeol ('Move to Heaven') — Interview"
+   "《我是遺物整理師》原型 金璽別 專訪・《消失的國界》",
+   "<나는 유품정리사입니다> 원형 김새별 인터뷰・<THE BORDERLESS WORLD>",
+   "Kim Sae-byeol ('Move to Heaven') — Interview ('The Borderless World')"
   ],
   [
    2026,
    "int",
    "government",
-   "江原道華川郡 郡守 專訪",
-   "강원도 화천군 군수 인터뷰",
-   "Hwacheon County Governor — Interview"
+   "江原道華川郡 郡守 專訪・《消失的國界》",
+   "강원도 화천군 군수 인터뷰・<THE BORDERLESS WORLD>",
+   "Hwacheon County Governor — Interview ('The Borderless World')"
   ],
   [
    2026,
    "evt",
    "exhibition",
-   "華川冰雪節 現場拍攝指導翻譯",
-   "화천산천어축제 현장 촬영 통역",
-   "Hwacheon Ice Festival — On-site Filming"
+   "華川冰雪節 現場拍攝指導翻譯・《消失的國界》",
+   "화천산천어축제 현장 촬영 통역・<THE BORDERLESS WORLD>",
+   "Hwacheon Ice Festival — On-site Filming ('The Borderless World')"
   ],
   [
    2026,
    "int",
    "media",
-   "機器人咖啡品牌 B;EAT 品牌訪談",
-   "AI 로봇카페 B;EAT 브랜드 인터뷰",
-   "Robot Café B;EAT — Brand Interview"
+   "機器人咖啡品牌 B;EAT 品牌訪談・《消失的國界》",
+   "AI 로봇카페 B;EAT 브랜드 인터뷰・<THE BORDERLESS WORLD>",
+   "Robot Café B;EAT — Brand Interview ('The Borderless World')"
   ],
   [
    2026,
    "int",
    "government",
-   "東大門「暖心便利店」首爾市孤獨對策部門 訪談",
-   "서울마음편의점 동대문점 고독대응과 인터뷰",
-   "Seoul 'Warm Heart Store' — Loneliness Dept."
+   "東大門「暖心便利店」首爾市孤獨對策部門 訪談・《消失的國界》",
+   "서울마음편의점 동대문점 고독대응과 인터뷰・<THE BORDERLESS WORLD>",
+   "Seoul 'Warm Heart Store' — Loneliness Dept. ('The Borderless World')"
   ],
   [
    2026,
    "int",
    "government",
-   "「首爾無孤獨計畫」孤獨120呼救中心 訪談",
-   "'외로움없는 서울' 외로움안녕120 콜센터 인터뷰",
-   "'Loneliness-Free Seoul' Hotline 120 — Interview"
+   "「首爾無孤獨計畫」孤獨120呼救中心 訪談・《消失的國界》",
+   "'외로움없는 서울' 외로움안녕120 콜센터 인터뷰・<THE BORDERLESS WORLD>",
+   "'Loneliness-Free Seoul' Hotline 120 — Interview ('The Borderless World')"
   ],
   [
    2025,

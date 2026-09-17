@@ -77,6 +77,11 @@ const html = `<!doctype html>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 /* Korean wraps at 어절 boundaries, never mid-syllable; other scripts unaffected */
 :root[lang="ko"],:root[lang="ko"] body,:root[lang="ko"] .ttl,:root[lang="ko"] .sub,:root[lang="ko"] .role,:root[lang="ko"] h1{word-break:keep-all;overflow-wrap:break-word}
+/* CJK: balance headings so no lone character is orphaned; strict kinsoku */
+:root{line-break:strict}
+h1,.ttl,.slabel,.nm{text-wrap:balance}
+.role,.sub,.tagline{text-wrap:pretty}
+.role,.sub,.ttl{word-break:auto-phrase}
 :root{--ink:#14110D;--mid:#555;--light:#8f8a80;--rule:#E9E5DC;--bg:#FFFFFF;--ac:#E8410E}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:'Inter','Noto Sans TC',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;line-height:1.6}
