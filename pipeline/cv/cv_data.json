@@ -2,6 +2,14 @@
  "TL": [
   [
    2026,
+   "mtg",
+   "business",
+   "臺灣食品暨生活用品採購洽談會（首爾）臺灣貿易中心 TAITRA 口譯",
+   "대만식품 라이프스타일 비즈니스 상담회(서울) 대만무역센터 TAITRA 통역",
+   "Taiwan Food & Lifestyle Products Sourcing Meeting Seoul — for TAITRA"
+  ],
+  [
+   2026,
    "rep",
    "government",
    "駐韓國台北代表部・外交官員租約續約與新任官員承租交接・韓文業務代理",
@@ -1365,7 +1373,11 @@
     "ko": "단독 저자",
     "en": "Sole author",
     "es": "Autor único"
-   }
+   },
+   "cko": "유홍빈. (2026). BERTopic을 활용한 대만 한국어교육 연구 동향. 외국어로서의 한국어교육, 82, 6.",
+   "cen": "Yu Hung-pin. (2026). Research Trends in Korean Language Education in Taiwan Using BERTopic. Teaching Korean as a Foreign Language, 82, 6.",
+   "doi": "10.21716/TKFL.82.6",
+   "doiUrl": "https://doi.org/10.21716/TKFL.82.6"
   },
   {
    "y": 2026,
@@ -1384,7 +1396,11 @@
     "ko": "공동 저자",
     "en": "Co-author",
     "es": "Coautor"
-   }
+   },
+   "cko": "고혜민, 이경희 and 유홍빈. (2026). BERTopic을 활용한 한국어교육 분야의 상호문화 연구 동향 분석. 문화교류와 다문화교육, 15(3), 363-393.",
+   "cen": "Hyemin Go, LEE KYUNG HEE and Hungpin Yu. (2026). A Topic Modeling Analysis of Intercultural Research Trends in Korean Language Education Using BERTopic. Cultural Exchange and Multicultural Education, 15(3), 363-393.",
+   "doi": "10.30974/kaice.2026.15.3.15",
+   "doiUrl": "https://doi.org/10.30974/kaice.2026.15.3.15"
   },
   {
    "y": 2025,
@@ -1403,7 +1419,11 @@
     "ko": "제1저자",
     "en": "First author",
     "es": "Primer autor"
-   }
+   },
+   "cko": "유홍빈, 송봉운 and 고혜민. (2025). 대만인 한국어 학습자의 즐거움 척도 개발 및 적용 방안 연구. 이중언어학, 100, 273-304.",
+   "cen": "Hungpin Yu, Bongwoon Song and Hyemin Go. (2025). A Study on the Development and Application of a Korean Language Learning Enjoyment Scale for Taiwanese Learners. Bilingual Research, 100, 273-304.",
+   "doi": "10.17296/korbil.2025..100.273",
+   "doiUrl": "https://doi.org/10.17296/korbil.2025..100.273"
   },
   {
    "y": 2024,
@@ -1412,8 +1432,8 @@
    "zh": "朝鮮語教材中的學習活動研究 — 以金日成綜合大學出版《조선어》（2022）為中心",
    "es": "Análisis de las actividades de aprendizaje en los manuales de lengua de Corea del Norte — sobre las publicaciones «Joseoneo» de la Universidad Kim Il Sung (2022)",
    "src": {
-    "zh": "한국언어문화 21(1) · KCI 등재",
-    "ko": "한국언어문화 21(1) · KCI 등재",
+    "zh": "한국언어문화학 21(1) · KCI 등재",
+    "ko": "한국언어문화학 21(1) · KCI 등재",
     "en": "Journal of the International Network for Korean Language and Culture 21(1) · KCI-indexed",
     "es": "Journal of the International Network for Korean Language and Culture 21(1) · KCI"
    },
@@ -1422,7 +1442,11 @@
     "ko": "공동 저자",
     "en": "Co-author",
     "es": "Coautor"
-   }
+   },
+   "cko": "고혜민, 유홍빈 and 김낭예. (2024). 조선어교재에 나타난 학습 활동 연구-김일성종합대학 출판 <조선어>(2022)를 중심으로-. 한국언어문화학, 21(1), 1-29.",
+   "cen": "Go Hye-min, Yu Hung-pin and Kim Nang-Ye. (2024). An Analysis of Learning Activities in North Korea Language Textbooks-Focusing on the 'Joseoneo' Publications of Kim Il Sung University (2022)-. Journal of the International Network for Korean Language and Culture, 21(1), 1-29.",
+   "doi": "10.15652/ink.2024.21.1.001",
+   "doiUrl": "https://doi.org/10.15652/ink.2024.21.1.001"
   }
  ],
  "BIO": {
@@ -1430,5 +1454,9 @@
   "ko": "유홍빈은 경희대학교 국어국문학과 한국어학 박사수료 연구자로, 대만인 학습자를 위한 한국어교육, 한국어와 대만어의 어휘·음운 유사성, 문화감응교수, 연구 동향의 계산적 분석을 연구한다. 최근 성과로 대만인 한국어 학습자 즐거움 척도 개발(2025), 한국어교육 분야 상호문화 연구 동향의 BERTopic 분석(2026)이 있다. 10년 이상의 한·중 통번역 실무 경험을 바탕으로, 현재 다국어 학술 말뭉치에 토픽 모델링을 적용하는 연구를 진행 중이다.",
   "en": "Yu, Hungpin is a Ph.D. candidate in the Department of Korean Language and Literature at Kyung Hee University in Seoul, South Korea. His research interests include Korean language education for Taiwanese learners, lexical and phonological similarities between Korean and Taiwanese Taigi, culturally responsive teaching, and computational approaches to analyzing research trends. His recent work includes the development of a Korean language learning enjoyment scale for Taiwanese learners (2025) and a BERTopic-based analysis of intercultural research trends in Korean language education (2026). He has over a decade of professional experience as a Korean-Chinese interpreter and translator. His current research applies topic modeling to multilingual academic corpora.",
   "es": "Yu Hung-pin es doctorando en Lingüística Coreana en la Universidad Kyung Hee (Seúl). Investiga la enseñanza del coreano a estudiantes taiwaneses, las similitudes léxicas y fonológicas entre el coreano y el taiwanés, la enseñanza culturalmente sensible y los métodos computacionales de análisis de tendencias. Entre sus trabajos recientes: una escala de disfrute del aprendizaje del coreano (2025) y un análisis con BERTopic de tendencias de investigación intercultural (2026). Cuenta con más de una década como intérprete y traductor coreano-chino."
+ },
+ "ORCID": {
+  "id": "0009-0000-8718-3388",
+  "url": "https://orcid.org/0009-0000-8718-3388"
  }
 }

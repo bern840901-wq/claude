@@ -218,14 +218,31 @@ def build(lang):
     if d.get('pubs'):
         slabel(doc, d['ui']['research'], lang)
         if d.get('bio'):
-            pb = para(doc, after=8, line=1.5)
+            pb = para(doc, after=2, line=1.5)
             rb = pb.add_run(d['bio']); set_font(rb, 9.4, LIGHT, False, SANS, CJK_SANS[lang])
+        if d.get('orcid'):
+            po = para(doc, after=9)
+            add_link(po, 'ORCID ' + d['orcid']['id'], d['orcid']['url'], 8.6, LIGHT, SANS, CJK_SANS[lang])
+        import re as _re
+        def _emrun(pp, text, size, color, name, east, base_bold=False):
+            for part in _re.split(r'(유홍빈|Yu Hung-pin|Hungpin Yu)', text):
+                if not part: continue
+                rr = pp.add_run(part)
+                own = part in ('유홍빈', 'Yu Hung-pin', 'Hungpin Yu')
+                set_font(rr, size, color, base_bold or own, name, east)
         for x in d['pubs']:
-            rowtable(doc, [(str(x['y']), x['ko'], '')], lang)
-            sub_note(doc, x['en'], lang, after=1)
+            tb = rowtable(doc, [(str(x['y']), '', x['kci'])], lang)
+            pc = tb.rows[0].cells[1].paragraphs[0]; pc.paragraph_format.line_spacing = 1.24
+            _emrun(pc, x['cko'], 10.6, INK, SERIF, CJK_SERIF[lang], base_bold=False)
+            pe = para(doc, after=1, indent=1.64, line=1.35)
+            _emrun(pe, x['cen'], 9.4, LIGHT, SANS, CJK_SANS[lang])
             if x.get('tr'):
                 sub_note(doc, x['tr'], lang, after=1)
-            sub_note(doc, x['src'] + ' · ' + x['role'], lang, after=4)
+            if x.get('doiUrl'):
+                pd = para(doc, after=6, indent=1.64)
+                add_link(pd, 'doi.org/' + x['doi'], x['doiUrl'], 8.6, LIGHT, SANS, CJK_SANS[lang])
+            else:
+                para(doc, after=4)
 
     # ── languages ──
     slabel(doc, d['ui']['languages'], lang)

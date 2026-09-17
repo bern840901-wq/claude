@@ -50,10 +50,11 @@ for (const l of LANGS) {
     })),
     edu: D.EDU.map(e => ({ year: e.year, school: pick(e.school, l), deg: pick(e.deg, l) })),
     bio: (D.BIO || {})[l] || '',
+    orcid: D.ORCID || null,
     dl: { label: { zh: '下載履歷 PDF ↓', ko: '이력서 PDF 다운로드 ↓', en: 'Download CV (PDF) ↓', es: 'Descargar CV (PDF) ↓' }[l],
           file: 'pdf/yu-hungpin-cv-' + l + '.pdf',
           name: { zh: '游宏斌_CV_精選版.pdf', ko: '游宏斌_CV_KO.pdf', en: '游宏斌_CV_EN.pdf', es: '游宏斌_CV_ES.pdf' }[l] },
-    pubs: (D.PUBS || []).map(x => ({ y: x.y, cko: x.cko, cen: x.cen, tr: l === 'zh' ? x.zh : l === 'es' ? x.es : null, kci: l === 'zh' || l === 'ko' ? 'KCI 등재' : 'KCI-indexed' })),
+    pubs: (D.PUBS || []).map(x => ({ y: x.y, cko: x.cko, cen: x.cen, doi: x.doi, doiUrl: x.doiUrl, tr: l === 'zh' ? x.zh : l === 'es' ? x.es : null, kci: l === 'zh' || l === 'ko' ? 'KCI 등재' : 'KCI-indexed' })),
     langs: D.LANGS.map(x => ({ name: pick(x.name, l), level: pick(x.level, l) })),
     certs: (D.CERTS[l] || D.CERTS.en).map(c => ({ name: c.name, issuer: c.issuer })),
     titleTag: { zh: '游宏斌 YU HUNG PIN — CV', ko: '유홍빈 YU HUNG PIN — CV', en: 'Yu Hung-Pin — CV', es: 'Yu Hung-Pin — CV' }[l],
@@ -107,6 +108,11 @@ section{margin-top:64px}
 .mail{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;border-color:var(--ac)}
 .dl{display:inline-block;margin-top:10px;font-size:13px;color:var(--mid);text-decoration:none;border-bottom:1px solid var(--rule)}
 .dl:hover{color:var(--ac);border-color:var(--ac)}
+.idl{color:var(--light);text-decoration:none;border-bottom:1px solid transparent;font-size:11.5px;letter-spacing:.02em}
+.idl:hover{color:var(--ac);border-color:var(--ac)}
+.orcid{display:inline-flex;align-items:center;gap:6px;margin:2px 0 16px;font-size:12px;color:var(--light);text-decoration:none}
+.orcid:hover{color:var(--ac)}
+.orcid i{width:9px;height:9px;border-radius:50%;background:#A6CE39;display:inline-block;font-style:normal}
 .foot{margin-top:88px;border-top:1px solid var(--rule);padding-top:18px;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:12.5px;color:var(--light)}
 .langpill{position:fixed;top:18px;right:18px;display:flex;gap:2px;background:rgba(255,255,255,.9);backdrop-filter:blur(6px);border:1px solid var(--rule);border-radius:999px;padding:3px}
 .langpill button{font:500 11px/1 'Inter',sans-serif;letter-spacing:.05em;border:0;background:none;color:var(--light);padding:7px 10px;border-radius:999px;cursor:pointer}
@@ -143,7 +149,8 @@ function render(l){
   const em = t => esc(t).replace(/유홍빈|Yu Hung-pin|Hungpin Yu/g, m => '<b style="font-weight:600">'+m+'</b>');
   const pubs = d.pubs.map(x => '<div class="row"><span class="yr">'+x.y+'</span><span class="ttl">'+em(x.cko)+'</span><span class="typ">'+esc(x.kci)+'</span></div>'
     + '<div class="kv" style="margin:-6px 0 0 62px"><span class="sub">'+em(x.cen)+'</span></div>'
-    + (x.tr ? '<div class="kv" style="margin:-2px 0 10px 62px"><span class="sub">'+esc(x.tr)+'</span></div>' : '<div style="height:10px"></div>')).join('');
+    + (x.tr ? '<div class="kv" style="margin:-2px 0 0 62px"><span class="sub">'+esc(x.tr)+'</span></div>' : '')
+    + (x.doiUrl ? '<div class="kv" style="margin:-2px 0 12px 62px"><a class="idl" href="'+x.doiUrl+'" target="_blank" rel="noopener">doi.org/'+esc(x.doi)+'</a></div>' : '<div style="height:12px"></div>')).join('');
   const langs = d.langs.map(x => '<div class="kv"><b>'+esc(x.name)+'</b> · <span class="sub">'+esc(x.level)+'</span></div>').join('');
   const certs = d.certs.map(c => '<div class="kv"><b>'+esc(c.name)+'</b><br><span class="sub">'+esc(c.issuer)+'</span></div>').join('');
   document.getElementById('app').innerHTML =
@@ -161,7 +168,8 @@ function render(l){
     + '<section><div class="slabel">'+esc(d.ui.clients)+'</div>'+clients+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.education)+'</div>'+edu+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.research)+'</div>'
-    + (d.bio ? '<div class="kv" style="margin-bottom:14px"><span class="sub" style="line-height:1.75">'+esc(d.bio)+'</span></div>' : '')
+    + (d.bio ? '<div class="kv" style="margin-bottom:4px"><span class="sub" style="line-height:1.75">'+esc(d.bio)+'</span></div>' : '')
+    + (d.orcid ? '<a class="orcid" href="'+d.orcid.url+'" target="_blank" rel="noopener"><i></i>ORCID '+esc(d.orcid.id)+'</a>' : '')
     + pubs+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.languages)+'</div>'+langs+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.certs)+'</div>'+certs+'</section>'
