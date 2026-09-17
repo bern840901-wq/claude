@@ -23,6 +23,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Caveat:wght@700&family=Gaegu:wght@700&family=LXGW+WenKai+TC:wght@700&family=Noto+Serif+TC:wght@700;900&family=Noto+Serif+KR:wght@700;900&family=Noto+Sans+TC:wght@500;700&family=Space+Mono:wght@400;700&display=swap" />
   <style>
+  /* Korean wraps at word boundaries, never mid-syllable; other scripts unaffected */
+  :root[lang="ko"], :root[lang="ko"] body { word-break: keep-all; overflow-wrap: break-word; }
+
     /* Brand theme — same palette as twkrpuente.web.app */
     :root, .sw-root {
       --sw-bg: #EDE6D5;

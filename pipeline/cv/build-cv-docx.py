@@ -45,6 +45,11 @@ def set_font(run, size, color=MID, bold=False, name=SANS, east=None, sp=None, ca
     if rf is None: rf = OxmlElement('w:rFonts'); r.append(rf)
     for a in ('w:ascii', 'w:hAnsi'): rf.set(qn(a), name)
     for a in ('w:eastAsia', 'w:cs'): rf.set(qn(a), east or name)
+    ea = east or name
+    if 'KR' in ea:
+        # Korean line-breaking: without an explicit East Asian locale the
+        # renderer breaks between syllables (인수 → 인/수). ko-KR wraps at spaces.
+        lg = OxmlElement('w:lang'); lg.set(qn('w:eastAsia'), 'ko-KR'); r.append(lg)
     if sp:
         e = OxmlElement('w:spacing'); e.set(qn('w:val'), str(sp)); r.append(e)
     if caps:
