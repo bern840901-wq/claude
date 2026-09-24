@@ -85,6 +85,33 @@ comm -13 \
 
 ---
 
+## 上傳中斷了怎麼辦
+
+素材有 125MB，Cloud Shell 偶爾會在上傳途中斷線：
+
+```
+Error: Task ... failed: retries exhausted after 6 attempts, with error:
+Failed to make request to https://upload-firebasehosting.googleapis.com/...
+```
+
+**網站不會壞。** Firebase 是全部檔案上傳完才切換版本，中途失敗等於什麼都沒發生，
+線上仍是上一版。
+
+直接重跑即可：
+
+```bash
+firebase deploy --only hosting:twkrpuente
+```
+
+已經上傳成功的檔案 Firebase 會依內容雜湊比對，不會重傳，所以每重試一次進度都會
+往前。連續失敗三次以上再換手：
+
+```bash
+firebase deploy --only hosting:twkrpuente --debug 2>&1 | tail -40
+```
+
+---
+
 ## 驗收
 
 ```bash
@@ -98,6 +125,17 @@ curl -s -o /dev/null -w "%{http_code} %{size_download}\n" https://twkrpuente.web
 ```bash
 cd ~/twkrpuente-site && stat -c '%n %s' index.html home/index.html cv/index.html
 ```
+
+確認不該公開的東西沒被發佈（三行都要是 `404`）：
+
+```bash
+for p in pipeline/cv/cv_data.json .git/config DEPLOY.md; do
+  curl -s -o /dev/null -w "$p → %{http_code}\n" "https://twkrpuente.web.app/$p"
+done
+```
+
+部署時 Firebase 會印出 `found N files in .`，**N 應該是 59**。明顯更多的話就是
+`ignore` 沒生效，把數字告訴 Claude。
 
 頁面本身：
 

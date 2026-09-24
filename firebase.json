@@ -5,12 +5,17 @@
     "ignore": [
       "firebase.json",
       ".firebaserc",
+      ".gitignore",
       "**/.*",
+      ".git",
+      ".git/**",
+      ".github",
+      ".github/**",
       "**/node_modules/**",
+      "pipeline",
       "pipeline/**",
       "README.md",
-      "DEPLOY.md",
-      ".gitignore"
+      "DEPLOY.md"
     ],
     "redirects": [
       {
