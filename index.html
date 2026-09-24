@@ -540,18 +540,29 @@
     let depthTick = false;
     addEventListener('scroll', () => { if (!depthTick) { depthTick = true; setTimeout(() => { depthTick = false; trackDepth(); }, 400); } }, { passive: true });
     trackDepth();
-    document.addEventListener('click', (e) => {
+    // An exit click races the navigation that follows it, so fire on
+    // pointerdown — a few hundred milliseconds earlier, while the page is
+    // still alive — and keep click for keyboard activation, deduped per link
+    // so one activation counts once.
+    const EXIT_TARGET = {
+      'sw-backlink': 'portfolio_topbar', 'sw-topcta': 'contact_topbar',
+      'sw-btn--primary': 'contact_cta', 'sw-btn--cv': 'cv_cta',
+      'sw-btn--ghost': 'portfolio_cta', 'ec-portfolio': 'portfolio_end',
+      'ec-cv': 'cv_end', 'ec-contact': 'contact_end',
+    };
+    const exitPending = new Set();
+    function onExit(e) {
       const a = e.target && e.target.closest ? e.target.closest('a') : null;
-      if (!a) return;
-      if (a.classList.contains('sw-backlink')) track('film_exit', { target: 'portfolio_topbar' });
-      else if (a.classList.contains('sw-topcta')) track('film_exit', { target: 'contact_topbar' });
-      else if (a.classList.contains('sw-btn--primary')) track('film_exit', { target: 'contact_cta' });
-      else if (a.classList.contains('sw-btn--cv')) track('film_exit', { target: 'cv_cta' });
-      else if (a.classList.contains('sw-btn--ghost')) track('film_exit', { target: 'portfolio_cta' });
-      else if (a.classList.contains('ec-portfolio')) track('film_exit', { target: 'portfolio_end' });
-      else if (a.classList.contains('ec-cv')) track('film_exit', { target: 'cv_end' });
-      else if (a.classList.contains('ec-contact')) track('film_exit', { target: 'contact_end' });
-    }, true);
+      if (!a || exitPending.has(a)) return;
+      let target = null;
+      for (const cls in EXIT_TARGET) { if (a.classList.contains(cls)) { target = EXIT_TARGET[cls]; break; } }
+      if (!target) return;
+      exitPending.add(a);
+      setTimeout(() => exitPending.delete(a), 1000);
+      track('film_exit', { target: target });
+    }
+    document.addEventListener('pointerdown', onExit, true);
+    document.addEventListener('click', onExit, true);
 
     applyLanguage(lang);
   })();
