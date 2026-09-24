@@ -151,10 +151,23 @@ done
 
 `firebase.json` 設了兩條規則：
 
-| 檔案 | Cache-Control | 意思 |
+| 路徑 | Cache-Control | 意思 |
 |---|---|---|
-| `**/*.html` | `no-cache, no-store, must-revalidate` | 每次都抓新的，改版立即生效 |
+| `/`、`/home/`、`/cv/`、`**/*.html` | `no-cache, no-store, must-revalidate` | 每次都抓新的，改版立即生效 |
 | `**/*.pdf` | `public, max-age=0, must-revalidate` | 每次向伺服器確認，沒變就回 304（不重抓） |
+
+三個頁面路徑必須**逐一列出**，不能只寫 `**/*.html`：header 的 `source` 比對的是
+**網址路徑**，而訪客走的是 `/cv/` 而不是 `/cv/index.html`，`.html` 的樣式套不到它。
+只寫 `**/*.html` 的話，改版後訪客最久會有一小時看到舊頁面（Firebase 預設
+`max-age=3600`）。驗證方式：
+
+```bash
+for p in "" home/ cv/; do
+  curl -s -o /dev/null -D - "https://twkrpuente.web.app/$p" | grep -i '^cache-control'
+done
+```
+
+三行都要是 `no-cache, no-store, must-revalidate`。
 
 影片、音訊、圖片走 Firebase 預設快取。如果換掉了同名的素材檔而瀏覽器還顯示舊的，
 用無痕視窗開，或在網址後加 `?v=2`。
