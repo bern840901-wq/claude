@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "target": "twkrpuente",
     "public": ".",
     "ignore": [
       "firebase.json",
@@ -11,6 +12,19 @@
       "DEPLOY.md",
       ".gitignore"
     ],
-    "cleanUrls": true
+    "headers": [
+      {
+        "source": "**/*.html",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+        ]
+      },
+      {
+        "source": "**/*.pdf",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        ]
+      }
+    ]
   }
 }

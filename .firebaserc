@@ -1,5 +1,14 @@
 {
   "projects": {
-    "default": "twkrpuente"
+    "default": "portfolio-c3321"
+  },
+  "targets": {
+    "portfolio-c3321": {
+      "hosting": {
+        "twkrpuente": [
+          "twkrpuente"
+        ]
+      }
+    }
   }
 }

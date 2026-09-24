@@ -1,63 +1,117 @@
-# 上線指南 — 方案 A（Cloud Shell 版）
+# 上線指南（Cloud Shell）
 
 網址規劃：
 
 ```
-twkrpuente.web.app/       ← scroll-world 電影頁（新首頁）
-twkrpuente.web.app/home/  ← 原站（完整作品集，內容原封不動）
+twkrpuente.web.app/       ← 電影頁（scroll-world）
+twkrpuente.web.app/home/  ← 原站作品集
+twkrpuente.web.app/cv/    ← 履歷（附四語 PDF 下載）
 ```
 
-電影頁到作品集的通道（客戶隨時可跳過電影）：
-- 開場動畫下方就有「查看作品集 →」按鈕
-- 頂欄常駐朱紅「查看作品集 ↗」膠囊（手機也看得到）
-- 第 1 景 hero 與最後一景各有「查看作品集」CTA；最後一景另有「CV」按鈕
-- 捲到影片結尾會浮出結尾卡「這 7 個現場，只是預告。」＋ 查看作品集／CV／洽詢合作 三個出口（避免訪客以為影片就是全部）
+這個 repo 的根目錄**就是網站內容**。`firebase.json` 與 `.firebaserc` 已經設好
+`twkrpuente` 這個 hosting target，所以直接在 repo 裡部署即可，不必再下載 zip、
+也不必把檔案搬到別的資料夾。
 
-## 部署步驟
+---
 
-**① 下載網站包**（電腦瀏覽器）
-GitHub 開倉庫 → 切到分支 `claude/scroll-world-skill-setup-hkgxfz`
-→ **Code → Download ZIP**（約 117MB）
+## 平常更新（兩行）
 
-**② 上傳到 Cloud Shell**：右上 ⋮ → **Upload** → 選 zip
+```bash
+cd ~/twkrpuente-site
+git pull && firebase deploy --only hosting:twkrpuente
+```
 
-**③ 解壓＋放進網站資料夾**（原站自動搬到 home/）：
+就這樣。`git pull` 抓最新內容，`firebase deploy` 直接把 repo 根目錄發佈上去。
+
+---
+
+## 第一次設定（只做一次）
 
 ```bash
 cd ~
-unzip -o -q claude-*.zip
-cd ~/portfolio-site/twkrpuente
-rm -rf world
-cp -r ~/claude-*/home ~/claude-*/cv .
-cp ~/claude-*/index.html ~/claude-*/scrub-engine.js ~/claude-*/world-config.js ~/claude-*/og.png .
-cp -r ~/claude-*/assets .
-ls
+git clone -b claude/scroll-world-skill-setup-hkgxfz \
+  https://github.com/bern840901-wq/claude.git twkrpuente-site
+cd ~/twkrpuente-site
+firebase deploy --only hosting:twkrpuente
 ```
 
-（`ls` 應該看到：`assets  cv  home  index.html  og.png  scrub-engine.js  world-config.js`）
-
-> 注意：這一步會把根目錄的 index.html 換成電影頁 — 原站完整保存在
-> `home/index.html`（zip 裡已附，跟你現在線上的版本相同）。
-
-**④ 部署**（跟你平常同一行）：
+已經有舊的 clone 的話，改成把它拉到最新並切到正確分支：
 
 ```bash
-cd ~/portfolio-site
-firebase deploy --only hosting:twkrpuente --project portfolio-c3321
+cd ~/twkrpuente-site           # 或你原本 clone 的路徑
+git fetch origin claude/scroll-world-skill-setup-hkgxfz
+git checkout claude/scroll-world-skill-setup-hkgxfz
+git reset --hard origin/claude/scroll-world-skill-setup-hkgxfz
 ```
 
-**⑤ 驗收**
-- https://twkrpuente.web.app/ → 電影頁（橋動畫開場）
-- https://twkrpuente.web.app/home/ → 原站作品集
+> `git reset --hard` 會丟掉本機未提交的修改。這個 clone 只用來部署，不該有本機
+> 修改；先跑 `git status` 確認是乾淨的再執行。
 
-## 反悔切回方案 B？
+---
 
-跟 Claude 說一聲即可 — 兩包檔案都在，只是對調誰當 index.html。
+## 從舊流程切換過來（做一次，要先檢查）
 
-## 上線後檢查
+Firebase hosting 的部署是**整站替換**——沒出現在這次部署裡的檔案會從線上消失。
+所以第一次用新流程之前，先確認舊的發佈資料夾裡沒有 repo 以外的檔案：
 
-- [ ] 首頁：橋動畫開場（動畫下方有「查看作品集 →」）→ 7 景一鏡到底
-- [ ] 手機：直式影片、頂欄可見「查看作品集」膠囊
-- [ ] 瀏覽器語言 = 韓文/英文/西文時，文案自動切換（zh 為預設）
-- [ ] /home/ 原站一切如常
-- [ ] Google Analytics（G-NVSBEEP9CR）兩頁都有計數
+```bash
+comm -13 \
+  <(cd ~/twkrpuente-site && git ls-files \
+      | grep -vE '^(pipeline/|README\.md$|DEPLOY\.md$|\.gitignore$|firebase\.json$|\.firebaserc$)' | sort) \
+  <(cd ~/portfolio-site/twkrpuente && find . -type f | sed 's|^\./||' | sort)
+```
+
+**沒有任何輸出 = 安全**，舊資料夾的檔案 repo 全都有，可以直接切換。
+
+（左邊那份清單就是會發佈的 59 個檔案：`index.html`、`scrub-engine.js`、
+`world-config.js`、`og.png`、`home/index.html`、`cv/index.html`、四份 CV PDF，
+以及 `assets/` 底下 49 個影音與圖片素材。）
+
+有輸出的話，那幾個檔案只存在於舊資料夾；把它們貼給 Claude 判斷是該加進 repo
+還是本來就該淘汰，不要直接部署。
+
+---
+
+## 驗收
+
+```bash
+curl -s -o /dev/null -w "%{http_code} %{size_download}\n" https://twkrpuente.web.app/
+curl -s -o /dev/null -w "%{http_code} %{size_download}\n" https://twkrpuente.web.app/home/
+curl -s -o /dev/null -w "%{http_code} %{size_download}\n" https://twkrpuente.web.app/cv/
+```
+
+三行都要是 `200`，而且 bytes 要跟 repo 裡對應檔案的大小一致：
+
+```bash
+cd ~/twkrpuente-site && stat -c '%n %s' index.html home/index.html cv/index.html
+```
+
+頁面本身：
+
+- [ ] `/` 橋動畫開場 → 7 景一鏡到底 → 結尾卡三個出口
+- [ ] `/home/` 作品集正常，精選作品抽屜可開、術語對照有內容
+- [ ] `/cv/` 四語切換正常，PDF 下載連結可用
+- [ ] 手機直式播放、頂欄「查看作品集」膠囊看得到
+- [ ] 瀏覽器語言為韓／英／西時文案自動切換（預設中文）
+
+---
+
+## 快取
+
+`firebase.json` 設了兩條規則：
+
+| 檔案 | Cache-Control | 意思 |
+|---|---|---|
+| `**/*.html` | `no-cache, no-store, must-revalidate` | 每次都抓新的，改版立即生效 |
+| `**/*.pdf` | `public, max-age=0, must-revalidate` | 每次向伺服器確認，沒變就回 304（不重抓） |
+
+影片、音訊、圖片走 Firebase 預設快取。如果換掉了同名的素材檔而瀏覽器還顯示舊的，
+用無痕視窗開，或在網址後加 `?v=2`。
+
+---
+
+## 其他站台不受影響
+
+這個 repo 的設定只定義 `twkrpuente` 一個 target，所以從這裡部署不會動到
+`~/portfolio-site` 底下的 `twkrbridge`、`twkrlink`、`taiwankorea`、`twkrbridgeold`。
+那幾個站要更新時，照舊在 `~/portfolio-site` 操作。
