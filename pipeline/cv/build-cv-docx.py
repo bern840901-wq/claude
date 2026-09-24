@@ -118,17 +118,36 @@ def cantsplit(tbl):
         trPr.append(OxmlElement('w:cantSplit'))
 
 
+def hairline_left(p, space='4'):
+    pPr = p._p.get_or_add_pPr()
+    bd = OxmlElement('w:pBdr'); e = OxmlElement('w:left')
+    e.set(qn('w:val'), 'single'); e.set(qn('w:sz'), '4'); e.set(qn('w:color'), HAIR)
+    e.set(qn('w:space'), space)
+    bd.append(e); pPr.append(bd)
+
+
 def rowtable(doc, entries, lang, widths=(1050, 6060, 2130)):
-    # the page's .row: [yr | ttl | typ] — 7px vertical padding, no rules
+    # the page's .row: [yr | ttl | typ] — 7px vertical padding, no rules.
+    # A 4th entry field is the page's .kv.topic: the assignment's subject
+    # matter, hung under the title behind the same hairline rule.
     KS, KA = CJK_SERIF[lang], CJK_SANS[lang]
     tb = doc.add_table(rows=len(entries), cols=3); no_borders(tb)
     fixed_widths(tb, list(widths)); cantsplit(tb)
-    for i, (yr, ttl, typ) in enumerate(entries):
+    for i, ent in enumerate(entries):
+        yr, ttl, typ = ent[0], ent[1], ent[2]
+        topic = ent[3] if len(ent) > 3 else ''
         cells = tb.rows[i].cells
         for c in cells: tcmar(c, 55, 55, 0, 60)
         r = cells[0].paragraphs[0].add_run(yr); set_font(r, 9.4, LIGHT, False, SANS, KA)
         p = cells[1].paragraphs[0]; p.paragraph_format.line_spacing = 1.24
         r = p.add_run(ttl); set_font(r, 11.5, INK, True, SERIF, KS)
+        if topic:
+            pt = cells[1].add_paragraph()
+            f = pt.paragraph_format
+            f.space_before = Pt(2); f.space_after = Pt(1); f.line_spacing = 1.34
+            f.left_indent = Cm(0.22)
+            hairline_left(pt)
+            rt = pt.add_run(topic); set_font(rt, 8.6, LIGHT, False, SANS, KA)
         p3 = cells[2].paragraphs[0]; p3.alignment = WD_ALIGN_PARAGRAPH.RIGHT
         r = p3.add_run(typ); set_font(r, 7.5, LIGHT, False, SANS, KA, sp=track(.14, 7.5), caps=True)
     return tb
@@ -198,7 +217,7 @@ def build(lang):
     for row in d['tl']:
         y = '' if row['y'] == last else str(row['y'])
         last = row['y']
-        entries.append((y, row['title'], d['types'].get(row['t'], '')))
+        entries.append((y, row['title'], d['types'].get(row['t'], ''), row.get('sub', '')))
     rowtable(doc, entries, lang)
 
     # ── clients ──

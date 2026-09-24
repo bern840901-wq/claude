@@ -43,7 +43,11 @@ for (const l of LANGS) {
     ui: Object.fromEntries(Object.entries(UI).map(([k, v]) => [k, v[l]])),
     types: Object.fromEntries(Object.entries(D.T).map(([k, v]) => [k, pick(v, l)])),
     partners: D.PARTNERS[l] || D.PARTNERS.en,
-    tl: D.TL.map(r => ({ y: r[0], t: r[1], title: l === 'zh' ? r[3] : l === 'ko' ? r[4] : r[5] })),
+    // r[6] (optional) = the subject matter of that assignment, in the client's
+    // own official terminology — so a reader sees WHAT was interpreted, not
+    // only for whom.
+    tl: D.TL.map(r => ({ y: r[0], t: r[1], title: l === 'zh' ? r[3] : l === 'ko' ? r[4] : r[5],
+                         sub: r[6] ? (r[6][l] || r[6].en || '') : '' })),
     clients: D.CLIENTS.map(g => ({
       title: pick(g.title, l),
       items: g.items.map(it => ({ name: pick(it.name, l), sub: pick(it.sub, l) })),
@@ -104,6 +108,10 @@ section{margin-top:64px}
 .kv{padding:6px 0;font-size:14px}
 .kv b{font-weight:500}
 .kv .sub{color:var(--light);font-size:12.5px}
+/* subject matter of a single assignment — hangs under its row, hairline-tied to it */
+.kv.topic{margin:-4px 0 10px 62px;padding-left:11px;border-left:1px solid var(--rule)}
+.kv.topic .sub{font-size:12px;line-height:1.62;display:block}
+@media (max-width:520px){.kv.topic{margin-left:0}}
 .group{margin-bottom:26px}
 .gtitle{font-size:12px;letter-spacing:.1em;color:var(--mid);font-weight:500;margin-bottom:8px}
 .cl{display:flex;flex-wrap:wrap;gap:6px 0;font-size:14px}
@@ -147,6 +155,7 @@ function render(l){
   for (const r of d.tl){
     const y = r.y === lastYear ? '' : r.y; lastYear = r.y;
     tlRows += '<div class="row"><span class="yr">'+y+'</span><span class="ttl">'+esc(r.title)+'</span><span class="typ">'+esc(d.types[r.t]||'')+'</span></div>';
+    if (r.sub) tlRows += '<div class="kv topic"><span class="sub">'+esc(r.sub)+'</span></div>';
   }
   const partners = d.partners.map(p => '<div class="row"><span class="yr">'+esc(p.period.split('–')[0])+'</span><span class="ttl">'+esc(p.org)+'</span><span class="typ">'+esc(p.period)+'</span></div>'
     + '<div class="kv" style="margin:-6px 0 8px 62px"><span class="sub">'+esc(p.desc)+'</span></div>').join('');
