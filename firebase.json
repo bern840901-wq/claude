@@ -12,6 +12,18 @@
       "DEPLOY.md",
       ".gitignore"
     ],
+    "redirects": [
+      {
+        "source": "/pue.html",
+        "destination": "/home/",
+        "type": 301
+      },
+      {
+        "source": "/preview-pue.png",
+        "destination": "/og.png",
+        "type": 301
+      }
+    ],
     "headers": [
       {
         "source": "**/*.html",
