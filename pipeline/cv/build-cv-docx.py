@@ -76,7 +76,7 @@ def hairline_top(p, space='14'):
     bd.append(e); pPr.append(bd)
 
 
-def slabel(doc, text, lang, before=21):
+def slabel(doc, text, lang, before=19):
     # .slabel: 11px uppercase .22em light, hairline above, ~14px padding-top
     p = para(doc, before=before, after=8)
     hairline_top(p)
@@ -137,7 +137,7 @@ def rowtable(doc, entries, lang, widths=(1050, 6060, 2130)):
         yr, ttl, typ = ent[0], ent[1], ent[2]
         topic = ent[3] if len(ent) > 3 else ''
         cells = tb.rows[i].cells
-        for c in cells: tcmar(c, 55, 55, 0, 60)
+        for c in cells: tcmar(c, 46, 46, 0, 60)
         r = cells[0].paragraphs[0].add_run(yr); set_font(r, 9.4, LIGHT, False, SANS, KA)
         p = cells[1].paragraphs[0]; p.paragraph_format.line_spacing = 1.24
         r = p.add_run(ttl); set_font(r, 11.5, INK, True, SERIF, KS)
