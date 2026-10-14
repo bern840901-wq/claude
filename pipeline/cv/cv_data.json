@@ -605,15 +605,15 @@
   {
    "year": "2021–",
    "school": {
-    "zh": "韓國 慶熙大學 一般大學院",
-    "ko": "한국 경희대학교 일반대학원",
-    "en": "Kyung Hee University · Graduate School",
-    "es": "Universidad Kyung Hee · Escuela de Posgrado"
+    "zh": "韓國 慶熙大學 一般大學院 國語國文學科",
+    "ko": "한국 경희대학교 일반대학원 국어국문학과",
+    "en": "Kyung Hee University · Department of Korean Language and Literature",
+    "es": "Universidad Kyung Hee · Departamento de Lengua y Literatura Coreanas"
    },
    "deg": {
     "zh": "韓國語學 博士候選人",
     "ko": "한국어학 박사수료",
-    "en": "PhD Candidate, Korean Linguistics",
+    "en": "PhD Candidate in Korean Linguistics",
     "es": "Doctorando en Lingüística Coreana"
    },
    "note": {
@@ -626,15 +626,15 @@
   {
    "year": "2019–21",
    "school": {
-    "zh": "韓國 慶熙大學 一般大學院",
-    "ko": "한국 경희대학교 일반대학원",
-    "en": "Kyung Hee University · Graduate School",
-    "es": "Universidad Kyung Hee · Escuela de Posgrado"
+    "zh": "韓國 慶熙大學 一般大學院 國語國文學科",
+    "ko": "한국 경희대학교 일반대학원 국어국문학과",
+    "en": "Kyung Hee University · Department of Korean Language and Literature",
+    "es": "Universidad Kyung Hee · Departamento de Lengua y Literatura Coreanas"
    },
    "deg": {
     "zh": "韓國語學 碩士",
     "ko": "한국어학 석사",
-    "en": "MA, Korean Linguistics",
+    "en": "MA in Korean Linguistics",
     "es": "Máster en Lingüística Coreana"
    },
    "note": {
@@ -693,8 +693,8 @@
    "name": {
     "zh": "中文 / 臺灣臺語",
     "ko": "중국어 / 대만어",
-    "en": "Chinese / Taiwanese",
-    "es": "Chino / Taiwanés"
+    "en": "Taiwanese Mandarin / Taiwanese Taigi",
+    "es": "Mandarín taiwanés / Taigi taiwanés"
    },
    "level": {
     "zh": "母語",
