@@ -269,19 +269,24 @@ def build(lang):
                 para(doc, after=4)
 
     # ── languages ──
-    slabel(doc, d['ui']['languages'], lang)
+    # Kept with the certs block below (and through it, the footer) so the
+    # document always ends on a full credentials page rather than a thin one.
+    sl = slabel(doc, d['ui']['languages'], lang); sl.paragraph_format.keep_with_next = True
     for x in d['langs']:
-        p = para(doc, before=3, after=3, line=1.45)
+        p = para(doc, before=3, after=3, line=1.45); p.paragraph_format.keep_with_next = True
         r = p.add_run(strip(x['name'])); set_font(r, 9.75, LIGHT, True, SANS, KA, sp=track(.14, 9.75))
         r = p.add_run(' · '); set_font(r, 9.75, LIGHT, False, SANS, KA)
         r = p.add_run(strip(x['level'])); set_font(r, 9.4, LIGHT, False, SANS, KA)
 
     # ── certs / awards ──
-    slabel(doc, d['ui']['certs'], lang)
+    # Kept with what follows (the footer table) so the footer can never be
+    # orphaned on a page of its own: if the body runs long, this whole block
+    # moves to the last page together with it.
+    sl = slabel(doc, d['ui']['certs'], lang); sl.paragraph_format.keep_with_next = True
     for c in d['certs']:
-        p = para(doc, before=3, after=1)
+        p = para(doc, before=3, after=1); p.paragraph_format.keep_with_next = True
         r = p.add_run(c['name']); set_font(r, 9.75, LIGHT, True, SANS, KA, sp=track(.14, 9.75))
-        p = para(doc, after=4)
+        p = para(doc, after=4); p.paragraph_format.keep_with_next = True
         r = p.add_run(strip(c['issuer'])); set_font(r, 9.4, LIGHT, False, SANS, KA)
 
     # ── foot: the page's footer links become the printed URL + QR ──

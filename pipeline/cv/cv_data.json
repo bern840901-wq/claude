@@ -2,6 +2,14 @@
  "TL": [
   [
    2026,
+   "esc",
+   "media",
+   "釜山國際影展（BIFF）/ ACFM — 文策院 TAICCA 董事長 隨行口譯",
+   "부산국제영화제(BIFF) / ACFM — TAICCA(대만콘텐츠진흥원) 이사장 수행통역",
+   "Busan International Film Festival (BIFF) / ACFM — TAICCA (Taiwan) Chairperson's Escort Interpreter"
+  ],
+  [
+   2026,
    "mtg",
    "business",
    "臺灣食品暨生活用品採購洽談會（首爾）經濟部國際貿易署 TITA × 外貿協會 TAITRA 口譯",
@@ -1372,6 +1380,29 @@
   }
  },
  "PUBS": [
+  {
+   "y": 2026,
+   "ko": "대만어 배경을 지닌 대만인 한국어 학습자의 어휘 유사성 인식 -학습 흥미와 동기를 중심으로-",
+   "en": "Perceptions of Taigi-Korean Lexical Similarity among Taiwanese Learners of Korean with Taigi Backgrounds: Focusing on Learning Interest and Motivation",
+   "zh": "具臺灣台語背景之臺灣韓語學習者對詞彙相似性之認知 — 以學習興趣與動機為中心",
+   "es": "Percepciones de la similitud léxica entre el taigi y el coreano en estudiantes taiwaneses de coreano con trasfondo lingüístico taigi — con énfasis en el interés y la motivación por el aprendizaje",
+   "src": {
+    "zh": "이중언어학 105 · KCI 등재",
+    "ko": "이중언어학 105 · KCI 등재",
+    "en": "Bilingual Research 105 · KCI-indexed",
+    "es": "Bilingual Research 105 · KCI"
+   },
+   "role": {
+    "zh": "單獨作者",
+    "ko": "단독 저자",
+    "en": "Sole author",
+    "es": "Autor único"
+   },
+   "cko": "유홍빈. (2026). 대만어 배경을 지닌 대만인 한국어 학습자의 어휘 유사성 인식 -학습 흥미와 동기를 중심으로-. 이중언어학, 105, 279-309.",
+   "cen": "Hungpin Yu. (2026). Perceptions of Taigi-Korean Lexical Similarity among Taiwanese Learners of Korean with Taigi Backgrounds: Focusing on Learning Interest and Motivation. Bilingual Research, 105, 279-309.",
+   "doi": "10.17296/korbil.2026..105.279",
+   "doiUrl": "https://doi.org/10.17296/korbil.2026..105.279"
+  },
   {
    "y": 2026,
    "ko": "BERTopic을 활용한 대만 한국어교육 연구 동향",
