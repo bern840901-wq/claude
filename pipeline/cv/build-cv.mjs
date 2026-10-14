@@ -146,6 +146,10 @@ section{margin-top:64px}
 <script>
 const DATA = ${JSON.stringify(payload)};
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// House style writes a body as 中文名 + 縮寫 (文策院 TAICCA, 外貿協會 TAITRA). Keep
+// that pair on one line: text-wrap:balance may otherwise put its break inside
+// the Chinese name (文／策院). Presentation only — the data is untouched.
+const glue = s => s.replace(/([一-鿿가-힣]+) ([A-Z][A-Za-z0-9&.'-]{1,11})(?![A-Za-z0-9])/g, '<span style="white-space:nowrap">$1 $2</span>');
 const HTML_LANG = { zh:'zh-Hant', ko:'ko', en:'en', es:'es' };
 function render(l){
   const d = DATA[l];
@@ -154,10 +158,10 @@ function render(l){
   let tlRows = '', lastYear = null;
   for (const r of d.tl){
     const y = r.y === lastYear ? '' : r.y; lastYear = r.y;
-    tlRows += '<div class="row"><span class="yr">'+y+'</span><span class="ttl">'+esc(r.title)+'</span><span class="typ">'+esc(d.types[r.t]||'')+'</span></div>';
+    tlRows += '<div class="row"><span class="yr">'+y+'</span><span class="ttl">'+glue(esc(r.title))+'</span><span class="typ">'+esc(d.types[r.t]||'')+'</span></div>';
     if (r.sub) tlRows += '<div class="kv topic"><span class="sub">'+esc(r.sub)+'</span></div>';
   }
-  const partners = d.partners.map(p => '<div class="row"><span class="yr">'+esc(p.period.split('–')[0])+'</span><span class="ttl">'+esc(p.org)+'</span><span class="typ">'+esc(p.period)+'</span></div>'
+  const partners = d.partners.map(p => '<div class="row"><span class="yr">'+esc(p.period.split('–')[0])+'</span><span class="ttl">'+glue(esc(p.org))+'</span><span class="typ">'+esc(p.period)+'</span></div>'
     + '<div class="kv" style="margin:-6px 0 8px 62px"><span class="sub">'+esc(p.desc)+'</span></div>').join('');
   const clients = d.clients.map(g => '<div class="group"><div class="gtitle">'+esc(g.title)+'</div><div class="cl">'
     + g.items.map(it => '<span class="it'+'"><span class="nm">'+esc(it.name)+'</span>'+(it.sub?'<span class="sb">'+esc(it.sub)+'</span>':'')+'</span>').join('') + '</div></div>').join('');

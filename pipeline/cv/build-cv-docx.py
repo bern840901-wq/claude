@@ -126,6 +126,24 @@ def hairline_left(p, space='4'):
     bd.append(e); pPr.append(bd)
 
 
+# Chinese has no word boundaries, so the renderer may break inside a term
+# (隨／行口譯, 文／策院). For zh rows, join the characters of the short fixed
+# terms with WORD JOINER and tie 中文名+縮寫 pairs with NO-BREAK SPACE.
+# Presentation only: DATA is untouched; the PDF text differs only by these
+# invisible characters.
+import re as _re
+_WJ, _NBSP = '\u2060', '\u00a0'
+_GLUE_TERMS = ['隨行口譯', '會議口譯', '訪談翻譯', '活動翻譯', '字幕筆譯', '展會口譯', '逐步口譯',
+               '業務代表', '隨行', '董事長', '副總經理', '次長', '院長', '郡守',
+               '文策院', '外貿協會', '國科會', '北流']
+_PAIR = _re.compile(r'([一-鿿]+) ([A-Z][A-Za-z0-9&.\'-]{1,11})(?![A-Za-z0-9])')
+def glue_zh(text):
+    text = _PAIR.sub(lambda m: m.group(1) + _NBSP + m.group(2), text)
+    for t in sorted(_GLUE_TERMS, key=len, reverse=True):
+        text = text.replace(t, _WJ.join(t))
+    return text
+
+
 def rowtable(doc, entries, lang, widths=(1050, 6060, 2130)):
     # the page's .row: [yr | ttl | typ] — 7px vertical padding, no rules.
     # A 4th entry field is the page's .kv.topic: the assignment's subject
@@ -140,7 +158,7 @@ def rowtable(doc, entries, lang, widths=(1050, 6060, 2130)):
         for c in cells: tcmar(c, 46, 46, 0, 60)
         r = cells[0].paragraphs[0].add_run(yr); set_font(r, 9.4, LIGHT, False, SANS, KA)
         p = cells[1].paragraphs[0]; p.paragraph_format.line_spacing = 1.24
-        r = p.add_run(ttl); set_font(r, 11.5, INK, True, SERIF, KS)
+        r = p.add_run(glue_zh(ttl) if lang == 'zh' else ttl); set_font(r, 11.5, INK, True, SERIF, KS)
         if topic:
             pt = cells[1].add_paragraph()
             f = pt.paragraph_format
