@@ -9,6 +9,8 @@ const D = JSON.parse(fs.readFileSync('cv_data.json', 'utf8'));
 
 const LANGS = ['zh', 'ko', 'en', 'es'];
 const strip = v => typeof v === 'string' ? v.replace(/<\/?[a-z][^>]*>/g, '') : v;
+const PRESENT = { zh: '現在', ko: '현재', en: 'present', es: 'actualidad' };
+const yearRange = (y, l) => { const [a, b] = String(y).split('–'); return b === undefined ? a : (b === '' ? a + '–' + PRESENT[l] : a + '–' + (b.length === 2 ? a.slice(0, 2) + b : b)); };
 const pick = (obj, l) => strip((obj && (obj[l] ?? obj.en ?? obj.zh)) ?? '');
 
 // Section labels drawn from the site's own strings where they exist.
@@ -52,7 +54,7 @@ for (const l of LANGS) {
       title: pick(g.title, l),
       items: g.items.map(it => ({ name: pick(it.name, l), sub: pick(it.sub, l) })),
     })),
-    edu: D.EDU.map(e => ({ year: e.year, school: pick(e.school, l), deg: pick(e.deg, l), note: pick(e.note, l) })),
+    edu: D.EDU.map(e => ({ year: yearRange(e.year, l), school: pick(e.school, l), deg: pick(e.deg, l), note: pick(e.note, l) })),
     bio: (D.BIO || {})[l] || '',
     orcid: D.ORCID || null,
     dl: { label: { zh: '下載履歷 PDF ↓', ko: '이력서 PDF 다운로드 ↓', en: 'Download CV (PDF) ↓', es: 'Descargar CV (PDF) ↓' }[l],
@@ -102,6 +104,9 @@ h1{font-family:'Cormorant Garamond','Noto Serif TC','Noto Serif KR',serif;font-w
 section{margin-top:64px}
 .slabel{font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--light);border-top:1px solid var(--rule);padding-top:14px;margin-bottom:22px}
 .row{display:flex;gap:18px;align-items:baseline;padding:7px 0}
+.edu{display:grid;grid-template-columns:max-content 1fr;column-gap:18px;align-items:baseline;padding:7px 0}
+.edu .yr{flex:none;white-space:nowrap}
+.edu .kv{padding:2px 0 0}
 .yr{flex:0 0 44px;font-size:12.5px;color:var(--light);font-variant-numeric:tabular-nums}
 .ttl{flex:1;font-family:'Cormorant Garamond','Noto Serif TC','Noto Serif KR',serif;font-size:16.5px;font-weight:600;line-height:1.45}
 .typ{flex:0 0 auto;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--light);text-align:right}
@@ -165,7 +170,7 @@ function render(l){
     + '<div class="kv" style="margin:-6px 0 8px 62px"><span class="sub">'+esc(p.desc)+'</span></div>').join('');
   const clients = d.clients.map(g => '<div class="group"><div class="gtitle">'+esc(g.title)+'</div><div class="cl">'
     + g.items.map(it => '<span class="it'+'"><span class="nm">'+esc(it.name)+'</span>'+(it.sub?'<span class="sb">'+esc(it.sub)+'</span>':'')+'</span>').join('') + '</div></div>').join('');
-  const edu = d.edu.map(e => '<div class="row"><span class="yr">'+esc(String(e.year).split('–')[0])+'</span><span class="ttl">'+glue(esc(e.deg))+'</span></div><div class="kv" style="margin:-6px 0 8px 62px"><span class="sub">'+glue(esc(e.school))+'</span>'+(e.note?'<br><span class="sub">'+glue(esc(e.note))+'</span>':'')+'</div>').join('');
+  const edu = d.edu.map(e => '<div class="edu"><span class="yr">'+esc(e.year)+'</span><div><div class="ttl">'+glue(esc(e.deg))+'</div><div class="kv"><span class="sub">'+glue(esc(e.school))+'</span>'+(e.note?'<br><span class="sub">'+glue(esc(e.note))+'</span>':'')+'</div></div></div>').join('');
   const em = t => esc(t).replace(/유홍빈|Yu Hung-pin|Hungpin Yu/g, m => '<b style="font-weight:600">'+m+'</b>');
   const pubs = d.pubs.map(x => '<div class="row"><span class="yr">'+x.y+'</span><span class="ttl">'+em(x.cko)+'</span><span class="typ">'+esc(x.kci)+'</span></div>'
     + '<div class="kv" style="margin:-6px 0 0 62px"><span class="sub">'+em(x.cen)+'</span></div>'
