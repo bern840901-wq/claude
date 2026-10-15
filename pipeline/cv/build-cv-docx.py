@@ -252,9 +252,11 @@ def build(lang):
 
     # ── education ──
     slabel(doc, d['ui']['education'], lang)
-    for e in d['edu']:
-        rowtable(doc, [(str(e['year']).split('–')[0], e['school'], '')], lang)
-        sub_note(doc, strip(e['deg']), lang)
+    for e in d['edu']:                                   # degree first (as on the website), school + scholarship under it
+        rowtable(doc, [(str(e['year']).split('–')[0], e['deg'], '')], lang)
+        note = strip(e.get('note') or '')
+        sub_note(doc, strip(e['school']), lang, after=(0 if note else 3))
+        if note: sub_note(doc, note, lang)
 
     # ── research (KO title main, EN official small, zh/es translation) ──
     if d.get('pubs'):

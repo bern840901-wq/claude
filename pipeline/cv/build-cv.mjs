@@ -52,7 +52,7 @@ for (const l of LANGS) {
       title: pick(g.title, l),
       items: g.items.map(it => ({ name: pick(it.name, l), sub: pick(it.sub, l) })),
     })),
-    edu: D.EDU.map(e => ({ year: e.year, school: pick(e.school, l), deg: pick(e.deg, l) })),
+    edu: D.EDU.map(e => ({ year: e.year, school: pick(e.school, l), deg: pick(e.deg, l), note: pick(e.note, l) })),
     bio: (D.BIO || {})[l] || '',
     orcid: D.ORCID || null,
     dl: { label: { zh: '下載履歷 PDF ↓', ko: '이력서 PDF 다운로드 ↓', en: 'Download CV (PDF) ↓', es: 'Descargar CV (PDF) ↓' }[l],
@@ -165,7 +165,7 @@ function render(l){
     + '<div class="kv" style="margin:-6px 0 8px 62px"><span class="sub">'+esc(p.desc)+'</span></div>').join('');
   const clients = d.clients.map(g => '<div class="group"><div class="gtitle">'+esc(g.title)+'</div><div class="cl">'
     + g.items.map(it => '<span class="it'+'"><span class="nm">'+esc(it.name)+'</span>'+(it.sub?'<span class="sb">'+esc(it.sub)+'</span>':'')+'</span>').join('') + '</div></div>').join('');
-  const edu = d.edu.map(e => '<div class="row"><span class="yr">'+esc(String(e.year).split('–')[0])+'</span><span class="ttl">'+esc(e.school)+'</span></div><div class="kv" style="margin:-6px 0 8px 62px"><span class="sub">'+esc(e.deg)+'</span></div>').join('');
+  const edu = d.edu.map(e => '<div class="row"><span class="yr">'+esc(String(e.year).split('–')[0])+'</span><span class="ttl">'+glue(esc(e.deg))+'</span></div><div class="kv" style="margin:-6px 0 8px 62px"><span class="sub">'+glue(esc(e.school))+'</span>'+(e.note?'<br><span class="sub">'+glue(esc(e.note))+'</span>':'')+'</div>').join('');
   const em = t => esc(t).replace(/유홍빈|Yu Hung-pin|Hungpin Yu/g, m => '<b style="font-weight:600">'+m+'</b>');
   const pubs = d.pubs.map(x => '<div class="row"><span class="yr">'+x.y+'</span><span class="ttl">'+em(x.cko)+'</span><span class="typ">'+esc(x.kci)+'</span></div>'
     + '<div class="kv" style="margin:-6px 0 0 62px"><span class="sub">'+em(x.cen)+'</span></div>'
