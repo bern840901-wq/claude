@@ -108,7 +108,7 @@ section{margin-top:64px}
 .edu .yr{flex:none;white-space:nowrap}
 .edu .kv{padding:2px 0 0}
 .yr{flex:0 0 44px;font-size:12.5px;color:var(--light);font-variant-numeric:tabular-nums}
-.ttl{flex:1;font-family:'Cormorant Garamond','Noto Serif TC','Noto Serif KR',serif;font-size:16.5px;font-weight:600;line-height:1.45}
+.ttl{flex:1;font-family:'Cormorant Garamond','Noto Serif TC','Noto Serif KR',serif;font-size:16.5px;font-weight:600;line-height:1.45;font-variant-numeric:lining-nums}
 .typ{flex:0 0 auto;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--light);text-align:right}
 .kv{padding:6px 0;font-size:14px}
 .kv b{font-weight:500}
