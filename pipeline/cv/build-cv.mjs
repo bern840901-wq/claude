@@ -48,7 +48,7 @@ for (const l of LANGS) {
     // r[6] (optional) = the subject matter of that assignment, in the client's
     // own official terminology — so a reader sees WHAT was interpreted, not
     // only for whom.
-    tl: D.TL.map(r => ({ y: r[0], t: r[1], title: l === 'zh' ? r[3] : l === 'ko' ? r[4] : r[5],
+    tl: D.TL.map((r, i) => ({ y: r[0], t: r[1], title: l === 'zh' ? r[3] : l === 'ko' ? r[4] : l === 'es' ? ((D.TLES && D.TLES[i]) || r[5]) : r[5],
                          sub: r[6] ? (r[6][l] || r[6].en || '') : '' })),
     clients: D.CLIENTS.map(g => ({
       title: pick(g.title, l),
