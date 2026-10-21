@@ -3,17 +3,19 @@
 適用對象：`pipeline/cv/cv_data.json` 的 `TL`（繁中／韓／英）與 `TLES`（西）、`home/index.html` 內的 `TL`／`TLES` 與精選卡 `title`。
 四處用詞必須一致：CV 列 = 網站時間軸列；精選卡標題可較長，但機關名稱與縮寫須相同。
 
-## 1. 機關國別標示（2026-10-21 定案）
+## 1. 機關國別標示（2026-10-21 定案，依全站既有寫法統一）
 
 讀該語言的人，不認識這個機關也要能從這一列看出它是哪一國的。
 
 | 機關所在國 | 繁中版 | 韓文版 | 英文版 | 西文版 |
 |---|---|---|---|---|
-| 韓國 | 前綴「韓國」，不空格（韓國行政安全部、韓國成均館大學） | 不標 | 「, Korea」或「(Korea)」 | 「de Corea」或「(Corea)」 |
-| 臺灣 | 不標 | 前綴「대만」 | 「, Taiwan」或「(Taiwan)」 | 「, Taiwán」或「(Taiwán)」 |
+| 韓國 | 前綴「韓國」，不空格、不加括號（韓國行政安全部、韓國成均館大學） | 不標 | 機關後括號 (Korea) | 機關後括號 (Corea) |
+| 臺灣 | 不標 | 前綴「대만 」（대만 행정원 …） | 機關後括號 (Taiwan) | 機關後括號 (Taiwán) |
 
-- 名稱本身已含國名者不再加（韓國教育開發院、Google Korea、Taipei Mission in Korea）。
-- 一列裡同時有臺韓雙方時，各自標自己的；「訪韓團／방한단／delegation to Korea」這類語境不取代機關前綴。
+- 英西文的國名一律放機關名後面的括號裡，不用「, Korea」逗號式。已有縮寫或地名括號時合併成一個：TAICCA (Taiwan)、Taoyuan International Airport Corporation (TIAC, Taiwan)、YIAF (Yilan, Taiwan)；有上級機關時國名跟在最上層機關後：Civil Service Development Institute (CSDI), Executive Yuan (Taiwan)。
+- 名稱本身已含國名者不再加（韓國教育開發院、Korea Railroad Research Institute、Google Korea、Taipei Mission in Korea、Oficina de Corea en Taipéi）。
+- 一列裡同時有臺韓雙方時各自標自己的；「訪韓團／방한단／delegation」這類語境不取代機關本身的標示。
+- 全站現況（2026-10-21 盤點 79 列＋12 卡）：繁中「韓國X」前綴 29 處、韓文「대만 X」前綴 41 處、英文「(Taiwan)」35 處、西文「(Taiwán)」35 處，皆為各語言的主流寫法；以上規則即據此定案。
 
 ## 2. 機關全稱與縮寫
 
