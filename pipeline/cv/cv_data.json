@@ -677,27 +677,6 @@
    }
   },
   {
-   "year": "2017–18",
-   "school": {
-    "zh": "韓國 慶熙大學 國際教育院",
-    "ko": "한국 경희대학교 국제교육원",
-    "en": "Kyung Hee University · Institute of Int'l Education",
-    "es": "Univ. Kyung Hee · Instituto de Educación Int."
-   },
-   "deg": {
-    "zh": "韓國語課程 高級2・韓國學班 結業",
-    "ko": "한국어 정규과정 고급2 · 한국학반 수료",
-    "en": "Korean Language Course · Advanced 2 · Korean Studies Class",
-    "es": "Curso de Coreano · Avanzado 2 · Clase de Estudios Coreanos"
-   },
-   "note": {
-    "zh": "臺灣教育部赴韓研習韓語獎學金",
-    "ko": "대만 교육부 한국어 연수 장학금",
-    "en": "Taiwan MOE Korean Study Scholarship",
-    "es": "Beca de coreano del MOE de Taiwán"
-   }
-  },
-  {
    "year": "2013–17",
    "school": {
     "zh": "臺灣 國立虎尾科技大學",
@@ -797,6 +776,12 @@
     "s": "墨西哥納亞里特自治大學 PREX",
     "c": "A2–B2 課程",
     "y": "2021–2022"
+   },
+   {
+    "s": "韓國 慶熙大學 國際教育院",
+    "c": "韓國語課程 高級2・韓國學班 結業",
+    "n": "臺灣教育部赴韓研習韓語獎學金",
+    "y": "2017–2018"
    }
   ],
   "ko": [
@@ -814,6 +799,12 @@
     "s": "멕시코 나야리트 자치대학 PREX",
     "c": "A2–B2 과정",
     "y": "2021–2022"
+   },
+   {
+    "s": "한국 경희대학교 국제교육원",
+    "c": "한국어 정규과정 고급2 · 한국학반 수료",
+    "n": "대만 교육부 한국어 연수 장학금",
+    "y": "2017–2018"
    }
   ],
   "en": [
@@ -831,6 +822,12 @@
     "s": "Univ. of Nayarit, Mexico",
     "c": "A2–B2 Courses",
     "y": "2021–2022"
+   },
+   {
+    "s": "Kyung Hee University · Institute of Int'l Education",
+    "c": "Korean Language Course · Advanced 2 · Korean Studies Class",
+    "n": "Taiwan MOE Korean Study Scholarship",
+    "y": "2017–2018"
    }
   ],
   "es": [
@@ -848,6 +845,12 @@
     "s": "Univ. de Nayarit, México",
     "c": "Cursos A2–B2",
     "y": "2021–2022"
+   },
+   {
+    "s": "Univ. Kyung Hee · Instituto de Educación Int.",
+    "c": "Curso de Coreano · Avanzado 2 · Clase de Estudios Coreanos",
+    "n": "Beca de coreano del MOE de Taiwán",
+    "y": "2017–2018"
    }
   ]
  },

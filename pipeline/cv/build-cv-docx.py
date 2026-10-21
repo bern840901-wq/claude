@@ -290,16 +290,11 @@ def build(lang):
                      for e in d['edu']], lang)
 
     # ── language study (the site's 語言進修 block: school first, course under it) ──
-    # Short block, so label + rows live in one unsplittable wrapper row and move
-    # to the next page as a unit instead of breaking after the first entry.
+    # Same construction as education: label kept with the first row, each entry
+    # an unsplittable row, so the block may break only between entries.
     if d.get('langstudy'):
-        spacer(doc)                                      # two adjacent tables would merge into one
-        wrap = doc.add_table(rows=1, cols=1); no_borders(wrap); fixed_widths(wrap, [9240]); cantsplit(wrap)
-        cell = wrap.rows[0].cells[0]; tcmar(cell, 0, 0, 0, 0)
-        slabel(cell, d['ui']['langstudy'], lang)
-        entry_rows(cell, [(str(x['y']), x['s'], [x['c']]) for x in d['langstudy']], lang)
-        cell.paragraphs[0]._p.getparent().remove(cell.paragraphs[0]._p)   # the cell's initial empty paragraph
-        shrink(cell.paragraphs[-1])                                         # the mandatory paragraph after a nested table
+        slabel(doc, d['ui']['langstudy'], lang).paragraph_format.keep_with_next = True
+        entry_rows(doc, [(str(x['y']), x['s'], [x['c']] + ([x['n']] if x.get('n') else [])) for x in d['langstudy']], lang)
 
     # ── research (KO title main, EN official small, zh/es translation) ──
     if d.get('pubs'):
