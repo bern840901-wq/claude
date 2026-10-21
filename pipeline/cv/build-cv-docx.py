@@ -171,6 +171,37 @@ def rowtable(doc, entries, lang, widths=(1050, 6060, 2130)):
     return tb
 
 
+def spacer(container):
+    p = container.add_paragraph(); shrink(p); return p
+
+
+def shrink(p):
+    from docx.enum.text import WD_LINE_SPACING
+    f = p.paragraph_format; f.space_before = Pt(0); f.space_after = Pt(0)
+    f.line_spacing_rule = WD_LINE_SPACING.EXACTLY; f.line_spacing = Pt(1)
+    return p
+
+
+def entry_rows(container, entries, lang, widths=(1700, 5410, 2130)):
+    # Education-style entries: [yr | title, then sub lines in the same cell].
+    # One row per entry, rows can't split, title kept with its sub lines.
+    KS, KA = CJK_SERIF[lang], CJK_SANS[lang]
+    tb = container.add_table(rows=len(entries), cols=3); no_borders(tb)
+    fixed_widths(tb, list(widths)); cantsplit(tb)
+    for i, (yr, ttl, subs) in enumerate(entries):
+        cells = tb.rows[i].cells
+        for c in cells: tcmar(c, 46, 46, 0, 60)
+        r = cells[0].paragraphs[0].add_run(yr); set_font(r, 9.4, LIGHT, False, SANS, KA)
+        p = cells[1].paragraphs[0]; p.paragraph_format.line_spacing = 1.24; p.paragraph_format.keep_with_next = True
+        r = p.add_run(glue_zh(ttl) if lang == 'zh' else ttl); set_font(r, 11.5, INK, True, SERIF, KS)
+        for j, sline in enumerate(subs):
+            ps = cells[1].add_paragraph(); f = ps.paragraph_format
+            f.space_before = Pt(1 if j == 0 else 0); f.space_after = Pt(3 if j == len(subs) - 1 else 0); f.line_spacing = 1.35
+            if j < len(subs) - 1: f.keep_with_next = True
+            r = ps.add_run(sline); set_font(r, 9.4, LIGHT, False, SANS, KA)
+    return tb
+
+
 def sub_note(doc, text, lang, indent=1.64, before=0, after=3):
     p = para(doc, before=before, after=after, indent=indent, line=1.35)
     r = p.add_run(text); set_font(r, 9.4, LIGHT, False, SANS, CJK_SANS[lang])
@@ -251,12 +282,24 @@ def build(lang):
         para(doc, after=7)
 
     # ── education ──
-    slabel(doc, d['ui']['education'], lang)
-    for e in d['edu']:                                   # degree first (as on the website), school + scholarship under it
-        rowtable(doc, [(str(e['year']), e['deg'], '')], lang, widths=(1700, 5410, 2130))   # full range, e.g. 2019–2021 / 2021–現在
-        note = strip(e.get('note') or '')
-        sub_note(doc, strip(e['school']), lang, indent=2.79, after=(0 if note else 3))
-        if note: sub_note(doc, note, lang, indent=2.79)
+    # Each entry is one unsplittable row [yr | degree + school + scholarship], so a
+    # title can never be parted from the lines under it.
+    slabel(doc, d['ui']['education'], lang).paragraph_format.keep_with_next = True
+    entry_rows(doc, [(str(e['year']), e['deg'],
+                      [strip(e['school'])] + ([strip(e['note'])] if strip(e.get('note') or '') else []))
+                     for e in d['edu']], lang)
+
+    # ── language study (the site's 語言進修 block: school first, course under it) ──
+    # Short block, so label + rows live in one unsplittable wrapper row and move
+    # to the next page as a unit instead of breaking after the first entry.
+    if d.get('langstudy'):
+        spacer(doc)                                      # two adjacent tables would merge into one
+        wrap = doc.add_table(rows=1, cols=1); no_borders(wrap); fixed_widths(wrap, [9240]); cantsplit(wrap)
+        cell = wrap.rows[0].cells[0]; tcmar(cell, 0, 0, 0, 0)
+        slabel(cell, d['ui']['langstudy'], lang)
+        entry_rows(cell, [(str(x['y']), x['s'], [x['c']]) for x in d['langstudy']], lang)
+        cell.paragraphs[0]._p.getparent().remove(cell.paragraphs[0]._p)   # the cell's initial empty paragraph
+        shrink(cell.paragraphs[-1])                                         # the mandatory paragraph after a nested table
 
     # ── research (KO title main, EN official small, zh/es translation) ──
     if d.get('pubs'):

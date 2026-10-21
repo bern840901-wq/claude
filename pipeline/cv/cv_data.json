@@ -781,6 +781,76 @@
    }
   }
  ],
+ "LANGSTUDY": {
+  "zh": [
+   {
+    "s": "賽萬提斯學院首爾分院",
+    "c": "C1 Superior 修畢（APTO）· Refuerzo C1 進修中",
+    "y": "2024–至今"
+   },
+   {
+    "s": "西班牙 IRIA FRAVIA 西語學校",
+    "c": "B1 正規課程",
+    "y": "2022"
+   },
+   {
+    "s": "墨西哥納亞里特自治大學 PREX",
+    "c": "A2–B2 課程",
+    "y": "2021–2022"
+   }
+  ],
+  "ko": [
+   {
+    "s": "세르반테스 문화원 서울",
+    "c": "C1 Superior 수료(APTO) · Refuerzo C1 수강 중",
+    "y": "2024–현재"
+   },
+   {
+    "s": "스페인 IRIA FRAVIA 어학원",
+    "c": "B1 정규과정",
+    "y": "2022"
+   },
+   {
+    "s": "멕시코 나야리트 자치대학 PREX",
+    "c": "A2–B2 과정",
+    "y": "2021–2022"
+   }
+  ],
+  "en": [
+   {
+    "s": "Instituto Cervantes Seoul",
+    "c": "C1 Superior completed (APTO) · Refuerzo C1 in progress",
+    "y": "2024–present"
+   },
+   {
+    "s": "IRIA FRAVIA School, Spain",
+    "c": "B1 Course",
+    "y": "2022"
+   },
+   {
+    "s": "Univ. of Nayarit, Mexico",
+    "c": "A2–B2 Courses",
+    "y": "2021–2022"
+   }
+  ],
+  "es": [
+   {
+    "s": "Instituto Cervantes Seúl",
+    "c": "C1 superado (APTO) · Refuerzo C1 Superior en curso",
+    "y": "2024–presente"
+   },
+   {
+    "s": "Escuela IRIA FRAVIA, España",
+    "c": "Curso B1",
+    "y": "2022"
+   },
+   {
+    "s": "Univ. de Nayarit, México",
+    "c": "Cursos A2–B2",
+    "y": "2021–2022"
+   }
+  ]
+ },
  "CERTS": {
   "zh": [
    {
