@@ -9,7 +9,7 @@
 
 | 機關所在國 | 繁中版 | 韓文版 | 英文版 | 西文版 |
 |---|---|---|---|---|
-| 韓國 | 前綴「韓國」，不空格、不加括號（韓國行政安全部、韓國成均館大學） | 不標 | 機關後括號 (Korea) | 機關後括號 (Corea) |
+| 韓國 | 前綴「韓國」，不加括號；接中文機關名不空格（韓國行政安全部、韓國成均館大學），接拉丁字母名稱空一格（韓國 CJ ENM、韓國 Team Monolith） | 不標 | 機關後括號 (Korea) | 機關後括號 (Corea) |
 | 臺灣 | 不標 | 前綴「대만 」（대만 행정원 …） | 機關後括號 (Taiwan) | 機關後括號 (Taiwán) |
 
 - 英西文的國名一律放機關名後面的括號裡，不用「, Korea」逗號式。已有縮寫或地名括號時合併成一個：TAICCA (Taiwan)、Taoyuan International Airport Corporation (TIAC, Taiwan)、YIAF (Yilan, Taiwan)；有上級機關時國名跟在最上層機關後：Civil Service Development Institute (CSDI), Executive Yuan (Taiwan)。
