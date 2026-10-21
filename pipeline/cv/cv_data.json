@@ -763,22 +763,22 @@
  "LANGSTUDY": {
   "zh": [
    {
-    "s": "賽萬提斯學院首爾分院",
-    "c": "C1 Superior 修畢（APTO）· Refuerzo C1 進修中",
+    "s": "西班牙語 · 賽萬提斯學院首爾分院",
+    "c": "C1 Superior 修畢（APTO 合格）· Refuerzo C1（C1 強化課程）進修中",
     "y": "2024–至今"
    },
    {
-    "s": "西班牙 IRIA FRAVIA 西語學校",
+    "s": "西班牙語 · 西班牙 Academia Iria Flavia 西語學校",
     "c": "B1 正規課程",
     "y": "2022"
    },
    {
-    "s": "墨西哥納亞里特自治大學 PREX",
+    "s": "西班牙語 · 墨西哥納亞里特自治大學 PREX",
     "c": "A2–B2 課程",
     "y": "2021–2022"
    },
    {
-    "s": "韓國 慶熙大學 國際教育院",
+    "s": "韓語 · 韓國 慶熙大學 國際教育院",
     "c": "韓國語課程 高級2・韓國學班 結業",
     "n": "臺灣教育部赴韓研習韓語獎學金",
     "y": "2017–2018"
@@ -786,22 +786,22 @@
   ],
   "ko": [
    {
-    "s": "세르반테스 문화원 서울",
-    "c": "C1 Superior 수료(APTO) · Refuerzo C1 수강 중",
+    "s": "스페인어 · 세르반테스 문화원 서울",
+    "c": "C1 Superior 수료(APTO 합격) · Refuerzo C1(C1 심화 과정) 수강 중",
     "y": "2024–현재"
    },
    {
-    "s": "스페인 IRIA FRAVIA 어학원",
+    "s": "스페인어 · 스페인 Academia Iria Flavia 어학원",
     "c": "B1 정규과정",
     "y": "2022"
    },
    {
-    "s": "멕시코 나야리트 자치대학 PREX",
+    "s": "스페인어 · 멕시코 나야리트 자치대학 PREX",
     "c": "A2–B2 과정",
     "y": "2021–2022"
    },
    {
-    "s": "한국 경희대학교 국제교육원",
+    "s": "한국어 · 한국 경희대학교 국제교육원",
     "c": "한국어 정규과정 고급2 · 한국학반 수료",
     "n": "대만 교육부 한국어 연수 장학금",
     "y": "2017–2018"
@@ -809,22 +809,22 @@
   ],
   "en": [
    {
-    "s": "Instituto Cervantes Seoul",
-    "c": "C1 Superior completed (APTO) · Refuerzo C1 in progress",
+    "s": "Spanish · Instituto Cervantes Seoul",
+    "c": "C1 Superior completed (APTO, pass) · Refuerzo C1 (C1 reinforcement course) in progress",
     "y": "2024–present"
    },
    {
-    "s": "IRIA FRAVIA School, Spain",
+    "s": "Spanish · Academia Iria Flavia, Spain",
     "c": "B1 Course",
     "y": "2022"
    },
    {
-    "s": "Univ. of Nayarit, Mexico",
+    "s": "Spanish · Univ. of Nayarit, Mexico",
     "c": "A2–B2 Courses",
     "y": "2021–2022"
    },
    {
-    "s": "Kyung Hee University · Institute of Int'l Education",
+    "s": "Korean · Kyung Hee University · Institute of Int'l Education",
     "c": "Korean Language Course · Advanced 2 · Korean Studies Class",
     "n": "Taiwan MOE Korean Study Scholarship",
     "y": "2017–2018"
@@ -832,22 +832,22 @@
   ],
   "es": [
    {
-    "s": "Instituto Cervantes Seúl",
+    "s": "Español · Instituto Cervantes Seúl",
     "c": "C1 superado (APTO) · Refuerzo C1 Superior en curso",
     "y": "2024–presente"
    },
    {
-    "s": "Escuela IRIA FRAVIA, España",
+    "s": "Español · Academia Iria Flavia, España",
     "c": "Curso B1",
     "y": "2022"
    },
    {
-    "s": "Univ. de Nayarit, México",
+    "s": "Español · Univ. de Nayarit, México",
     "c": "Cursos A2–B2",
     "y": "2021–2022"
    },
    {
-    "s": "Univ. Kyung Hee · Instituto de Educación Int.",
+    "s": "Coreano · Univ. Kyung Hee · Instituto de Educación Int.",
     "c": "Curso de Coreano · Avanzado 2 · Clase de Estudios Coreanos",
     "n": "Beca de coreano del MOE de Taiwán",
     "y": "2017–2018"

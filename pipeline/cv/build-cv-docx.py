@@ -182,11 +182,13 @@ def shrink(p):
     return p
 
 
-def entry_rows(container, entries, lang, widths=(1700, 5410, 2130)):
+def entry_rows(container, entries, lang, widths=(1700, 7540)):
     # Education-style entries: [yr | title, then sub lines in the same cell].
     # One row per entry, rows can't split, title kept with its sub lines.
+    # Two columns only: the page's .typ column is empty here, so the text cell
+    # gets the full width a top-level sub_note paragraph used to have.
     KS, KA = CJK_SERIF[lang], CJK_SANS[lang]
-    tb = container.add_table(rows=len(entries), cols=3); no_borders(tb)
+    tb = container.add_table(rows=len(entries), cols=len(widths)); no_borders(tb)
     fixed_widths(tb, list(widths)); cantsplit(tb)
     for i, (yr, ttl, subs) in enumerate(entries):
         cells = tb.rows[i].cells
