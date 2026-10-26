@@ -65,6 +65,9 @@
 
 function mountScrollWorld(container, config) {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Data Saver (Save-Data) asks pages to send less: keep the stills, skip the clips.
+  const lite = !!(navigator.connection && navigator.connection.saveData);
+  window.__swNoClips = reduce || lite;
   // Phone detection. `coarse` is captured once (input type doesn't change mid-session);
   // the ≤860px query is read live via isMobile() so a desktop resize/DevTools toggle
   // switches sources and seek behaviour without a reload.
@@ -195,15 +198,59 @@ function mountScrollWorld(container, config) {
     window.scrollTo({ top: seg.start + (seg.end - seg.start) * 0.5, behavior: reduce ? 'auto' : 'smooth' });
   }
 
-  function loadClip(s) {
+  // Clips download ONE AT A TIME, nearest first: the scene on screen, then the
+  // ones ahead, then the ones behind. In parallel they split the connection and
+  // on a slow network none of them arrived in time; serialised, the scene you are
+  // looking at gets the whole pipe. A download that scrolls out of range is
+  // cancelled so the clip you jumped to isn't stuck behind it.
+  let inflight = null;
+  const emit = (name, detail) => { try { window.dispatchEvent(new CustomEvent(name, { detail })); } catch (e) {} };
+  function pumpClips(ci, y) {
+    if (reduce || lite) return;
+    const inRange = i => { const s = SEGMENTS[i]; return y > s.start - 3.2 * vh && y < s.end + 1.6 * vh; };   // look further ahead than behind
+    if (inflight) {
+      if (inRange(inflight.i)) return;
+      try { inflight.ctrl && inflight.ctrl.abort(); } catch (e) {}
+      inflight.s.loading = false; inflight = null;
+    }
+    const order = [];
+    for (let i = ci; i < NSEG; i++) order.push(i);
+    for (let i = ci - 1; i >= 0; i--) order.push(i);
+    for (const i of order) {
+      const s = SEGMENTS[i];
+      if (!inRange(i) || s.hasClip || s.loading || !s.clip || s.fails >= 3) continue;
+      loadClip(s, i); return;
+    }
+  }
+
+  function loadClip(s, i) {
     // Under prefers-reduced-motion we never load the clips at all — the stills stay up
     // and simply cross-dissolve as you scroll. No scrubbed video motion, no decode cost.
-    if (reduce || s.loading || !s.clip) return;
+    if (reduce || lite || s.loading || !s.clip) return;
     s.loading = true;
     // Serve the lighter mobile encode on phones when one was provided.
     const url = (isMobile() && s.clipM) ? s.clipM : s.clip;
-    fetch(url).then(r => r.ok ? r.blob() : Promise.reject(new Error('404')))
+    const ctrl = (typeof AbortController === 'function') ? new AbortController() : null;
+    const job = inflight = { s, i, ctrl };
+    const done = () => { if (inflight === job) inflight = null; };
+    // Streamed so the page can show real progress (sw:clip-progress / sw:clip-loaded).
+    fetch(url, ctrl ? { signal: ctrl.signal } : undefined)
+      .then(r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        const total = +r.headers.get('content-length') || 0;
+        if (!r.body || !r.body.getReader) return r.blob();
+        const reader = r.body.getReader(), parts = [];
+        let got = 0;
+        const next = () => reader.read().then(({ done: end, value }) => {
+          if (end) return new Blob(parts, { type: 'video/mp4' });
+          parts.push(value); got += value.length;
+          emit('sw:clip-progress', { url, got, total });
+          return next();
+        });
+        return next();
+      })
       .then(blob => {
+        done();
         const v = document.createElement('video');
         v.className = 'sw-scene__video';
         v.muted = true; v.playsInline = true; v.preload = 'auto';
@@ -216,7 +263,12 @@ function mountScrollWorld(container, config) {
         v.addEventListener('seeked', () => { s.el.classList.add('has-clip'); }, { once: true });
         v.addEventListener('loadeddata', () => { try { v.pause(); } catch (e) {} if (userReady) primeVideo(v); });
         s.el.appendChild(v); s.video = v; s.hasClip = true;
-      }).catch(() => { s.loading = false; });
+        emit('sw:clip-loaded', { url });
+        read();   // start the next clip in line
+      }).catch(e => {
+        done(); s.loading = false;
+        if (!(e && e.name === 'AbortError')) { s.fails = (s.fails || 0) + 1; setTimeout(read, 1500); }
+      });
   }
 
   function read() {
@@ -225,9 +277,9 @@ function mountScrollWorld(container, config) {
     let ci = 0;
     for (let i = 0; i < NSEG; i++) if (y >= SEGMENTS[i].start) ci = i;
 
+    pumpClips(ci, y);
     for (let i = 0; i < NSEG; i++) {
       const s = SEGMENTS[i];
-      if (y > s.start - 1.6 * vh && y < s.end + 1.6 * vh) loadClip(s);
       const local = clamp((y - s.start) / (s.end - s.start), 0, 1);
       s.target = s.linger ? lingerEase(local, s.linger) : local;
       let outside = 0;
@@ -245,10 +297,13 @@ function mountScrollWorld(container, config) {
       const seg = SECTIONS[i]._seg;
       const pr = clamp((y - seg.start) / (seg.end - seg.start), 0, 1);
       const before = y < seg.start, after = y > seg.end;
+      // Copy holds at full strength for most of its scene and only fades near the
+      // seams — half-transparent text over moving video is unreadable, so it should
+      // spend as little time as possible in between.
       let cop;
-      if (i === 0) cop = after ? 0 : smooth(1 - pr / 0.62);            // greets on landing
-      else if (i === N - 1) cop = before ? 0 : smooth(pr / 0.4);       // holds CTA at the end
-      else cop = (before || after) ? 0 : smooth(1 - Math.abs(pr - 0.5) / 0.5);
+      if (i === 0) cop = after ? 0 : smooth(1 - (pr - 0.4) / 0.4);     // greets on landing, holds through the first nudge
+      else if (i === N - 1) cop = before ? 0 : smooth(pr / 0.25);      // holds CTA at the end
+      else cop = (before || after) ? 0 : smooth(Math.min(pr, 1 - pr) / 0.2);
       const c = copies[i];
       c.style.opacity = cop;
       c.style.transform = reduce ? 'none' : `translateY(${(0.5 - pr) * 4}vh)`;

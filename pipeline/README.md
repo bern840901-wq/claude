@@ -88,8 +88,8 @@ bash encode.sh
 編碼輸出 → 網站讀取路徑（`world-config.js` 已預先接好，無需改路徑）：
 
 ```
-assets/vid/<id>.mp4        桌機 leg（1080p, g8, crf20）
-assets/vid/<id>-m.mp4      手機 leg（720 寬直式, g4, crf23）
+assets/vid/<id>.mp4        桌機 leg（1080p, g8, crf24）
+assets/vid/<id>-m.mp4      手機 leg（720 寬直式, g4, crf28）
 assets/stills/<id>.webp    桌機海報（= leg 第一格）
 assets/stills/<id>-m.webp  手機直式海報（= 直式 leg 第一格）
 ```

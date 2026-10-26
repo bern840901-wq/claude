@@ -82,7 +82,7 @@
   @keyframes yBang{from{opacity:0;transform:rotate(12deg) translateY(-2px) scale(1.5)}to{opacity:1;transform:rotate(4deg) translateY(8px) scale(1)}}
   @keyframes yPress{0%,100%{transform:none}45%{transform:scale(1.06) rotate(-1deg)}}
   #sw-intro.done{animation:introHide .6s ease both}
-  @media (prefers-reduced-motion: reduce){ #sw-intro{display:none} }
+  @media (prefers-reduced-motion: reduce){ #sw-intro{display:none !important} }  /* !important: the intro carries an inline display:flex */
   .sw-root .sw-copy__num, .sw-root .sw-copy__eyebrow{font-family:'Space Mono',monospace;}
   .sw-root .sw-copy__eyebrow{letter-spacing:.18em;}
   .sw-root .sw-copy__tags li{background:rgba(237,230,213,.75);border:1.5px solid rgba(20,17,13,.35);color:#14110D;border-radius:7px;transition:transform .25s cubic-bezier(.34,1.56,.64,1),border-color .2s;}
@@ -101,6 +101,19 @@
   .sw-endcard{box-sizing:border-box;position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,26px);z-index:72;background:rgba(20,17,13,.93);backdrop-filter:blur(10px);border:1.5px solid rgba(232,65,14,.7);border-radius:18px;padding:20px 26px;display:flex;flex-direction:column;align-items:center;gap:14px;max-width:min(92vw,600px);box-shadow:0 20px 60px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .55s ease,transform .55s ease;}
   .sw-endcard.show{opacity:1;transform:translate(-50%,0);pointer-events:auto;}
   body.ec-on .sw-play,body.ec-on .snd-btn{opacity:0;pointer-events:none;}
+  /* the end card carries the same three exits — drop the scene's own copy of them
+     and, on phones, lift the copy clear of the card */
+  .sw-root .sw-copy__cta{transition:opacity .3s;}
+  body.ec-on .sw-root .sw-copy__cta{opacity:0;pointer-events:none;}
+  @media (max-width:860px){
+    .sw-root .sw-copy{transition:bottom .4s ease;}
+    body.ec-on .sw-root .sw-copy__cta{display:none;}
+    body.ec-on .sw-root .sw-copy{bottom:calc(var(--ec-lift,150px) + env(safe-area-inset-bottom));}
+  }
+  @media (max-width:860px) and (max-height:700px){ body.ec-on .sw-root .sw-copy__tags{display:none;} }
+  /* top bar rides above the intro so the CV is there from the first second */
+  .sw-root .sw-topbar{z-index:10000;}
+  body.sw-intro-on .sw-root .sw-topcta{box-shadow:inset 0 0 0 1.5px rgba(237,230,213,.5);}
   .sw-play,.snd-btn{transition:opacity .4s ease,transform .2s,background .2s,color .2s,border-color .2s;}
   .sw-endcard__line{color:#EDE6D5;font-weight:700;font-size:1.05rem;letter-spacing:.03em;text-align:center;line-height:1.4;}
   .sw-endcard__row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
@@ -167,11 +180,54 @@
     .sw-root .sw-copy__title{font-size:clamp(1.35rem,2.6vw,2rem);}
     .sw-copy__role{display:none;}
   }
+  /* desktop: the copy column (48vw) ran past the side scrim, so its right edge
+     (often the small role line) sat on bare video — widen and firm up the scrim */
+  @media (min-width:861px){
+    .sw-root .sw-copylayer::before{width:min(66vw,980px);background:linear-gradient(90deg,var(--sw-bg) 0%,color-mix(in srgb,var(--sw-bg) 88%,transparent) 42%,color-mix(in srgb,var(--sw-bg) 55%,transparent) 68%,transparent 100%);}
+  }
+  /* ===== phones: one readable block at the bottom, controls kept out of it =====
+     The desktop column width above (48vw) used to leak onto phones and squeeze the
+     copy into half the screen over moving video; here it spans the width again on
+     a taller, more opaque cream scrim. Autoplay and sound share one row under the
+     copy, the language switch moves up under the top bar, and the route dots and
+     scroll hint (the intro already says "scroll") step aside. */
+  @media (max-width:860px){
+    /* +2vh: the engine drifts the copy up to 2vh downward as a scene begins */
+    .sw-root .sw-copy{width:auto;bottom:calc(64px + 2vh + env(safe-area-inset-bottom));}
+    .sw-root .sw-copylayer::before{height:74%;background:linear-gradient(0deg,var(--sw-bg) 0%,color-mix(in srgb,var(--sw-bg) 92%,transparent) 40%,color-mix(in srgb,var(--sw-bg) 60%,transparent) 64%,transparent 100%);}
+    .sw-root .sw-copy__title{font-size:clamp(1.7rem,7vw,2.4rem);line-height:1.12;}
+    .sw-root .sw-copy__body{margin-top:10px;font-size:clamp(.95rem,3.9vw,1.05rem);line-height:1.55;color:#2a241d;}
+    .sw-root .sw-copy__eyebrow{margin-top:8px;font-size:.74rem;letter-spacing:.12em;}
+    .sw-root .sw-copy__tags{margin-top:12px;gap:6px;}
+    .sw-root .sw-copy__cta{margin-top:14px;gap:8px;}
+    .sw-root .sw-btn{padding:11px 18px;font-size:.88rem;}
+    .sw-root .sw-route,.sw-root .sw-hint{display:none;}
+    .sw-play{left:clamp(14px,4vw,30px);right:auto;bottom:calc(14px + env(safe-area-inset-bottom));}
+    .snd-btn{bottom:calc(14px + env(safe-area-inset-bottom));padding:10px 13px;}
+    .lang-pill{top:calc(clamp(14px,2.4vw,26px) + 46px);bottom:auto;}
+    .lang-pill button{padding:7px 10px;font-size:11px;}
+  }
   /* mobile: same guard for short phones */
   @media (max-width:860px) and (max-height:760px){
     .sw-root .sw-copy__title{font-size:clamp(1.5rem,6vw,2rem);}
     .sw-root .sw-copy__body{font-size:.9rem;line-height:1.45;}
     .sw-root .sw-copy__tags li{padding:5px 10px;font-size:.72rem;}
+  }
+  /* landscape phones are too short for a bottom block: the copy goes back to a
+     left column over a side scrim (like desktop) and the end card moves right */
+  @media (max-width:860px) and (max-height:500px) and (orientation:landscape){
+    .sw-root .sw-copylayer::before{top:0;bottom:auto;height:100%;width:68vw;background:linear-gradient(90deg,var(--sw-bg) 0%,color-mix(in srgb,var(--sw-bg) 90%,transparent) 48%,color-mix(in srgb,var(--sw-bg) 50%,transparent) 76%,transparent 100%);}
+    .sw-root .sw-copy{left:calc(clamp(18px,4vw,40px) + env(safe-area-inset-left));right:auto;width:min(50vw,440px);bottom:calc(58px + 2vh + env(safe-area-inset-bottom));}
+    .sw-root .sw-copy__num,.sw-root .sw-copy__tags{display:none;}
+    .sw-root .sw-copy__eyebrow{margin-top:0;}
+    .sw-root .sw-copy__title{font-size:1.45rem;}
+    .sw-root .sw-copy__body{margin-top:6px;font-size:.86rem;line-height:1.45;}
+    .sw-root .sw-copy__cta{margin-top:10px;}
+    .sw-root .sw-btn{padding:8px 14px;font-size:.8rem;}
+    .sw-play{left:calc(clamp(14px,4vw,30px) + env(safe-area-inset-left));}
+    .sw-endcard{left:auto;right:calc(14px + env(safe-area-inset-right));transform:translateY(26px);width:auto;max-width:42vw;}
+    .sw-endcard.show{transform:none;}
+    body.ec-on .sw-root .sw-copy{bottom:calc(58px + 2vh + env(safe-area-inset-bottom));}
   }
 
   </style>
@@ -256,11 +312,18 @@
     }
 
     function sectionsFor(l) {
-      return W.scenes.map((scene, i) => Object.assign(
-        { id: scene.id, accent: '#E8410E', scroll: scene.scroll, linger: scene.linger },
-        assetsFor(scene),
-        W.copy[l][i]
-      ));
+      const copy = W.copy[l];
+      const cv = copy[copy.length - 1].cta && copy[copy.length - 1].cta.tertiary;
+      return W.scenes.map((scene, i) => {
+        const s = Object.assign(
+          { id: scene.id, accent: '#E8410E', scroll: scene.scroll, linger: scene.linger },
+          assetsFor(scene),
+          copy[i]
+        );
+        // the CV is one tap away on the very first scene too, not only at the end
+        if (s.cta && cv) s.cta = Object.assign({}, s.cta, { tertiary: { label: cv.label, href: '/cv/?lang=' + l } });
+        return s;
+      });
     }
 
     // ---- mount once ----
@@ -378,33 +441,31 @@
       }, 3500);
     }
 
-    // intro doubles as the preloader: it holds until the first clip is cached
-    // (min 2.8s for the animation, max 9s), showing real fetch progress.
+    // intro doubles as the preloader: it holds until the first clip is in
+    // (min 4.2s for the animation, max 9s), showing real progress. It follows the
+    // engine's own download (sw:clip-progress / sw:clip-loaded) — fetching the clip
+    // here as well used to download it twice at once and halve the speed of both.
+    // The top bar sits above the intro, so portfolio / CV / contact are tappable
+    // from the very first second.
     const intro = document.getElementById('sw-intro');
+    const endIntro = () => { if (intro) intro.remove(); document.body.classList.remove('sw-intro-on'); };
     if (intro) {
-      intro.addEventListener('click', () => { intro.remove(); track('film_intro_skip'); });
+      document.body.classList.add('sw-intro-on');
+      intro.addEventListener('click', () => { endIntro(); track('film_intro_skip'); });
       const prog = document.getElementById('sw-intro-prog');
-      const firstClip = (window.matchMedia('(hover: none) and (pointer: coarse)').matches || innerWidth <= 860) && window.MOBILE_READY
-        ? 'assets/vid/bridge-m.mp4' : 'assets/vid/bridge.mp4';
       const minT = new Promise(r => setTimeout(r, 4200));
-      const load = (async () => {
-        try {
-          const res = await fetch(firstClip);
-          const total = +res.headers.get('content-length') || 0;
-          const reader = res.body.getReader();
-          let got = 0;
-          for (;;) {
-            const { done, value } = await reader.read();
-            if (done) break;
-            got += value.length;
-            if (total && prog) prog.textContent = Math.min(99, Math.round(got / total * 100)) + '%';
-          }
-        } catch (e) {}
-      })();
+      let firstUrl = null;
+      const load = window.__swNoClips ? Promise.resolve() : new Promise(res => {
+        addEventListener('sw:clip-progress', e => {
+          const d = e.detail || {}; if (!firstUrl) firstUrl = d.url;
+          if (d.url === firstUrl && d.total && prog) prog.textContent = Math.min(99, Math.round(d.got / d.total * 100)) + '%';
+        });
+        addEventListener('sw:clip-loaded', e => { const u = (e.detail || {}).url; if (!firstUrl || u === firstUrl) res(); });
+      });
       Promise.race([Promise.all([minT, load]), new Promise(r => setTimeout(r, 9000))]).then(() => {
         if (prog) prog.textContent = '100%';
         intro.classList.add('done');
-        setTimeout(() => intro.remove(), 700);
+        setTimeout(endIntro, 700);
         armNudge();
       });
     } else { armNudge(); }
@@ -462,7 +523,7 @@
     const PAUSE_LABEL = { zh: '❚❚ 暫停', ko: '❚❚ 일시정지', en: '❚❚ Pause', es: '❚❚ Pausa' };
     const playBtn = document.createElement('button');
     playBtn.className = 'sw-play';
-    if (!REDUCE) document.body.appendChild(playBtn);
+    if (!REDUCE && !window.__swNoClips) document.body.appendChild(playBtn);
     let playing = false, playRAF = 0, filmScene = -1;
     function playLabelUpdate() { playBtn.textContent = playing ? PAUSE_LABEL[lang] : PLAY_LABEL[lang]; playBtn.classList.toggle('on', playing); }
     function sceneVideo(i) { const sc = container.querySelectorAll('.sw-scene')[i]; return sc ? sc.querySelector('video') : null; }
@@ -529,7 +590,7 @@
         '<div class="sw-endcard__line">' + esc(E.line) + '</div>' +
         '<div class="sw-endcard__row">' +
           '<a class="ec-portfolio" href="' + esc(W.site) + '">' + esc(E.portfolio) + ' →</a>' +
-          '<a class="ec-cv" href="/cv/">' + esc(E.cv) + '</a>' +
+          '<a class="ec-cv" href="/cv/?lang=' + l + '">' + esc(E.cv) + '</a>' +
           '<a class="ec-contact" href="mailto:' + esc(W.email) + '">' + esc(E.contact) + '</a>' +
         '</div>';
     }
@@ -538,6 +599,8 @@
       const max = tr.offsetHeight - innerHeight; if (max <= 0) return;
       const pr = (scrollY || 0) / max;
       if (pr >= 0.985) {
+        // phones lift the closing copy just above the card (see .ec-on CSS)
+        document.body.style.setProperty('--ec-lift', (endCard.offsetHeight + 30) + 'px');
         if (!endCard.classList.contains('show')) {
           endCard.classList.add('show');
           document.body.classList.add('ec-on');

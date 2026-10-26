@@ -1,7 +1,9 @@
 #!/bin/bash
 # Encode the rendered chain for smooth scrubbing + build posters, then flip
 # USE_PLACEHOLDERS in ../world-config.js to false.
-# Desktop: native res, crf 20, GOP 8. Mobile (9:16): 720 wide, crf 23, GOP 4.
+# Desktop: native res, crf 24, GOP 8. Mobile (9:16): 720 wide, crf 28, GOP 4.
+# (2026-10-26: crf 20/23 → 24/28 roughly halves every clip, SSIM ≥ 0.975 vs the old
+#  encodes; the old sizes made the first scene arrive too late on slow networks.)
 set -u
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
@@ -14,11 +16,11 @@ mkdir -p "$VID" "$STILLS"
 NAMES="bridge gov biz media expo study contact"
 
 enc()  { ffmpeg -v error -y -i "$1" -an -vf "unsharp=5:5:0.8:5:5:0.0" \
-  -c:v libx264 -preset slow -crf 20 -pix_fmt yuv420p \
+  -c:v libx264 -preset slow -crf 24 -pix_fmt yuv420p \
   -g 8 -keyint_min 8 -sc_threshold 0 -movflags +faststart "$2" && echo "enc  $2 $(du -h "$2" | cut -f1)"; }
 
 encm() { ffmpeg -v error -y -i "$1" -an -vf "scale=720:-2,unsharp=5:5:0.6:5:5:0.0" \
-  -c:v libx264 -preset slow -crf 23 -pix_fmt yuv420p \
+  -c:v libx264 -preset slow -crf 28 -pix_fmt yuv420p \
   -g 4 -keyint_min 4 -sc_threshold 0 -movflags +faststart "$2" && echo "encm $2 $(du -h "$2" | cut -f1)"; }
 
 webp_from() { # src dst width
