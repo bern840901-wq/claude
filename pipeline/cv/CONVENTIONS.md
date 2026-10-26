@@ -21,6 +21,7 @@
 
 - 上級機關寫全稱：行政院人事行政總處 公務人力發展學院（CSDI）；인사혁신처 국가공무원인재개발원(NHI)；행정안전부 지방자치인재개발원(LOGODI)。
 - 縮寫放在機關名後的括號：繁中全形（CSDI）、韓英西半形(CSDI)。
+- 駐韓國台北代表部：英文一律 Taipei Mission in Korea，西文一律 Oficina de Taipéi en Corea（2026-10-26 定案；不用 Taipei Representative Office／Taipei Office／Oficina de Representación）。
 - 英文官方名以機關自用者為準（Ministry of Personnel Management、Ministry of the Interior and Safety、Directorate-General of Personnel Administration）；西文照英文官方名翻譯，機構縮寫保留。
 
 ## 3. 列的結構
