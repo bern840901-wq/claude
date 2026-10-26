@@ -103,7 +103,7 @@
   body.ec-on .sw-play,body.ec-on .snd-btn{opacity:0;pointer-events:none;}
   /* the end card carries the same three exits — drop the scene's own copy of them
      and, on phones, lift the copy clear of the card */
-  .sw-root .sw-copy__cta{transition:opacity .3s;}
+  .sw-root .sw-copy__cta{transition:opacity .3s;pointer-events:inherit;}   /* follow the copy's own on/off (engine sets it inline) */
   body.ec-on .sw-root .sw-copy__cta{opacity:0;pointer-events:none;}
   @media (max-width:860px){
     .sw-root .sw-copy{transition:bottom .4s ease;}
@@ -111,9 +111,15 @@
     body.ec-on .sw-root .sw-copy{bottom:calc(var(--ec-lift,150px) + env(safe-area-inset-bottom));}
   }
   @media (max-width:860px) and (max-height:700px){ body.ec-on .sw-root .sw-copy__tags{display:none;} }
+  /* shorter desktops: the closing tags reach down to the end card — fade them with the buttons */
+  .sw-root .sw-copy__tags{transition:opacity .3s;}
+  @media (min-width:861px) and (max-height:800px){ body.ec-on .sw-root .sw-copy__tags{opacity:0;} }
   /* top bar rides above the intro so the CV is there from the first second */
-  .sw-root .sw-topbar{z-index:10000;}
+  .sw-root .sw-topbar{z-index:10000;pointer-events:none;}
+  .sw-root .sw-topbar > *{pointer-events:auto;}
   body.sw-intro-on .sw-root .sw-topcta{box-shadow:inset 0 0 0 1.5px rgba(237,230,213,.5);}
+  .sw-root .sw-brand__name{transition:color .6s;}
+  body.sw-intro-on .sw-root .sw-brand__name{color:#EDE6D5;}
   .sw-play,.snd-btn{transition:opacity .4s ease,transform .2s,background .2s,color .2s,border-color .2s;}
   .sw-endcard__line{color:#EDE6D5;font-weight:700;font-size:1.05rem;letter-spacing:.03em;text-align:center;line-height:1.4;}
   .sw-endcard__row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
@@ -150,6 +156,10 @@
   .sw-root .sw-hint i{border-color:rgba(20,17,13,.55);width:24px;height:38px;}
   .sw-play{position:fixed;z-index:71;left:50%;transform:translateX(-50%);bottom:calc(96px + env(safe-area-inset-bottom));font:700 12px/1 'Space Mono',monospace;letter-spacing:.08em;color:#EDE6D5;background:rgba(20,17,13,.88);border:1.5px solid #E8410E;border-radius:999px;padding:12px 20px;cursor:pointer;transition:transform .2s,background .2s;}
   .sw-play:hover{transform:translateX(-50%) translateY(-2px);}
+  @media (min-width:861px) and (max-width:1100px){
+    .sw-play{left:auto;right:clamp(14px,2.4vw,30px);transform:none;bottom:calc(114px + env(safe-area-inset-bottom));}
+    .sw-play:hover{transform:translateY(-2px);}
+  }
   .sw-play.on{background:#E8410E;}
   @media (max-width:860px){
     .sw-play{left:auto;right:clamp(14px,2.4vw,30px);transform:none;bottom:calc(114px + env(safe-area-inset-bottom));font-size:11px;padding:10px 14px;}
@@ -202,10 +212,19 @@
     .sw-root .sw-copy__cta{margin-top:14px;gap:8px;}
     .sw-root .sw-btn{padding:11px 18px;font-size:.88rem;}
     .sw-root .sw-route,.sw-root .sw-hint{display:none;}
+    /* counter + eyebrow can sit above the dense part of the scrim on tall copy */
+    .sw-root .sw-copy__num,.sw-root .sw-copy__eyebrow{text-shadow:0 0 6px var(--sw-bg),0 0 12px var(--sw-bg),0 0 2px var(--sw-bg);}
+    body.ec-on .sw-root .sw-copylayer::before{height:88%;}
     .sw-play{left:clamp(14px,4vw,30px);right:auto;bottom:calc(14px + env(safe-area-inset-bottom));}
     .snd-btn{bottom:calc(14px + env(safe-area-inset-bottom));padding:10px 13px;}
     .lang-pill{top:calc(clamp(14px,2.4vw,26px) + 46px);bottom:auto;}
     .lang-pill button{padding:7px 10px;font-size:11px;}
+  }
+  /* reduced motion hides the intro (and autoplay/sound), so phones get the scroll
+     cue back — text only, in the empty bottom row */
+  @media (max-width:860px) and (prefers-reduced-motion:reduce){
+    .sw-root .sw-hint{display:flex;bottom:calc(18px + env(safe-area-inset-bottom));}
+    .sw-root .sw-hint i{display:none;}
   }
   /* mobile: same guard for short phones */
   @media (max-width:860px) and (max-height:760px){
@@ -213,21 +232,43 @@
     .sw-root .sw-copy__body{font-size:.9rem;line-height:1.45;}
     .sw-root .sw-copy__tags li{padding:5px 10px;font-size:.72rem;}
   }
-  /* landscape phones are too short for a bottom block: the copy goes back to a
-     left column over a side scrim (like desktop) and the end card moves right */
-  @media (max-width:860px) and (max-height:500px) and (orientation:landscape){
+  /* landscape phones (big ones wider than 860px too) are too short for a bottom
+     block: the copy goes back to a left column over a side scrim (like desktop),
+     the controls sit in the bottom corners and the end card moves right. The rules
+     a >860px phone would otherwise miss from the phone block are restated here. */
+  @media (orientation:landscape) and (max-height:500px) and (max-width:860px),
+         (orientation:landscape) and (max-height:500px) and (pointer:coarse){
     .sw-root .sw-copylayer::before{top:0;bottom:auto;height:100%;width:68vw;background:linear-gradient(90deg,var(--sw-bg) 0%,color-mix(in srgb,var(--sw-bg) 90%,transparent) 48%,color-mix(in srgb,var(--sw-bg) 50%,transparent) 76%,transparent 100%);}
-    .sw-root .sw-copy{left:calc(clamp(18px,4vw,40px) + env(safe-area-inset-left));right:auto;width:min(50vw,440px);bottom:calc(58px + 2vh + env(safe-area-inset-bottom));}
-    .sw-root .sw-copy__num,.sw-root .sw-copy__tags{display:none;}
-    .sw-root .sw-copy__eyebrow{margin-top:0;}
-    .sw-root .sw-copy__title{font-size:1.45rem;}
-    .sw-root .sw-copy__body{margin-top:6px;font-size:.86rem;line-height:1.45;}
-    .sw-root .sw-copy__cta{margin-top:10px;}
-    .sw-root .sw-btn{padding:8px 14px;font-size:.8rem;}
-    .sw-play{left:calc(clamp(14px,4vw,30px) + env(safe-area-inset-left));}
-    .sw-endcard{left:auto;right:calc(14px + env(safe-area-inset-right));transform:translateY(26px);width:auto;max-width:42vw;}
+    .sw-root .sw-copy{top:auto;left:calc(clamp(18px,4vw,40px) + env(safe-area-inset-left));right:auto;width:min(46vw,440px);bottom:calc(58px + 2vh + env(safe-area-inset-bottom));}
+    .sw-root .sw-copy__num,.sw-root .sw-copy__tags,.sw-copy__role{display:none;}
+    .sw-root .sw-copy__eyebrow{margin-top:0;font-size:.7rem;}
+    .sw-root .sw-copy__title{font-size:1.35rem;line-height:1.15;margin-top:6px;}
+    .sw-root .sw-copy__body{margin-top:6px;font-size:.84rem;line-height:1.45;max-width:none;}
+    .sw-root .sw-copy__cta{margin-top:10px;gap:6px;}
+    .sw-root .sw-btn{padding:7px 12px;font-size:.78rem;}
+    .sw-root .sw-route,.sw-root .sw-hint{display:none;}
+    .sw-play{left:calc(clamp(14px,4vw,30px) + env(safe-area-inset-left));right:auto;transform:none;bottom:calc(14px + env(safe-area-inset-bottom));font-size:11px;padding:10px 14px;}
+    .sw-play:hover{transform:none;}
+    .snd-btn{right:calc(clamp(14px,2.4vw,30px) + env(safe-area-inset-right));bottom:calc(14px + env(safe-area-inset-bottom));}
+    .lang-pill{top:calc(clamp(14px,2.4vw,26px) + 46px);bottom:auto;right:calc(clamp(14px,2.4vw,30px) + env(safe-area-inset-right));}
+    .lang-pill button{padding:7px 10px;font-size:11px;}
+    .sw-endcard{left:auto;right:calc(14px + env(safe-area-inset-right));bottom:calc(14px + env(safe-area-inset-bottom));transform:translateY(26px);width:auto;max-width:46vw;padding:12px 14px;gap:9px;}
     .sw-endcard.show{transform:none;}
+    .sw-endcard__line{font-size:.86rem;}
+    .sw-endcard__row{gap:6px;}
+    .sw-endcard__row a{font-size:.78rem;padding:8px 12px;}
     body.ec-on .sw-root .sw-copy{bottom:calc(58px + 2vh + env(safe-area-inset-bottom));}
+  }
+  /* very short landscape (360px-tall Androids, SE): drop the eyebrow and tighten
+     so the first scene's copy (with its three buttons) clears the top bar */
+  @media (orientation:landscape) and (max-height:380px) and (max-width:860px),
+         (orientation:landscape) and (max-height:380px) and (pointer:coarse){
+    .sw-root .sw-copy__eyebrow{display:none;}
+    .sw-root .sw-copy__title{font-size:1.2rem;margin-top:0;}
+    .sw-root .sw-copy__body{font-size:.78rem;line-height:1.4;}
+    .sw-root .sw-copy{width:min(56vw,440px);bottom:calc(54px + 2vh + env(safe-area-inset-bottom));}
+    .sw-root .sw-btn{padding:6px 10px;font-size:.74rem;}
+    body.ec-on .sw-root .sw-copy{width:min(46vw,440px);}   /* clear of the end card on the right */
   }
 
   </style>
@@ -454,13 +495,18 @@
       intro.addEventListener('click', () => { endIntro(); track('film_intro_skip'); });
       const prog = document.getElementById('sw-intro-prog');
       const minT = new Promise(r => setTimeout(r, 4200));
-      let firstUrl = null;
+      // Follow whichever clip the engine is downloading (the first one is cancelled
+      // if the visitor scrolls away during the intro) and finish on the first that
+      // lands; the number never runs backwards.
+      let shown = 0, landed = false;
+      if (window.__swNoClips && prog) prog.style.display = 'none';
       const load = window.__swNoClips ? Promise.resolve() : new Promise(res => {
         addEventListener('sw:clip-progress', e => {
-          const d = e.detail || {}; if (!firstUrl) firstUrl = d.url;
-          if (d.url === firstUrl && d.total && prog) prog.textContent = Math.min(99, Math.round(d.got / d.total * 100)) + '%';
+          const d = e.detail || {}; if (landed || !d.total || !prog) return;
+          shown = Math.max(shown, Math.min(99, Math.round(d.got / d.total * 100)));
+          prog.textContent = shown + '%';
         });
-        addEventListener('sw:clip-loaded', e => { const u = (e.detail || {}).url; if (!firstUrl || u === firstUrl) res(); });
+        addEventListener('sw:clip-loaded', () => { landed = true; res(); }, { once: true });
       });
       Promise.race([Promise.all([minT, load]), new Promise(r => setTimeout(r, 9000))]).then(() => {
         if (prog) prog.textContent = '100%';
@@ -599,8 +645,7 @@
       const max = tr.offsetHeight - innerHeight; if (max <= 0) return;
       const pr = (scrollY || 0) / max;
       if (pr >= 0.985) {
-        // phones lift the closing copy just above the card (see .ec-on CSS)
-        document.body.style.setProperty('--ec-lift', (endCard.offsetHeight + 30) + 'px');
+        setEcLift();
         if (!endCard.classList.contains('show')) {
           endCard.classList.add('show');
           document.body.classList.add('ec-on');
@@ -611,6 +656,10 @@
         document.body.classList.remove('ec-on');
       }
     }
+    // phones lift the closing copy just above the card (see .ec-on CSS); the card's
+    // height changes with the language and when web fonts swap in, so keep it in step
+    function setEcLift() { document.body.style.setProperty('--ec-lift', (endCard.offsetHeight + 30) + 'px'); }
+    if (window.ResizeObserver) new ResizeObserver(() => { if (endCard.classList.contains('show')) setEcLift(); }).observe(endCard);
     addEventListener('scroll', endCardCheck, { passive: true });
     addEventListener('resize', endCardCheck, { passive: true });
 

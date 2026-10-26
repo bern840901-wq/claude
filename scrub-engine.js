@@ -208,17 +208,24 @@ function mountScrollWorld(container, config) {
   function pumpClips(ci, y) {
     if (reduce || lite) return;
     const inRange = i => { const s = SEGMENTS[i]; return y > s.start - 3.2 * vh && y < s.end + 1.6 * vh; };   // look further ahead than behind
+    const now = performance.now();
+    const waiting = s => s.dead || (s.retryAt && s.retryAt > now);
     if (inflight) {
-      if (inRange(inflight.i)) return;
-      try { inflight.ctrl && inflight.ctrl.abort(); } catch (e) {}
-      inflight.s.loading = false; inflight = null;
+      // Keep the running download unless it scrolled out of range, or it is for a
+      // scene already behind the visitor while the scene on screen has no clip
+      // (and it isn't nearly done).
+      const cur = SEGMENTS[ci], j = inflight;
+      const behind = j.i < ci && !cur.hasClip && cur.clip && !waiting(cur) && !(j.total && j.got / j.total > 0.8);
+      if (inRange(j.i) && !behind) return;
+      try { j.ctrl && j.ctrl.abort(); } catch (e) {}
+      j.s.loading = false; inflight = null;
     }
     const order = [];
     for (let i = ci; i < NSEG; i++) order.push(i);
     for (let i = ci - 1; i >= 0; i--) order.push(i);
     for (const i of order) {
       const s = SEGMENTS[i];
-      if (!inRange(i) || s.hasClip || s.loading || !s.clip || s.fails >= 3) continue;
+      if (!inRange(i) || s.hasClip || s.loading || !s.clip || waiting(s)) continue;
       loadClip(s, i); return;
     }
   }
@@ -236,14 +243,14 @@ function mountScrollWorld(container, config) {
     // Streamed so the page can show real progress (sw:clip-progress / sw:clip-loaded).
     fetch(url, ctrl ? { signal: ctrl.signal } : undefined)
       .then(r => {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
+        if (!r.ok) { const err = new Error('HTTP ' + r.status); err.status = r.status; throw err; }
         const total = +r.headers.get('content-length') || 0;
         if (!r.body || !r.body.getReader) return r.blob();
         const reader = r.body.getReader(), parts = [];
         let got = 0;
         const next = () => reader.read().then(({ done: end, value }) => {
           if (end) return new Blob(parts, { type: 'video/mp4' });
-          parts.push(value); got += value.length;
+          parts.push(value); got += value.length; job.got = got; job.total = total;
           emit('sw:clip-progress', { url, got, total });
           return next();
         });
@@ -267,7 +274,15 @@ function mountScrollWorld(container, config) {
         read();   // start the next clip in line
       }).catch(e => {
         done(); s.loading = false;
-        if (!(e && e.name === 'AbortError')) { s.fails = (s.fails || 0) + 1; setTimeout(read, 1500); }
+        if (e && e.name === 'AbortError') return;
+        // A missing file (4xx) is not coming back; anything else (dropped
+        // connection, 5xx) retries with a real backoff — 1.5 s, 3 s, 6 s … 15 s —
+        // and immediately when the browser reports it is back online.
+        if (e && e.status >= 400 && e.status < 500) { s.dead = true; return; }
+        s.fails = (s.fails || 0) + 1;
+        const wait = Math.min(15000, 1500 * Math.pow(2, s.fails - 1));
+        s.retryAt = performance.now() + wait;
+        setTimeout(read, wait + 30);
       });
   }
 
@@ -377,6 +392,7 @@ function mountScrollWorld(container, config) {
     layout();
   }
   window.addEventListener('resize', onResize);
+  window.addEventListener('online', () => { SEGMENTS.forEach(s => { s.retryAt = 0; }); read(); });
   window.addEventListener('orientationchange', layout);
   window.addEventListener('load', layout);
   layout();
