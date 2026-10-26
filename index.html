@@ -94,6 +94,9 @@
   .sw-root .sw-brand__name{font-family:'Noto Serif TC','Noto Serif KR',serif;font-weight:900;}
   .sw-backlink{margin-left:auto;text-decoration:none;font-weight:700;font-size:.88rem;color:#E8410E;background:rgba(237,230,213,.85);border:1.5px solid #E8410E;padding:9px 16px;border-radius:999px;white-space:nowrap;transition:transform .2s,background .2s,color .2s;}
   .sw-backlink:hover{transform:rotate(-1deg) translateY(-1px);background:#E8410E;color:#EDE6D5;}
+  /* CV — between the portfolio and contact buttons; same look as the end card's CV pill */
+  .sw-cvlink{text-decoration:none;font-weight:700;font-size:.88rem;color:#14110D;background:rgba(237,230,213,.94);border:1.5px solid rgba(20,17,13,.35);padding:9px 16px;border-radius:999px;white-space:nowrap;transition:transform .2s,border-color .2s;}
+  .sw-cvlink:hover{transform:rotate(-1deg) translateY(-1px);border-color:#14110D;}
   /* end card — unmistakable exits once the film has played out */
   .sw-endcard{box-sizing:border-box;position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translate(-50%,26px);z-index:72;background:rgba(20,17,13,.93);backdrop-filter:blur(10px);border:1.5px solid rgba(232,65,14,.7);border-radius:18px;padding:20px 26px;display:flex;flex-direction:column;align-items:center;gap:14px;max-width:min(92vw,600px);box-shadow:0 20px 60px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .55s ease,transform .55s ease;}
   .sw-endcard.show{opacity:1;transform:translate(-50%,0);pointer-events:auto;}
@@ -112,9 +115,23 @@
     .sw-endcard__row a{font-size:.84rem;padding:10px 15px;}
   }
   @media (max-width:860px){
-    .sw-backlink{font-size:.78rem;padding:8px 12px;}
+    .sw-backlink,.sw-cvlink{font-size:.78rem;padding:8px 12px;}
     .sw-root .sw-brand__name{display:none;}
     .sw-root .sw-topcta{font-size:.8rem;padding:9px 14px;}
+  }
+  /* phones: three buttons plus the seal must fit one row in every language */
+  @media (max-width:480px){
+    .sw-root .sw-topbar{gap:6px;padding-left:12px;padding-right:12px;}
+    .sw-root .sw-brand__mark{zoom:.82;}
+    .sw-backlink,.sw-cvlink{font-size:.72rem;padding:7px 10px;}
+    .sw-root .sw-topcta{font-size:.72rem;padding:8px 11px;}
+  }
+  @media (max-width:370px){
+    .sw-backlink,.sw-cvlink,.sw-root .sw-topcta{font-size:.68rem;padding:7px 8px;letter-spacing:-.01em;}
+  }
+  @media (max-width:340px){
+    .sw-root .sw-topbar{gap:4px;padding-left:9px;padding-right:9px;}
+    .sw-root .sw-brand__mark{zoom:.72;}
   }
   .sw-root .sw-hint{font-size:.8rem;font-weight:700;letter-spacing:.2em;color:#14110D;opacity:1;}
   .sw-root .sw-hint i{border-color:rgba(20,17,13,.55);width:24px;height:38px;}
@@ -289,6 +306,7 @@
       container.querySelectorAll('.sw-route__label').forEach((r, i) => { if (secs[i]) r.textContent = secs[i].label || ''; });
       const topcta = container.querySelector('.sw-topcta'); if (topcta) topcta.textContent = W.topCta[l];
       const back = container.querySelector('.sw-backlink'); if (back) back.textContent = W.skips[l] + ' \u2197';
+      if (typeof cvLinkUpdate === 'function') cvLinkUpdate(l);
       const hint = container.querySelector('.sw-hint span'); if (hint) hint.textContent = W.hints[l];
       endCardUpdate(l);
       document.querySelectorAll('.lang-pill button').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
@@ -322,6 +340,13 @@
     backLink.className = 'sw-backlink';
     backLink.href = W.site;
     topbar.insertBefore(backLink, container.querySelector('.sw-topcta'));
+    // CV link right next to it, so the CV is one tap away from the first frame
+    // (label = the end card's own CV word; ?lang keeps the visitor's language)
+    const cvLink = document.createElement('a');
+    cvLink.className = 'sw-cvlink';
+    topbar.insertBefore(cvLink, container.querySelector('.sw-topcta'));
+    function cvLinkUpdate(l) { cvLink.textContent = (W.endcard && W.endcard[l] && W.endcard[l].cv) || 'CV'; cvLink.href = '/cv/?lang=' + l; }
+    cvLinkUpdate(lang);
 
     // one-line explanation inside the intro: scroll drives the camera, 7 scenes
     const EXPLAIN = {
@@ -545,7 +570,7 @@
     // still alive — and keep click for keyboard activation, deduped per link
     // so one activation counts once.
     const EXIT_TARGET = {
-      'sw-backlink': 'portfolio_topbar', 'sw-topcta': 'contact_topbar',
+      'sw-backlink': 'portfolio_topbar', 'sw-cvlink': 'cv_topbar', 'sw-topcta': 'contact_topbar',
       'sw-btn--primary': 'contact_cta', 'sw-btn--cv': 'cv_cta',
       'sw-btn--ghost': 'portfolio_cta', 'ec-portfolio': 'portfolio_end',
       'ec-cv': 'cv_end', 'ec-contact': 'contact_end',
