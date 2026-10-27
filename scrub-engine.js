@@ -215,31 +215,34 @@ function mountScrollWorld(container, config) {
   // on a slow network none of them arrived in time; serialised, the scene you are
   // looking at gets the whole pipe. A download that scrolls out of range is
   // cancelled so the clip you jumped to isn't stuck behind it.
-  let inflight = null;
+  let inflight = null, curSeg = 0;
   const emit = (name, detail) => { try { window.dispatchEvent(new CustomEvent(name, { detail })); } catch (e) {} };
   function pumpClips(ci, y) {
     if (reduce || lite) return;
-    const inRange = i => { if (PRELOAD_ALL) return true; const s = SEGMENTS[i]; return y > s.start - 3.2 * vh && y < s.end + 1.6 * vh; };   // look further ahead than behind
+    // near: the scenes around the visitor (further ahead than behind). With
+    // preloadAll every clip is fetched, but `near` still decides what may jump the
+    // queue: a far-off download must not hold up the scene the visitor is in.
+    const near = i => { const s = SEGMENTS[i]; return y > s.start - 3.2 * vh && y < s.end + 1.6 * vh; };
+    const inRange = i => PRELOAD_ALL || near(i);
     const now = performance.now();
     const waiting = s => s.dead || (s.retryAt && s.retryAt > now);
-    if (inflight) {
-      // Keep the running download unless it scrolled out of range, or it is for a
-      // scene already behind the visitor while the scene on screen has no clip
-      // (and it isn't nearly done).
-      const cur = SEGMENTS[ci], j = inflight;
-      const behind = j.i < ci && !cur.hasClip && cur.clip && !waiting(cur) && !(j.total && j.got / j.total > 0.8);
-      if (inRange(j.i) && !behind) return;
-      try { j.ctrl && j.ctrl.abort(); } catch (e) {}
-      j.s.loading = false; inflight = null;
-    }
     const order = [];
     for (let i = ci; i < NSEG; i++) order.push(i);
     for (let i = ci - 1; i >= 0; i--) order.push(i);
-    for (const i of order) {
-      const s = SEGMENTS[i];
-      if (!inRange(i) || s.hasClip || s.loading || !s.clip || waiting(s)) continue;
-      loadClip(s, i); return;
+    const want = order.find(i => { const s = SEGMENTS[i]; return inRange(i) && !s.hasClip && !s.loading && s.clip && !waiting(s); });
+    if (inflight) {
+      // Keep the running download unless it is out of range, or (when it isn't
+      // nearly done) it is for a scene behind the visitor while the scene on screen
+      // has no clip, or it is far off while a nearby scene still lacks its clip.
+      const cur = SEGMENTS[ci], j = inflight;
+      const nearlyDone = j.total && j.got / j.total > 0.8;
+      const behind = j.i < ci && !cur.hasClip && cur.clip && !waiting(cur);
+      const farOff = want !== undefined && near(want) && !near(j.i);
+      if (inRange(j.i) && (nearlyDone || !(behind || farOff))) return;
+      try { j.ctrl && j.ctrl.abort(); } catch (e) {}
+      j.s.loading = false; inflight = null;
     }
+    if (want !== undefined) loadClip(SEGMENTS[want], want);
   }
 
   function loadClip(s, i) {
@@ -295,7 +298,7 @@ function mountScrollWorld(container, config) {
         // A missing file (4xx) is not coming back; anything else (dropped
         // connection, 5xx) retries with a real backoff — 1.5 s, 3 s, 6 s … 15 s —
         // and immediately when the browser reports it is back online.
-        if (e && e.status >= 400 && e.status < 500) { s.dead = true; return; }
+        if (e && e.status >= 400 && e.status < 500) { s.dead = true; emit('sw:clip-dead', { url }); read(); return; }   // move on to the next clip
         s.fails = (s.fails || 0) + 1;
         const wait = Math.min(15000, 1500 * Math.pow(2, s.fails - 1));
         s.retryAt = performance.now() + wait;
@@ -308,6 +311,7 @@ function mountScrollWorld(container, config) {
     const fade = CROSSFADE * vh;
     let ci = 0;
     for (let i = 0; i < NSEG; i++) if (y >= SEGMENTS[i].start) ci = i;
+    curSeg = ci;
 
     pumpClips(ci, y);
     for (let i = 0; i < NSEG; i++) {
@@ -381,6 +385,7 @@ function mountScrollWorld(container, config) {
           if (diff > 1.5) { try { v.currentTime = clamp(s.target, 0, 0.999) * dur - 0.3; } catch (e) {} s.cur = v.currentTime / dur; continue; }
           const rate = clamp(diff / 0.4, 0.6, 3);
           if (Math.abs(v.playbackRate - rate) > 0.2 && now - (s.rateAt || 0) > 150) { v.playbackRate = rate; s.rateAt = now; }
+          v.__chase = true;
           if (v.paused && !s.playPending) {
             s.playPending = true;
             const p = v.play();
@@ -390,6 +395,7 @@ function mountScrollWorld(container, config) {
           s.cur = v.currentTime / dur;
           continue;
         }
+        v.__chase = false;
         if (!v.paused) { try { v.pause(); } catch (e) {} }
         s.cur = v.currentTime / dur;               // the seek path below starts from where playback left off
         if (s.visible && diff >= -1.5 / FPS) continue;   // caught up: hold this frame
@@ -418,16 +424,22 @@ function mountScrollWorld(container, config) {
   // clips prime themselves (see loadClip).
   let userReady = false;
   function primeVideo(v) {
-    if (!isMobile() || !v || !v.paused) return;   // already playing (chase) needs no priming
-    try { const p = v.play(); if (p && p.then) p.then(() => { try { v.pause(); } catch (e) {} }).catch(() => {}); }
-    catch (e) {}
+    // Skip a clip that is already playing (chase) or while film mode drives the
+    // clips; and when the priming play() resolves, don't pause it if film mode or
+    // chase has taken it over in the meantime — that froze the film.
+    if (!isMobile() || !v || !v.paused || window.__swNativePlay) return;
+    try {
+      const p = v.play();
+      if (p && p.then) p.then(() => { if (!window.__swNativePlay && !v.__chase) { try { v.pause(); } catch (e) {} } }).catch(() => {});
+    } catch (e) {}
   }
   function onFirstGesture() {
     if (userReady) return;
     userReady = true;
-    // Visible scenes first, the rest staggered: with every clip preloaded,
+    // Nearest scenes first, the rest staggered: with every clip preloaded,
     // priming all decoders in the same instant would hitch the first scroll.
-    const order = SEGMENTS.filter(s => s.video).sort((a, b) => (b.visible ? 1 : 0) - (a.visible ? 1 : 0));
+    const order = SEGMENTS.map((s, i) => ({ s, d: Math.abs(i - curSeg) })).filter(o => o.s.video)
+      .sort((a, b) => a.d - b.d).map(o => o.s);   // the scene on screen, then its neighbours, outward
     order.forEach((s, k) => { if (k < 2) primeVideo(s.video); else setTimeout(() => primeVideo(s.video), 150 * (k - 1)); });
   }
   window.addEventListener('pointerdown', onFirstGesture, { once: true, passive: true });

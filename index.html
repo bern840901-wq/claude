@@ -507,10 +507,10 @@
       const minT = new Promise(r => setTimeout(r, 3500));
       const need = Math.min(2, window.__swClipCount || 0);
       const frac = {}, order = [];   // the first `need` clips the engine starts on (nearest scenes)
-      let shown = 0, landedN = 0;
+      let shown = 0, landedN = 0, finished = false;
       if (!need && prog) prog.style.display = 'none';
       const paint = () => {
-        if (!prog) return;
+        if (!prog || finished) return;   // after the exit, later downloads must not rewrite the counter
         let sum = 0; for (const u of order.slice(0, need)) sum += frac[u] || 0;
         shown = Math.max(shown, Math.min(99, Math.floor(sum / need * 100)));   // never runs backwards
         prog.textContent = shown + '%';
@@ -518,9 +518,13 @@
       const seen = u => { if (u && !order.includes(u)) order.push(u); };
       const load = !need ? Promise.resolve() : new Promise(res => {
         addEventListener('sw:clip-progress', e => { const d = e.detail || {}; seen(d.url); if (d.total) { frac[d.url] = Math.min(1, d.got / d.total); paint(); } });
-        addEventListener('sw:clip-loaded', e => { const u = (e.detail || {}).url; seen(u); frac[u] = 1; paint(); if (++landedN >= need) res(); });
+        // a clip that is missing for good (4xx) counts as done, so the screen doesn't wait the full 8 s for it
+        const done = e => { const u = (e.detail || {}).url; seen(u); frac[u] = 1; paint(); if (++landedN >= need) res(); };
+        addEventListener('sw:clip-loaded', done);
+        addEventListener('sw:clip-dead', done);
       });
       Promise.race([Promise.all([minT, load]), new Promise(r => setTimeout(r, 8000))]).then(() => {
+        finished = true;
         if (prog) prog.textContent = '100%';
         intro.classList.add('done');
         setTimeout(endIntro, 700);
@@ -609,6 +613,7 @@
       if (v && v.readyState >= 2 && v.duration) {
         const b = segBounds(filmScene);
         const pr = Math.min(1, v.currentTime / v.duration);
+        if (v.paused && !v.ended && pr < 0.995) v.play().catch(() => {});   // something paused it (e.g. a late priming call): resume
         window.scrollTo(0, b[0] + pr * (b[1] - b[0]));
         if (pr >= 0.995 || v.ended) {
           try { v.pause(); } catch (e) {}
