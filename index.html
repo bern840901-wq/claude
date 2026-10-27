@@ -490,35 +490,37 @@
       }, 3500);
     }
 
-    // intro doubles as the preloader: it holds until EVERY clip is in, so no scene
-    // has to load while the visitor is scrolling (min 4.2s for the animation, max
-    // 15s — on a slow line the film then starts anyway and the rest keeps loading
-    // in the background, nearest scene first). The counter is the whole film's
-    // progress, taken from the engine's own downloads (sw:clip-progress / -loaded).
-    // The top bar sits above the intro, so portfolio / CV / contact are tappable
-    // from the very first second.
+    // intro doubles as the preloader: it holds until the clips of the first two
+    // scenes are in (min 3.5s for the animation, max 8s), then the film starts and
+    // the other clips keep downloading in the background, nearest scene first — a
+    // visitor takes far longer to scroll through two scenes than the rest takes to
+    // arrive. (Waiting for all seven made the loading screen feel too long.) The
+    // counter is the progress of those first clips, taken from the engine's own
+    // downloads (sw:clip-progress / -loaded). The top bar sits above the intro, so
+    // portfolio / CV / contact are tappable from the very first second.
     const intro = document.getElementById('sw-intro');
     const endIntro = () => { if (intro) intro.remove(); document.body.classList.remove('sw-intro-on'); };
     if (intro) {
       document.body.classList.add('sw-intro-on');
       intro.addEventListener('click', () => { endIntro(); track('film_intro_skip'); });
       const prog = document.getElementById('sw-intro-prog');
-      const minT = new Promise(r => setTimeout(r, 4200));
-      const clipCount = window.__swClipCount || 0;
-      const frac = {};   // url -> 0..1; each clip counts equally, the number never runs backwards
+      const minT = new Promise(r => setTimeout(r, 3500));
+      const need = Math.min(2, window.__swClipCount || 0);
+      const frac = {}, order = [];   // the first `need` clips the engine starts on (nearest scenes)
       let shown = 0, landedN = 0;
-      if (!clipCount && prog) prog.style.display = 'none';
+      if (!need && prog) prog.style.display = 'none';
       const paint = () => {
         if (!prog) return;
-        let sum = 0; for (const k in frac) sum += frac[k];
-        shown = Math.max(shown, Math.min(99, Math.floor(sum / clipCount * 100)));
+        let sum = 0; for (const u of order.slice(0, need)) sum += frac[u] || 0;
+        shown = Math.max(shown, Math.min(99, Math.floor(sum / need * 100)));   // never runs backwards
         prog.textContent = shown + '%';
       };
-      const load = !clipCount ? Promise.resolve() : new Promise(res => {
-        addEventListener('sw:clip-progress', e => { const d = e.detail || {}; if (d.total) { frac[d.url] = Math.min(1, d.got / d.total); paint(); } });
-        addEventListener('sw:clip-loaded', e => { frac[(e.detail || {}).url] = 1; paint(); if (++landedN >= clipCount) res(); });
+      const seen = u => { if (u && !order.includes(u)) order.push(u); };
+      const load = !need ? Promise.resolve() : new Promise(res => {
+        addEventListener('sw:clip-progress', e => { const d = e.detail || {}; seen(d.url); if (d.total) { frac[d.url] = Math.min(1, d.got / d.total); paint(); } });
+        addEventListener('sw:clip-loaded', e => { const u = (e.detail || {}).url; seen(u); frac[u] = 1; paint(); if (++landedN >= need) res(); });
       });
-      Promise.race([Promise.all([minT, load]), new Promise(r => setTimeout(r, 15000))]).then(() => {
+      Promise.race([Promise.all([minT, load]), new Promise(r => setTimeout(r, 8000))]).then(() => {
         if (prog) prog.textContent = '100%';
         intro.classList.add('done');
         setTimeout(endIntro, 700);
