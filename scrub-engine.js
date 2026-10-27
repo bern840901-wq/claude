@@ -68,6 +68,10 @@ function mountScrollWorld(container, config) {
   // Data Saver (Save-Data) asks pages to send less: keep the stills, skip the clips.
   const lite = !!(navigator.connection && navigator.connection.saveData);
   window.__swNoClips = reduce || lite;
+  // preloadAll: fetch every clip up front (still one at a time, nearest first)
+  // instead of only the few scenes around the viewport.
+  const PRELOAD_ALL = !!config.preloadAll;
+  const FPS = config.fps || 24;   // clips are 24 fps; seeks land on frame centres
   // Phone detection. `coarse` is captured once (input type doesn't change mid-session);
   // the ≤860px query is read live via isMobile() so a desktop resize/DevTools toggle
   // switches sources and seek behaviour without a reload.
@@ -103,6 +107,7 @@ function mountScrollWorld(container, config) {
     }
   });
   const NSEG = SEGMENTS.length;
+  window.__swClipCount = (reduce || lite) ? 0 : SEGMENTS.filter(s => s.clip).length;
 
   // ---- DOM ----
   const sky = el('div', 'sw-sky');
@@ -207,7 +212,7 @@ function mountScrollWorld(container, config) {
   const emit = (name, detail) => { try { window.dispatchEvent(new CustomEvent(name, { detail })); } catch (e) {} };
   function pumpClips(ci, y) {
     if (reduce || lite) return;
-    const inRange = i => { const s = SEGMENTS[i]; return y > s.start - 3.2 * vh && y < s.end + 1.6 * vh; };   // look further ahead than behind
+    const inRange = i => { if (PRELOAD_ALL) return true; const s = SEGMENTS[i]; return y > s.start - 3.2 * vh && y < s.end + 1.6 * vh; };   // look further ahead than behind
     const now = performance.now();
     const waiting = s => s.dead || (s.retryAt && s.retryAt > now);
     if (inflight) {
@@ -344,7 +349,6 @@ function mountScrollWorld(container, config) {
     // Film mode (window.__swNativePlay): the page plays videos natively and
     // derives scroll from playback time, so the seek loop must stand down.
     if (window.__swNativePlay) { requestAnimationFrame(raf); return; }
-    const eps = isMobile() ? 0.02 : 0.008;   // coarser seek step on phones = fewer decodes
     for (let i = 0; i < NSEG; i++) {
       const s = SEGMENTS[i];
       if (!s.hasClip || !s.ready || !s.video) continue;
@@ -355,8 +359,14 @@ function mountScrollWorld(container, config) {
       if (!s.visible && Math.abs(s.cur - s.target) < 0.002) continue;
       s.cur += (s.target - s.cur) * (reduce ? 1 : 0.18);
       const dur = s.video.duration || 1;
-      const t = clamp(s.cur, 0, 0.999) * dur;
-      if (Math.abs(s.video.currentTime - t) > eps) { try { s.video.currentTime = t; } catch (e) {} }
+      // Seek to the centre of the target frame, and only when that frame isn't the
+      // one already up: every seek costs the phone a decode, and seeking twice
+      // into the same frame (or chasing sub-frame lerp steps) is pure waste.
+      // (Within ~half a frame counts as there: some browsers report a seeked time
+      // snapped to the frame's start, which must not trigger a re-seek loop.)
+      const f = Math.min(Math.floor(clamp(s.cur, 0, 1) * dur * FPS), Math.ceil(dur * FPS) - 1);
+      const want = (f + 0.5) / FPS;
+      if (Math.abs(s.video.currentTime - want) > 0.6 / FPS) { try { s.video.currentTime = want; } catch (e) {} }
     }
     requestAnimationFrame(raf);
   }
@@ -374,7 +384,10 @@ function mountScrollWorld(container, config) {
   function onFirstGesture() {
     if (userReady) return;
     userReady = true;
-    SEGMENTS.forEach(s => primeVideo(s.video));
+    // Visible scenes first, the rest staggered: with every clip preloaded,
+    // priming all decoders in the same instant would hitch the first scroll.
+    const order = SEGMENTS.filter(s => s.video).sort((a, b) => (b.visible ? 1 : 0) - (a.visible ? 1 : 0));
+    order.forEach((s, k) => { if (k < 2) primeVideo(s.video); else setTimeout(() => primeVideo(s.video), 150 * (k - 1)); });
   }
   window.addEventListener('pointerdown', onFirstGesture, { once: true, passive: true });
   window.addEventListener('touchstart', onFirstGesture, { once: true, passive: true });
