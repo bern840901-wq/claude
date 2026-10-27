@@ -72,6 +72,13 @@ function mountScrollWorld(container, config) {
   // instead of only the few scenes around the viewport.
   const PRELOAD_ALL = !!config.preloadAll;
   const FPS = config.fps || 24;   // clips are 24 fps; seeks land on frame centres
+  // Chase mode (phones by default; config.chase: 'all' | false): scrolling forward
+  // PLAYS the clip toward the scroll target instead of seeking frame by frame.
+  // Seeking makes the decoder rebuild a frame on every scroll step, which low-end
+  // phones can't keep up with; forward playback is what their hardware decoders
+  // are built for, so it stays smooth. Scroll faster → it plays faster; stop → it
+  // glides to a stop. Browsers can't play backwards, so scrolling back still seeks.
+  const chaseOn = () => config.chase !== false && (config.chase === 'all' || isMobile());
   // Phone detection. `coarse` is captured once (input type doesn't change mid-session);
   // the ≤860px query is read live via isMobile() so a desktop resize/DevTools toggle
   // switches sources and seek behaviour without a reload.
@@ -273,6 +280,11 @@ function mountScrollWorld(container, config) {
         // painted — on iOS a seeked-but-never-played muted video stays blank, so
         // hiding the still on metadata alone would flash an empty scene.
         v.addEventListener('seeked', () => { s.el.classList.add('has-clip'); }, { once: true });
+        // chase mode may start a clip by playing it, with no seek at all
+        v.addEventListener('playing', () => {
+          if (v.requestVideoFrameCallback) v.requestVideoFrameCallback(() => s.el.classList.add('has-clip'));
+          else s.el.classList.add('has-clip');
+        }, { once: true });
         v.addEventListener('loadeddata', () => { try { v.pause(); } catch (e) {} if (userReady) primeVideo(v); });
         s.el.appendChild(v); s.video = v; s.hasClip = true;
         emit('sw:clip-loaded', { url });
@@ -347,18 +359,46 @@ function mountScrollWorld(container, config) {
 
   function raf() {
     // Film mode (window.__swNativePlay): the page plays videos natively and
-    // derives scroll from playback time, so the seek loop must stand down.
-    if (window.__swNativePlay) { requestAnimationFrame(raf); return; }
+    // derives scroll from playback time, so the seek loop must stand down
+    // (and no clip may keep a chase speed-up into it).
+    if (window.__swNativePlay) {
+      for (const s of SEGMENTS) if (s.video && s.video.playbackRate !== 1) s.video.playbackRate = 1;
+      requestAnimationFrame(raf); return;
+    }
+    const chase = chaseOn(), now = performance.now();
     for (let i = 0; i < NSEG; i++) {
       const s = SEGMENTS[i];
       if (!s.hasClip || !s.ready || !s.video) continue;
+      const v = s.video, dur = v.duration || 1;
+      if (chase && !s.noPlay && !v.seeking) {
+        const diff = clamp(s.target, 0, 0.999) * dur - v.currentTime;   // seconds the camera is behind the scroll
+        if (s.visible && diff > 1.5 / FPS) {
+          // behind → play forward, quicker the further behind (0.6×–3×), catching up in ~0.4 s;
+          // the rate is only retuned every 150 ms so the decoder isn't reconfigured each frame
+          // more than 1.5 s behind (a flick, or arriving mid-scene): one jump to
+          // just short of the target, then play the rest of the way
+          if (diff > 1.5) { try { v.currentTime = clamp(s.target, 0, 0.999) * dur - 0.3; } catch (e) {} s.cur = v.currentTime / dur; continue; }
+          const rate = clamp(diff / 0.4, 0.6, 3);
+          if (Math.abs(v.playbackRate - rate) > 0.2 && now - (s.rateAt || 0) > 150) { v.playbackRate = rate; s.rateAt = now; }
+          if (v.paused && !s.playPending) {
+            s.playPending = true;
+            const p = v.play();
+            const ok = () => { s.playPending = false; }, fail = () => { s.playPending = false; s.noPlay = true; };   // e.g. iOS Low Power Mode: fall back to seeking
+            if (p && p.then) p.then(ok, fail); else ok();
+          }
+          s.cur = v.currentTime / dur;
+          continue;
+        }
+        if (!v.paused) { try { v.pause(); } catch (e) {} }
+        s.cur = v.currentTime / dur;               // the seek path below starts from where playback left off
+        if (s.visible && diff >= -1.5 / FPS) continue;   // caught up: hold this frame
+      }
       // Never queue a seek while the decoder is still resolving the last one.
       // On phones a fast flick would otherwise pile up seeks and freeze the clip;
       // cur keeps lerping, so we snap to the latest target the moment it's free.
       if (s.video.seeking) continue;
       if (!s.visible && Math.abs(s.cur - s.target) < 0.002) continue;
       s.cur += (s.target - s.cur) * (reduce ? 1 : 0.18);
-      const dur = s.video.duration || 1;
       // Seek to the centre of the target frame, and only when that frame isn't the
       // one already up: every seek costs the phone a decode, and seeking twice
       // into the same frame (or chasing sub-frame lerp steps) is pure waste.
@@ -377,7 +417,7 @@ function mountScrollWorld(container, config) {
   // clips prime themselves (see loadClip).
   let userReady = false;
   function primeVideo(v) {
-    if (!isMobile() || !v) return;
+    if (!isMobile() || !v || !v.paused) return;   // already playing (chase) needs no priming
     try { const p = v.play(); if (p && p.then) p.then(() => { try { v.pause(); } catch (e) {} }).catch(() => {}); }
     catch (e) {}
   }

@@ -595,7 +595,7 @@
     function startScene(i, fromStart) {
       filmScene = i;
       const v = sceneVideo(i);
-      if (v) { try { if (fromStart) v.currentTime = 0; } catch (e) {} v.muted = true; v.play().catch(() => {}); }
+      if (v) { try { if (fromStart) v.currentTime = 0; } catch (e) {} v.muted = true; v.playbackRate = 1; v.play().catch(() => {}); }
     }
     function filmTick() {
       if (!playing) return;
