@@ -605,7 +605,7 @@
     function startScene(i, fromStart) {
       filmScene = i;
       const v = sceneVideo(i);
-      if (v) { try { if (fromStart) v.currentTime = 0; } catch (e) {} v.muted = true; v.playbackRate = FILM_RATE; v.play().catch(() => {}); }
+      if (v) { try { if (fromStart) v.currentTime = 0; } catch (e) {} v.muted = true; v.__chase = false; v.playbackRate = FILM_RATE; v.play().catch(() => {}); }
     }
     function filmTick() {
       if (!playing) return;

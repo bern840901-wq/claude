@@ -79,6 +79,7 @@ function mountScrollWorld(container, config) {
   // are built for, so it stays smooth. Scroll faster → it plays faster; stop → it
   // glides to a stop. Browsers can't play backwards, so scrolling back still seeks.
   const chaseOn = () => config.chase !== false && (config.chase === 'all' || isMobile());
+  const CHASE_MAX = 5;   // fastest chase playback; quicker flicks use the seek path
   // Phone detection. `coarse` is captured once (input type doesn't change mid-session);
   // the ≤860px query is read live via isMobile() so a desktop resize/DevTools toggle
   // switches sources and seek behaviour without a reload.
@@ -367,7 +368,12 @@ function mountScrollWorld(container, config) {
     // (and every clip runs at the film speed, not a leftover chase speed).
     if (window.__swNativePlay) {
       const fr = window.__swFilmRate || 1;   // the page's film speed (index.html)
-      for (const s of SEGMENTS) if (s.video && s.video.playbackRate !== fr) s.video.playbackRate = fr;
+      for (const s of SEGMENTS) {
+        if (!s.video) continue;
+        if (s.video.__chase && !s.video.paused) { try { s.video.pause(); } catch (e) {} }   // left over from chase
+        s.video.__chase = false;
+        if (s.video.playbackRate !== fr) s.video.playbackRate = fr;
+      }
       requestAnimationFrame(raf); return;
     }
     const chase = chaseOn(), now = performance.now();
@@ -375,30 +381,59 @@ function mountScrollWorld(container, config) {
       const s = SEGMENTS[i];
       if (!s.hasClip || !s.ready || !s.video) continue;
       const v = s.video, dur = v.duration || 1;
+      const tgt = clamp(s.target, 0, 0.999) * dur;
+      // How fast the scroll target moves, in video-seconds per second (smoothed).
+      // Chase plays at this speed (feed-forward) plus a correction for the gap, so
+      // the camera keeps pace with the finger instead of trailing it by ~1 s.
+      const dt = s.lastNow ? (now - s.lastNow) / 1000 : 0;
+      s.vel = (dt > 0 && dt < 0.25) ? (s.vel || 0) * 0.75 + ((tgt - s.lastTgt) / dt) * 0.25 : 0;
+      s.lastNow = now; s.lastTgt = tgt;
+      if (s.noPlay && now - s.noPlayAt > 3000) s.noPlay = false;   // a refused play() is retried, not given up on
+      const playing = !v.paused;
       if (chase && !s.noPlay && !v.seeking) {
-        const diff = clamp(s.target, 0, 0.999) * dur - v.currentTime;   // seconds the camera is behind the scroll
-        if (s.visible && diff > 1.5 / FPS) {
-          // behind → play forward, quicker the further behind (0.6×–3×), catching up in ~0.4 s;
-          // the rate is only retuned every 150 ms so the decoder isn't reconfigured each frame
-          // more than 1.5 s behind (a flick, or arriving mid-scene): one jump to
-          // just short of the target, then play the rest of the way
-          if (diff > 1.5) { try { v.currentTime = clamp(s.target, 0, 0.999) * dur - 0.3; } catch (e) {} s.cur = v.currentTime / dur; continue; }
-          const rate = clamp(diff / 0.4, 0.6, 3);
-          if (Math.abs(v.playbackRate - rate) > 0.2 && now - (s.rateAt || 0) > 150) { v.playbackRate = rate; s.rateAt = now; }
-          v.__chase = true;
-          if (v.paused && !s.playPending) {
-            s.playPending = true;
-            const p = v.play();
-            const ok = () => { s.playPending = false; }, fail = () => { s.playPending = false; s.noPlay = true; };   // e.g. iOS Low Power Mode: fall back to seeking
-            if (p && p.then) p.then(ok, fail); else ok();
+        const diff = tgt - v.currentTime;   // seconds the camera is behind the scroll
+        // A flick faster than a phone can reasonably play (≈5×), or a big gap
+        // (arriving mid-scene): the frame-snapped seek path below handles it.
+        const fast = s.vel > CHASE_MAX * 0.9 || diff > 1;
+        if (s.visible && !fast && diff > -1.5 / FPS) {
+          const want = s.vel + diff / 0.3;
+          // hysteresis: start once 2 frames behind (or the finger is moving), keep
+          // going until within half a frame and the finger has stopped — no
+          // play/pause flutter on slow drags
+          const go = playing ? (want > 0.2 || diff > 0.5 / FPS) : (diff > 2 / FPS || (s.vel > 0.3 && diff > 0.5 / FPS));
+          if (go) {
+            const rate = clamp(want, 0.25, CHASE_MAX);
+            if (Math.abs(v.playbackRate - rate) > 0.1 * rate + 0.05 && now - (s.rateAt || 0) > 120) { v.playbackRate = rate; s.rateAt = now; }
+            v.__chase = true;
+            if (!playing && !s.playPending) {
+              s.playPending = true;
+              const p = v.play();
+              const ok = () => { s.playPending = false; };
+              // an AbortError is just our own pause() interrupting it; anything else
+              // (e.g. iOS Low Power Mode) falls back to seeking for a while
+              const fail = e => { s.playPending = false; if (e && e.name === 'AbortError') return; s.noPlay = true; s.noPlayAt = performance.now(); };
+              if (p && p.then) p.then(ok, fail); else ok();
+            }
+            continue;
           }
-          s.cur = v.currentTime / dur;
-          continue;
+          if (playing) {
+            try { v.pause(); } catch (e) {}
+            // land exactly: one frame-snapped seek if playback coasted past the target
+            if (Math.abs(diff) > 0.6 / FPS) { try { v.currentTime = (Math.min(Math.floor(tgt * FPS), Math.ceil(dur * FPS) - 1) + 0.5) / FPS; } catch (e) {} }
+            s.cur = tgt / dur;
+          }
+          v.__chase = false;
+          continue;                                 // caught up and the finger has stopped: hold this frame
         }
+        // scrolled back, flicked, or off screen: stop playing; the seek path takes over
+        // from where playback left off (re-based once, on the switch — re-basing every
+        // frame stalled its lerp 2–3 frames short of the target)
+        if (playing) { try { v.pause(); } catch (e) {} s.cur = v.currentTime / dur; }
         v.__chase = false;
-        if (!v.paused) { try { v.pause(); } catch (e) {} }
-        s.cur = v.currentTime / dur;               // the seek path below starts from where playback left off
-        if (s.visible && diff >= -1.5 / FPS) continue;   // caught up: hold this frame
+      } else if (playing && !window.__swNativePlay) {
+        // chase switched off (window widened past 860px) or play refused mid-chase:
+        // never leave a clip playing under the seek loop
+        try { v.pause(); } catch (e) {} v.__chase = false; s.cur = v.currentTime / dur;
       }
       // Never queue a seek while the decoder is still resolving the last one.
       // On phones a fast flick would otherwise pile up seeks and freeze the clip;
@@ -436,6 +471,7 @@ function mountScrollWorld(container, config) {
   function onFirstGesture() {
     if (userReady) return;
     userReady = true;
+    SEGMENTS.forEach(s => { s.noPlay = false; });   // play() refused before any gesture may work now
     // Nearest scenes first, the rest staggered: with every clip preloaded,
     // priming all decoders in the same instant would hitch the first scroll.
     const order = SEGMENTS.map((s, i) => ({ s, d: Math.abs(i - curSeg) })).filter(o => o.s.video)
