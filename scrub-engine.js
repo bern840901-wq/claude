@@ -360,9 +360,10 @@ function mountScrollWorld(container, config) {
   function raf() {
     // Film mode (window.__swNativePlay): the page plays videos natively and
     // derives scroll from playback time, so the seek loop must stand down
-    // (and no clip may keep a chase speed-up into it).
+    // (and every clip runs at the film speed, not a leftover chase speed).
     if (window.__swNativePlay) {
-      for (const s of SEGMENTS) if (s.video && s.video.playbackRate !== 1) s.video.playbackRate = 1;
+      const fr = window.__swFilmRate || 1;   // the page's film speed (index.html)
+      for (const s of SEGMENTS) if (s.video && s.video.playbackRate !== fr) s.video.playbackRate = fr;
       requestAnimationFrame(raf); return;
     }
     const chase = chaseOn(), now = performance.now();

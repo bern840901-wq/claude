@@ -577,6 +577,10 @@
     // via window.__swNativePlay. Any wheel/touch/key input hands control back.
     const PLAY_LABEL  = { zh: '▶ 自動播放', ko: '▶ 자동 재생', en: '▶ Autoplay', es: '▶ Reproducir' };
     const PAUSE_LABEL = { zh: '❚❚ 暫停', ko: '❚❚ 일시정지', en: '❚❚ Pause', es: '❚❚ Pausa' };
+    // film speed: the clips are slow, cinematic 10 s takes; 1.5× keeps the camera
+    // moving (≈47 s for all seven scenes instead of 70 s)
+    const FILM_RATE = 1.5;
+    window.__swFilmRate = FILM_RATE;
     const playBtn = document.createElement('button');
     playBtn.className = 'sw-play';
     if (!REDUCE && !window.__swNoClips) document.body.appendChild(playBtn);
@@ -595,7 +599,7 @@
     function startScene(i, fromStart) {
       filmScene = i;
       const v = sceneVideo(i);
-      if (v) { try { if (fromStart) v.currentTime = 0; } catch (e) {} v.muted = true; v.playbackRate = 1; v.play().catch(() => {}); }
+      if (v) { try { if (fromStart) v.currentTime = 0; } catch (e) {} v.muted = true; v.playbackRate = FILM_RATE; v.play().catch(() => {}); }
     }
     function filmTick() {
       if (!playing) return;
