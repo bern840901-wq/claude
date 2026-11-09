@@ -23,7 +23,7 @@ const UI = {
   education: { zh: S.zh.eduDeg + ' / EDUCATION', ko: S.ko.eduDeg + ' / EDUCATION', en: 'EDUCATION', es: 'FORMACIÓN' },
   langstudy: { zh: S.zh.langStudyLabel + ' / LANGUAGE STUDY', ko: S.ko.langStudyLabel + ' / LANGUAGE STUDY', en: 'LANGUAGE STUDY', es: 'ESTUDIOS DE IDIOMAS' },
   research: { zh: '研究發表 / RESEARCH', ko: '연구 실적 / RESEARCH', en: 'RESEARCH', es: 'INVESTIGACIÓN' },
-  teaching: { zh: '講座・教學 / TEACHING', ko: '강의 경력 / TEACHING', en: 'TEACHING', es: 'DOCENCIA' },
+  teaching: { zh: '跨文化講座 / CROSS-CULTURAL TALKS', ko: '문화 간 이해 강연 / CROSS-CULTURAL TALKS', en: 'CROSS-CULTURAL TALKS', es: 'CHARLAS INTERCULTURALES' },
   languages: { zh: S.zh.eduLang + ' / LANGUAGES', ko: S.ko.eduLang + ' / LANGUAGES', en: 'LANGUAGES', es: 'IDIOMAS' },
   certs: { zh: S.zh.certLabel + ' / AWARDS', ko: S.ko.certLabel + ' / AWARDS', en: 'CERTIFICATIONS & AWARDS', es: 'CERTIFICACIONES Y PREMIOS' },
   film: { zh: '走進我的工作現場', ko: '현장 속으로', en: 'Walk through my world', es: 'Recorre mi mundo' },

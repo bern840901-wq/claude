@@ -39,7 +39,7 @@
 - 正規學歷只放學位（博士候選人、碩士、學士）；語言課程（含 2017–2018 慶熙大學國際教育院韓國語課程）一律放「語言進修」。
 - 語言進修（`cv_data.json` 的 `LANGSTUDY`）：照網站「語言進修」區塊原文四語收錄（每條以語言開頭：「西班牙語 · 學校」「韓語 · 學校」；學校 → 課程，獎學金（`n`）在 CV 自成一行、網站另起一行以藍色等寬字顯示（同正規學歷的獎學金）；學院內部用語加註，如「APTO 合格」「Refuerzo C1（C1 強化課程）」），緊接在正規學歷之後、自成一區，最新在上；年份寫完整區間（網站的「至今／presente」在 CV 改成「現在／actualidad」）。網站與 CV 兩邊要同步改。
 
-- 講座・教學（`cv_data.json` 的 `TEACHING`，2026-11-09 新增）：放在「研究發表」之後、「語言能力」之前，自成一區；條目格式同正規學歷（年份 → 標題 → 機構 → 一行說明），四語欄位 `title`／`org`／`note`。只收講座與教學，不計入口筆譯案件數。區塊名：講座・教學 / TEACHING・강의 경력 / TEACHING・TEACHING・DOCENCIA。
+- 跨文化講座（`cv_data.json` 的 `TEACHING`，2026-11-09 新增；原名「講座・教學」，同日改名以免被誤認為口筆譯教學）：放在「研究發表」之後、「語言能力」之前，自成一區；條目格式同正規學歷（年份 → 標題 → 機構 → 一行說明），四語欄位 `title`／`org`／`note`。只收講座與教學，不計入口筆譯案件數。區塊名：CV 用「跨文化講座 / CROSS-CULTURAL TALKS・문화 간 이해 강연 / CROSS-CULTURAL TALKS・CROSS-CULTURAL TALKS・CHARLAS INTERCULTURALES」，首頁短寫「跨文化講座・문화 간 이해 강연・Cross-Cultural Talks・Charlas interculturales」。韓文用一般用語「문화 간」（不用學術的「상호문화」），「문화 간」空一格。
 
 ## 5. 流程
 
