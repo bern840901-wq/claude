@@ -22,7 +22,8 @@
 - 上級機關寫全稱：行政院人事行政總處 公務人力發展學院（CSDI）；인사혁신처 국가공무원인재개발원(NHI)；행정안전부 지방자치인재개발원(LOGODI)。
 - 縮寫放在機關名後的括號：繁中全形（CSDI）、韓英西半形(CSDI)。
 - 駐韓國台北代表部：英文一律 Taipei Mission in Korea，西文一律 Oficina de Taipéi en Corea（2026-10-26 定案；不用 Taipei Representative Office／Taipei Office／Oficina de Representación）。
-- 韓國教育學術資訊院（KERIS）：繁中一律「資訊院」（2026-11-09 定案，舊寫法「情報院」已全站改掉）；韓文 한국교육학술정보원(KERIS)；英文 Korea Education and Research Information Service (KERIS)；西文 Servicio Coreano de Información Educativa y de Investigación (KERIS)。
+- 韓國教育學術資訊院（KERIS）：繁中一律「資訊院」（2026-11-09 定案，舊寫法「情報院」已全站改掉）；韓文 한국교육학술정보원(KERIS)。英西全稱：Korea Education and Research Information Service／Servicio Coreano de Información Educativa y de Investigación——新列寫「全稱 (KERIS)」；2026-05 NTCU × KERIS 一列沿用既有的「KERIS (全稱)」順序與 "&"，不回頭改。
+- 首爾泳熏國際中學：英文照校方 Young Hoon International Middle School（兩個字）；西文 Escuela Secundaria Internacional Young Hoon。
 - 臺灣教育部：韓文「대만 교육부」；英文 Ministry of Education (Taiwan)；西文 Ministerio de Educación (Taiwán)。民國年（115年）只在繁中、韓文保留，英西不譯。
 - 英文官方名以機關自用者為準（Ministry of Personnel Management、Ministry of the Interior and Safety、Directorate-General of Personnel Administration）；西文照英文官方名翻譯，機構縮寫保留。
 
