@@ -328,6 +328,11 @@ def build(lang):
             else:
                 para(doc, after=4)
 
+    # ── teaching (talks & lessons) — same construction as education ──
+    if d.get('teaching'):
+        slabel(doc, d['ui']['teaching'], lang).paragraph_format.keep_with_next = True
+        entry_rows(doc, [(str(x['year']), x['title'], [x['org']] + ([x['note']] if x.get('note') else [])) for x in d['teaching']], lang)
+
     # ── languages ──
     # Kept with the certs block below (and through it, the footer) so the
     # document always ends on a full credentials page rather than a thin one.

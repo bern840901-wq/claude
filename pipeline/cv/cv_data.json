@@ -1664,6 +1664,29 @@
    "doiUrl": "https://doi.org/10.15652/ink.2024.21.1.001"
   }
  ],
+ "TEACHING": [
+  {
+   "year": "2026",
+   "title": {
+    "zh": "臺灣文化理解課程 特邀講師",
+    "ko": "대만 문화 이해 수업 초청 강사",
+    "en": "Invited Lecturer, Taiwan Culture Lessons",
+    "es": "Profesor invitado — clases sobre la cultura de Taiwán"
+   },
+   "org": {
+    "zh": "韓國 京畿道 廣州光明國小 · 5・6 年級 2 場（約 300 名學生）",
+    "ko": "경기도 광주광명초등학교 · 5·6학년 2회(약 300명)",
+    "en": "Gwangju Gwangmyeong Elementary School, Gyeonggi-do, Korea · Grades 5–6, 2 sessions (~300 students)",
+    "es": "Escuela Primaria Gwangju Gwangmyeong (Gyeonggi-do, Corea) · 5.º y 6.º de primaria, 2 sesiones (unos 300 alumnos)"
+   },
+   "note": {
+    "zh": "自行設計韓語教案與教材 · 以文化回應教學規劃課程",
+    "ko": "한국어 교안·수업 자료 직접 개발 · 문화감응교수 관점의 수업 설계",
+    "en": "Designed Korean-language lesson plans and materials · grounded in culturally responsive teaching",
+    "es": "Diseño de planes de clase y materiales en coreano · enfoque de enseñanza culturalmente sensible"
+   }
+  }
+ ],
  "BIO": {
   "zh": "游宏斌，慶熙大學韓國語學博士候選人（首爾）。研究關注臺灣學習者的韓語教育、韓語與臺灣台語的詞彙・音韻相似性、文化回應教學，以及以計算方法分析研究動向。近期成果包括臺灣韓語學習者學習愉悅感量表之開發（2025）、韓語教育領域跨文化研究動向之 BERTopic 分析（2026）。同時具十年以上中韓口筆譯實務經驗，目前研究將主題建模應用於多語學術語料。",
   "ko": "유홍빈은 경희대학교 국어국문학과 한국어학 박사수료 연구자로, 대만인 학습자를 위한 한국어교육, 한국어와 대만어의 어휘·음운 유사성, 문화감응교수, 연구 동향의 계산적 분석을 연구한다. 최근 성과로 대만인 한국어 학습자 즐거움 척도 개발(2025), 한국어교육 분야 상호문화 연구 동향의 BERTopic 분석(2026)이 있다. 10년 이상의 한·중 통번역 실무 경험을 바탕으로, 현재 다국어 학술 말뭉치에 토픽 모델링을 적용하는 연구를 진행 중이다.",

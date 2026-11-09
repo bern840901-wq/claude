@@ -23,6 +23,7 @@ const UI = {
   education: { zh: S.zh.eduDeg + ' / EDUCATION', ko: S.ko.eduDeg + ' / EDUCATION', en: 'EDUCATION', es: 'FORMACIÓN' },
   langstudy: { zh: S.zh.langStudyLabel + ' / LANGUAGE STUDY', ko: S.ko.langStudyLabel + ' / LANGUAGE STUDY', en: 'LANGUAGE STUDY', es: 'ESTUDIOS DE IDIOMAS' },
   research: { zh: '研究發表 / RESEARCH', ko: '연구 실적 / RESEARCH', en: 'RESEARCH', es: 'INVESTIGACIÓN' },
+  teaching: { zh: '講座・教學 / TEACHING', ko: '강의 경력 / TEACHING', en: 'TEACHING', es: 'DOCENCIA' },
   languages: { zh: S.zh.eduLang + ' / LANGUAGES', ko: S.ko.eduLang + ' / LANGUAGES', en: 'LANGUAGES', es: 'IDIOMAS' },
   certs: { zh: S.zh.certLabel + ' / AWARDS', ko: S.ko.certLabel + ' / AWARDS', en: 'CERTIFICATIONS & AWARDS', es: 'CERTIFICACIONES Y PREMIOS' },
   film: { zh: '走進我的工作現場', ko: '현장 속으로', en: 'Walk through my world', es: 'Recorre mi mundo' },
@@ -60,6 +61,8 @@ for (const l of LANGS) {
     // open-ended range takes the CV's "present" word so it reads like the degree rows
     langstudy: (((D.LANGSTUDY || {})[l]) || (D.LANGSTUDY || {}).en || []).map(x => ({
       y: yearRange(String(x.y).replace(/–(至今|현재|present|presente)$/, '–'), l), s: x.s, c: x.c, n: x.n || '' })),   // n: scholarship, its own line (the site joins it to c with " · ")
+    // talks & lessons (TEACHING): same shape as a degree row — title, institution, one note line
+    teaching: (D.TEACHING || []).map(e => ({ year: yearRange(e.year, l), title: pick(e.title, l), org: pick(e.org, l), note: pick(e.note, l) })),
     bio: (D.BIO || {})[l] || '',
     orcid: D.ORCID || null,
     dl: { label: { zh: '下載履歷 PDF ↓', ko: '이력서 PDF 다운로드 ↓', en: 'Download CV (PDF) ↓', es: 'Descargar CV (PDF) ↓' }[l],
@@ -177,6 +180,7 @@ function render(l){
     + g.items.map(it => '<span class="it'+'"><span class="nm">'+esc(it.name)+'</span>'+(it.sub?'<span class="sb">'+esc(it.sub)+'</span>':'')+'</span>').join('') + '</div></div>').join('');
   const edu = '<div class="edu">' + d.edu.map(e => '<span class="yr">'+esc(e.year)+'</span><div><div class="ttl">'+glue(esc(e.deg))+'</div><div class="kv"><span class="sub">'+glue(esc(e.school))+'</span>'+(e.note?'<br><span class="sub">'+glue(esc(e.note))+'</span>':'')+'</div></div>').join('') + '</div>';   // one shared grid: the year column is as wide as the widest range
   const langstudy = '<div class="edu">' + d.langstudy.map(x => '<span class="yr">'+esc(x.y)+'</span><div><div class="ttl">'+glue(esc(x.s))+'</div><div class="kv"><span class="sub">'+esc(x.c)+'</span>'+(x.n?'<br><span class="sub">'+glue(esc(x.n))+'</span>':'')+'</div></div>').join('') + '</div>';   // same grid as the degrees: school as the title, course (and scholarship) under it
+  const teaching = '<div class="edu">' + d.teaching.map(e => '<span class="yr">'+esc(e.year)+'</span><div><div class="ttl">'+glue(esc(e.title))+'</div><div class="kv"><span class="sub">'+glue(esc(e.org))+'</span>'+(e.note?'<br><span class="sub">'+glue(esc(e.note))+'</span>':'')+'</div></div>').join('') + '</div>';   // same grid as the degrees
   const em = t => esc(t).replace(/유홍빈|Yu Hung-pin|Hungpin Yu/g, m => '<b style="font-weight:600">'+m+'</b>');
   const pubs = d.pubs.map(x => '<div class="row"><span class="yr">'+x.y+'</span><span class="ttl">'+em(x.cko)+'</span><span class="typ">'+esc(x.kci)+'</span></div>'
     + '<div class="kv" style="margin:-6px 0 0 62px"><span class="sub">'+em(x.cen)+'</span></div>'
@@ -203,6 +207,7 @@ function render(l){
     + (d.bio ? '<div class="kv" style="margin-bottom:4px"><span class="sub" style="line-height:1.75">'+esc(d.bio)+'</span></div>' : '')
     + (d.orcid ? '<a class="orcid" href="'+d.orcid.url+'" target="_blank" rel="noopener"><i></i>ORCID '+esc(d.orcid.id)+'</a>' : '')
     + pubs+'</section>'
+    + (d.teaching.length ? '<section><div class="slabel">'+esc(d.ui.teaching)+'</div>'+teaching+'</section>' : '')
     + '<section><div class="slabel">'+esc(d.ui.languages)+'</div>'+langs+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.certs)+'</div>'+certs+'</section>'
     + '<div class="foot"><a href="/home/">'+esc(d.cta2)+'</a><a href="/">▶ '+esc(d.ui.film)+'</a><span>© 游宏斌 YU HUNG PIN</span></div>';
