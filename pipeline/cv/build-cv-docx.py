@@ -144,7 +144,7 @@ def lbkey(s):
     while True:
         h, r = divmod(h, 36); out = digits[r] + out
         if not h: return out
-def T(text):
+def T(text, serif=False):
     """Apply the line-break hints to one display string."""
     if not text: return text
     code = LBM.get(lbkey(text))
@@ -161,9 +161,12 @@ def T(text):
             # LibreOffice does not hold U+00A0 next to Han; U+202F holds there, and two
             # of them are exactly as wide as a normal space. Next to Hangul or Latin,
             # U+00A0 holds (no East Asian locale) and keeps the normal width.
-            out.append(_NNBSP * 2 if (_HANCJK.match(a or ' ') or _HANCJK.match(b or ' ')) else _NBSP)
+            # In the serif (EB Garamond) titles U+00A0 renders a third narrower than a
+            # space; two U+202F match a space there too (measured)
+            out.append(_NNBSP * 2 if (serif or _HANCJK.match(a or ' ') or _HANCJK.match(b or ' ')) else _NBSP)
         else:
             out.append(c)
+            if c in '↔→←⇄': out.append('\ufe0e')   # text presentation, never a colour emoji
     return ''.join(out)
 
 
@@ -177,7 +180,9 @@ def keep_korean_words(doc):
         if t.text and _HG2.search(t.text): t.text = _HG2.sub(_WJ, t.text)
 
 
-ROW_WIDTHS = {'zh': (1050, 6940, 1250), 'ko': (1050, 6940, 1250), 'en': (1050, 6060, 2130), 'es': (1050, 6060, 2130)}
+# zh/ko type labels are four characters; en/es labels wrap onto two lines, so their
+# column only needs the longest single word (INTERPRETATION; es: ACOMPAÑAMIENTO)
+ROW_WIDTHS = {'zh': (1050, 6940, 1250), 'ko': (1050, 6940, 1250), 'en': (1050, 6390, 1800), 'es': (1050, 6240, 1950)}
 
 
 def rowtable(doc, entries, lang, widths=None):
@@ -195,7 +200,7 @@ def rowtable(doc, entries, lang, widths=None):
         for c in cells: tcmar(c, 46, 46, 0, 60)
         r = cells[0].paragraphs[0].add_run(yr); set_font(r, 9.4, LIGHT, False, SANS, KA)
         p = cells[1].paragraphs[0]; p.paragraph_format.line_spacing = 1.24
-        r = p.add_run(T(ttl)); set_font(r, 11.5, INK, True, SERIF, KS)
+        r = p.add_run(T(ttl, serif=True)); set_font(r, 11.5, INK, True, SERIF, KS)
         if topic:
             pt = cells[1].add_paragraph()
             f = pt.paragraph_format
@@ -204,7 +209,7 @@ def rowtable(doc, entries, lang, widths=None):
             hairline_left(pt)
             rt = pt.add_run(T(topic)); set_font(rt, 8.6, LIGHT, False, SANS, KA)
         p3 = cells[2].paragraphs[0]; p3.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        r = p3.add_run(T(typ)); set_font(r, 7.5, LIGHT, False, SANS, KA, sp=track(.14, 7.5), caps=True)
+        r = p3.add_run(typ); set_font(r, 7.5, LIGHT, False, SANS, KA, sp=track(.14, 7.5), caps=True)
     return tb
 
 
@@ -232,7 +237,7 @@ def entry_rows(container, entries, lang, widths=(1700, 7540)):
         for c in cells: tcmar(c, 46, 46, 0, 60)
         r = cells[0].paragraphs[0].add_run(yr); set_font(r, 9.4, LIGHT, False, SANS, KA)
         p = cells[1].paragraphs[0]; p.paragraph_format.line_spacing = 1.24; p.paragraph_format.keep_with_next = True
-        r = p.add_run(T(ttl)); set_font(r, 11.5, INK, True, SERIF, KS)
+        r = p.add_run(T(ttl, serif=True)); set_font(r, 11.5, INK, True, SERIF, KS)
         for j, sline in enumerate(subs):
             ps = cells[1].add_paragraph(); f = ps.paragraph_format
             f.space_before = Pt(1 if j == 0 else 0); f.space_after = Pt(3 if j == len(subs) - 1 else 0); f.line_spacing = 1.35
@@ -319,8 +324,11 @@ def build(lang):
     for grp in d['clients']:
         p = para(doc, after=6)
         r = p.add_run(T(grp['title'])); set_font(r, 9, MID, True, SANS, KA, sp=track(.1, 9))
-        for it in grp['items']:
+        p.paragraph_format.keep_with_next = True
+        for k, it in enumerate(grp['items']):
             p = para(doc, after=1.5, line=1.2)
+            # a group never leaves its title or its last item alone on a page
+            if k == 0 or k == len(grp['items']) - 2: p.paragraph_format.keep_with_next = True
             r = p.add_run(T(strip(it['name']))); set_font(r, 10.5, INK, False, SANS, KA)
             if it.get('sub'):
                 r = p.add_run('   ' + T(strip(it['sub']))); set_font(r, 9, LIGHT, False, SANS, KA)
@@ -353,7 +361,7 @@ def build(lang):
         import re as _re
         _ME = '|'.join('\u2060?'.join(_re.escape(ch) for ch in nm) for nm in ('유홍빈', 'Yu Hung-pin', 'Hungpin Yu'))
         def _emrun(pp, text, size, color, name, east, base_bold=False):
-            for part in _re.split('(' + _ME + ')', T(text)):
+            for part in _re.split('(' + _ME + ')', T(text, serif=(name == SERIF))):
                 if not part: continue
                 rr = pp.add_run(part)
                 own = part.replace('\u2060', '') in ('유홍빈', 'Yu Hung-pin', 'Hungpin Yu')

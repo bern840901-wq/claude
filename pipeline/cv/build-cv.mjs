@@ -107,8 +107,8 @@ const html = `<!doctype html>
 body{word-break:keep-all;overflow-wrap:break-word;line-break:strict}
 .nb{white-space:nowrap}
 .ttl,.typ,.edu>div,.kv,.cl .nm,.cl .sb{min-width:0}
-h1,.ttl,.slabel,.nm{text-wrap:balance}
-.role,.kv,.sub,.sb,.tagline,.loc,.gtitle{text-wrap:pretty}
+h1,.slabel,.nm{text-wrap:balance}
+.ttl,.role,.kv,.sub,.sb,.tagline,.loc,.gtitle{text-wrap:pretty}
 :root{--ink:#14110D;--mid:#555;--light:#8f8a80;--rule:#E9E5DC;--bg:#FFFFFF;--ac:#E8410E}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:'Inter','Noto Sans TC',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;line-height:1.6}
@@ -192,7 +192,7 @@ const fmt = (v, boldRe) => {
   let out = '', open = false, b = false;
   for (let i = 0; i < s.length; i++) {
     if (open && (!hold[i] || !n.has(i))) { if (b) { out += '</b>'; b = false; } out += '</span>'; open = false; }
-    if (!open && w.has(i)) out += '<wbr>';
+    if (!open && (w.has(i) || (i > 0 && '·/'.includes(s[i - 1]) && s[i] !== ' ' && !n.has(i)))) out += '<wbr>';   // keep-all gives no break after an unspaced · or /
     if (hold[i] && !open) { if (b) { out += '</b>'; b = false; } out += '<span class="nb">'; open = true; }
     if (bold[i] && !b) { out += '<b style="font-weight:600">'; b = true; }
     else if (!bold[i] && b) { out += '</b>'; b = false; }
@@ -212,7 +212,7 @@ function render(l){
   let tlRows = '', lastYear = null;
   for (const r of d.tl){
     const y = r.y === lastYear ? '' : r.y; lastYear = r.y;
-    tlRows += '<div class="row"><span class="yr">'+y+'</span><span class="ttl">'+fmt(r.title)+'</span><span class="typ">'+fmt(d.types[r.t]||'')+'</span></div>';
+    tlRows += '<div class="row"><span class="yr">'+y+'</span><span class="ttl">'+fmt(r.title)+'</span><span class="typ">'+esc(d.types[r.t]||'')+'</span></div>';
     if (r.sub) tlRows += '<div class="kv topic"><span class="sub">'+fmt(r.sub)+'</span></div>';
   }
   const partners = d.partners.map(p => '<div class="row"><span class="yr">'+esc(p.period.split('–')[0])+'</span><span class="ttl">'+fmt(p.org)+'</span><span class="typ">'+fmt(p.period)+'</span></div>'

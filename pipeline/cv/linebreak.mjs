@@ -72,12 +72,13 @@ export function lbInfo(s) {
 
   // 5. parentheticals: never break before the bracket; keep short ones whole
   each(/\S(?=[（(])/g, s, m => n.add(m.index + 1));
-  each(/[（(][^（）()]{1,16}[）)]/g, s, m => { const inner = m[0].slice(1, -1); const han = (inner.match(/[㐀-鿿]/g) || []).length; if (han <= 8 && inner.length <= 16) tie(n, m.index, m.index + m[0].length); });
+  each(/[（(][^（）()]{1,12}[）)]/g, s, m => { const inner = m[0].slice(1, -1); const han = (inner.match(/[㐀-鿿]/g) || []).length; if (han <= 6 && inner.length <= 10 && !/[・·\/,，、]/.test(inner)) tie(n, m.index, m.index + m[0].length); });
   // "Service (KERIS)": an abbreviation in brackets stays with the word before it
-  each(/\S( )\((?:[A-Z0-9][A-Za-z0-9&.'’\-\u00c0-\u024f]{0,13})(?:, [A-Z][A-Za-z\u00c0-\u024f]{1,10})?\)/g, s, m => tieSpace(n, m.index + 1));
+  each(/\S( )\((?:[A-Z][A-Za-z0-9&.'’\-À-ɏ]{0,13})(?: [A-Z][A-Za-z\-À-ɏ]{1,10})?\)/g, s, m => tieSpace(n, m.index + 1));   // (KERIS) (Taiwan) (Kyung Hee); never a year
+  each(/\S( )\([A-Z][A-Z0-9]{1,7}, [A-Z][a-zÀ-ɏ]{2,10}\)/g, s, m => tieSpace(n, m.index + 1));   // (TIAC, Taiwan)
 
   // 6. short bracketed titles stay whole: 《消失的國界》 <조선어> <THE BORDERLESS WORLD>
-  each(/[《〈「<«“][^《》〈〉「」<>«»“”]{1,26}[》〉」>»”]/g, s, m => { const inner = m[0].slice(1, -1); const han = (inner.match(/[㐀-鿿]/g) || []).length, hg = (inner.match(/[가-힣]/g) || []).length; if (han <= 8 && hg <= 12) tie(n, m.index, m.index + m[0].length); });
+  each(/[《〈「<«“][^《》〈〉「」<>«»“”]{1,26}[》〉」>»”]/g, s, m => { const inner = m[0].slice(1, -1); const han = (inner.match(/[㐀-鿿]/g) || []).length, hg = (inner.match(/[가-힣]/g) || []).length; if (han <= 8 && hg <= 8 && inner.length <= 24) tie(n, m.index, m.index + m[0].length); });
 
   // abbreviation before a spelled-out name: "TITA (Administración …", "KERIS (Korea …"
   each(/\b[A-Z][A-Z0-9]{1,7}( )[（(]/g, s, m => tieSpace(n, m.index + m[0].length - 2));
@@ -91,16 +92,16 @@ export function lbInfo(s) {
   each(/[)）]\/( )/g, s, m => tieSpace(n, m.index + 2));
   // ordinals and a year with the word after it: 5.º y 6.º · 2026 Busan
   each(/\d\.º y \d\.º/g, s, m => tie(n, m.index, m.index + m[0].length));
-  each(/\b(?:19|20)\d\d( )(?=[A-Z][a-z])/g, s, m => tieSpace(n, m.index + 4));
-  // a short Latin abbreviation stays with the Chinese/Korean word after it: NTCU 研修團, AI 教科書
-  each(/\b[A-Z][A-Za-z0-9]{0,6}( )(?=[㐀-鿿가-힣])/g, s, m => tieSpace(n, m.index + m[0].length - 1));
+
+  // a Chinese name keeps the abbreviation after it: 國際貿易署 TITA, 國立國際教育院 NIIED
+  each(/[㐀-鿿]( )(?=[A-Z][A-Z0-9&]{1,7}(?![A-Za-z0-9]))/g, s, m => tieSpace(n, m.index + 1));
 
   // 7. Latin compounds: Cross-Cultural, Korean–Chinese, 한-대만
   each(/[A-Za-zÀ-ɏ가-힣]+(?:[-–][A-Za-zÀ-ɏ가-힣]+)+/g, s, m => { if (m[0].length <= 30) tie(n, m.index, m.index + m[0].length); });
   // ALL-CAPS names of 2–3 words: MORE ON ACADEMY, STUDIO DRAGON, YU HUNG PIN
   each(/\b[A-Z][A-Z0-9&.'’]+(?: [A-Z][A-Z0-9&.'’]*){1,2}\b/g, s, m => { if (m[0].length <= 24 && !/[a-z]/.test(m[0])) tie(n, m.index, m.index + m[0].length); });
   // "Univ. de Nayarit", "Univ. Kyung Hee", "Konkuk Univ.", "Depto. contra …"
-  each(/\b(?:Univ|Dept|Depto|Int|Inst|Mfg)\.( )/g, s, m => tieSpace(n, m.index + m[0].length - 1));
+  each(/\b(?:Univ|Dept|Depto|Int|Inst|Mfg)\.( )(?=[A-Za-zÀ-ɏ])/g, s, m => tieSpace(n, m.index + m[0].length - 1));
   each(/\S( )(?:Univ|Dept|Depto)\./g, s, m => tieSpace(n, m.index + 1));
   // a level stays with its number: Nivel 6, Grade 5–6, TOPIK II 6
   each(/\b(?:Nivel|nivel|Level|level|Grade|grade|Grado|grado|II)( )\d/g, s, m => tieSpace(n, m.index + m[0].length - 2));
@@ -150,7 +151,9 @@ export function lbInfo(s) {
       const letterGap = L.test(s[p - 1]) && L.test(s[p]) && (HAN.test(s[p - 1]) || HAN.test(s[p]));
       if (!(atSpace || letterGap) || n.has(p)) continue;
       const rest = s.slice(p, tailEnd), hanN = (rest.match(/[㐀-鿿]/g) || []).length;
-      if (!/\s/.test(rest) && hanN <= 3 && hanN === rest.replace(/[^㐀-鿿A-Za-z0-9]/g, '').length) { if (atSpace) tieSpace(n, p - 1); else n.add(p); }
+      const latN = (rest.match(/[A-Za-z0-9]/g) || []).length;
+      const short = atSpace ? (hanN <= 4 && latN === 0 && !/\s/.test(rest)) : ((hanN <= 3 && latN === 0 && !/\s/.test(rest)) || (hanN <= 2 && latN <= 5 && rest.length <= 8));
+      if (short) { if (atSpace) tieSpace(n, p - 1); else n.add(p); }
       break;
     }
   }
