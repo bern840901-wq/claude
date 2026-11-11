@@ -1,4 +1,126 @@
 {
+ "FOR": [
+  {
+   "year": "2025–2026",
+   "who": {
+    "zh": "中華民國文化部次長 兼 文化內容策進院（TAICCA）董事長",
+    "ko": "대만 문화부 차관 겸 대만콘텐츠진흥원(TAICCA) 이사장",
+    "en": "Vice Minister of Culture (Taiwan), concurrently Chairperson of TAICCA",
+    "es": "Viceministra de Cultura de Taiwán, también presidenta de TAICCA"
+   },
+   "what": {
+    "zh": "2025 TAICCA 訪韓行程 四日官方訪韓 高層會談隨行・2026 釜山國際影展（BIFF）/ ACFM 隨行・耳語口譯",
+    "ko": "2025 TAICCA 방한 일정 4일 공식 방한 고위급 회담 수행・2026 부산국제영화제(BIFF)/ACFM 수행·위스퍼링 통역",
+    "en": "2025 TAICCA Korea visit — four-day official visit, high-level meetings · 2026 Busan International Film Festival (BIFF) / ACFM — escort and whispered interpreting",
+    "es": "2025 visita a Corea con TAICCA — cuatro días de visita oficial y reuniones de alto nivel · 2026 Festival Internacional de Cine de Busan (BIFF) / ACFM — acompañamiento e interpretación susurrada"
+   }
+  },
+  {
+   "year": "2026",
+   "who": {
+    "zh": "法務部矯正署副署長",
+    "ko": "대만 법무부 교정서 부서장(차장급)",
+    "en": "Deputy Director-General, Agency of Corrections, Ministry of Justice (Taiwan)",
+    "es": "Subdirector general de la Agencia de Instituciones Penitenciarias, Ministerio de Justicia (Taiwán)"
+   },
+   "what": {
+    "zh": "首爾南部看守所 戒護安全管理考察團 — 所長歡談・設施參觀・座談",
+    "ko": "서울남부구치소 보안 관리 시찰단 — 소장 환담·시설 견학·간담회",
+    "en": "Study delegation at Seoul Nambu Detention Center — warden meeting, facility tour, roundtable",
+    "es": "Delegación de estudio en el Centro de Detención de Seúl Nambu — reunión con el director, visita de instalaciones, coloquio"
+   }
+  },
+  {
+   "year": "2026",
+   "who": {
+    "zh": "行政院人事行政總處 公務人力發展學院（CSDI）",
+    "ko": "대만 행정원 인사행정총처 공무인력발전학원(CSDI)",
+    "en": "Civil Service Development Institute (CSDI), Executive Yuan (Taiwan)",
+    "es": "Instituto de Desarrollo del Servicio Civil (CSDI), Yuan Ejecutivo (Taiwán)"
+   },
+   "what": {
+    "zh": "115年韓國人力資源發展機構業務運作考察團 — NHI・LOGODI・成均館大學",
+    "ko": "2026년 한국 인적자원개발기관 업무 운영 방한 시찰단 — NHI・LOGODI・성균관대",
+    "en": "2026 study delegation on Korea's human-resource development institutions — NHI · LOGODI · Sungkyunkwan University",
+    "es": "Delegación de estudio 2026 sobre las instituciones coreanas de desarrollo de recursos humanos — NHI · LOGODI · Universidad Sungkyunkwan"
+   }
+  },
+  {
+   "year": "2026",
+   "who": {
+    "zh": "教育部",
+    "ko": "대만 교육부",
+    "en": "Ministry of Education (Taiwan)",
+    "es": "Ministerio de Educación (Taiwán)"
+   },
+   "what": {
+    "zh": "115年AI教育暨數位學習韓國考察團 — 首爾・大邱 6 日・18 人團",
+    "ko": "2026년 AI교육·디지털 학습 한국 시찰단 — 서울·대구 6일·18명",
+    "en": "2026 Korea study delegation on AI education and digital learning — Seoul & Daegu, 6 days, 18 members",
+    "es": "Delegación de estudio 2026 sobre educación con IA y aprendizaje digital — Seúl y Daegu, 6 días, 18 integrantes"
+   }
+  },
+  {
+   "year": "2019",
+   "who": {
+    "zh": "臺南市副市長",
+    "ko": "대만 타이난시 부시장",
+    "en": "Deputy Mayor of Tainan (Taiwan)",
+    "es": "Vicealcalde de Tainan (Taiwán)"
+   },
+   "what": {
+    "zh": "韓國忠清道廳 氣候變遷對應國際研討會 — 隨行口譯",
+    "ko": "충남도청 기후변화대응 국제 컨퍼런스 — 수행 통역",
+    "en": "Chungcheong Province Climate Change Conference (Korea) — escort interpreting",
+    "es": "Conferencia sobre cambio climático de la provincia de Chungcheong (Corea) — interpretación de acompañamiento"
+   }
+  },
+  {
+   "year": "2026",
+   "who": {
+    "zh": "Google Korea",
+    "ko": "Google Korea",
+    "en": "Google Korea",
+    "es": "Google Korea"
+   },
+   "what": {
+    "zh": "Google for Education 韓國區負責人會面・AI in Education 工作坊（NTCU 研修團・教育部考察團）",
+    "ko": "Google for Education 한국 총괄 면담·AI in Education 워크숍(NTCU 연수단·교육부 시찰단)",
+    "en": "Meeting with the Google for Education Korea Director · AI in Education workshop (NTCU and Ministry of Education delegations)",
+    "es": "Reunión con el responsable de Google for Education en Corea · taller AI in Education (delegaciones de la NTCU y del Ministerio de Educación)"
+   }
+  },
+  {
+   "year": "2025",
+   "who": {
+    "zh": "桃園國際機場公司 副總經理",
+    "ko": "대만 타오위안국제공항공사(TIAC) 부사장",
+    "en": "Vice President, Taoyuan International Airport Corporation (Taiwan)",
+    "es": "Vicepresidente de la Corporación del Aeropuerto Internacional de Taoyuan (Taiwán)"
+   },
+   "what": {
+    "zh": "訪仁川國際機場公社（IIAC）",
+    "ko": "인천국제공항공사(IIAC) 방문",
+    "en": "Visit to Incheon International Airport Corporation (IIAC)",
+    "es": "Visita a la Corporación del Aeropuerto Internacional de Incheon (IIAC)"
+   }
+  },
+  {
+   "year": "2026",
+   "who": {
+    "zh": "國家教育研究院（NAER）",
+    "ko": "대만 국가교육연구원(NAER)",
+    "en": "National Academy for Educational Research (NAER, Taiwan)",
+    "es": "Academia Nacional de Investigación Educativa (NAER, Taiwán)"
+   },
+   "what": {
+    "zh": "訪韓 — NIIED・KICE・KEDI 三場拜會",
+    "ko": "방한 — NIIED·KICE·KEDI 3개 기관 방문",
+    "en": "Korea visit — NIIED · KICE · KEDI",
+    "es": "Visita a Corea — NIIED · KICE · KEDI"
+   }
+  }
+ ],
  "TL": [
   [
    2026,
@@ -636,9 +758,9 @@
    2019,
    "esc",
    "government",
-   "韓國忠清道廳 氣候變遷對應國際研討會",
-   "충남도청 기후변화대응 국제 컨퍼런스",
-   "Chungcheong Province (Korea) — Climate Change Conference"
+   "韓國忠清道廳 氣候變遷對應國際研討會・臺南市副市長 隨行口譯",
+   "충남도청 기후변화대응 국제 컨퍼런스・대만 타이난시 부시장 수행 통역",
+   "Chungcheong Province (Korea) — Climate Change Conference · escort interpreter for the Deputy Mayor of Tainan (Taiwan)"
   ],
   [
    2018,
@@ -1807,7 +1929,7 @@
   "Centro de Chino de la Univ. Shih Chien (Taiwán) — Visita a Corea",
   "Oficina de Corea en Taipéi — Festival cultural Corea-Taiwán",
   "Expo de Turismo de Taipéi — Stand de la Org. de Turismo de Corea",
-  "Provincia de Chungcheong (Corea) — Conferencia sobre cambio climático",
+  "Provincia de Chungcheong (Corea) — Conferencia sobre cambio climático · intérprete de acompañamiento del vicealcalde de Tainan (Taiwán)",
   "Centro de Educación de Taiwán en Corea — Asistente",
   "Expo de Estudios y Migración de Corea — Pabellón de Taiwán",
   "Festival de Danza de Máscaras de Andong (Corea) — Intérprete de chino",

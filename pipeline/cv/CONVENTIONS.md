@@ -42,6 +42,11 @@
 
 - 跨文化講座（`cv_data.json` 的 `TEACHING`，2026-11-09 新增；原名「講座・教學」，同日改名以免被誤認為口筆譯教學）：放在「研究發表」之後、「語言能力」之前，自成一區；條目格式同正規學歷（年份 → 標題 → 機構 → 一行說明），四語欄位 `title`／`org`／`note`。只收講座與教學，不計入口筆譯案件數。可附公開來源連結（`url`＋四語 `linkLabel`，如教育局新聞稿），網站與 /cv/ 顯示為小連結，PDF 為可點文字；首頁對應欄位 `u`／`ul`。區塊名：CV 用「跨文化講座 / CROSS-CULTURAL TALKS・문화 간 이해 강연 / CROSS-CULTURAL TALKS・CROSS-CULTURAL TALKS・CHARLAS INTERCULTURALES」，首頁短寫「跨文化講座・문화 간 이해 강연・Cross-Cultural Talks・Charlas interculturales」。韓文用一般用語「문화 간」（不用學術的「상호문화」），「문화 간」空一格。
 
+## 4b. 曾服務對象（CV 專用，2026-11-11 新增）
+
+- `cv_data.json` 的 `FOR`：放在「聯繫」之後、「長期合作」之前，只在 /cv/ 與 PDF（首頁已有精選卡片）。每條：年份（可寫區間）→ 對象（人或機關，粗體）→ 案子一行；四語欄位 `who`／`what`。同一位長官兼兩個職位時合成一條（文化部次長 兼 TAICCA 董事長）。區塊名：曾服務對象 / INTERPRETED FOR・주요 통역 대상 / INTERPRETED FOR・INTERPRETED FOR・HE INTERPRETADO PARA。
+- 時間軸列不因此合併；對象若在列裡看不出來，補進列標題（如 2019 忠清道廳 → 加「臺南市副市長 隨行口譯」）。
+
 ## 5. 流程
 
 1. `scratchpad/patch_cases.py <cases.json>`（以繁中標題為鍵，可用 `replaces` 換掉舊寫法）→ 同步 `cv_data.json` 與網站 bundle。

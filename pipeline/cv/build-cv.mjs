@@ -18,6 +18,7 @@ const UI = {
   contact: { zh: '聯繫 / CONTACT', ko: '연락처 / CONTACT', en: 'CONTACT', es: 'CONTACTO' },
   partners: {  // heading composed from the site's own tmLabel wording
     zh: '長期合作 / LONG-TERM', ko: '장기 협력 / LONG-TERM', en: 'LONG-TERM ENGAGEMENTS', es: 'COLABORACIONES DE LARGO PLAZO' },
+  interpretedFor: { zh: '曾服務對象 / INTERPRETED FOR', ko: '주요 통역 대상 / INTERPRETED FOR', en: 'INTERPRETED FOR', es: 'HE INTERPRETADO PARA' },
   work: { zh: S.zh.tlHeading + ' / WORK', ko: S.ko.tlHeading + ' / WORK', en: 'WORK', es: 'TRAYECTORIA' },
   clients: { zh: S.zh.clientsLabel + ' / CLIENTS', ko: S.ko.clientsLabel + ' / CLIENTS', en: 'SELECTED CLIENTS', es: 'CLIENTES DESTACADOS' },
   education: { zh: S.zh.eduDeg + ' / EDUCATION', ko: S.ko.eduDeg + ' / EDUCATION', en: 'EDUCATION', es: 'FORMACIÓN' },
@@ -61,6 +62,8 @@ for (const l of LANGS) {
     // open-ended range takes the CV's "present" word so it reads like the degree rows
     langstudy: (((D.LANGSTUDY || {})[l]) || (D.LANGSTUDY || {}).en || []).map(x => ({
       y: yearRange(String(x.y).replace(/–(至今|현재|present|presente)$/, '–'), l), s: x.s, c: x.c, n: x.n || '' })),   // n: scholarship, its own line (the site joins it to c with " · ")
+    // who the owner has interpreted for (FOR): principal, then the engagement on one line
+    interpretedFor: (D.FOR || []).map(e => ({ year: yearRange(e.year, l), who: pick(e.who, l), what: pick(e.what, l) })),
     // talks & lessons (TEACHING): same shape as a degree row — title, institution, one note line
     teaching: (D.TEACHING || []).map(e => ({ year: yearRange(e.year, l), title: pick(e.title, l), org: pick(e.org, l), note: pick(e.note, l), url: e.url || '', linkLabel: e.linkLabel ? pick(e.linkLabel, l) : '' })),
     bio: (D.BIO || {})[l] || '',
@@ -180,6 +183,7 @@ function render(l){
     + g.items.map(it => '<span class="it'+'"><span class="nm">'+esc(it.name)+'</span>'+(it.sub?'<span class="sb">'+esc(it.sub)+'</span>':'')+'</span>').join('') + '</div></div>').join('');
   const edu = '<div class="edu">' + d.edu.map(e => '<span class="yr">'+esc(e.year)+'</span><div><div class="ttl">'+glue(esc(e.deg))+'</div><div class="kv"><span class="sub">'+glue(esc(e.school))+'</span>'+(e.note?'<br><span class="sub">'+glue(esc(e.note))+'</span>':'')+'</div></div>').join('') + '</div>';   // one shared grid: the year column is as wide as the widest range
   const langstudy = '<div class="edu">' + d.langstudy.map(x => '<span class="yr">'+esc(x.y)+'</span><div><div class="ttl">'+glue(esc(x.s))+'</div><div class="kv"><span class="sub">'+esc(x.c)+'</span>'+(x.n?'<br><span class="sub">'+glue(esc(x.n))+'</span>':'')+'</div></div>').join('') + '</div>';   // same grid as the degrees: school as the title, course (and scholarship) under it
+  const interpretedFor = '<div class="edu">' + d.interpretedFor.map(e => '<span class="yr">'+esc(e.year)+'</span><div><div class="ttl">'+glue(esc(e.who))+'</div><div class="kv"><span class="sub">'+glue(esc(e.what))+'</span></div></div>').join('') + '</div>';   // same grid as the degrees
   const teaching = '<div class="edu">' + d.teaching.map(e => '<span class="yr">'+esc(e.year)+'</span><div><div class="ttl">'+glue(esc(e.title))+'</div><div class="kv"><span class="sub">'+glue(esc(e.org))+'</span>'+(e.note?'<br><span class="sub">'+glue(esc(e.note))+'</span>':'')+(e.url?'<br><a class="orcid" href="'+esc(e.url)+'" target="_blank" rel="noopener">'+esc(e.linkLabel)+'</a>':'')+'</div></div>').join('') + '</div>';   // same grid as the degrees; optional source link (press release)
   const em = t => esc(t).replace(/유홍빈|Yu Hung-pin|Hungpin Yu/g, m => '<b style="font-weight:600">'+m+'</b>');
   const pubs = d.pubs.map(x => '<div class="row"><span class="yr">'+x.y+'</span><span class="ttl">'+em(x.cko)+'</span><span class="typ">'+esc(x.kci)+'</span></div>'
@@ -197,6 +201,7 @@ function render(l){
     + '<div class="mailrow"><a class="mail" href="mailto:twkrbridge@gmail.com">twkrbridge@gmail.com</a></div>'
     + '<div class="kv"><span class="sub">'+esc(d.reply)+'</span></div>'
     + '<a class="dl" href="'+d.dl.file+'" download="'+esc(d.dl.name)+'">'+esc(d.dl.label)+'</a></section>'
+    + (d.interpretedFor.length ? '<section><div class="slabel">'+esc(d.ui.interpretedFor)+'</div>'+interpretedFor+'</section>' : '')
     + '<section><div class="slabel">'+esc(d.ui.partners)+'</div>'+partners+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.work)+'</div>'
     + '<div class="kv" style="margin-bottom:12px"><span class="sub">'+esc(d.tlSub)+'</span></div>'+tlRows+'</section>'

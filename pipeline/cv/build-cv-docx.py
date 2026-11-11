@@ -255,6 +255,11 @@ def build(lang):
     r = p.add_run(strip(d['reply'])); set_font(r, 9.4, LIGHT, False, SANS, KA)
 
     # ── long-term partners ──
+    # ── interpreted for (principals first, the engagement under each) ──
+    if d.get('interpretedFor'):
+        slabel(doc, d['ui']['interpretedFor'], lang).paragraph_format.keep_with_next = True
+        entry_rows(doc, [(str(x['year']), x['who'], [x['what']]) for x in d['interpretedFor']], lang)
+
     slabel(doc, d['ui']['partners'], lang)
     for pr in d['partners']:
         rowtable(doc, [(pr['period'].split('–')[0], pr['org'], pr['period'])], lang)
