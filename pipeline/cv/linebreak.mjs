@@ -25,6 +25,9 @@ const isLetter = c => HAN.test(c) || HANGUL.test(c) || LATIN.test(c);
 
 const zhTerms = [...new Set(TERMS)].filter(t => t.length >= 2).sort((a, b) => b.length - a.length);
 const names = [...new Set(NAMES)].sort((a, b) => b.length - a.length);
+// terms indexed by first character (longest first) so long pages stay fast
+const byFirst = new Map();
+for (const t of zhTerms) { const k = t[0]; if (!byFirst.has(k)) byFirst.set(k, []); byFirst.get(k).push(t); }
 
 // mark every gap strictly inside [a, b)
 const tie = (set, a, b) => { for (let p = a + 1; p < b; p++) set.add(p); };
@@ -42,7 +45,7 @@ export function lbInfo(s) {
     const taken = new Array(s.length).fill(false);
     for (let i = 0; i < s.length; i++) {
       if (taken[i] || !HAN.test(s[i]) && !LATIN.test(s[i])) continue;
-      for (const t of zhTerms) {
+      for (const t of (byFirst.get(s[i]) || [])) {
         if (s.startsWith(t, i)) {
           let free = true; for (let k = i; k < i + t.length; k++) if (taken[k]) { free = false; break; }
           if (!free) continue;
@@ -201,7 +204,7 @@ export function zhUncovered(obj) {
     if (typeof o === 'string') {
       if (!HAN.test(o)) return;
       const cov = new Array(o.length).fill(false);
-      for (let i = 0; i < o.length; i++) { const t = zhTerms.find(t => o.startsWith(t, i)); if (t) { cov.fill(true, i, i + t.length); i += t.length - 1; } }
+      for (let i = 0; i < o.length; i++) { const t = (byFirst.get(o[i]) || []).find(t => o.startsWith(t, i)); if (t) { cov.fill(true, i, i + t.length); i += t.length - 1; } }
       let run = '';
       for (let i = 0; i <= o.length; i++) { if (i < o.length && HAN.test(o[i]) && !cov[i]) run += o[i]; else { if (run.length >= 2) out.add(run); run = ''; } }
     } else if (Array.isArray(o)) o.forEach(walk);
