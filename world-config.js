@@ -177,7 +177,7 @@ window.WORLD = {
         "label": "聯繫",
         "eyebrow": "聯繫",
         "title": "一起把話，說清楚。",
-        "role": "臺韓口筆譯員 · 赴韓溝通顧問 · 慶熙大學韓語博士候選人 · 國立大學英語主修・西語高級（C1）",
+        "role": "臺韓口筆譯員 · 赴韓溝通顧問 · 跨文化講座講師 · 慶熙大學韓語博士候選人 · 國立大學英語主修・西語高級（C1）",
         "body": "如有口筆譯需求或合作洽詢，歡迎透過以下方式聯繫。 ✉ 來信 24 小時內回覆",
         "tags": [
           "80+ 口筆譯案件",
@@ -278,7 +278,7 @@ window.WORLD = {
         "label": "연락처",
         "eyebrow": "연락처",
         "title": "정확하게, 전하겠습니다.",
-        "role": "대만인 통번역사 · 대만 비즈니스 커뮤니케이션 컨설턴트 · 경희대학교 한국어학 박사수료 · 학부 영어 전공·스페인어 고급(C1)",
+        "role": "대만인 통번역사 · 대만 비즈니스 커뮤니케이션 컨설턴트 · 문화 간 이해 강연자 · 경희대학교 한국어학 박사수료 · 학부 영어 전공·스페인어 고급(C1)",
         "body": "통역·번역 의뢰 및 협업 문의는 아래로 연락주세요. ✉ 문의 메일은 24시간 이내에 회신드립니다",
         "tags": [
           "통번역 80여 건",
@@ -379,7 +379,7 @@ window.WORLD = {
         "label": "Contact",
         "eyebrow": "Contact",
         "title": "Let's get it across.",
-        "role": "Taiwanese Korean–Chinese Interpreter · Communication Consultant · PhD Candidate, Kyung Hee University · BA in English, C1 Spanish",
+        "role": "Taiwanese Korean–Chinese Interpreter · Communication Consultant · Cross-Cultural Speaker · PhD Candidate, Kyung Hee University · BA in English, C1 Spanish",
         "body": "For interpretation, translation inquiries or collaboration, please reach out. ✉ Inquiries answered within 24 hours",
         "tags": [
           "80+ engagements",
@@ -480,7 +480,7 @@ window.WORLD = {
         "label": "Contacto",
         "eyebrow": "Contacto",
         "title": "Que el mensaje llegue claro.",
-        "role": "Intérprete taiwanés coreano–chino · Asesor de comunicación · Doctorando en Lingüística Coreana, Univ. Kyung Hee · grado en inglés, español C1",
+        "role": "Intérprete taiwanés coreano–chino · Asesor de comunicación · Conferenciante intercultural · Doctorando en Lingüística Coreana, Univ. Kyung Hee · grado en inglés, español C1",
         "body": "Para consultas de interpretación, traducción o colaboración, no dude en contactarme. ✉ Respuesta en menos de 24 horas",
         "tags": [
           "Más de 80 encargos",
