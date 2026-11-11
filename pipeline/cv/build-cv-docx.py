@@ -331,7 +331,13 @@ def build(lang):
     # ── teaching (talks & lessons) — same construction as education ──
     if d.get('teaching'):
         slabel(doc, d['ui']['teaching'], lang).paragraph_format.keep_with_next = True
-        entry_rows(doc, [(str(x['year']), x['title'], [x['org']] + ([x['note']] if x.get('note') else [])) for x in d['teaching']], lang)
+        tb = entry_rows(doc, [(str(x['year']), x['title'], [x['org']] + ([x['note']] if x.get('note') else [])) for x in d['teaching']], lang)
+        # optional public source (e.g. an education office press release): a small link line
+        for i, x in enumerate(d['teaching']):
+            if x.get('url') and x.get('linkLabel'):
+                cell = tb.rows[i].cells[1]; cell.paragraphs[-1].paragraph_format.space_after = Pt(0)
+                pl = cell.add_paragraph(); pl.paragraph_format.space_before = Pt(1); pl.paragraph_format.space_after = Pt(3); pl.paragraph_format.line_spacing = 1.35
+                add_link(pl, x['linkLabel'], x['url'], 8.6, LIGHT, SANS, CJK_SANS[lang])
 
     # ── languages ──
     # Kept with the certs block below (and through it, the footer) so the
