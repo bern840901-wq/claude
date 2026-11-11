@@ -3,6 +3,7 @@
 // (STR dict + TL timeline + EDU/LANGS/CERTS/CLIENTS/PARTNERS), four languages.
 import { createRequire } from 'module';
 import fs from 'fs';
+import { lbMap } from './linebreak.mjs';
 const require = createRequire(import.meta.url);
 const S = require('./str_dict.js');
 const D = JSON.parse(fs.readFileSync('cv_data.json', 'utf8'));
@@ -78,6 +79,9 @@ for (const l of LANGS) {
   };
 }
 
+// line-break hints for every display string (see linebreak.mjs)
+for (const l of LANGS) payload[l]._lb = lbMap(payload[l]);
+
 const html = `<!doctype html>
 <html lang="zh-Hant">
 <head>
@@ -93,12 +97,15 @@ const html = `<!doctype html>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 /* Korean wraps at 어절 boundaries, never mid-syllable; other scripts unaffected */
-:root[lang="ko"],:root[lang="ko"] body,:root[lang="ko"] .ttl,:root[lang="ko"] .sub,:root[lang="ko"] .role,:root[lang="ko"] h1{word-break:keep-all;overflow-wrap:break-word}
-/* CJK: balance headings so no lone character is orphaned; strict kinsoku */
-:root{line-break:strict}
+/* Words stay whole in every language: Korean wraps at spaces, Chinese only at
+   the word boundaries the build marks with <wbr> (linebreak.mjs), plus spaces and
+   punctuation. .nb holds a few characters together (a name and its bracket,
+   a number and its unit). overflow-wrap:anywhere is only a last resort so a
+   long unit can never push past a narrow screen. */
+body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+.nb{white-space:nowrap}
 h1,.ttl,.slabel,.nm{text-wrap:balance}
-.role,.sub,.tagline{text-wrap:pretty}
-.role,.sub,.ttl{word-break:auto-phrase}
+.role,.kv,.tagline,.loc{text-wrap:pretty}
 :root{--ink:#14110D;--mid:#555;--light:#8f8a80;--rule:#E9E5DC;--bg:#FFFFFF;--ac:#E8410E}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:'Inter','Noto Sans TC',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;line-height:1.6}
@@ -120,7 +127,7 @@ section{margin-top:64px}
 .edu .kv{padding:2px 0 0}
 .yr{flex:0 0 44px;font-size:12.5px;color:var(--light);font-variant-numeric:tabular-nums}
 .ttl{flex:1;font-family:'Cormorant Garamond','Noto Serif TC','Noto Serif KR',serif;font-size:16.5px;font-weight:600;line-height:1.45;font-variant-numeric:lining-nums}
-.typ{flex:0 0 auto;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--light);text-align:right}
+.typ{flex:0 1 auto;max-width:150px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--light);text-align:right;text-wrap:balance}
 .kv{padding:6px 0;font-size:14px}
 .kv b{font-weight:500}
 .kv .sub{color:var(--light);font-size:12.5px}
@@ -131,7 +138,7 @@ section{margin-top:64px}
 .group{margin-bottom:26px}
 .gtitle{font-size:12px;letter-spacing:.1em;color:var(--mid);font-weight:500;margin-bottom:8px}
 .cl{display:flex;flex-wrap:wrap;gap:6px 0;font-size:14px}
-.cl .it{padding:3px 0;flex:0 0 100%;display:flex;gap:10px;align-items:baseline}
+.cl .it{padding:3px 0;flex:0 0 100%;display:flex;flex-wrap:wrap;column-gap:10px;align-items:baseline}
 .cl .nm{font-weight:400}
 .cl .t1 .nm{font-weight:500}
 .cl .sb{color:var(--light);font-size:12px}
@@ -162,54 +169,82 @@ section{margin-top:64px}
 <script>
 const DATA = ${JSON.stringify(payload)};
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-// House style writes a body as 中文名 + 縮寫 (文策院 TAICCA, 外貿協會 TAITRA). Keep
-// that pair on one line: text-wrap:balance may otherwise put its break inside
-// the Chinese name (文／策院). Presentation only — the data is untouched.
-const glue = s => s.replace(/([一-鿿가-힣]+) ([A-Z][A-Za-z0-9&.'-]{1,11})(?![A-Za-z0-9])/g, '<span style="white-space:nowrap">$1 $2</span>');
+// Line-break hints computed at build time (linebreak.mjs): n = gaps that must
+// not break, stored as "a-b c". A forbidden gap at a space becomes a no-break
+// space; any other forbidden gap is held by a short .nb span; every other gap
+// between two letters in Chinese text is a word boundary and gets <wbr>
+// (the page uses word-break:keep-all). Presentation only — the data is untouched.
+let LBM = {};
+const HAN = /[\u3400-\u9fff\uf900-\ufaff]/, LET = /[\u3400-\u9fff\uf900-\ufaff\uac00-\ud7a3A-Za-z0-9\u00c0-\u024f]/;
+const fmt = (v, boldRe) => {
+  const s = String(v ?? '');
+  let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+  const n = new Set(); for (const part of String(LBM[h.toString(36)] || '').split(' ')) { if (!part) continue; const [a, b] = part.split('-').map(Number); for (let p = a; p <= (b || a); p++) n.add(p); }
+  const w = new Set(); if (HAN.test(s)) for (let p = 1; p < s.length; p++) if (!n.has(p) && LET.test(s[p - 1]) && LET.test(s[p]) && (HAN.test(s[p - 1]) || HAN.test(s[p]))) w.add(p);
+  const hold = new Uint8Array(s.length), bold = new Uint8Array(s.length);
+  // gaps between two letters are already held by keep-all; a span is only needed
+  // where punctuation, a bracket or a hyphen is involved
+  for (const p of n) if (s[p - 1] !== ' ' && s[p] !== ' ' && !(LET.test(s[p - 1]) && LET.test(s[p]))) { hold[p - 1] = 1; hold[p] = 1; }
+  if (boldRe) { boldRe.lastIndex = 0; let m; while ((m = boldRe.exec(s))) for (let k = m.index; k < m.index + m[0].length; k++) bold[k] = 1; }
+  let out = '', open = false, b = false;
+  for (let i = 0; i < s.length; i++) {
+    if (open && (!hold[i] || !n.has(i))) { if (b) { out += '</b>'; b = false; } out += '</span>'; open = false; }
+    if (!open && w.has(i)) out += '<wbr>';
+    if (hold[i] && !open) { if (b) { out += '</b>'; b = false; } out += '<span class="nb">'; open = true; }
+    if (bold[i] && !b) { out += '<b style="font-weight:600">'; b = true; }
+    else if (!bold[i] && b) { out += '</b>'; b = false; }
+    const c = s[i];
+    out += c === ' ' && n.has(i + 1) ? '&nbsp;' : esc(c);
+  }
+  if (b) out += '</b>';
+  if (open) out += '</span>';
+  return out;
+};
 const HTML_LANG = { zh:'zh-Hant', ko:'ko', en:'en', es:'es' };
 function render(l){
   const d = DATA[l];
+  LBM = d._lb || {};
   document.documentElement.lang = HTML_LANG[l];
   document.title = d.titleTag;
   let tlRows = '', lastYear = null;
   for (const r of d.tl){
     const y = r.y === lastYear ? '' : r.y; lastYear = r.y;
-    tlRows += '<div class="row"><span class="yr">'+y+'</span><span class="ttl">'+glue(esc(r.title))+'</span><span class="typ">'+esc(d.types[r.t]||'')+'</span></div>';
-    if (r.sub) tlRows += '<div class="kv topic"><span class="sub">'+esc(r.sub)+'</span></div>';
+    tlRows += '<div class="row"><span class="yr">'+y+'</span><span class="ttl">'+fmt(r.title)+'</span><span class="typ">'+esc(d.types[r.t]||'')+'</span></div>';
+    if (r.sub) tlRows += '<div class="kv topic"><span class="sub">'+fmt(r.sub)+'</span></div>';
   }
-  const partners = d.partners.map(p => '<div class="row"><span class="yr">'+esc(p.period.split('–')[0])+'</span><span class="ttl">'+glue(esc(p.org))+'</span><span class="typ">'+esc(p.period)+'</span></div>'
-    + '<div class="kv" style="margin:-6px 0 8px 62px"><span class="sub">'+esc(p.desc)+'</span></div>').join('');
+  const partners = d.partners.map(p => '<div class="row"><span class="yr">'+esc(p.period.split('–')[0])+'</span><span class="ttl">'+fmt(p.org)+'</span><span class="typ">'+fmt(p.period)+'</span></div>'
+    + '<div class="kv" style="margin:-6px 0 8px 62px"><span class="sub">'+fmt(p.desc)+'</span></div>').join('');
   const clients = d.clients.map(g => '<div class="group"><div class="gtitle">'+esc(g.title)+'</div><div class="cl">'
-    + g.items.map(it => '<span class="it'+'"><span class="nm">'+esc(it.name)+'</span>'+(it.sub?'<span class="sb">'+esc(it.sub)+'</span>':'')+'</span>').join('') + '</div></div>').join('');
-  const edu = '<div class="edu">' + d.edu.map(e => '<span class="yr">'+esc(e.year)+'</span><div><div class="ttl">'+glue(esc(e.deg))+'</div><div class="kv"><span class="sub">'+glue(esc(e.school))+'</span>'+(e.note?'<br><span class="sub">'+glue(esc(e.note))+'</span>':'')+'</div></div>').join('') + '</div>';   // one shared grid: the year column is as wide as the widest range
-  const langstudy = '<div class="edu">' + d.langstudy.map(x => '<span class="yr">'+esc(x.y)+'</span><div><div class="ttl">'+glue(esc(x.s))+'</div><div class="kv"><span class="sub">'+esc(x.c)+'</span>'+(x.n?'<br><span class="sub">'+glue(esc(x.n))+'</span>':'')+'</div></div>').join('') + '</div>';   // same grid as the degrees: school as the title, course (and scholarship) under it
-  const interpretedFor = '<div class="edu">' + d.interpretedFor.map(e => '<span class="yr">'+esc(e.year)+'</span><div><div class="ttl">'+glue(esc(e.who))+'</div><div class="kv"><span class="sub">'+glue(esc(e.what))+'</span></div></div>').join('') + '</div>';   // same grid as the degrees
-  const teaching = '<div class="edu">' + d.teaching.map(e => '<span class="yr">'+esc(e.year)+'</span><div><div class="ttl">'+glue(esc(e.title))+'</div><div class="kv"><span class="sub">'+glue(esc(e.org))+'</span>'+(e.note?'<br><span class="sub">'+glue(esc(e.note))+'</span>':'')+(e.url?'<br><a class="orcid" href="'+esc(e.url)+'" target="_blank" rel="noopener">'+esc(e.linkLabel)+'</a>':'')+'</div></div>').join('') + '</div>';   // same grid as the degrees; optional source link (press release)
-  const em = t => esc(t).replace(/유홍빈|Yu Hung-pin|Hungpin Yu/g, m => '<b style="font-weight:600">'+m+'</b>');
-  const pubs = d.pubs.map(x => '<div class="row"><span class="yr">'+x.y+'</span><span class="ttl">'+em(x.cko)+'</span><span class="typ">'+esc(x.kci)+'</span></div>'
-    + '<div class="kv" style="margin:-6px 0 0 62px"><span class="sub">'+em(x.cen)+'</span></div>'
-    + (x.tr ? '<div class="kv" style="margin:-2px 0 0 62px"><span class="sub">'+esc(x.tr)+'</span></div>' : '')
+    + g.items.map(it => '<span class="it'+'"><span class="nm">'+fmt(it.name)+'</span>'+(it.sub?'<span class="sb">'+fmt(it.sub)+'</span>':'')+'</span>').join('') + '</div></div>').join('');
+  const edu = '<div class="edu">' + d.edu.map(e => '<span class="yr">'+esc(e.year)+'</span><div><div class="ttl">'+fmt(e.deg)+'</div><div class="kv"><span class="sub">'+fmt(e.school)+'</span>'+(e.note?'<br><span class="sub">'+fmt(e.note)+'</span>':'')+'</div></div>').join('') + '</div>';   // one shared grid: the year column is as wide as the widest range
+  const langstudy = '<div class="edu">' + d.langstudy.map(x => '<span class="yr">'+esc(x.y)+'</span><div><div class="ttl">'+fmt(x.s)+'</div><div class="kv"><span class="sub">'+fmt(x.c)+'</span>'+(x.n?'<br><span class="sub">'+fmt(x.n)+'</span>':'')+'</div></div>').join('') + '</div>';   // same grid as the degrees: school as the title, course (and scholarship) under it
+  const interpretedFor = '<div class="edu">' + d.interpretedFor.map(e => '<span class="yr">'+esc(e.year)+'</span><div><div class="ttl">'+fmt(e.who)+'</div><div class="kv"><span class="sub">'+fmt(e.what)+'</span></div></div>').join('') + '</div>';   // same grid as the degrees
+  const teaching = '<div class="edu">' + d.teaching.map(e => '<span class="yr">'+esc(e.year)+'</span><div><div class="ttl">'+fmt(e.title)+'</div><div class="kv"><span class="sub">'+fmt(e.org)+'</span>'+(e.note?'<br><span class="sub">'+fmt(e.note)+'</span>':'')+(e.url?'<br><a class="orcid" href="'+esc(e.url)+'" target="_blank" rel="noopener">'+fmt(e.linkLabel)+'</a>':'')+'</div></div>').join('') + '</div>';   // same grid as the degrees; optional source link (press release)
+  const ME = /유홍빈|Yu Hung-pin|Hungpin Yu/g;
+  const pubs = d.pubs.map(x => '<div class="row"><span class="yr">'+x.y+'</span><span class="ttl">'+fmt(x.cko, ME)+'</span><span class="typ">'+esc(x.kci)+'</span></div>'
+    + '<div class="kv" style="margin:-6px 0 0 62px"><span class="sub">'+fmt(x.cen, ME)+'</span></div>'
+    + (x.tr ? '<div class="kv" style="margin:-2px 0 0 62px"><span class="sub">'+fmt(x.tr)+'</span></div>' : '')
     + (x.doiUrl ? '<div class="kv" style="margin:-2px 0 12px 62px"><a class="idl" href="'+x.doiUrl+'" target="_blank" rel="noopener">doi.org/'+esc(x.doi)+'</a></div>' : '<div style="height:12px"></div>')).join('');
-  const langs = d.langs.map(x => '<div class="kv"><b>'+esc(x.name)+'</b> · <span class="sub">'+esc(x.level)+'</span></div>').join('');
-  const certs = d.certs.map(c => '<div class="kv"><b>'+esc(c.name)+'</b><br><span class="sub">'+esc(c.issuer)+'</span></div>').join('');
+  const langs = d.langs.map(x => '<div class="kv"><b>'+fmt(x.name)+'</b> · <span class="sub">'+fmt(x.level)+'</span></div>').join('');
+  const certs = d.certs.map(c => '<div class="kv"><b>'+fmt(c.name)+'</b><br><span class="sub">'+fmt(c.issuer)+'</span></div>').join('');
   document.getElementById('app').innerHTML =
     '<header><h1>'+esc(d.name)+'</h1><div class="namesub">'+esc(d.nameSub)+'</div>'
-    + '<p class="role">'+esc(d.role)+'</p>'
-    + '<div class="tagline">'+esc(d.tagline)+'</div>'
-    + '<div class="loc">'+esc(d.based)+' · '+esc(d.avail)+'</div></header>'
+    + '<p class="role">'+fmt(d.role)+'</p>'
+    + '<div class="tagline">'+fmt(d.tagline)+'</div>'
+    + '<div class="loc">'+fmt(d.based)+' · '+fmt(d.avail)+'</div></header>'
     + '<section><div class="slabel">'+esc(d.ui.contact)+'</div>'
     + '<div class="mailrow"><a class="mail" href="mailto:twkrbridge@gmail.com">twkrbridge@gmail.com</a></div>'
-    + '<div class="kv"><span class="sub">'+esc(d.reply)+'</span></div>'
+    + '<div class="kv"><span class="sub">'+fmt(d.reply)+'</span></div>'
     + '<a class="dl" href="'+d.dl.file+'" download="'+esc(d.dl.name)+'">'+esc(d.dl.label)+'</a></section>'
     + (d.interpretedFor.length ? '<section><div class="slabel">'+esc(d.ui.interpretedFor)+'</div>'+interpretedFor+'</section>' : '')
     + '<section><div class="slabel">'+esc(d.ui.partners)+'</div>'+partners+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.work)+'</div>'
-    + '<div class="kv" style="margin-bottom:12px"><span class="sub">'+esc(d.tlSub)+'</span></div>'+tlRows+'</section>'
+    + '<div class="kv" style="margin-bottom:12px"><span class="sub">'+fmt(d.tlSub)+'</span></div>'+tlRows+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.clients)+'</div>'+clients+'</section>'
     + '<section><div class="slabel">'+esc(d.ui.education)+'</div>'+edu+'</section>'
     + (d.langstudy.length ? '<section><div class="slabel">'+esc(d.ui.langstudy)+'</div>'+langstudy+'</section>' : '')
     + '<section><div class="slabel">'+esc(d.ui.research)+'</div>'
-    + (d.bio ? '<div class="kv" style="margin-bottom:4px"><span class="sub" style="line-height:1.75">'+esc(d.bio)+'</span></div>' : '')
+    + (d.bio ? '<div class="kv" style="margin-bottom:4px"><span class="sub" style="line-height:1.75">'+fmt(d.bio)+'</span></div>' : '')
     + (d.orcid ? '<a class="orcid" href="'+d.orcid.url+'" target="_blank" rel="noopener"><i></i>ORCID '+esc(d.orcid.id)+'</a>' : '')
     + pubs+'</section>'
     + (d.teaching.length ? '<section><div class="slabel">'+esc(d.ui.teaching)+'</div>'+teaching+'</section>' : '')

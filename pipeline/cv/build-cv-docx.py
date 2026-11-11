@@ -126,25 +126,67 @@ def hairline_left(p, space='4'):
     bd.append(e); pPr.append(bd)
 
 
-# Chinese has no word boundaries, so the renderer may break inside a term
-# (隨／行口譯, 文／策院). For zh rows, join the characters of the short fixed
-# terms with WORD JOINER and tie 中文名+縮寫 pairs with NO-BREAK SPACE.
-# Presentation only: DATA is untouched; the PDF text differs only by these
-# invisible characters.
+# Line-break hints come from the page build (linebreak.mjs → DATA[lang]['_lb']):
+# n = gaps that must not break. A forbidden gap at a space becomes a no-break
+# space; any other forbidden gap gets a WORD JOINER. Chinese gaps that are not
+# word boundaries are in n too, so Chinese now breaks only between words.
+# Presentation only: the PDF text differs from DATA by invisible characters.
 import re as _re
-_WJ, _NBSP = '\u2060', '\u00a0'
-_GLUE_TERMS = ['隨行口譯', '會議口譯', '訪談翻譯', '活動翻譯', '字幕筆譯', '展會口譯', '逐步口譯',
-               '業務代表', '隨行', '董事長', '副總經理', '次長', '院長', '郡守',
-               '文策院', '外貿協會', '國科會', '北流']
-_PAIR = _re.compile(r'([一-鿿]+) ([A-Z][A-Za-z0-9&.\'-]{1,11})(?![A-Za-z0-9])')
-def glue_zh(text):
-    text = _PAIR.sub(lambda m: m.group(1) + _NBSP + m.group(2), text)
-    for t in sorted(_GLUE_TERMS, key=len, reverse=True):
-        text = text.replace(t, _WJ.join(t))
-    return text
+_WJ, _NBSP, _NNBSP = '\u2060', '\u00a0', '\u202f'
+_CJK = _re.compile(r'[\u3000-\u9fff\uac00-\ud7a3\uff00-\uffef\u1100-\u11ff\u3130-\u318f]')
+_HANGUL = _re.compile(r'[\uac00-\ud7a3\u1100-\u11ff\u3130-\u318f]')
+LBM = {}
+def lbkey(s):
+    # same hash as linebreak.mjs lbKey: FNV-1a over UTF-16 code units, base 36
+    h = 0x811c9dc5
+    b = s.encode('utf-16-le')
+    for i in range(0, len(b), 2):
+        h ^= b[i] | (b[i + 1] << 8); h = (h * 0x01000193) & 0xffffffff
+    digits = '0123456789abcdefghijklmnopqrstuvwxyz'; out = ''
+    while True:
+        h, r = divmod(h, 36); out = digits[r] + out
+        if not h: return out
+def T(text):
+    """Apply the line-break hints to one display string."""
+    if not text: return text
+    code = LBM.get(lbkey(text))
+    if not code: return text
+    n = set()
+    for part in code.split():
+        a, _, b = part.partition('-'); n.update(range(int(a), int(b or a) + 1))
+    out = []
+    for i, c in enumerate(text):
+        if i and i in n and c != ' ' and text[i - 1] != ' ': out.append(_WJ)
+        if c == ' ' and (i + 1) in n:
+            a = text[i - 1] if i else ''; b = text[i + 1] if i + 1 < len(text) else ''
+            # LibreOffice does not reliably hold U+00A0 next to CJK text; U+202F holds,
+            # and two of them are exactly as wide as a normal space there
+            out.append(_NNBSP * 2 if (_CJK.match(a or ' ') or _CJK.match(b or ' ')) else _NBSP)
+        else:
+            out.append(c)
+    return ''.join(out)
 
 
-def rowtable(doc, entries, lang, widths=(1050, 6060, 2130)):
+def tag_korean(doc):
+    """Korean words wrap at spaces only when the run says it is Korean; give every
+    run that contains Hangul the ko-KR East-Asian language (the Chinese, English
+    and Spanish CVs quote Korean titles too)."""
+    body = doc.element.body
+    for r in body.iter(qn('w:r')):
+        t = ''.join(x.text or '' for x in r.iter(qn('w:t')))
+        if not _HANGUL.search(t): continue
+        rPr = r.find(qn('w:rPr'))
+        if rPr is None: rPr = OxmlElement('w:rPr'); r.insert(0, rPr)
+        lg = rPr.find(qn('w:lang'))
+        if lg is None: lg = OxmlElement('w:lang'); rPr.append(lg)
+        lg.set(qn('w:eastAsia'), 'ko-KR')
+
+
+ROW_WIDTHS = {'zh': (1050, 6940, 1250), 'ko': (1050, 6940, 1250), 'en': (1050, 6060, 2130), 'es': (1050, 6060, 2130)}
+
+
+def rowtable(doc, entries, lang, widths=None):
+    widths = widths or ROW_WIDTHS[lang]
     # the page's .row: [yr | ttl | typ] — 7px vertical padding, no rules.
     # A 4th entry field is the page's .kv.topic: the assignment's subject
     # matter, hung under the title behind the same hairline rule.
@@ -158,16 +200,16 @@ def rowtable(doc, entries, lang, widths=(1050, 6060, 2130)):
         for c in cells: tcmar(c, 46, 46, 0, 60)
         r = cells[0].paragraphs[0].add_run(yr); set_font(r, 9.4, LIGHT, False, SANS, KA)
         p = cells[1].paragraphs[0]; p.paragraph_format.line_spacing = 1.24
-        r = p.add_run(glue_zh(ttl) if lang == 'zh' else ttl); set_font(r, 11.5, INK, True, SERIF, KS)
+        r = p.add_run(T(ttl)); set_font(r, 11.5, INK, True, SERIF, KS)
         if topic:
             pt = cells[1].add_paragraph()
             f = pt.paragraph_format
             f.space_before = Pt(2); f.space_after = Pt(1); f.line_spacing = 1.34
             f.left_indent = Cm(0.22)
             hairline_left(pt)
-            rt = pt.add_run(topic); set_font(rt, 8.6, LIGHT, False, SANS, KA)
+            rt = pt.add_run(T(topic)); set_font(rt, 8.6, LIGHT, False, SANS, KA)
         p3 = cells[2].paragraphs[0]; p3.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        r = p3.add_run(typ); set_font(r, 7.5, LIGHT, False, SANS, KA, sp=track(.14, 7.5), caps=True)
+        r = p3.add_run(T(typ)); set_font(r, 7.5, LIGHT, False, SANS, KA, sp=track(.14, 7.5), caps=True)
     return tb
 
 
@@ -195,18 +237,18 @@ def entry_rows(container, entries, lang, widths=(1700, 7540)):
         for c in cells: tcmar(c, 46, 46, 0, 60)
         r = cells[0].paragraphs[0].add_run(yr); set_font(r, 9.4, LIGHT, False, SANS, KA)
         p = cells[1].paragraphs[0]; p.paragraph_format.line_spacing = 1.24; p.paragraph_format.keep_with_next = True
-        r = p.add_run(glue_zh(ttl) if lang == 'zh' else ttl); set_font(r, 11.5, INK, True, SERIF, KS)
+        r = p.add_run(T(ttl)); set_font(r, 11.5, INK, True, SERIF, KS)
         for j, sline in enumerate(subs):
             ps = cells[1].add_paragraph(); f = ps.paragraph_format
             f.space_before = Pt(1 if j == 0 else 0); f.space_after = Pt(3 if j == len(subs) - 1 else 0); f.line_spacing = 1.35
             if j < len(subs) - 1: f.keep_with_next = True
-            r = ps.add_run(sline); set_font(r, 9.4, LIGHT, False, SANS, KA)
+            r = ps.add_run(T(sline)); set_font(r, 9.4, LIGHT, False, SANS, KA)
     return tb
 
 
 def sub_note(doc, text, lang, indent=1.64, before=0, after=3):
     p = para(doc, before=before, after=after, indent=indent, line=1.35)
-    r = p.add_run(text); set_font(r, 9.4, LIGHT, False, SANS, CJK_SANS[lang])
+    r = p.add_run(T(text)); set_font(r, 9.4, LIGHT, False, SANS, CJK_SANS[lang])
     return p
 
 
@@ -226,6 +268,7 @@ def add_link(p, text, url, size, color, name, east, ulcolor='C9C4BA'):
 
 def build(lang):
     d = DATA[lang]
+    global LBM; LBM = d.get('_lb', {})
     KS, KA = CJK_SERIF[lang], CJK_SANS[lang]
     doc = Document()
     sec = doc.sections[0]
@@ -241,18 +284,18 @@ def build(lang):
     p = para(doc, after=10)
     r = p.add_run(d['nameSub']); set_font(r, 9.75, LIGHT, False, SANS, KA, sp=track(.14, 9.75))
     p = para(doc, after=7, line=1.7)
-    r = p.add_run(strip(d['role'])); set_font(r, 11.25, MID, False, SANS, KA)
+    r = p.add_run(T(strip(d['role']))); set_font(r, 11.25, MID, False, SANS, KA)
     p = para(doc, after=14)
     r = p.add_run(d['tagline']); set_font(r, 9, LIGHT, False, SANS, KA, sp=track(.16, 9), caps=True)
     p = para(doc)
-    r = p.add_run(d['based'] + ' · ' + d['avail']); set_font(r, 10.1, MID, False, SANS, KA)
+    r = p.add_run(T(d['based']) + ' · ' + T(d['avail'])); set_font(r, 10.1, MID, False, SANS, KA)
 
     # ── contact ──
     slabel(doc, d['ui']['contact'], lang, before=26)
     p = para(doc, after=5)
     r = p.add_run('twkrbridge@gmail.com'); set_font(r, 15.75, INK, True, SERIF, KS, ul=AC)
     p = para(doc)
-    r = p.add_run(strip(d['reply'])); set_font(r, 9.4, LIGHT, False, SANS, KA)
+    r = p.add_run(T(strip(d['reply']))); set_font(r, 9.4, LIGHT, False, SANS, KA)
 
     # ── long-term partners ──
     # ── interpreted for (principals first, the engagement under each) ──
@@ -268,7 +311,7 @@ def build(lang):
     # ── work (full timeline, year shown once per group) ──
     slabel(doc, d['ui']['work'], lang)
     p = para(doc, after=9, line=1.4)
-    r = p.add_run(strip(d['tlSub'])); set_font(r, 9.4, LIGHT, False, SANS, KA)
+    r = p.add_run(T(strip(d['tlSub']))); set_font(r, 9.4, LIGHT, False, SANS, KA)
     entries, last = [], None
     for row in d['tl']:
         y = '' if row['y'] == last else str(row['y'])
@@ -283,9 +326,9 @@ def build(lang):
         r = p.add_run(grp['title']); set_font(r, 9, MID, True, SANS, KA, sp=track(.1, 9))
         for it in grp['items']:
             p = para(doc, after=1.5, line=1.2)
-            r = p.add_run(strip(it['name'])); set_font(r, 10.5, INK, False, SANS, KA)
+            r = p.add_run(T(strip(it['name']))); set_font(r, 10.5, INK, False, SANS, KA)
             if it.get('sub'):
-                r = p.add_run('   ' + strip(it['sub'])); set_font(r, 9, LIGHT, False, SANS, KA)
+                r = p.add_run('   ' + T(strip(it['sub']))); set_font(r, 9, LIGHT, False, SANS, KA)
         para(doc, after=7)
 
     # ── education ──
@@ -307,17 +350,18 @@ def build(lang):
     if d.get('pubs'):
         slabel(doc, d['ui']['research'], lang)
         if d.get('bio'):
-            pb = para(doc, after=2, line=1.5)
-            rb = pb.add_run(d['bio']); set_font(rb, 9.4, LIGHT, False, SANS, CJK_SANS[lang])
+            pb = para(doc, after=2, line=1.5); pb.paragraph_format.keep_together = True
+            rb = pb.add_run(T(d['bio'])); set_font(rb, 9.4, LIGHT, False, SANS, CJK_SANS[lang])
         if d.get('orcid'):
             po = para(doc, after=9)
             add_link(po, 'ORCID ' + d['orcid']['id'], d['orcid']['url'], 8.6, LIGHT, SANS, CJK_SANS[lang])
         import re as _re
+        _ME = '|'.join('\u2060?'.join(_re.escape(ch) for ch in nm) for nm in ('유홍빈', 'Yu Hung-pin', 'Hungpin Yu'))
         def _emrun(pp, text, size, color, name, east, base_bold=False):
-            for part in _re.split(r'(유홍빈|Yu Hung-pin|Hungpin Yu)', text):
+            for part in _re.split('(' + _ME + ')', T(text)):
                 if not part: continue
                 rr = pp.add_run(part)
-                own = part in ('유홍빈', 'Yu Hung-pin', 'Hungpin Yu')
+                own = part.replace('\u2060', '') in ('유홍빈', 'Yu Hung-pin', 'Hungpin Yu')
                 set_font(rr, size, color, base_bold or own, name, east)
         for x in d['pubs']:
             tb = rowtable(doc, [(str(x['y']), '', x['kci'])], lang)
@@ -350,9 +394,9 @@ def build(lang):
     sl = slabel(doc, d['ui']['languages'], lang); sl.paragraph_format.keep_with_next = True
     for x in d['langs']:
         p = para(doc, before=3, after=3, line=1.45); p.paragraph_format.keep_with_next = True
-        r = p.add_run(strip(x['name'])); set_font(r, 9.75, LIGHT, True, SANS, KA, sp=track(.14, 9.75))
+        r = p.add_run(T(strip(x['name']))); set_font(r, 9.75, LIGHT, True, SANS, KA, sp=track(.14, 9.75))
         r = p.add_run(' · '); set_font(r, 9.75, LIGHT, False, SANS, KA)
-        r = p.add_run(strip(x['level'])); set_font(r, 9.4, LIGHT, False, SANS, KA)
+        r = p.add_run(T(strip(x['level']))); set_font(r, 9.4, LIGHT, False, SANS, KA)
 
     # ── certs / awards ──
     # Kept with what follows (the footer table) so the footer can never be
@@ -361,9 +405,9 @@ def build(lang):
     sl = slabel(doc, d['ui']['certs'], lang); sl.paragraph_format.keep_with_next = True
     for c in d['certs']:
         p = para(doc, before=3, after=1); p.paragraph_format.keep_with_next = True
-        r = p.add_run(c['name']); set_font(r, 9.75, LIGHT, True, SANS, KA, sp=track(.14, 9.75))
+        r = p.add_run(T(c['name'])); set_font(r, 9.75, LIGHT, True, SANS, KA, sp=track(.14, 9.75))
         p = para(doc, after=4); p.paragraph_format.keep_with_next = True
-        r = p.add_run(strip(c['issuer'])); set_font(r, 9.4, LIGHT, False, SANS, KA)
+        r = p.add_run(T(strip(c['issuer']))); set_font(r, 9.4, LIGHT, False, SANS, KA)
 
     # ── foot: the page's footer links become the printed URL + QR ──
     ft = doc.add_table(rows=1, cols=2); no_borders(ft)
@@ -380,6 +424,7 @@ def build(lang):
     pq = c1.paragraphs[0]; pq.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     pq.add_run().add_picture(f'{OUT}/qr.png', width=Cm(1.4))
 
+    tag_korean(doc)
     doc.save(f'{OUT}/{FNAME[lang]}.docx')
     return f'{OUT}/{FNAME[lang]}.docx'
 
