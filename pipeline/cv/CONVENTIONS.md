@@ -62,5 +62,6 @@ CV 網頁與四語 PDF 的換行由 `linebreak.mjs` 統一決定，資料文字�
 - 中文只在詞與詞之間換行：詞表在 `zh_terms.json`（由現有中文全文逐句斷詞、人工複核後產生）。新案出現新的機關名、人名、職稱或術語時，把它加進 `zh_terms.json`（例如「矯正署」「副署長」「考察團」），否則它可能被拆在兩行。
 - 英、西、韓文的多字專有名詞（Kyung Hee、Instituto Cervantes、The Borderless World…）列在 `nobreak_names.json`；新案有不能拆開的名字就加進去。
 - 規則已涵蓋、不必另加：數字＋單位（115年、6日、2026년、6 days）、分隔號（ · — × / ・）不放行首、括號縮寫跟著前一個字（（KERIS）、(Taiwan)）、短括號整段、書名號〈〉《》<>«» 短標題、連字號詞（Cross-Cultural、Gyeonggi-do）、韓文國別＋機關（대만 행정원）、最後一個短字不單獨成行。
-- 已知限制：PDF 由 LibreOffice 產生，它不理會兩個韓文詞之間的不斷行空格，所以韓文 PDF 仍可能在兩個韓文詞之間換行（網頁不會）。
+- PDF 由 LibreOffice 產生：文字一律不加東亞語言標記（加了 ko-KR／zh-TW 反而會讓不斷行字元失效）；韓文靠「每兩個韓文音節之間放 WORD JOINER」保持整詞（`build-cv-docx.py` 的 `keep_korean_words`）。
+- 建置時若印出「Chinese not in zh_terms.json」，表示有中文沒被詞表涵蓋，照提示把詞加進 `zh_terms.json` 再重建。
 - 流程：照 §5 跑 `node build-cv.mjs`（會自動算換行提示）→ `build-cv-docx.py` → PDF。
