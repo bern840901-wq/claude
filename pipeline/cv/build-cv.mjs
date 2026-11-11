@@ -3,7 +3,7 @@
 // (STR dict + TL timeline + EDU/LANGS/CERTS/CLIENTS/PARTNERS), four languages.
 import { createRequire } from 'module';
 import fs from 'fs';
-import { lbMap } from './linebreak.mjs';
+import { lbMap, zhUncovered } from './linebreak.mjs';
 const require = createRequire(import.meta.url);
 const S = require('./str_dict.js');
 const D = JSON.parse(fs.readFileSync('cv_data.json', 'utf8'));
@@ -81,6 +81,7 @@ for (const l of LANGS) {
 
 // line-break hints for every display string (see linebreak.mjs)
 for (const l of LANGS) payload[l]._lb = lbMap(payload[l]);
+{ const gaps = zhUncovered(payload.zh); if (gaps.length) console.log('Chinese not in zh_terms.json (may break inside):', gaps.join(' · ')); }
 
 const html = `<!doctype html>
 <html lang="zh-Hant">
@@ -100,12 +101,14 @@ const html = `<!doctype html>
 /* Words stay whole in every language: Korean wraps at spaces, Chinese only at
    the word boundaries the build marks with <wbr> (linebreak.mjs), plus spaces and
    punctuation. .nb holds a few characters together (a name and its bracket,
-   a number and its unit). overflow-wrap:anywhere is only a last resort so a
-   long unit can never push past a narrow screen. */
-body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+   a number and its unit). overflow-wrap:break-word only splits a unit that
+   cannot fit a line on its own; min-width:0 lets text columns shrink to the
+   screen instead of pushing past it. */
+body{word-break:keep-all;overflow-wrap:break-word;line-break:strict}
 .nb{white-space:nowrap}
+.ttl,.typ,.edu>div,.kv,.cl .nm,.cl .sb{min-width:0}
 h1,.ttl,.slabel,.nm{text-wrap:balance}
-.role,.kv,.tagline,.loc{text-wrap:pretty}
+.role,.kv,.sub,.sb,.tagline,.loc,.gtitle{text-wrap:pretty}
 :root{--ink:#14110D;--mid:#555;--light:#8f8a80;--rule:#E9E5DC;--bg:#FFFFFF;--ac:#E8410E}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:'Inter','Noto Sans TC',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;line-height:1.6}
@@ -209,12 +212,12 @@ function render(l){
   let tlRows = '', lastYear = null;
   for (const r of d.tl){
     const y = r.y === lastYear ? '' : r.y; lastYear = r.y;
-    tlRows += '<div class="row"><span class="yr">'+y+'</span><span class="ttl">'+fmt(r.title)+'</span><span class="typ">'+esc(d.types[r.t]||'')+'</span></div>';
+    tlRows += '<div class="row"><span class="yr">'+y+'</span><span class="ttl">'+fmt(r.title)+'</span><span class="typ">'+fmt(d.types[r.t]||'')+'</span></div>';
     if (r.sub) tlRows += '<div class="kv topic"><span class="sub">'+fmt(r.sub)+'</span></div>';
   }
   const partners = d.partners.map(p => '<div class="row"><span class="yr">'+esc(p.period.split('–')[0])+'</span><span class="ttl">'+fmt(p.org)+'</span><span class="typ">'+fmt(p.period)+'</span></div>'
     + '<div class="kv" style="margin:-6px 0 8px 62px"><span class="sub">'+fmt(p.desc)+'</span></div>').join('');
-  const clients = d.clients.map(g => '<div class="group"><div class="gtitle">'+esc(g.title)+'</div><div class="cl">'
+  const clients = d.clients.map(g => '<div class="group"><div class="gtitle">'+fmt(g.title)+'</div><div class="cl">'
     + g.items.map(it => '<span class="it'+'"><span class="nm">'+fmt(it.name)+'</span>'+(it.sub?'<span class="sb">'+fmt(it.sub)+'</span>':'')+'</span>').join('') + '</div></div>').join('');
   const edu = '<div class="edu">' + d.edu.map(e => '<span class="yr">'+esc(e.year)+'</span><div><div class="ttl">'+fmt(e.deg)+'</div><div class="kv"><span class="sub">'+fmt(e.school)+'</span>'+(e.note?'<br><span class="sub">'+fmt(e.note)+'</span>':'')+'</div></div>').join('') + '</div>';   // one shared grid: the year column is as wide as the widest range
   const langstudy = '<div class="edu">' + d.langstudy.map(x => '<span class="yr">'+esc(x.y)+'</span><div><div class="ttl">'+fmt(x.s)+'</div><div class="kv"><span class="sub">'+fmt(x.c)+'</span>'+(x.n?'<br><span class="sub">'+fmt(x.n)+'</span>':'')+'</div></div>').join('') + '</div>';   // same grid as the degrees: school as the title, course (and scholarship) under it

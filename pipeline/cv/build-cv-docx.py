@@ -45,11 +45,9 @@ def set_font(run, size, color=MID, bold=False, name=SANS, east=None, sp=None, ca
     if rf is None: rf = OxmlElement('w:rFonts'); r.append(rf)
     for a in ('w:ascii', 'w:hAnsi'): rf.set(qn(a), name)
     for a in ('w:eastAsia', 'w:cs'): rf.set(qn(a), east or name)
-    ea = east or name
-    if 'KR' in ea:
-        # Korean line-breaking: without an explicit East Asian locale the
-        # renderer breaks between syllables (인수 → 인/수). ko-KR wraps at spaces.
-        lg = OxmlElement('w:lang'); lg.set(qn('w:eastAsia'), 'ko-KR'); r.append(lg)
+    # No East Asian locale on purpose: under ko-KR or zh-TW LibreOffice ignores
+    # WORD JOINER and no-break spaces (and a joiner between two syllables even
+    # becomes a break). Korean words are kept whole by keep_korean_words().
     if sp:
         e = OxmlElement('w:spacing'); e.set(qn('w:val'), str(sp)); r.append(e)
     if caps:
@@ -80,7 +78,7 @@ def slabel(doc, text, lang, before=19):
     # .slabel: 11px uppercase .22em light, hairline above, ~14px padding-top
     p = para(doc, before=before, after=8)
     hairline_top(p)
-    r = p.add_run(text)
+    r = p.add_run(T(text))
     set_font(r, 8.25, LIGHT, False, SANS, CJK_SANS[lang], sp=track(.22, 8.25), caps=True)
     return p
 
@@ -133,7 +131,7 @@ def hairline_left(p, space='4'):
 # Presentation only: the PDF text differs from DATA by invisible characters.
 import re as _re
 _WJ, _NBSP, _NNBSP = '\u2060', '\u00a0', '\u202f'
-_CJK = _re.compile(r'[\u3000-\u9fff\uac00-\ud7a3\uff00-\uffef\u1100-\u11ff\u3130-\u318f]')
+_HANCJK = _re.compile(r'[\u3000-\u9fff\uf900-\ufaff\uff00-\uffef]')   # Han + CJK punctuation, not Hangul
 _HANGUL = _re.compile(r'[\uac00-\ud7a3\u1100-\u11ff\u3130-\u318f]')
 LBM = {}
 def lbkey(s):
@@ -156,30 +154,27 @@ def T(text):
         a, _, b = part.partition('-'); n.update(range(int(a), int(b or a) + 1))
     out = []
     for i, c in enumerate(text):
-        if i and i in n and c != ' ' and text[i - 1] != ' ': out.append(_WJ)
+        if i and i in n and c != ' ' and text[i - 1] != ' ' and not (_HANGUL.match(c) and _HANGUL.match(text[i - 1])):
+            out.append(_WJ)
         if c == ' ' and (i + 1) in n:
             a = text[i - 1] if i else ''; b = text[i + 1] if i + 1 < len(text) else ''
-            # LibreOffice does not reliably hold U+00A0 next to CJK text; U+202F holds,
-            # and two of them are exactly as wide as a normal space there
-            out.append(_NNBSP * 2 if (_CJK.match(a or ' ') or _CJK.match(b or ' ')) else _NBSP)
+            # LibreOffice does not hold U+00A0 next to Han; U+202F holds there, and two
+            # of them are exactly as wide as a normal space. Next to Hangul or Latin,
+            # U+00A0 holds (no East Asian locale) and keeps the normal width.
+            out.append(_NNBSP * 2 if (_HANCJK.match(a or ' ') or _HANCJK.match(b or ' ')) else _NBSP)
         else:
             out.append(c)
     return ''.join(out)
 
 
-def tag_korean(doc):
-    """Korean words wrap at spaces only when the run says it is Korean; give every
-    run that contains Hangul the ko-KR East-Asian language (the Chinese, English
-    and Spanish CVs quote Korean titles too)."""
-    body = doc.element.body
-    for r in body.iter(qn('w:r')):
-        t = ''.join(x.text or '' for x in r.iter(qn('w:t')))
-        if not _HANGUL.search(t): continue
-        rPr = r.find(qn('w:rPr'))
-        if rPr is None: rPr = OxmlElement('w:rPr'); r.insert(0, rPr)
-        lg = rPr.find(qn('w:lang'))
-        if lg is None: lg = OxmlElement('w:lang'); rPr.append(lg)
-        lg.set(qn('w:eastAsia'), 'ko-KR')
+_HG2 = _re.compile(r'(?<=[\uac00-\ud7a3])(?=[\uac00-\ud7a3])')
+def keep_korean_words(doc):
+    """Korean breaks only at spaces: a WORD JOINER between every two adjacent
+    Hangul syllables, in every run of the document (titles quoted in the zh/en/es
+    CVs too). Tested in LibreOffice 24.2: no mid-word breaks, and no-break spaces
+    between Korean words then hold as well."""
+    for t in doc.element.body.iter(qn('w:t')):
+        if t.text and _HG2.search(t.text): t.text = _HG2.sub(_WJ, t.text)
 
 
 ROW_WIDTHS = {'zh': (1050, 6940, 1250), 'ko': (1050, 6940, 1250), 'en': (1050, 6060, 2130), 'es': (1050, 6060, 2130)}
@@ -282,11 +277,11 @@ def build(lang):
     p = para(doc, after=4)
     r = p.add_run(d['name']); set_font(r, 33, INK, True, SERIF, KS)
     p = para(doc, after=10)
-    r = p.add_run(d['nameSub']); set_font(r, 9.75, LIGHT, False, SANS, KA, sp=track(.14, 9.75))
+    r = p.add_run(T(d['nameSub'])); set_font(r, 9.75, LIGHT, False, SANS, KA, sp=track(.14, 9.75))
     p = para(doc, after=7, line=1.7)
     r = p.add_run(T(strip(d['role']))); set_font(r, 11.25, MID, False, SANS, KA)
     p = para(doc, after=14)
-    r = p.add_run(d['tagline']); set_font(r, 9, LIGHT, False, SANS, KA, sp=track(.16, 9), caps=True)
+    r = p.add_run(T(d['tagline'])); set_font(r, 9, LIGHT, False, SANS, KA, sp=track(.16, 9), caps=True)
     p = para(doc)
     r = p.add_run(T(d['based']) + ' · ' + T(d['avail'])); set_font(r, 10.1, MID, False, SANS, KA)
 
@@ -323,7 +318,7 @@ def build(lang):
     slabel(doc, d['ui']['clients'], lang)
     for grp in d['clients']:
         p = para(doc, after=6)
-        r = p.add_run(grp['title']); set_font(r, 9, MID, True, SANS, KA, sp=track(.1, 9))
+        r = p.add_run(T(grp['title'])); set_font(r, 9, MID, True, SANS, KA, sp=track(.1, 9))
         for it in grp['items']:
             p = para(doc, after=1.5, line=1.2)
             r = p.add_run(T(strip(it['name']))); set_font(r, 10.5, INK, False, SANS, KA)
@@ -386,7 +381,7 @@ def build(lang):
             if x.get('url') and x.get('linkLabel'):
                 cell = tb.rows[i].cells[1]; cell.paragraphs[-1].paragraph_format.space_after = Pt(0)
                 pl = cell.add_paragraph(); pl.paragraph_format.space_before = Pt(1); pl.paragraph_format.space_after = Pt(3); pl.paragraph_format.line_spacing = 1.35
-                add_link(pl, x['linkLabel'], x['url'], 8.6, LIGHT, SANS, CJK_SANS[lang])
+                add_link(pl, T(x['linkLabel']), x['url'], 8.6, LIGHT, SANS, CJK_SANS[lang])
 
     # ── languages ──
     # Kept with the certs block below (and through it, the footer) so the
@@ -415,16 +410,16 @@ def build(lang):
     c0, c1 = ft.rows[0].cells
     tcmar(c0, 170, 0, 0, 0); tcmar(c1, 110, 0, 0, 0)
     p = c0.paragraphs[0]; hairline_top(p, space='10')
-    add_link(p, d['cta2'], 'https://twkrpuente.web.app/home/', 9.4, LIGHT, SANS, KA)
+    add_link(p, T(d['cta2']), 'https://twkrpuente.web.app/home/', 9.4, LIGHT, SANS, KA)
     r = p.add_run('   ·   '); set_font(r, 9.4, LIGHT, False, SANS, KA)
-    add_link(p, '▶ ' + d['ui']['film'], 'https://twkrpuente.web.app/', 9.4, LIGHT, SANS, KA)
+    add_link(p, '▶ ' + T(d['ui']['film']), 'https://twkrpuente.web.app/', 9.4, LIGHT, SANS, KA)
     p2 = c0.add_paragraph(); p2.paragraph_format.space_before = Pt(4)
     r = p2.add_run('twkrpuente.web.app   ·   © 游宏斌 YU HUNG PIN')
     set_font(r, 9.4, LIGHT, False, SANS, KA)
     pq = c1.paragraphs[0]; pq.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     pq.add_run().add_picture(f'{OUT}/qr.png', width=Cm(1.4))
 
-    tag_korean(doc)
+    keep_korean_words(doc)
     doc.save(f'{OUT}/{FNAME[lang]}.docx')
     return f'{OUT}/{FNAME[lang]}.docx'
 

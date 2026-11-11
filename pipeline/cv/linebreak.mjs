@@ -189,3 +189,21 @@ export function lbMap(obj) {
   walk(obj);
   return map;
 }
+
+// Chinese stretches of 2+ characters that no vocabulary term covers: printed by
+// the build so a new name from a new case gets added to zh_terms.json.
+export function zhUncovered(obj) {
+  const out = new Set();
+  const walk = o => {
+    if (typeof o === 'string') {
+      if (!HAN.test(o)) return;
+      const cov = new Array(o.length).fill(false);
+      for (let i = 0; i < o.length; i++) { const t = zhTerms.find(t => o.startsWith(t, i)); if (t) { cov.fill(true, i, i + t.length); i += t.length - 1; } }
+      let run = '';
+      for (let i = 0; i <= o.length; i++) { if (i < o.length && HAN.test(o[i]) && !cov[i]) run += o[i]; else { if (run.length >= 2) out.add(run); run = ''; } }
+    } else if (Array.isArray(o)) o.forEach(walk);
+    else if (o && typeof o === 'object') Object.entries(o).forEach(([k, v]) => { if (k !== '_lb') walk(v); });
+  };
+  walk(obj);
+  return [...out];
+}
