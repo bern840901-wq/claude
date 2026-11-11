@@ -931,7 +931,7 @@
     "es": "Español"
    },
    "level": {
-    "zh": "<strong style=\"color:var(--ac,#E8410E);font-weight:700\">高級（C1 Superior）</strong> · 賽萬提斯學院修畢認證（APTO）· DELE B2",
+    "zh": "<strong style=\"color:var(--ac,#E8410E);font-weight:700\">高級（C1 Superior）</strong> · 塞萬提斯學院修畢認證（APTO）· DELE B2",
     "ko": "<strong style=\"color:var(--ac,#E8410E);font-weight:700\">고급(C1 Superior)</strong> · 세르반테스 문화원 수료 인증(APTO) · DELE B2",
     "en": "<strong style=\"color:var(--ac,#E8410E);font-weight:700\">Advanced (C1 Superior)</strong> · Instituto Cervantes, certified APTO · DELE B2",
     "es": "<strong style=\"color:var(--ac,#E8410E);font-weight:700\">Nivel superior (C1)</strong> · Instituto Cervantes, superado (APTO) · DELE B2"
@@ -941,7 +941,7 @@
  "LANGSTUDY": {
   "zh": [
    {
-    "s": "西班牙語 · 賽萬提斯學院首爾分院",
+    "s": "西班牙語 · 西班牙 塞萬提斯學院首爾分院",
     "c": "C1 Superior 修畢（APTO 合格）· Refuerzo C1（C1 強化課程）進修中",
     "y": "2024–至今"
    },
@@ -964,7 +964,7 @@
   ],
   "ko": [
    {
-    "s": "스페인어 · 세르반테스 문화원 서울",
+    "s": "스페인어 · 주한 세르반테스 스페인 문화원",
     "c": "C1 Superior 수료(APTO 합격) · Refuerzo C1(C1 심화 과정) 수강 중",
     "y": "2024–현재"
    },
@@ -1010,7 +1010,7 @@
   ],
   "es": [
    {
-    "s": "Español · Instituto Cervantes Seúl",
+    "s": "Español · Instituto Cervantes de Seúl",
     "c": "C1 superado (APTO) · Refuerzo C1 Superior en curso",
     "y": "2024–presente"
    },
