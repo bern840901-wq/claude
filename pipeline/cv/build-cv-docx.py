@@ -78,7 +78,7 @@ def slabel(doc, text, lang, before=19):
     # .slabel: 11px uppercase .22em light, hairline above, ~14px padding-top
     p = para(doc, before=before, after=8)
     hairline_top(p)
-    r = p.add_run(T(text))
+    r = p.add_run(T(text, tracked=True))
     set_font(r, 8.25, LIGHT, False, SANS, CJK_SANS[lang], sp=track(.22, 8.25), caps=True)
     return p
 
@@ -134,6 +134,7 @@ _WJ, _NBSP, _NNBSP = '\u2060', '\u00a0', '\u202f'
 _HANCJK = _re.compile(r'[\u3000-\u9fff\uf900-\ufaff\uff00-\uffef]')   # Han + CJK punctuation, not Hangul
 _HANGUL = _re.compile(r'[\uac00-\ud7a3\u1100-\u11ff\u3130-\u318f]')
 LBM = {}
+_ARROWS = '↔→←⇄'
 def lbkey(s):
     # same hash as linebreak.mjs lbKey: FNV-1a over UTF-16 code units, base 36
     h = 0x811c9dc5
@@ -144,7 +145,7 @@ def lbkey(s):
     while True:
         h, r = divmod(h, 36); out = digits[r] + out
         if not h: return out
-def T(text, serif=False):
+def T(text, serif=False, tracked=False):
     """Apply the line-break hints to one display string."""
     if not text: return text
     code = LBM.get(lbkey(text))
@@ -154,7 +155,8 @@ def T(text, serif=False):
         a, _, b = part.partition('-'); n.update(range(int(a), int(b or a) + 1))
     out = []
     for i, c in enumerate(text):
-        if i and i in n and c != ' ' and text[i - 1] != ' ' and not (_HANGUL.match(c) and _HANGUL.match(text[i - 1])):
+        if i and i in n and c != ' ' and text[i - 1] != ' ' and not (_HANGUL.match(c) and _HANGUL.match(text[i - 1])) \
+                and c not in _ARROWS and text[i - 1] not in _ARROWS:   # no joiner next to an arrow (LibreOffice then draws an emoji)
             out.append(_WJ)
         if c == ' ' and (i + 1) in n:
             a = text[i - 1] if i else ''; b = text[i + 1] if i + 1 < len(text) else ''
@@ -163,14 +165,38 @@ def T(text, serif=False):
             # U+00A0 holds (no East Asian locale) and keeps the normal width.
             # In the serif (EB Garamond) titles U+00A0 renders a third narrower than a
             # space; two U+202F match a space there too (measured)
-            out.append(_NNBSP * 2 if (serif or _HANCJK.match(a or ' ') or _HANCJK.match(b or ' ')) else _NBSP)
+            # in letter-spaced (tracked) runs every character gets the extra spacing, so one U+202F
+            out.append((_NNBSP if tracked else _NNBSP * 2) if (serif or _HANCJK.match(a or ' ') or _HANCJK.match(b or ' ')) else _NBSP)
         else:
             out.append(c)
-            if c in '↔→←⇄': out.append('\ufe0e')   # text presentation, never a colour emoji
     return ''.join(out)
 
 
 _HG2 = _re.compile(r'(?<=[\uac00-\ud7a3])(?=[\uac00-\ud7a3])')
+def plain_arrows(doc):
+    """Arrows (ZH↔KO, 中→韓) in their own run with a text font, so LibreOffice never
+    falls back to the colour-emoji font for them."""
+    import copy
+    for r in list(doc.element.body.iter(qn('w:r'))):
+        ts = r.findall(qn('w:t'))
+        if len(ts) != 1 or not ts[0].text or not _re.search('[' + _ARROWS + ']', ts[0].text): continue
+        parts = [x for x in _re.split('([' + _ARROWS + '])', ts[0].text) if x]
+        if len(parts) < 2 and parts[0] not in _ARROWS: continue
+        rPr = r.find(qn('w:rPr')); parent = r.getparent(); idx = parent.index(r)
+        for k, part in enumerate(parts):
+            nr = OxmlElement('w:r')
+            if rPr is not None: nr.append(copy.deepcopy(rPr))
+            if part in _ARROWS:
+                np_ = nr.find(qn('w:rPr'))
+                if np_ is None: np_ = OxmlElement('w:rPr'); nr.insert(0, np_)
+                rf = np_.find(qn('w:rFonts'))
+                if rf is None: rf = OxmlElement('w:rFonts'); np_.insert(0, rf)
+                for a_ in ('w:ascii', 'w:hAnsi', 'w:eastAsia', 'w:cs'): rf.set(qn(a_), 'DejaVu Sans')
+            t = OxmlElement('w:t'); t.set(qn('xml:space'), 'preserve'); t.text = part; nr.append(t)
+            parent.insert(idx + k, nr)
+        parent.remove(r)
+
+
 def keep_korean_words(doc):
     """Korean breaks only at spaces: a WORD JOINER between every two adjacent
     Hangul syllables, in every run of the document (titles quoted in the zh/en/es
@@ -198,6 +224,7 @@ def rowtable(doc, entries, lang, widths=None):
         topic = ent[3] if len(ent) > 3 else ''
         cells = tb.rows[i].cells
         for c in cells: tcmar(c, 46, 46, 0, 60)
+        if lang == 'es': tcmar(cells[1], 46, 46, 0, 160)   # a clear gap before the long Spanish type labels
         r = cells[0].paragraphs[0].add_run(yr); set_font(r, 9.4, LIGHT, False, SANS, KA)
         p = cells[1].paragraphs[0]; p.paragraph_format.line_spacing = 1.24
         r = p.add_run(T(ttl, serif=True)); set_font(r, 11.5, INK, True, SERIF, KS)
@@ -286,7 +313,7 @@ def build(lang):
     p = para(doc, after=7, line=1.7)
     r = p.add_run(T(strip(d['role']))); set_font(r, 11.25, MID, False, SANS, KA)
     p = para(doc, after=14)
-    r = p.add_run(T(d['tagline'])); set_font(r, 9, LIGHT, False, SANS, KA, sp=track(.16, 9), caps=True)
+    r = p.add_run(T(d['tagline'], tracked=True)); set_font(r, 9, LIGHT, False, SANS, KA, sp=track(.16, 9), caps=True)
     p = para(doc)
     r = p.add_run(T(d['based']) + ' · ' + T(d['avail'])); set_font(r, 10.1, MID, False, SANS, KA)
 
@@ -323,7 +350,7 @@ def build(lang):
     slabel(doc, d['ui']['clients'], lang)
     for grp in d['clients']:
         p = para(doc, after=6)
-        r = p.add_run(T(grp['title'])); set_font(r, 9, MID, True, SANS, KA, sp=track(.1, 9))
+        r = p.add_run(T(grp['title'], tracked=True)); set_font(r, 9, MID, True, SANS, KA, sp=track(.1, 9))
         p.paragraph_format.keep_with_next = True
         for k, it in enumerate(grp['items']):
             p = para(doc, after=1.5, line=1.2)
@@ -397,7 +424,7 @@ def build(lang):
     sl = slabel(doc, d['ui']['languages'], lang); sl.paragraph_format.keep_with_next = True
     for x in d['langs']:
         p = para(doc, before=3, after=3, line=1.45); p.paragraph_format.keep_with_next = True
-        r = p.add_run(T(strip(x['name']))); set_font(r, 9.75, LIGHT, True, SANS, KA, sp=track(.14, 9.75))
+        r = p.add_run(T(strip(x['name']), tracked=True)); set_font(r, 9.75, LIGHT, True, SANS, KA, sp=track(.14, 9.75))
         r = p.add_run(' · '); set_font(r, 9.75, LIGHT, False, SANS, KA)
         r = p.add_run(T(strip(x['level']))); set_font(r, 9.4, LIGHT, False, SANS, KA)
 
@@ -408,7 +435,7 @@ def build(lang):
     sl = slabel(doc, d['ui']['certs'], lang); sl.paragraph_format.keep_with_next = True
     for c in d['certs']:
         p = para(doc, before=3, after=1); p.paragraph_format.keep_with_next = True
-        r = p.add_run(T(c['name'])); set_font(r, 9.75, LIGHT, True, SANS, KA, sp=track(.14, 9.75))
+        r = p.add_run(T(c['name'], tracked=True)); set_font(r, 9.75, LIGHT, True, SANS, KA, sp=track(.14, 9.75))
         p = para(doc, after=4); p.paragraph_format.keep_with_next = True
         r = p.add_run(T(strip(c['issuer']))); set_font(r, 9.4, LIGHT, False, SANS, KA)
 
@@ -428,6 +455,7 @@ def build(lang):
     pq.add_run().add_picture(f'{OUT}/qr.png', width=Cm(1.4))
 
     keep_korean_words(doc)
+    plain_arrows(doc)
     doc.save(f'{OUT}/{FNAME[lang]}.docx')
     return f'{OUT}/{FNAME[lang]}.docx'
 

@@ -98,17 +98,16 @@ const html = `<!doctype html>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 /* Korean wraps at 어절 boundaries, never mid-syllable; other scripts unaffected */
-/* Words stay whole in every language: Korean wraps at spaces, Chinese only at
-   the word boundaries the build marks with <wbr> (linebreak.mjs), plus spaces and
-   punctuation. .nb holds a few characters together (a name and its bracket,
-   a number and its unit). overflow-wrap:break-word only splits a unit that
-   cannot fit a line on its own; min-width:0 lets text columns shrink to the
-   screen instead of pushing past it. */
-body{word-break:keep-all;overflow-wrap:break-word;line-break:strict}
-.nb{white-space:nowrap}
+/* Words stay whole in every language: the build writes WORD JOINER / no-break
+   spaces into the text (see fmt below); Korean also wraps at spaces on the
+   Korean page. overflow-wrap:break-word only splits a unit that cannot fit a
+   line on its own; min-width:0 lets text columns shrink to the screen
+   instead of pushing past it. */
+:root[lang="ko"] body{word-break:keep-all}
+body{overflow-wrap:break-word;line-break:strict}
 .ttl,.typ,.edu>div,.kv,.cl .nm,.cl .sb{min-width:0}
 h1,.slabel,.nm{text-wrap:balance}
-.ttl,.role,.kv,.sub,.sb,.tagline,.loc,.gtitle{text-wrap:pretty}
+.ttl,.role,.sb,.tagline,.loc,.gtitle{text-wrap:pretty}
 :root{--ink:#14110D;--mid:#555;--light:#8f8a80;--rule:#E9E5DC;--bg:#FFFFFF;--ac:#E8410E}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:'Inter','Noto Sans TC',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;line-height:1.6}
@@ -173,40 +172,39 @@ section{margin-top:64px}
 const DATA = ${JSON.stringify(payload)};
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 // Line-break hints computed at build time (linebreak.mjs): n = gaps that must
-// not break, stored as "a-b c". A forbidden gap at a space becomes a no-break
-// space; any other forbidden gap is held by a short .nb span; every other gap
-// between two letters in Chinese text is a word boundary and gets <wbr>
-// (the page uses word-break:keep-all). Presentation only — the data is untouched.
-let LBM = {};
-const HAN = /[\u3400-\u9fff\uf900-\ufaff]/, LET = /[\u3400-\u9fff\uf900-\ufaff\uac00-\ud7a3A-Za-z0-9\u00c0-\u024f]/;
+// not break, stored as "a-b c". They are written as invisible characters, the
+// same way /lb.js does it on the portfolio and film pages: WORD JOINER in a
+// forbidden gap (inside a Chinese word, a name, a number and its unit …), a
+// no-break space for a tied space, and on the zh/en/es pages a WORD JOINER
+// between Hangul syllables so quoted Korean titles keep their words whole.
+// No markup, so Chrome keeps trimming full-width punctuation spacing.
+// Presentation only — the data text is untouched.
+let LBM = {}, KO = false;
+const HG = /[가-힣]/;
 const fmt = (v, boldRe) => {
   const s = String(v ?? '');
   let h = 0x811c9dc5; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
   const n = new Set(); for (const part of String(LBM[h.toString(36)] || '').split(' ')) { if (!part) continue; const [a, b] = part.split('-').map(Number); for (let p = a; p <= (b || a); p++) n.add(p); }
-  const w = new Set(); if (HAN.test(s)) for (let p = 1; p < s.length; p++) if (!n.has(p) && LET.test(s[p - 1]) && LET.test(s[p]) && (HAN.test(s[p - 1]) || HAN.test(s[p]))) w.add(p);
-  const hold = new Uint8Array(s.length), bold = new Uint8Array(s.length);
-  // gaps between two letters are already held by keep-all; a span is only needed
-  // where punctuation, a bracket or a hyphen is involved
-  for (const p of n) if (s[p - 1] !== ' ' && s[p] !== ' ' && !(LET.test(s[p - 1]) && LET.test(s[p]))) { hold[p - 1] = 1; hold[p] = 1; }
+  const bold = new Uint8Array(s.length);
   if (boldRe) { boldRe.lastIndex = 0; let m; while ((m = boldRe.exec(s))) for (let k = m.index; k < m.index + m[0].length; k++) bold[k] = 1; }
-  let out = '', open = false, b = false;
+  let out = '', b = false;
   for (let i = 0; i < s.length; i++) {
-    if (open && (!hold[i] || !n.has(i))) { if (b) { out += '</b>'; b = false; } out += '</span>'; open = false; }
-    if (!open && (w.has(i) || (i > 0 && '·/'.includes(s[i - 1]) && s[i] !== ' ' && !n.has(i)))) out += '<wbr>';   // keep-all gives no break after an unspaced · or /
-    if (hold[i] && !open) { if (b) { out += '</b>'; b = false; } out += '<span class="nb">'; open = true; }
+    const c = s[i], a = s[i - 1];
     if (bold[i] && !b) { out += '<b style="font-weight:600">'; b = true; }
     else if (!bold[i] && b) { out += '</b>'; b = false; }
-    const c = s[i];
+    if (i && c !== ' ' && a !== ' ') {
+      if (n.has(i) || (!KO && HG.test(a) && HG.test(c))) out += '\u2060';
+      else if ('・·/'.includes(a)) out += '\u200b';   // keep-all gives no break after an unspaced ・ · /
+    }
     out += c === ' ' && n.has(i + 1) ? '&nbsp;' : esc(c);
   }
   if (b) out += '</b>';
-  if (open) out += '</span>';
   return out;
 };
 const HTML_LANG = { zh:'zh-Hant', ko:'ko', en:'en', es:'es' };
 function render(l){
   const d = DATA[l];
-  LBM = d._lb || {};
+  LBM = d._lb || {}; KO = l === 'ko';
   document.documentElement.lang = HTML_LANG[l];
   document.title = d.titleTag;
   let tlRows = '', lastYear = null;

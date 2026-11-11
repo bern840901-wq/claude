@@ -36,7 +36,12 @@ const tieSpace = (set, k) => { set.add(k); set.add(k + 1); };
 
 function each(re, s, fn) { re.lastIndex = 0; let m; while ((m = re.exec(s))) { fn(m); if (m[0] === '') re.lastIndex++; } }
 
-export function lbInfo(s) {
+// opts.latinTail=false: no last-word tie in Latin text (web pages whose CSS already
+// avoids orphans with text-wrap:pretty); opts.tail=false: no last-word tie at all
+// (large display text, where a tied pair may not fit the line).
+export function lbInfo(s, opts) {
+  opts = opts || {};
+  const useTail = opts.tail !== false, latinTail = useTail && opts.latinTail !== false;
   const n = new Set();
   const words = [];                  // Chinese units found, as [a, b)
 
@@ -67,7 +72,7 @@ export function lbInfo(s) {
   each(/\d+ ?[-–] ?(?:\d+|至今|現在|현재|present|presente|actualidad)/g, s, m => tie(n, m.index, m.index + m[0].length));
 
   // 4. separators never open a line: "X · Y", "X — Y", "X × Y", "X / Y", "X・Y", "X/Y"
-  each(/\S( )(?:·|—|–|×|\/|\|)(?= |$)/g, s, m => tieSpace(n, m.index + 1));
+  each(/\S( )(?:·|—|–|×|\/|\||&)(?= |$)/g, s, m => tieSpace(n, m.index + 1));
   each(/\S(?=[・·\/／])/g, s, m => n.add(m.index + 1));
   // …and a 1-character pair around a dot or arrow stays whole: 한·중, 중↔한, 영→한
   each(/(?:^|[\s(（])(\S)[·・→↔⇄](\S)(?=$|[\s)）,，])/g, s, m => { const a = m.index + m[0].length - 3; tie(n, a, a + 3); });
@@ -75,37 +80,39 @@ export function lbInfo(s) {
 
   // 5. parentheticals: never break before the bracket; keep short ones whole
   each(/\S(?=[（(])/g, s, m => n.add(m.index + 1));
-  each(/[（(][^（）()]{1,12}[）)]/g, s, m => { const inner = m[0].slice(1, -1); const han = (inner.match(/[㐀-鿿]/g) || []).length; if (han <= 6 && inner.length <= 10 && !/[・·\/,，、]/.test(inner)) tie(n, m.index, m.index + m[0].length); });
+  each(/[（(][^（）()]{1,14}[）)]/g, s, m => { const inner = m[0].slice(1, -1); const cjk = (inner.match(/[㐀-鿿가-힣]/g) || []).length; const han = (inner.match(/[㐀-鿿]/g) || []).length; const list = /[・·]/.test(inner) && !/[\/,，、]/.test(inner); if ((han <= 6 && inner.length <= 10 && !/[・·\/,，、]/.test(inner)) || (list && inner.length <= 14 && cjk <= 10)) tie(n, m.index, m.index + m[0].length); });
   // "Service (KERIS)": an abbreviation in brackets stays with the word before it
   each(/\S( )\((?:[A-Z][A-Za-z0-9&.'’\-À-ɏ]{0,13})(?: [A-Z][A-Za-z\-À-ɏ]{1,10})?\)/g, s, m => tieSpace(n, m.index + 1));   // (KERIS) (Taiwan) (Kyung Hee); never a year
-  each(/\S( )\([A-Z][A-Z0-9]{1,7}, [A-Z][a-zÀ-ɏ]{2,10}\)/g, s, m => tieSpace(n, m.index + 1));   // (TIAC, Taiwan)
+  each(/\S( )\([A-Z][A-Za-zÀ-ɏ0-9'’\-]{1,12}, [A-Z][a-zÀ-ɏ]{2,10}\)/g, s, m => { tieSpace(n, m.index + 1); tie(n, m.index + 2, m.index + m[0].length); });   // (TIAC, Taiwan) (Yilan, Taiwán)
 
   // 6. short bracketed titles stay whole: 《消失的國界》 <조선어> <THE BORDERLESS WORLD>
-  each(/[《〈「<«“][^《》〈〉「」<>«»“”]{1,26}[》〉」>»”]/g, s, m => { const inner = m[0].slice(1, -1); const han = (inner.match(/[㐀-鿿]/g) || []).length, hg = (inner.match(/[가-힣]/g) || []).length; if (han <= 8 && hg <= 8 && inner.length <= 24) tie(n, m.index, m.index + m[0].length); });
+  each(/[《〈「<«“][^《》〈〉「」<>«»“”]{1,26}[》〉」>»”]/g, s, m => { const inner = m[0].slice(1, -1); const han = (inner.match(/[㐀-鿿]/g) || []).length, hg = (inner.match(/[가-힣]/g) || []).length; if (han <= 8 && hg <= 10 && inner.length <= 24) tie(n, m.index, m.index + m[0].length); });
 
   // abbreviation before a spelled-out name: "TITA (Administración …", "KERIS (Korea …"
   each(/\b[A-Z][A-Z0-9]{1,7}( )[（(]/g, s, m => tieSpace(n, m.index + m[0].length - 2));
-  // inside a Latin-script parenthetical, the first two and the last two words stay together
+  // inside a Latin-script parenthetical, the last two words stay together (no lone 'Agency)')
   each(/\(([^()]+)\)/g, s, m => {
     const inner = m[1]; if (!/[A-Za-z]/.test(inner) || /[㐀-鿿]/.test(inner)) return;
     const sp = []; for (let k = 0; k < inner.length; k++) if (inner[k] === ' ') sp.push(m.index + 1 + k);
-    if (sp.length >= 2) { tieSpace(n, sp[0]); tieSpace(n, sp[sp.length - 1]); }
+    if (sp.length >= 2) tieSpace(n, sp[sp.length - 1]);
   });
   // "(BIFF)/ ACFM": a slash after a bracket keeps its neighbour
   each(/[)）]\/( )/g, s, m => tieSpace(n, m.index + 2));
   // ordinals and a year with the word after it: 5.º y 6.º · 2026 Busan
   each(/\d\.º y \d\.º/g, s, m => tie(n, m.index, m.index + m[0].length));
+  each(/[㐀-鿿가-힣]( )(?=\d+ ?[級屆期급회])/g, s, m => tieSpace(n, m.index + 1));
+  each(/\S( )(?=\d+\(\d+\))/g, s, m => tieSpace(n, m.index + 1));
 
-  // a Chinese name keeps the abbreviation after it: 國際貿易署 TITA, 國立國際教育院 NIIED
-  each(/[㐀-鿿]( )(?=[A-Z][A-Z0-9&]{1,7}(?![A-Za-z0-9]))/g, s, m => tieSpace(n, m.index + 1));
+  // a Chinese or Korean name keeps the abbreviation after it: 國際貿易署 TITA, 한국교육과정평가원 KICE
+  each(/[㐀-鿿가-힣]( )(?=[A-Z][A-Z0-9&]{1,7}(?![A-Za-z0-9㐀-鿿]))/g, s, m => tieSpace(n, m.index + 1));
 
   // 7. Latin compounds: Cross-Cultural, Korean–Chinese, 한-대만
   each(/[A-Za-zÀ-ɏ가-힣]+(?:[-–][A-Za-zÀ-ɏ가-힣]+)+/g, s, m => { if (m[0].length <= 30) tie(n, m.index, m.index + m[0].length); });
   // ALL-CAPS names of 2–3 words: MORE ON ACADEMY, STUDIO DRAGON, YU HUNG PIN
   each(/\b[A-Z][A-Z0-9&.'’]+(?: [A-Z][A-Z0-9&.'’]*){1,2}\b/g, s, m => { if (m[0].length <= 24 && !/[a-z]/.test(m[0])) tie(n, m.index, m.index + m[0].length); });
   // "Univ. de Nayarit", "Univ. Kyung Hee", "Konkuk Univ.", "Depto. contra …"
-  each(/\b(?:Univ|Dept|Depto|Int|Inst|Mfg)\.( )(?=[A-Za-zÀ-ɏ])/g, s, m => tieSpace(n, m.index + m[0].length - 1));
-  each(/\S( )(?:Univ|Dept|Depto)\./g, s, m => tieSpace(n, m.index + 1));
+  each(/\b(?:Univ|Dept|Depto|Int|Inst|Mfg|Org)\.( )(?=[A-Za-zÀ-ɏ])/g, s, m => tieSpace(n, m.index + m[0].length - 1));
+  each(/[A-Za-zÀ-ɏ]( )(?:Univ|Dept|Depto)\./g, s, m => tieSpace(n, m.index + 1));
   // a level stays with its number: Nivel 6, Grade 5–6, TOPIK II 6
   each(/\b(?:Nivel|nivel|Level|level|Grade|grade|Grado|grado|II)( )\d/g, s, m => tieSpace(n, m.index + m[0].length - 2));
 
@@ -135,9 +142,9 @@ export function lbInfo(s) {
     const last = tail.slice(lastSpace + 1);
     const prev = tail.slice(0, lastSpace).split(' ').pop() || '';
     let short;
-    if (HANGUL.test(last)) short = last.length <= 4;
-    else if (HAN.test(last)) short = last.length <= 2;
-    else short = last.length <= 15 && (prev.length + 1 + last.length) <= 26;   // never one word alone
+    if (HANGUL.test(last)) short = useTail && last.length <= 4;
+    else if (HAN.test(last)) short = useTail && last.length <= 2;
+    else short = latinTail && last.length <= 15 && (prev.length + 1 + last.length) <= 26;   // never one word alone
     if (short && prev.length > 0) tieSpace(n, lastSpace);
   }
   // Chinese text: every gap between two letters that is NOT a word boundary
@@ -149,7 +156,7 @@ export function lbInfo(s) {
     // no short last line: the last allowed break must leave 4+ Chinese characters
     const tailEnd = s.replace(/[\s.。．)）」》〉、・]+$/, '').length;
     const L = /[㐀-鿿A-Za-z0-9가-힣]/;
-    for (let p = tailEnd - 1; p > 0; p--) {
+    for (let p = useTail ? tailEnd - 1 : 0; p > 0; p--) {
       const atSpace = s[p - 1] === ' ';
       const letterGap = L.test(s[p - 1]) && L.test(s[p]) && (HAN.test(s[p - 1]) || HAN.test(s[p]));
       if (!(atSpace || letterGap) || n.has(p)) continue;
