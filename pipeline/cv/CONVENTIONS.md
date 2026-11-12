@@ -65,5 +65,6 @@ CV 網頁與四語 PDF 的換行由 `linebreak.mjs` 統一決定，資料文字�
 - PDF 由 LibreOffice 產生：文字一律不加東亞語言標記（加了 ko-KR／zh-TW 反而會讓不斷行字元失效）；韓文靠「每兩個韓文音節之間放 WORD JOINER」保持整詞（`build-cv-docx.py` 的 `keep_korean_words`）。
 - 建置時若印出「Chinese not in zh_terms.json」，表示有中文沒被詞表涵蓋，照提示把詞加進 `zh_terms.json` 再重建。
 - 首頁（/home/）與電影頁（/）用同一套規則：`node build-lb-runtime.mjs` 由 `linebreak.mjs`＋兩個詞表產生網站根目錄的 `/lb.js`，頁面載入後把每段文字就地加上看不見的不斷行字元（WORD JOINER／不斷行空格／分隔號後的零寬斷點），可見文字不變；換語言、開卡片時自動重做。網頁上英西文的「最後一字不單獨成行」交給 CSS（text-wrap:pretty），大字標題（≥22px）不做最後一字綁定，以免放不下。
+- 放不下時自動放寬（2026-11-12）：綁在一起的詞組有可能比所在的框還寬（例如手機上點開卡片的大標題「桃園國際機場股份有限公司（TIAC）」），會被切掉。`lb.js` 在排版後檢查 16px 以上的文字，超出框的就改用較鬆的規則：先只保留中文與韓文整詞，仍放不下就還原成原文，讓瀏覽器自行換行；視窗大小改變或網頁字型載入後會重新檢查。檢查方式：開啟每張精選卡片，四語 × 手機／電腦，確認沒有文字超出右邊（韓文頁因 keep-all 可能有括號貼到留白的情況，不算被切掉）。
 - 改了詞表或規則後要重跑：`node build-cv.mjs`、`node build-lb-runtime.mjs`、`build-cv-docx.py`（再轉 PDF），三頁才會一致。
 - 流程：照 §5 跑 `node build-cv.mjs`（會自動算換行提示）→ `build-cv-docx.py` → PDF；首頁或電影頁有新文字時再跑 `node build-lb-runtime.mjs`。

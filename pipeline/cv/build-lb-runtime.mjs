@@ -31,8 +31,14 @@ var SKIP = { SCRIPT: 1, STYLE: 1, TEXTAREA: 1, INPUT: 1, NOSCRIPT: 1, CODE: 1, P
 var INVIS = /[\\u2060\\u202f\\u200b]/g;
 var done = new WeakMap();   // text node -> the value lb.js last wrote
 var large = new WeakMap();  // element -> font-size >= 22px (display text)
+var mid = new WeakMap();    // element -> font-size >= 16px (checked for overflow after layout)
 var HG = /[\\uac00-\\ud7a3]/;
-function apply(raw, koPage, large) {
+var HANC = /[\\u3400-\\u9fff\\uf900-\\ufaff]/;
+// level 0: every rule. level 1 (the text did not fit its box): only Chinese and Korean
+// words stay whole — names, brackets and separators may break. level 2: the raw text.
+function apply(raw, koPage, large, level) {
+  level = level || 0;
+  if (level >= 2) return raw;
   // the pages' CSS (text-wrap:pretty) already avoids a lone last word in Latin text;
   // large display text gets no last-word ties at all (a tied pair may not fit)
   var code = lbInfo(raw, { latinTail: false, tail: !large });
@@ -41,13 +47,81 @@ function apply(raw, koPage, large) {
   for (var i = 0; i < raw.length; i++) {
     var c = raw[i], a = raw[i - 1];
     if (i && c !== ' ' && a !== ' ') {
-      if (n.has(i)) out += WJ;
+      if (n.has(i) && (level === 0 || (HANC.test(a) && HANC.test(c)))) out += WJ;
       else if (!koPage && HG.test(a) && HG.test(c)) out += WJ;   // Korean words stay whole on every page
       else if ('・·/'.indexOf(a) >= 0) out += '\\u200b';         // keep-all gives no break after an unspaced ・ · /
     }
-    if (c === ' ' && n.has(i + 1)) out += NBSP; else out += c;
+    if (c === ' ' && level === 0 && n.has(i + 1)) out += NBSP; else out += c;
   }
   return out;
+}
+// A tied unit can be wider than its box (a long name in a big heading on a phone).
+// After layout, any text that sticks out of its box is rewritten with looser rules,
+// so nothing is ever cut off. Checked for text of 16px and up, again after a resize.
+var lvl = new WeakMap(), rawOf = new WeakMap(), watch = [], checkQ = [], checkQueued = false;
+function blockOf(el) { while (el && el.parentElement && getComputedStyle(el).display.indexOf('inline') === 0) el = el.parentElement; return el; }
+function flatChain(el) {   // translate/scale only: client rects can be compared
+  for (var e = el; e && e.nodeType === 1; e = e.parentElement) {
+    var t = getComputedStyle(e).transform;
+    if (t && t !== 'none') { if (t.indexOf('matrix3d') === 0) return false; var m = t.slice(7, -1).split(','); if (Math.abs(parseFloat(m[1])) > 1e-3 || Math.abs(parseFloat(m[2])) > 1e-3) return false; }
+  }
+  return true;
+}
+function sticksOut(node) {
+  var el = node.parentElement; if (!el) return false;
+  var blk = blockOf(el); var cs = getComputedStyle(blk);
+  if (/nowrap|pre/.test(cs.whiteSpace) || !flatChain(blk)) return false;
+  var r = blk.getBoundingClientRect(); if (!r.width) return false;
+  var right = r.right - parseFloat(cs.paddingRight) - parseFloat(cs.borderRightWidth) + 1.5;
+  var left = r.left + parseFloat(cs.paddingLeft) + parseFloat(cs.borderLeftWidth) - 1.5;
+  var rg = document.createRange(); rg.selectNodeContents(node);
+  var rs = rg.getClientRects();
+  for (var k = 0; k < rs.length; k++) if (rs[k].width > 0 && (rs[k].right > right || rs[k].left < left)) return true;
+  return false;
+}
+function queueCheck(node) { checkQ.push(node); if (checkQueued) return; checkQueued = true; requestAnimationFrame(function () { requestAnimationFrame(runChecks); }); }
+// a box that is still sliding or growing (an opening card) is measured once it has settled
+var tries = new WeakMap();
+function moving(node) {
+  if (!document.getAnimations) return false;
+  var as = document.getAnimations();
+  for (var k = 0; k < as.length; k++) {
+    var a = as[k], tg = a.effect && a.effect.target;
+    if (tg && tg.contains && tg.contains(node) && a.playState === 'running' && a.effect.getTiming().iterations !== Infinity) return true;
+  }
+  return false;
+}
+function runChecks() {
+  checkQueued = false; var list = checkQ, later = []; checkQ = [];
+  var koPage = (document.documentElement.lang || '').slice(0, 2) === 'ko';
+  for (var k = 0; k < list.length; k++) {
+    var t = list[k]; if (!t.isConnected || done.get(t) !== t.nodeValue) continue;
+    if (moving(t)) { var n = (tries.get(t) || 0) + 1; tries.set(t, n); if (n < 20) later.push(t); continue; }
+    var L = lvl.get(t) || 0; if (L >= 2 || !sticksOut(t)) continue;
+    L++; lvl.set(t, L);
+    var p = t.parentNode, next = apply(rawOf.get(t) || t.nodeValue.replace(INVIS, ''), koPage, large.get(p), L);
+    done.set(t, next); if (next !== t.nodeValue) t.nodeValue = next;
+    queueCheck(t);   // still too wide? the next pass loosens once more
+  }
+  if (later.length) setTimeout(function () { for (var k = 0; k < later.length; k++) queueCheck(later[k]); }, 150);
+}
+// re-check after a resize (start again from the full rules) and after a web font has
+// loaded (text measured in the fallback font may only stick out once the real font is in)
+function recheck(reset) {
+  var koPage = (document.documentElement.lang || '').slice(0, 2) === 'ko', keep = [];
+  for (var k = 0; k < watch.length; k++) {
+    var t = watch[k].deref ? watch[k].deref() : watch[k]; if (!t || !t.isConnected) continue; keep.push(watch[k]);
+    if (reset && (lvl.get(t) || 0) > 0) { lvl.set(t, 0); var next = apply(rawOf.get(t) || t.nodeValue.replace(INVIS, ''), koPage, large.get(t.parentNode), 0); done.set(t, next); t.nodeValue = next; }
+    tries.delete(t); queueCheck(t);
+  }
+  watch = keep;
+}
+var resizeT = 0, fontT = 0;
+window.addEventListener('resize', function () { clearTimeout(resizeT); resizeT = setTimeout(function () { recheck(true); }, 250); });
+if (document.fonts) {
+  var onFonts = function () { clearTimeout(fontT); fontT = setTimeout(function () { recheck(false); }, 60); };
+  if (document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', onFonts);
+  if (document.fonts.ready) document.fonts.ready.then(onFonts);
 }
 function fix(node, koPage) {
   var v = node.nodeValue;
@@ -55,10 +129,15 @@ function fix(node, koPage) {
   var p = node.parentNode; if (!p || SKIP[p.nodeName] || (p.closest && p.closest('[data-nolb],svg'))) return;
   if (!/[\\u3400-\\u9fff\\uac00-\\ud7a3]|\\S \\S|\\d|[·・—×\\/(（\\-–]/.test(v)) { done.set(node, v); return; }
   var raw = v.replace(INVIS, '');
-  var fs = large.get(p); if (fs === undefined) { fs = parseFloat(getComputedStyle(p).fontSize) >= 22; large.set(p, fs); }
-  var next = apply(raw, koPage, fs);
+  var fs = large.get(p); if (fs === undefined) { var px = parseFloat(getComputedStyle(p).fontSize); fs = px >= 22; large.set(p, fs); if (px >= 16) mid.set(p, 1); }
+  lvl.set(node, 0); rawOf.set(node, raw);   // the text as the page wrote it, before any hints
+  var next = apply(raw, koPage, fs, 0);
   done.set(node, next);
   if (next !== v) node.nodeValue = next;
+  if (mid.has(p) && next !== raw) {
+    queueCheck(node); watch.push(typeof WeakRef === 'function' ? new WeakRef(node) : node);
+    if (watch.length > 4000) watch = watch.filter(function (w) { var t = w.deref ? w.deref() : w; return t && t.isConnected; });
+  }
 }
 function run(root) {
   var koPage = (document.documentElement.lang || '').slice(0, 2) === 'ko';
@@ -94,7 +173,7 @@ document.addEventListener('copy', function (e) {
   e.clipboardData.setData('text/html', clean(div.innerHTML));
   e.preventDefault();
 });
-window.__lb = { info: lbInfo, decode: decodeN, apply: apply, run: run, opts: function (el) { return { latinTail: false, tail: !(parseFloat(getComputedStyle(el).fontSize) >= 22) }; } };
+window.__lb = { info: lbInfo, decode: decodeN, apply: apply, run: run, state: function (t) { return { level: lvl.get(t) || 0, checked: mid.has(t.parentNode), sticksOut: sticksOut(t), moving: moving(t), tries: tries.get(t) || 0, ours: done.get(t) === t.nodeValue }; }, opts: function (el) { return { latinTail: false, tail: !(parseFloat(getComputedStyle(el).fontSize) >= 22) }; } };
 if (window.__LB_NOAUTO) return;   // measuring tools load the rules without touching the page
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
