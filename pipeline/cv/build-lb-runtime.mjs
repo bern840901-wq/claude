@@ -33,9 +33,10 @@ var done = new WeakMap();   // text node -> the value lb.js last wrote
 var large = new WeakMap();  // element -> font-size >= 22px (display text)
 var mid = new WeakMap();    // element -> font-size >= 16px (checked for overflow after layout)
 var HG = /[\\uac00-\\ud7a3]/;
-var HANC = /[\\u3400-\\u9fff\\uf900-\\ufaff]/;
-// level 0: every rule. level 1 (the text did not fit its box): only Chinese and Korean
-// words stay whole — names, brackets and separators may break. level 2: the raw text.
+var HANC = /[\\u3400-\\u9fff\\uf900-\\ufaff]/, WORDC = /[0-9A-Za-z\\u00c0-\\u024f\\u3400-\\u9fff\\uf900-\\ufaff\\uac00-\\ud7a3\\-'’.]/;
+// level 0: every rule. level 1 (the text did not fit its box): only words stay whole
+// (Chinese words, Korean words, hyphenated names) — brackets, separators and tied
+// spaces may break. level 2: the raw text.
 function apply(raw, koPage, large, level) {
   level = level || 0;
   if (level >= 2) return raw;
@@ -47,7 +48,7 @@ function apply(raw, koPage, large, level) {
   for (var i = 0; i < raw.length; i++) {
     var c = raw[i], a = raw[i - 1];
     if (i && c !== ' ' && a !== ' ') {
-      if (n.has(i) && (level === 0 || (HANC.test(a) && HANC.test(c)))) out += WJ;
+      if (n.has(i) && (level === 0 || (HANC.test(a) && HANC.test(c)) || (WORDC.test(a) && WORDC.test(c) && !HANC.test(a) && !HANC.test(c)))) out += WJ;
       else if (!koPage && HG.test(a) && HG.test(c)) out += WJ;   // Korean words stay whole on every page
       else if ('・·/'.indexOf(a) >= 0) out += '\\u200b';         // keep-all gives no break after an unspaced ・ · /
     }
@@ -81,7 +82,7 @@ function sticksOut(node) {
 }
 function queueCheck(node) { checkQ.push(node); if (checkQueued) return; checkQueued = true; requestAnimationFrame(function () { requestAnimationFrame(runChecks); }); }
 // a box that is still sliding or growing (an opening card) is measured once it has settled
-var tries = new WeakMap();
+var tries = new WeakMap(), lastW = new WeakMap();
 function moving(node) {
   if (!document.getAnimations) return false;
   var as = document.getAnimations();
@@ -96,7 +97,9 @@ function runChecks() {
   var koPage = (document.documentElement.lang || '').slice(0, 2) === 'ko';
   for (var k = 0; k < list.length; k++) {
     var t = list[k]; if (!t.isConnected || done.get(t) !== t.nodeValue) continue;
-    if (moving(t)) { var n = (tries.get(t) || 0) + 1; tries.set(t, n); if (n < 20) later.push(t); continue; }
+    var bw = (function () { var bl = blockOf(t.parentElement); return bl ? Math.round(bl.getBoundingClientRect().width * 10) : 0; })();
+    var settled = lastW.get(t) === bw; lastW.set(t, bw);
+    if (moving(t) || !settled) { var n = (tries.get(t) || 0) + 1; tries.set(t, n); if (n < 25) later.push(t); continue; }
     var L = lvl.get(t) || 0; if (L >= 2 || !sticksOut(t)) continue;
     L++; lvl.set(t, L);
     var p = t.parentNode, next = apply(rawOf.get(t) || t.nodeValue.replace(INVIS, ''), koPage, large.get(p), L);
@@ -112,14 +115,14 @@ function recheck(reset) {
   for (var k = 0; k < watch.length; k++) {
     var t = watch[k].deref ? watch[k].deref() : watch[k]; if (!t || !t.isConnected) continue; keep.push(watch[k]);
     if (reset && (lvl.get(t) || 0) > 0) { lvl.set(t, 0); var next = apply(rawOf.get(t) || t.nodeValue.replace(INVIS, ''), koPage, large.get(t.parentNode), 0); done.set(t, next); t.nodeValue = next; }
-    tries.delete(t); queueCheck(t);
+    tries.delete(t); lastW.delete(t); queueCheck(t);
   }
   watch = keep;
 }
 var resizeT = 0, fontT = 0;
 window.addEventListener('resize', function () { clearTimeout(resizeT); resizeT = setTimeout(function () { recheck(true); }, 250); });
 if (document.fonts) {
-  var onFonts = function () { clearTimeout(fontT); fontT = setTimeout(function () { recheck(false); }, 60); };
+  var onFonts = function () { clearTimeout(fontT); fontT = setTimeout(function () { recheck(true); }, 60); };
   if (document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', onFonts);
   if (document.fonts.ready) document.fonts.ready.then(onFonts);
 }
