@@ -1,18 +1,18 @@
 {
  "FOR": [
   {
-   "year": "2025–2026",
+   "year": "2019–2026",
    "who": {
     "zh": "文化內容策進院（TAICCA）董事長（由文化部次長兼任）",
-    "ko": "대만콘텐츠진흥원(TAICCA) 이사장(문화부 차관 겸임직)",
-    "en": "Chairperson of TAICCA (Taiwan Creative Content Agency), a post held concurrently by the Vice Minister of Culture",
-    "es": "Presidenta de TAICCA (Agencia de Contenidos Creativos de Taiwán), cargo que ocupa a la vez la viceministra de Cultura"
+    "ko": "대만콘텐츠진흥원(TAICCA) 이사장(문화부 차관 겸임)",
+    "en": "Chairperson of TAICCA (Taiwan Creative Content Agency), concurrently Deputy Minister of Culture",
+    "es": "Presidenta de TAICCA (Agencia de Contenidos Creativos de Taiwán), a la vez viceministra de Cultura"
    },
    "what": {
-    "zh": "2025 TAICCA 訪韓行程 四日官方訪韓 高層會談隨行・2026 釜山國際影展（BIFF）/ ACFM 隨行・耳語口譯",
-    "ko": "2025 TAICCA 방한 일정 4일 공식 방한 고위급 회담 수행・2026 부산국제영화제(BIFF)/ACFM 수행·위스퍼링 통역",
-    "en": "2025 TAICCA Korea visit — four-day official visit, high-level meetings · 2026 Busan International Film Festival (BIFF) / ACFM — escort and whispered interpreting",
-    "es": "2025 visita a Corea con TAICCA — cuatro días de visita oficial y reuniones de alto nivel · 2026 Festival Internacional de Cine de Busan (BIFF) / ACFM — acompañamiento e interpretación susurrada"
+    "zh": "2019 臺南市副市長任內：韓國忠清南道廳「2019棄煤應對氣候變遷國際會議」隨行口譯・2025・2026 釜山國際影展（BIFF）/ 亞洲內容暨電影市場展（ACFM）隨行口譯",
+    "ko": "2019년 타이난시 부시장 재임 시 충청남도청 「2019 탈석탄 기후변화 대응 국제 컨퍼런스」 수행 통역・2025・2026 부산국제영화제(BIFF) / 아시아콘텐츠&필름마켓(ACFM) 수행 통역",
+    "en": "2019, as Deputy Mayor of Tainan — 2019 International Conference on Coal Phase-out and Climate Change Response, hosted by the Chungcheongnam-do Provincial Government (Korea) · 2025 and 2026 — Busan International Film Festival (BIFF) / Asian Contents & Film Market (ACFM), escort interpreting",
+    "es": "2019, como vicealcaldesa de Tainan — Conferencia Internacional sobre el Abandono del Carbón y la Respuesta al Cambio Climático 2019, organizada por el Gobierno Provincial de Chungcheongnam-do (Corea) · 2025 y 2026 — Festival Internacional de Cine de Busan (BIFF) / Mercado Asiático de Contenidos y Cine (ACFM), interpretación de acompañamiento"
    }
   },
   {
@@ -58,21 +58,6 @@
     "ko": "2026년 AI교육·디지털 학습 한국 시찰단 — 서울·대구 6일·18명",
     "en": "2026 Korea study delegation on AI education and digital learning — Seoul & Daegu, 6 days, 18 members",
     "es": "Delegación de estudio 2026 sobre educación con IA y aprendizaje digital — Seúl y Daegu, 6 días, 18 integrantes"
-   }
-  },
-  {
-   "year": "2019",
-   "who": {
-    "zh": "臺南市副市長",
-    "ko": "대만 타이난시 부시장",
-    "en": "Deputy Mayor of Tainan (Taiwan)",
-    "es": "Vicealcalde de Tainan (Taiwán)"
-   },
-   "what": {
-    "zh": "韓國忠清道廳 氣候變遷對應國際研討會 — 隨行口譯",
-    "ko": "충남도청 기후변화대응 국제 컨퍼런스 — 수행 통역",
-    "en": "Chungcheong Province Climate Change Conference (Korea) — escort interpreting",
-    "es": "Conferencia sobre cambio climático de la provincia de Chungcheong (Corea) — interpretación de acompañamiento"
    }
   },
   {
@@ -213,10 +198,10 @@
   [
    2026,
    "esc",
-   "media",
-   "釜山國際影展（BIFF）/ ACFM — 文策院 TAICCA 董事長 隨行口譯",
-   "부산국제영화제(BIFF) / ACFM — TAICCA(대만콘텐츠진흥원) 이사장 수행통역",
-   "Busan International Film Festival (BIFF) / ACFM — TAICCA (Taiwan) Chairperson's Escort Interpreter"
+   "government",
+   "文化內容策進院（TAICCA）董事長（由文化部次長兼任） — 釜山國際影展（BIFF）/ 亞洲內容暨電影市場展（ACFM）隨行・耳語口譯",
+   "대만콘텐츠진흥원(TAICCA) 이사장(문화부 차관 겸임) — 부산국제영화제(BIFF) / 아시아콘텐츠&필름마켓(ACFM) 수행·위스퍼링 통역",
+   "Chairperson of TAICCA (Taiwan), concurrently Deputy Minister of Culture — Busan International Film Festival (BIFF) / Asian Contents & Film Market (ACFM) · escort and whispered interpreting"
   ],
   [
    2026,
@@ -533,10 +518,10 @@
   [
    2025,
    "esc",
-   "media",
-   "釜山國際影展（BIFF）/ ACFM — 文策院 TAICCA 官方隨行",
-   "부산국제영화제(BIFF) / ACFM — TAICCA(대만콘텐츠진흥원) 공식 수행",
-   "Busan International Film Festival (BIFF) / ACFM — TAICCA (Taiwan) Official Escort"
+   "government",
+   "文化內容策進院（TAICCA）董事長（由文化部次長兼任） — 釜山國際影展（BIFF）/ 亞洲內容暨電影市場展（ACFM）四日官方行程・高層會談隨行",
+   "대만콘텐츠진흥원(TAICCA) 이사장(문화부 차관 겸임) — 부산국제영화제(BIFF) / 아시아콘텐츠&필름마켓(ACFM) 4일 공식 일정·고위급 회담 수행",
+   "Chairperson of TAICCA (Taiwan), concurrently Deputy Minister of Culture — Busan International Film Festival (BIFF) / Asian Contents & Film Market (ACFM) · four-day official program, escort interpreting for high-level meetings"
   ],
   [
    2025,
@@ -561,14 +546,6 @@
    "文策院 TAICCA × 韓國 STUDIO DRAGON MOU 簽訂",
    "TAICCA(대만콘텐츠진흥원) × STUDIO DRAGON MOU 체결",
    "TAICCA (Taiwan) × STUDIO DRAGON (Korea) — MOU Signing"
-  ],
-  [
-   2025,
-   "esc",
-   "government",
-   "中華民國文化部次長 × 文策院 TAICCA 訪韓行程",
-   "대만 문화부 차관 × TAICCA(대만콘텐츠진흥원) 방한 일정",
-   "Taiwan Vice Minister of Culture × TAICCA (Taiwan)"
   ],
   [
    2024,
@@ -758,9 +735,9 @@
    2019,
    "esc",
    "government",
-   "韓國忠清道廳 氣候變遷對應國際研討會・臺南市副市長 隨行口譯",
-   "충남도청 기후변화대응 국제 컨퍼런스・대만 타이난시 부시장 수행 통역",
-   "Chungcheong Province (Korea) — Climate Change Conference · escort interpreter for the Deputy Mayor of Tainan (Taiwan)"
+   "臺南市政府出席韓國忠清南道廳「2019棄煤應對氣候變遷國際會議」・副市長 隨行口譯",
+   "대만 타이난시청, 충청남도청 「2019 탈석탄 기후변화 대응 국제 컨퍼런스」 참석・부시장 수행 통역",
+   "Tainan City Government (Taiwan) at the 2019 International Conference on Coal Phase-out and Climate Change Response, hosted by the Chungcheongnam-do Provincial Government (Korea) · escort interpreter for the Deputy Mayor"
   ],
   [
    2018,
@@ -1861,7 +1838,7 @@
   "Escuela de Posgrado de Gobernanza de la Universidad Sungkyunkwan (Corea) — delegación del Instituto de Desarrollo del Servicio Civil (CSDI), Dirección General de Administración de Personal del Yuan Ejecutivo (Taiwán)",
   "Instituto de Desarrollo de Funcionarios de Gobiernos Locales (LOGODI), Ministerio del Interior y Seguridad (Corea) — delegación del Instituto de Desarrollo del Servicio Civil (CSDI), Dirección General de Administración de Personal del Yuan Ejecutivo (Taiwán)",
   "Instituto Nacional de Desarrollo de Recursos Humanos (NHI), Ministerio de Gestión de Personal (Corea) — delegación del Instituto de Desarrollo del Servicio Civil (CSDI), Dirección General de Administración de Personal del Yuan Ejecutivo (Taiwán)",
-  "Festival Internacional de Cine de Busan (BIFF) / ACFM — Interpretación de acompañamiento para la Presidencia de TAICCA (Taiwán)",
+  "Presidenta de TAICCA (Taiwán), a la vez viceministra de Cultura — Festival Internacional de Cine de Busan (BIFF) / Mercado Asiático de Contenidos y Cine (ACFM) · acompañamiento e interpretación susurrada",
   "Encuentro de Compras de Alimentos y Productos de Estilo de Vida de Taiwán (Seúl) — TITA (Administración de Comercio Internacional de Taiwán) × TAITRA",
   "Oficina de Taipéi en Corea — renovación de alquiler de funcionario diplomático y traspaso a nuevo funcionario; representación en coreano",
   "Chosun Ilbo (Corea) × Taipei Music Center — entrevista exclusiva en video al presidente (ZH→KO consecutiva)",
@@ -1901,11 +1878,10 @@
   "TAITRA Seúl — Rueda de negocios de alimentos de Taiwán",
   "Documental TCCF de TAICCA (Taiwán) — Subtítulos (COR→CH)",
   "Vicepresidente de la Corporación del Aeropuerto Internacional de Taoyuan (TIAC, Taiwán) — Visita a la Corporación del Aeropuerto Internacional de Incheon (IIAC)",
-  "Festival Internacional de Cine de Busan (BIFF) / ACFM — Acompañamiento oficial de TAICCA (Taiwán)",
+  "Presidenta de TAICCA (Taiwán), a la vez viceministra de Cultura — Festival Internacional de Cine de Busan (BIFF) / Mercado Asiático de Contenidos y Cine (ACFM) · programa oficial de cuatro días, acompañamiento en reuniones de alto nivel",
   "TAICCA (Taiwán) × CJ ENM (Corea) — Reunión de negocios",
   "TAICCA (Taiwán) × MR ROMANCE (Corea) — Reunión de negocios",
   "TAICCA (Taiwán) × STUDIO DRAGON (Corea) — Firma de MOU",
-  "Viceministro de Cultura de Taiwán × TAICCA (Taiwán) — Visita a Corea",
   "D.O. Monsant Grand Tasting Seúl — Interpretación ES-COR",
   "KCTU (Corea) × Sindicatos de Taiwán — Justicia climática",
   "Jing-Chi Estética (Taiwán) × K-BEAUTY EXPO Seúl",
@@ -1929,7 +1905,7 @@
   "Centro de Chino de la Univ. Shih Chien (Taiwán) — Visita a Corea",
   "Oficina de Corea en Taipéi — Festival cultural Corea-Taiwán",
   "Expo de Turismo de Taipéi — Stand de la Org. de Turismo de Corea",
-  "Provincia de Chungcheong (Corea) — Conferencia sobre cambio climático · intérprete de acompañamiento del vicealcalde de Tainan (Taiwán)",
+  "Gobierno de la Ciudad de Tainan (Taiwán) en la Conferencia Internacional sobre el Abandono del Carbón y la Respuesta al Cambio Climático 2019, organizada por el Gobierno Provincial de Chungcheongnam-do (Corea) · intérprete de acompañamiento de la vicealcaldesa",
   "Centro de Educación de Taiwán en Corea — Asistente",
   "Expo de Estudios y Migración de Corea — Pabellón de Taiwán",
   "Festival de Danza de Máscaras de Andong (Corea) — Intérprete de chino",

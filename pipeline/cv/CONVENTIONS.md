@@ -27,6 +27,11 @@
 - 法務部矯正署：韓文 대만 법무부 교정서；英文 Agency of Corrections, Ministry of Justice (Taiwan)；西文 Agencia de Instituciones Penitenciarias del Ministerio de Justicia (Taiwán)。首爾南部看守所：서울남부구치소／Seoul Nambu Detention Center／Centro de Detención de Seúl Nambu。
 - 臺灣教育部：韓文「대만 교육부」；英文 Ministry of Education (Taiwan)；西文 Ministerio de Educación (Taiwán)。民國年（115年）只在繁中保留；韓、英、西一律改成西元（2026년／2026），2026-11-11 定案。
 - 英文官方名以機關自用者為準（Ministry of Personnel Management、Ministry of the Interior and Safety、Directorate-General of Personnel Administration）；西文照英文官方名翻譯，機構縮寫保留。
+- 臺南市政府（2026-11-12 定案）：韓文「대만 타이난시청」（韓國人稱地方政府的習慣，與同列的 충청남도청 對稱；不用直譯的「시정부」）；英文 Tainan City Government (Taiwan)；西文 Gobierno de la Ciudad de Tainan (Taiwán)——照英文官方名翻譯，西語通用；不用 Ayuntamiento（西班牙用語，且在西班牙法律裡包含市議員，臺灣的市政府與市議會是分開的）。Tainan 不加重音（臺灣外交部與 RTI 西語皆寫 Tainan，雖然 Taipéi 有重音）。人的職稱：臺南市副市長／대만 타이난시 부시장／Deputy Mayor of Tainan (Taiwan)／vicealcaldesa de Tainan (Taiwán)。
+- 韓國忠清南道廳：충청남도청；英文 the Chungcheongnam-do Provincial Government (Korea)（句中加 the）；西文 Gobierno Provincial de Chungcheongnam-do (Corea)。舊寫法「忠清道廳／Chungcheong Province」不分南北，已改掉。
+- 文化部次長：英文 Deputy Minister of Culture（文化部與 Taiwan Today 的官方用法；不用 Vice Minister）；西文 viceministra de Cultura；韓文 문화부 차관。文策院董事長由次長兼任時，四語一律寫：文化內容策進院（TAICCA）董事長（由文化部次長兼任）／대만콘텐츠진흥원(TAICCA) 이사장(문화부 차관 겸임)／Chairperson of TAICCA (Taiwan), concurrently Deputy Minister of Culture／Presidenta de TAICCA (Taiwán), a la vez viceministra de Cultura（CV 曾服務對象寫 TAICCA 全名：Taiwan Creative Content Agency／Agencia de Contenidos Creativos de Taiwán）。韓文兼任一律「(○○ 겸임)」，不用「겸임직」。
+- 釜山國際影展與市場展：釜山國際影展（BIFF）/ 亞洲內容暨電影市場展（ACFM）；부산국제영화제(BIFF) / 아시아콘텐츠&필름마켓(ACFM)；Busan International Film Festival (BIFF) / Asian Contents & Film Market (ACFM)；Festival Internacional de Cine de Busan (BIFF) / Mercado Asiático de Contenidos y Cine (ACFM)。ACFM 全名是「釜山亞洲內容暨電影市場展」，跟在「釜山國際影展」後面時省略第二個「釜山」。
+- 西文職稱照當事人性別（vicealcaldesa、viceministra、presidenta）；新案若不確定長官性別，先問使用者。
 
 ## 3. 列的結構
 
@@ -34,6 +39,14 @@
 - 單一場次的訪團案（沒有總括列）：標題順序為「委託單位／率團長官 → 訪 受訪機關 — 考察全名 口譯形式」（如 2026 法務部矯正署副署長率團 訪首爾南部看守所 — 115年…考察團 隨行口譯），精選卡標題用同一句。
 - 同一年內最新在上；年份只寫年。
 - 口譯形式：esc 隨行、mtg 會議、int 訪談、evt 活動、exh 展會、sub 字幕、rep 業務代表。
+
+## 3b. 精選卡片（代表作，2026-11-12 新增）
+
+- 有官方出國報告的案子一律放進精選卡片，並附出處（`ref`：網址＋四語說明，格式「機關《報告名》（年）· 來源網站」）。CV 曾服務對象裡的案子也都要有卡片。
+- 排序依層級：中央部會（次長級）→ 中央部會所屬機關 → 地方政府 → 國營事業 → 企業 → 學術合作 → 媒體・影視；同一層先看長官位階，再看日期（新到舊）。例外：同一位長官的卡片排在一起（2026-11 起：TAICCA 董事長卡之後緊接 2019 臺南卡）。順序寫在 `home/index.html` 的 `forder`。
+- 同一位長官、同一場合跨年度：合成一張卡（標題＝對象 — 年份・年份 場合 口譯形式；日期欄寫「2025–2026」，不寫月份，以免手機上把標題擠窄）；時間軸仍每年一列。同一趟行程在時間軸只寫一列（其中的商務會議、MOU 等不同口譯形式可另列）。
+- 卡片側記只寫報告或使用者提供的事實；同一位長官的卡片在側記最後各加一句互相連結。
+- 作品區副標不寫年份範圍（每張卡片已有日期）。
 
 ## 4. 學歷區
 
@@ -48,9 +61,11 @@
 
 - `cv_data.json` 的 `FOR`：放在「聯繫」之後、「長期合作」之前，只在 /cv/ 與 PDF（首頁已有精選卡片）。每條：年份（可寫區間）→ 對象（人或機關，粗體）→ 案子一行；四語欄位 `who`／`what`。同一位長官兼兩個職位時合成一條（文化部次長 兼 TAICCA 董事長）。區塊名：曾服務對象 / INTERPRETED FOR・주요 통역 대상 / INTERPRETED FOR・INTERPRETED FOR・HE INTERPRETADO PARA。
 - 時間軸列不因此合併；對象若在列裡看不出來，補進列標題（如 2019 忠清道廳 → 加「臺南市副市長 隨行口譯」）。
+- 同一位長官在不同時期、不同職位都服務過（2026-11-12 新增）：合成一條，年份寫區間（2019–2026），對象寫現職，案件欄依時間列出各次，較早的職位寫在該次前面（「2019 臺南市副市長任內：…」）。不寫長官姓名，只寫職稱。
 
 ## 5. 流程
 
+- 每個新案都要（使用者 2026-11-12 交代）：①逐語檢查寫法是否合乎該語言習慣——官方名稱（英文以機關自用為準）、冠詞（英文句中的 the）、性別（西文職稱）、語序與歧義（英文 hosted by、西文 organizada por、西文 a／de 的受詞歧義）、標點（西文破折號不留空格）、數字（韓文年份加「년」以免與後面的數字相連）、美式拼法（program、organization）；②斷句：新中文詞加進 `zh_terms.json`，套用後量四語 × 手機／電腦的清單與點開的卡片，確認沒有詞被拆開、沒有文字超出框。
 1. `scratchpad/patch_cases.py <cases.json>`（以繁中標題為鍵，可用 `replaces` 換掉舊寫法）→ 同步 `cv_data.json` 與網站 bundle。
 2. `node build-cv.mjs` → `python3 build-cv-docx.py` → soffice 轉 PDF → 四版頁數與最後一頁檢查（以語言＋證照頁收尾，不得孤行）。
 3. 無頭瀏覽器檢查四語 `/cv/` 與 `/home/` → `refresh_archive.py` → commit、push → 使用者部署。
