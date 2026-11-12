@@ -122,7 +122,7 @@ window.WORLD = {
         "title": "政府・官方場合",
         "body": "「希望下次出差還能對上你的檔期——我們需要你。」 — 政府訪團聯絡窗口",
         "tags": [
-          "部會首長訪團",
+          "中央部會訪團",
           "官方協定簽署",
           "跨國機構交流"
         ]
@@ -223,7 +223,7 @@ window.WORLD = {
         "title": "정부·공공기관",
         "body": "“다음 출장에도 일정이 맞았으면 합니다. 저희는 당신이 필요합니다.” — 정부 방문단 연락 담당자",
         "tags": [
-          "부처 장·차관 방문단",
+          "중앙부처 방문단",
           "공식 협약 서명",
           "국제기관 교류"
         ]
@@ -324,7 +324,7 @@ window.WORLD = {
         "title": "Government & Institutions",
         "body": "“I hope our next trip lines up with your schedule — we need you.” — Government delegation coordinator",
         "tags": [
-          "Ministerial delegations",
+          "Central-government delegations",
           "official signings",
           "inter-institutional exchanges"
         ]
@@ -425,7 +425,7 @@ window.WORLD = {
         "title": "Gobierno e instituciones",
         "body": "«Ojalá el próximo viaje coincida con su agenda: le necesitamos.» — Coordinador de delegación gubernamental",
         "tags": [
-          "Delegaciones ministeriales",
+          "Delegaciones del gobierno central",
           "firmas de acuerdos oficiales",
           "intercambios interinstitucionales"
         ]

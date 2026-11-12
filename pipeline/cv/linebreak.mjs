@@ -131,7 +131,7 @@ export function lbInfo(s, opts) {
       n.add(m.index + k);
     }
   });
-  // country marker + institution (대만 행정원), person + title (양수륜 회장)
+  // country marker + institution (대만 행정원), person + title (○○○ 이사장)
   each(/(?:^|[\s・·(（])(?:대만|한국|주한|대만의) (?=\S)/g, s, m => tieSpace(n, m.index + m[0].length - 1));
   // a month stays with what follows it: 11 月教育部…, 11월 대만…, 5 月 NTCU…
   each(/\d{1,2} ?[月월](?= ?[^\s\d・·,，、。）)])/g, s, m => { const e = m.index + m[0].length; if (s[e] === ' ') tieSpace(n, e); else n.add(e); });

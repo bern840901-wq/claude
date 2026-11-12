@@ -779,7 +779,6 @@ const TERMS = [
 "桃園國際機場股份有限公司",
 "桃園機場",
 "案件",
-"梁序倫",
 "業務",
 "業務代理",
 "業務代表",
@@ -1254,7 +1253,6 @@ const TERMS = [
 "跳過",
 "身側",
 "身分",
-"車海營",
 "軟體",
 "輔助",
 "輪廓",
@@ -1425,7 +1423,6 @@ const TERMS = [
 "高階",
 "髮廊",
 "麻浦區",
-"麻浦區廳",
 "點擊",
 "龍豪蔥抓餅",
 "亞洲",
@@ -1518,7 +1515,38 @@ const TERMS = [
 "教育雲端平台",
 "課程體系",
 "造訪",
-"再度"
+"再度",
+"公共事務",
+"體育",
+"經貿",
+"麻浦區議會",
+"議員",
+"麻浦區議員",
+"採訪中",
+"結識",
+"親自主持",
+"主持",
+"這場",
+"邀我",
+"會中",
+"參政案例",
+"參政",
+"案例",
+"政治參與案例",
+"負責",
+"臺灣場次",
+"場次",
+"政治人物",
+"韓文譯名",
+"譯名",
+"選舉用語",
+"選舉",
+"對照表",
+"村里長",
+"立法委員",
+"彩虹選民指南",
+"選民服務",
+"輿情監測"
 ];
 // Multi-word names that must stay on one line, any language.
 const NAMES = [
@@ -1659,7 +1687,12 @@ const NAMES = [
  "grado en inglés",
  "español C1",
  "Doctorando en Lingüística Coreana",
- "BA in English, C1 Spanish"
+ "BA in English, C1 Spanish",
+ "프라이드 온 더 파티",
+ "무지개 유권자 가이드",
+ "Mapo District",
+ "jefe de aldea o de barrio",
+ "distrito de Mapo"
 ];
 
 const HAN = /[㐀-鿿豈-﫿]/;
@@ -1775,7 +1808,7 @@ function lbInfo(s, opts) {
       n.add(m.index + k);
     }
   });
-  // country marker + institution (대만 행정원), person + title (양수륜 회장)
+  // country marker + institution (대만 행정원), person + title (○○○ 이사장)
   each(/(?:^|[\s・·(（])(?:대만|한국|주한|대만의) (?=\S)/g, s, m => tieSpace(n, m.index + m[0].length - 1));
   // a month stays with what follows it: 11 月教育部…, 11월 대만…, 5 月 NTCU…
   each(/\d{1,2} ?[月월](?= ?[^\s\d・·,，、。）)])/g, s, m => { const e = m.index + m[0].length; if (s[e] === ' ') tieSpace(n, e); else n.add(e); });

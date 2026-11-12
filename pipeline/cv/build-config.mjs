@@ -14,25 +14,25 @@ const SITE = 'https://twkrpuente.web.app/home/';
 // Hand-checked verbatim segmentations (the site's own '・' / ' · ' / '·' separators).
 const strengthTags = {
   zh: [
-    ['部會首長訪團', '官方協定簽署', '跨國機構交流'],
+    ['中央部會訪團', '官方協定簽署', '跨國機構交流'],
     ['工廠驗貨', '技術洽談', '商機媒合', '品牌在地化'],
     ['電視台系列採訪', '名人專訪', '字幕翻譯', '拍攝現場'],
     ['國際展館接待', '文化節隨隊', '藝術表演巡迴'],
   ],
   ko: [
-    ['부처 장·차관 방문단', '공식 협약 서명', '국제기관 교류'],
+    ['중앙부처 방문단', '공식 협약 서명', '국제기관 교류'],
     ['공장 검수', '기술 협의', '비즈니스 매칭', '브랜드 현지화'],
     ['방송 시리즈 취재', '단독 인터뷰', '자막 번역', '촬영 현장'],
     ['국제 전시 부스', '문화 축제 동행', '예술 공연 투어'],
   ],
   en: [
-    ['Ministerial delegations', 'official signings', 'inter-institutional exchanges'],
+    ['Central-government delegations', 'official signings', 'inter-institutional exchanges'],
     ['Factory inspections', 'technical talks', 'matchmaking', 'brand localization'],
     ['TV series reporting', 'exclusive interviews', 'subtitles', 'on-site filming'],
     ["Int'l expo hosting", 'festival escort', 'arts touring'],
   ],
   es: [
-    ['Delegaciones ministeriales', 'firmas de acuerdos oficiales', 'intercambios interinstitucionales'],
+    ['Delegaciones del gobierno central', 'firmas de acuerdos oficiales', 'intercambios interinstitucionales'],
     ['Inspección de fábrica', 'consultas técnicas', 'matchmaking empresarial', 'localización de marca'],
     ['Reportajes de TV en serie', 'entrevistas exclusivas', 'subtítulos', 'rodajes in situ'],
     ['Atención en ferias internacionales', 'acompañamiento en festivales', 'giras artísticas'],

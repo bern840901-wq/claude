@@ -40,7 +40,7 @@
    },
    "what": {
     "zh": "Google for Education 韓國區負責人口譯 — 2026 年 5 月 NTCU × 國科會研修團會面・11 月教育部考察團 AI in Education 工作坊",
-    "ko": "Google for Education 한국 총괄 통역 — 2026년 5월 대만 NTCU × NSTC 연수단 면담・11월 대만 교육부 시찰단 AI in Education 워크숍",
+    "ko": "Google for Education 한국 총괄의 통역 — 2026년 5월 대만 NTCU × NSTC 연수단 면담・11월 대만 교육부 시찰단 AI in Education 워크숍",
     "en": "Interpreter for the Head of Google for Education Korea — May 2026, meeting with the NTCU × NSTC delegation (Taiwan) · November 2026, AI in Education workshop for the Ministry of Education delegation (Taiwan)",
     "es": "Intérprete de la responsable de Google for Education en Corea — mayo de 2026, reunión con la delegación de la NTCU y el NSTC (Taiwán) · noviembre de 2026, taller AI in Education para la delegación del Ministerio de Educación (Taiwán)"
    }
@@ -49,7 +49,7 @@
    "year": "2026",
    "who": {
     "zh": "法務部矯正署副署長",
-    "ko": "대만 법무부 교정서 부서장(차장급)",
+    "ko": "대만 법무부 교정서 부서장(副署長·차장급)",
     "en": "Deputy Director-General, Agency of Corrections, Ministry of Justice (Taiwan)",
     "es": "Subdirector general de la Agencia de Instituciones Penitenciarias, Ministerio de Justicia (Taiwán)"
    },
@@ -85,7 +85,7 @@
    },
    "what": {
     "zh": "115年韓國人力資源發展機構業務運作考察團 — NHI・LOGODI・成均館大學",
-    "ko": "2026년 한국 인적자원개발기관 업무 운영 방한 시찰단 — NHI・LOGODI・성균관대",
+    "ko": "2026년 한국 인적자원개발기관 업무 운영 방한 시찰단 — 인사혁신처 국가공무원인재개발원・행정안전부 지방자치인재개발원・성균관대 국정전문대학원",
     "en": "2026 study delegation on Korea's human-resource development institutions — NHI · LOGODI · Sungkyunkwan University",
     "es": "Delegación de estudio 2026 sobre las instituciones coreanas de desarrollo de recursos humanos — NHI · LOGODI · Universidad Sungkyunkwan"
    }
@@ -100,7 +100,7 @@
    },
    "what": {
     "zh": "訪韓 — NIIED・KICE・KEDI 三場拜會",
-    "ko": "방한 — NIIED·KICE·KEDI 3개 기관 방문",
+    "ko": "방한 — 국립국제교육원·한국교육과정평가원·한국교육개발원 방문",
     "en": "Korea visit — NIIED · KICE · KEDI",
     "es": "Visita a Corea — NIIED · KICE · KEDI"
    }
@@ -142,7 +142,7 @@
    "esc",
    "government",
    "法務部矯正署副署長率團 訪首爾南部看守所 — 115年韓國矯正機關科技設備輔助戒護管理暨受刑人階段處遇與差別化戒護風險管理制度考察團 隨行口譯",
-   "대만 법무부 교정서 부서장(차장급) 인솔 서울남부구치소 방문 — 2026년 한국 교정기관 전자장비 활용 계호 관리 및 수형자 단계별 처우·차별화 계호 위험관리 제도 방한 시찰단 수행 통역",
+   "대만 법무부 교정서 부서장(副署長·차장급) 인솔 서울남부구치소 방문 — 2026년 한국 교정기관 전자장비 활용 계호 관리 및 수형자 단계별 처우·차별화 계호 위험관리 제도 방한 시찰단 수행 통역",
    "Agency of Corrections, Ministry of Justice (Taiwan) — delegation led by the Deputy Director-General at Seoul Nambu Detention Center: 2026 study delegation on technology-assisted custodial management, staged inmate treatment and differentiated custodial risk management in Korean correctional institutions — escort interpreting"
   ],
   [
@@ -253,8 +253,8 @@
    2026,
    "int",
    "media",
-   "臺北流行音樂中心（北流／Taipei Music Center） × 韓國朝鮮日報 梁序倫董事長 視訊專訪口譯（中譯韓逐步）",
-   "조선일보 × 타이베이 뮤직 센터(Taipei Music Center) 양수륜 회장 화상 단독 인터뷰 통역 (중→한 순차)",
+   "韓國朝鮮日報 × 臺北流行音樂中心（北流／Taipei Music Center）董事長 視訊專訪口譯（中譯韓逐步）",
+   "조선일보 × 타이베이 뮤직 센터(Taipei Music Center) 이사장 화상 단독 인터뷰 통역 (중→한 순차)",
    "Chosun Ilbo (Korea) × Taipei Music Center — Chairman's Exclusive Video Interview (ZH→KO Consecutive)"
   ],
   [
@@ -333,16 +333,16 @@
    2026,
    "esc",
    "government",
-   "韓國國際教育院（NIIED）拜會・NAER 訪韓團",
-   "한국국제교육원(NIIED) 방문 수행・대만 NAER 방한단",
+   "韓國國立國際教育院（NIIED）拜會・NAER 訪韓團",
+   "국립국제교육원(NIIED) 방문 수행・대만 NAER 방한단",
    "NIIED (National Institute for International Education, Korea) — NAER (Taiwan) delegation"
   ],
   [
    2026,
    "esc",
    "government",
-   "臺灣國家教育研究院（NAER）訪韓 — 國際教育評比業務參訪暨公費留學政策轉型考察（國立國際教育院 NIIED・教育課程評鑑院 KICE・教育開發院 KEDI）",
-   "대만 국가교육연구원(NAER) 방한 — 국제 교육평가 관련 기관 방문 및 국비유학 정책 전환 고찰 (국립국제교육원 NIIED·한국교육과정평가원 KICE·한국교육개발원 KEDI)",
+   "臺灣國家教育研究院（NAER）訪韓 — 國際教育評比業務參訪暨公費留學政策轉型考察（韓國國立國際教育院 NIIED・韓國教育課程評鑑院 KICE・韓國教育開發院 KEDI）",
+   "대만 국가교육연구원(NAER) 방한 — 국제 교육평가 관련 기관 방문 및 국비유학 정책 전환 시찰 (국립국제교육원 NIIED·한국교육과정평가원 KICE·한국교육개발원 KEDI)",
    "NAER (Taiwan) Korea Visit — International Assessment Agencies & Government Scholarship Policy Reform (NIIED · KICE · KEDI)"
   ],
   [
@@ -350,7 +350,7 @@
    "esc",
    "government",
    "國立臺中教育大學（NTCU）智慧教育中心 × 國科會人文處數學教育學門 首爾教育科技國際研修代表團",
-   "대만 국립타이중교육대학교(NTCU) 스마트교육센터 × 국가과학기술위원회(NSTC) 수학교육 분야 서울 교육기술 국제연수 대표단",
+   "대만 국립타이중교육대학교(NTCU) 스마트교육센터 × 대만 국가과학기술위원회(NSTC) 수학교육 분야 서울 교육기술 국제연수 대표단",
    "NTCU (Taiwan) Smart Education Center × NSTC Mathematics Education Division — Seoul EdTech Training Delegation"
   ],
   [
@@ -374,7 +374,7 @@
    "esc",
    "government",
    "KERIS 首爾 Edtech 軟體實驗室 機構參訪（建國大學）・NTCU × 國科會研修團",
-   "KERIS 서울 에듀테크 소프트랩 기관 참관（건국대）・대만 NTCU × NSTC 연수단",
+   "KERIS 서울 에듀테크 소프트랩 기관 참관(건국대)・대만 NTCU × NSTC 연수단",
    "KERIS Seoul EdTech Software Lab (Konkuk Univ.) — NTCU × NSTC (Taiwan) delegation"
   ],
   [
@@ -414,7 +414,7 @@
    "esc",
    "government",
    "台韓 AI 數學教育 國際學術論壇（國科會 × 弘益大學）",
-   "한국-대만 AI 수학교육 국제 학술포럼（NSTC × 홍익대）",
+   "한국-대만 AI 수학교육 국제 학술포럼(NSTC × 홍익대)",
    "Taiwan–Korea International Academic Forum on AI Mathematics Education (NSTC (Taiwan) × Hongik Univ., Korea)"
   ],
   [
@@ -461,9 +461,9 @@
    2026,
    "int",
    "government",
-   "韓國麻浦區廳 車海營 區議員 專訪・《消失的國界》",
-   "마포구 차해영 구의원 인터뷰・<THE BORDERLESS WORLD>",
-   "Councilor Cha Hae-young, Mapo (Korea) — Interview ('The Borderless World')"
+   "韓國麻浦區議會 區議員 專訪・《消失的國界》",
+   "마포구 구의원 인터뷰・<THE BORDERLESS WORLD>",
+   "Mapo District Councilor (Korea) — Interview ('The Borderless World')"
   ],
   [
    2026,
@@ -478,7 +478,7 @@
    "int",
    "government",
    "韓國江原道華川郡 郡守 專訪・《消失的國界》",
-   "강원도 화천군 군수 인터뷰・<THE BORDERLESS WORLD>",
+   "강원특별자치도 화천군 군수 인터뷰・<THE BORDERLESS WORLD>",
    "Hwacheon County Governor (Korea) — Interview ('The Borderless World')"
   ],
   [
@@ -534,7 +534,7 @@
    "sub",
    "media",
    "文策院 TCCF 創意內容大會紀實影片 字幕（韓→中）",
-   "대만콘텐츠진흥원(TAICCA) TCCF 컨퍼런스 다큐 자막 번역（한→중）",
+   "대만콘텐츠진흥원(TAICCA) TCCF 컨퍼런스 다큐 자막 번역(한→중)",
    "TAICCA (Taiwan) TCCF Documentary — Subtitles (KR→ZH)"
   ],
   [
@@ -582,7 +582,7 @@
    "evt",
    "business",
    "D.O. Monsant Seoul Grand Tasting 首爾品酒會（西-韓）",
-   "D.O. 몬산트 서울 그랜드 테이스팅（스페인어-한국어）",
+   "D.O. 몬산트 서울 그랜드 테이스팅(스페인어-한국어)",
    "D.O. Monsant Seoul Tasting — ES-KR Interpretation"
   ],
   [
@@ -638,7 +638,7 @@
    "exh",
    "exhibition",
    "韓國 IFS 連鎖加盟展 臺灣館（TAITRA 首爾）",
-   "IFS 프랜차이즈 박람회 대만관（TAITRA 서울）",
+   "IFS 프랜차이즈 박람회 대만관(TAITRA 서울)",
    "IFS Franchise Expo Korea — Taiwan Pavilion"
   ],
   [
@@ -694,7 +694,7 @@
    "exh",
    "exhibition",
    "韓國國際留學移民博覽會 駐韓國台北代表部",
-   "한국 해외이민유학박람회 주한국대만대표부",
+   "한국 해외이민유학박람회 주한국타이베이대표부",
    "Korea Study/Migration Expo — Taipei Mission in Korea"
   ],
   [
@@ -702,7 +702,7 @@
    "exh",
    "business",
    "SIMTOS 首爾國際製造技術展 臺灣館（心源 SYIC）",
-   "킨텍스 SIMTOS 대만관（SYIC）",
+   "킨텍스 SIMTOS 대만관(SYIC)",
    "SIMTOS Seoul Mfg. Tech Expo — Taiwan Pavilion"
   ],
   [
@@ -718,7 +718,7 @@
    "rep",
    "business",
    "SUPERLINK 遊戲公司 臺灣業務（韓中翻譯·CS, 2020–2022）",
-   "(주)슈퍼링크 게임사 대만 업무（한중 번역·CS）",
+   "(주)슈퍼링크 게임사 대만 업무(한중 번역·CS)",
    "SUPERLINK Mobile Games — Taiwan Business Lead"
   ],
   [
@@ -734,7 +734,7 @@
    "esc",
    "government",
    "駐韓國台北代表部 × 警政署 × 仁川海關 訪問",
-   "주한국대만대표부 × 대만 경찰청 × 인천세관 방문",
+   "주한국타이베이대표부 × 대만 경찰청 × 인천세관 방문",
    "Taipei Mission in Korea × Taiwan National Police Agency × Incheon Customs"
   ],
   [
@@ -750,7 +750,7 @@
    "evt",
    "government",
    "駐臺北韓國代表部《韓-臺文化交流饗宴》",
-   "주타이베이한국대표부 <한-대만 문화교류향연>",
+   "주타이베이대한민국대표부 <한-대만 문화교류향연>",
    "Korean Office Taipei — Korea-Taiwan Festival"
   ],
   [
@@ -790,7 +790,7 @@
    "evt",
    "exhibition",
    "韓國安東國際假面舞節 中文隨隊",
-   "안동탈춤축제 한중 통역",
+   "안동국제탈춤페스티벌 한중 통역",
    "Andong Mask Dance Festival (Korea) — Chinese Interpreter"
   ],
   [
@@ -871,7 +871,7 @@
    },
    "deg": {
     "zh": "應用外語系（主修英語）學士",
-    "ko": "응용외국어학과（영어 전공）학사",
+    "ko": "응용외국어학과(영어 전공) 학사",
     "en": "BA, Applied Foreign Languages (English)",
     "es": "Lic. en Lenguas Extranjeras Aplicadas (Inglés)"
    },
@@ -909,7 +909,7 @@
    },
    "level": {
     "zh": "<strong style=\"color:var(--ac,#E8410E);font-weight:700\">專業口譯工作語言</strong> · 韓語語言學博士候選人（慶熙大學）· 韓國語教員資格證 2 級 · TOPIK II 6 級最高級",
-    "ko": "<strong style=\"color:var(--ac,#E8410E);font-weight:700\">전문 통역 작업 언어</strong> · 한국어학 박사수료（경희대）· 국립국어원 한국어교원 2급 · TOPIK II 6급 최고급",
+    "ko": "<strong style=\"color:var(--ac,#E8410E);font-weight:700\">전문 통역 작업 언어</strong> · 한국어학 박사수료(경희대) · 국립국어원 한국어교원 2급 · TOPIK II 6급 최고급",
     "en": "<strong style=\"color:var(--ac,#E8410E);font-weight:700\">Full Professional Working Language</strong> · PhD Candidate in Korean Linguistics (Kyung Hee) · Korean Teacher Certificate Lv.2 · TOPIK II Level 6 (Highest)",
     "es": "<strong style=\"color:var(--ac,#E8410E);font-weight:700\">Lengua de trabajo profesional</strong> · Doctorando en Lingüística Coreana (Kyung Hee) · Certificado de Docente de Coreano Nivel 2 · TOPIK II Nivel 6 (máximo)"
    }
@@ -1100,27 +1100,12 @@
  "CLIENTS": [
   {
    "title": {
-    "zh": "政府・官方機構",
-    "ko": "정부·공공기관",
-    "en": "Government & Institutions",
-    "es": "Gobierno e instituciones"
+    "zh": "教育・學術",
+    "ko": "교육·학술",
+    "en": "Education & Academia",
+    "es": "Educación y academia"
    },
    "items": [
-    {
-     "tier": 1,
-     "name": {
-      "zh": "駐韓國台北代表部",
-      "ko": "주한국대만대표부",
-      "en": "Taipei Mission in Korea",
-      "es": "Oficina de Taipéi en Corea"
-     },
-     "sub": {
-      "zh": "臺灣外交代表機構 · 等同大使館",
-      "ko": "대만 외교 대표 기관 · 대사관 기능",
-      "en": "Taiwan's de facto Embassy",
-      "es": "Embajada de facto de Taiwán"
-     }
-    },
     {
      "tier": 1,
      "name": {
@@ -1134,221 +1119,6 @@
       "ko": "정보·과학기술교육국",
       "en": "Dept. of Information & Technology Education",
       "es": "Depto. de Educación en Información y Tecnología"
-     }
-    },
-    {
-     "tier": 1,
-     "name": {
-      "zh": "桃園國際機場公司",
-      "ko": "타오위안 국제공항공사",
-      "en": "Taoyuan Int'l Airport",
-      "es": "Aeropuerto de Taoyuan"
-     },
-     "sub": {
-      "zh": "",
-      "ko": "",
-      "en": "",
-      "es": ""
-     }
-    },
-    {
-     "tier": 1,
-     "name": {
-      "zh": "文化內容策進院",
-      "ko": "대만콘텐츠진흥원",
-      "en": "TAICCA",
-      "es": "TAICCA"
-     },
-     "sub": {
-      "zh": "TAICCA",
-      "ko": "TAICCA",
-      "en": "Content Agency",
-      "es": "Contenidos Culturales"
-     }
-    },
-    {
-     "tier": 2,
-     "name": {
-      "zh": "數位發展部",
-      "ko": "대만 디지털부",
-      "en": "Ministry of Digital Affairs",
-      "es": "Min. Digital de Taiwán"
-     },
-     "sub": {
-      "zh": "moda × 資策會",
-      "ko": "moda × 정보산업연구원",
-      "en": "moda × III",
-      "es": "moda × III"
-     }
-    },
-    {
-     "tier": 2,
-     "name": {
-      "zh": "國家科學及技術委員會",
-      "ko": "국가과학기술위원회",
-      "en": "NSTC",
-      "es": "NSTC"
-     },
-     "sub": {
-      "zh": "NSTC",
-      "ko": "NSTC",
-      "en": "Science & Tech",
-      "es": "Ciencia y Tecnología"
-     }
-    },
-    {
-     "tier": 2,
-     "name": {
-      "zh": "中華職棒 CPBL",
-      "ko": "대만 프로야구 CPBL",
-      "en": "Taiwan CPBL",
-      "es": "Liga CPBL de Taiwán"
-     },
-     "sub": {
-      "zh": "× 韓國職棒 KBO",
-      "ko": "× 한국 프로야구 KBO",
-      "en": "× Korea KBO",
-      "es": "× KBO de Corea"
-     }
-    },
-    {
-     "tier": 2,
-     "name": {
-      "zh": "韓國教育學術資訊院",
-      "ko": "한국교육학술정보원",
-      "en": "KERIS",
-      "es": "KERIS"
-     },
-     "sub": {
-      "zh": "KERIS",
-      "ko": "KERIS",
-      "en": "Education Info",
-      "es": "Info. Educativa"
-     }
-    },
-    {
-     "tier": 2,
-     "name": {
-      "zh": "法務部矯正署",
-      "ko": "대만 법무부 교정서",
-      "en": "Agency of Corrections (Taiwan)",
-      "es": "Agencia de Instituciones Penitenciarias (Taiwán)"
-     },
-     "sub": {
-      "zh": "",
-      "ko": "",
-      "en": "Ministry of Justice",
-      "es": "Ministerio de Justicia"
-     }
-    }
-   ]
-  },
-  {
-   "title": {
-    "zh": "媒體・文化內容",
-    "ko": "미디어·문화 콘텐츠",
-    "en": "Media & Culture",
-    "es": "Medios y cultura"
-   },
-   "items": [
-    {
-     "tier": 1,
-     "name": {
-      "zh": "三立電視 SETN",
-      "ko": "삼립텔레비전 SETN",
-      "en": "SETN Taiwan",
-      "es": "SETN Taiwán"
-     },
-     "sub": {
-      "zh": "《消失的國界》",
-      "ko": "<THE BORDERLESS WORLD>",
-      "en": "'The Borderless World'",
-      "es": "'The Borderless World'"
-     }
-    },
-    {
-     "tier": 1,
-     "name": {
-      "zh": "CJ ENM",
-      "ko": "CJ ENM",
-      "en": "CJ ENM",
-      "es": "CJ ENM"
-     },
-     "sub": {
-      "zh": "",
-      "ko": "",
-      "en": "",
-      "es": ""
-     }
-    },
-    {
-     "tier": 1,
-     "name": {
-      "zh": "釜山國際影展",
-      "ko": "부산국제영화제",
-      "en": "Busan Int'l Film Festival",
-      "es": "Festival de Cine de Busan"
-     },
-     "sub": {
-      "zh": "BIFF · ACFM",
-      "ko": "BIFF · ACFM",
-      "en": "BIFF · ACFM",
-      "es": "BIFF · ACFM"
-     }
-    },
-    {
-     "tier": 2,
-     "name": {
-      "zh": "韓國國立國樂院",
-      "ko": "국립국악원",
-      "en": "National Gugak Center",
-      "es": "Inst. Nacional de Música Coreana"
-     },
-     "sub": {
-      "zh": "× 國立臺灣國樂團",
-      "ko": "× 대만 국립타이완국악단",
-      "en": "× NCFTA Taiwan",
-      "es": "× NCFTA Taiwán"
-     }
-    },
-    {
-     "tier": 2,
-     "name": {
-      "zh": "STUDIO DRAGON",
-      "ko": "STUDIO DRAGON",
-      "en": "STUDIO DRAGON",
-      "es": "STUDIO DRAGON"
-     },
-     "sub": {
-      "zh": "",
-      "ko": "",
-      "en": "",
-      "es": ""
-     }
-    }
-   ]
-  },
-  {
-   "title": {
-    "zh": "教育・學術機構",
-    "ko": "교육·학술기관",
-    "en": "Education & Academia",
-    "es": "Educación y academia"
-   },
-   "items": [
-    {
-     "tier": 1,
-     "name": {
-      "zh": "Google Korea",
-      "ko": "Google Korea",
-      "en": "Google Korea",
-      "es": "Google Korea"
-     },
-     "sub": {
-      "zh": "Google for Education",
-      "ko": "Google for Education",
-      "en": "Google for Education",
-      "es": "Google for Education"
      }
     },
     {
@@ -1369,6 +1139,21 @@
     {
      "tier": 1,
      "name": {
+      "zh": "Google Korea",
+      "ko": "Google Korea",
+      "en": "Google Korea",
+      "es": "Google Korea"
+     },
+     "sub": {
+      "zh": "Google for Education",
+      "ko": "Google for Education",
+      "en": "Google for Education",
+      "es": "Google for Education"
+     }
+    },
+    {
+     "tier": 1,
+     "name": {
       "zh": "實踐大學",
       "ko": "대만 실천대학교",
       "en": "Shih Chien University",
@@ -1384,16 +1169,31 @@
     {
      "tier": 2,
      "name": {
-      "zh": "天才教育",
-      "ko": "천재교육",
-      "en": "Chunjae Education",
-      "es": "Chunjae Education"
+      "zh": "國家科學及技術委員會",
+      "ko": "대만 국가과학기술위원회",
+      "en": "NSTC",
+      "es": "NSTC"
      },
      "sub": {
-      "zh": "Chunjae",
-      "ko": "Chunjae",
-      "en": "Chunjae",
-      "es": "Chunjae"
+      "zh": "NSTC",
+      "ko": "NSTC",
+      "en": "Science & Tech",
+      "es": "Ciencia y Tecnología"
+     }
+    },
+    {
+     "tier": 2,
+     "name": {
+      "zh": "韓國教育學術資訊院",
+      "ko": "한국교육학술정보원",
+      "en": "KERIS",
+      "es": "KERIS"
+     },
+     "sub": {
+      "zh": "KERIS",
+      "ko": "KERIS",
+      "en": "Education Info",
+      "es": "Info. Educativa"
      }
     },
     {
@@ -1410,30 +1210,245 @@
       "en": "SNUE",
       "es": "SNUE"
      }
+    },
+    {
+     "tier": 2,
+     "name": {
+      "zh": "天才教育",
+      "ko": "천재교육",
+      "en": "Chunjae Education",
+      "es": "Chunjae Education"
+     },
+     "sub": {
+      "zh": "Chunjae",
+      "ko": "Chunjae",
+      "en": "Chunjae",
+      "es": "Chunjae"
+     }
     }
    ]
   },
   {
    "title": {
-    "zh": "企業・產業品牌",
-    "ko": "기업·산업 브랜드",
-    "en": "Corporate & Brands",
-    "es": "Empresas y marcas"
+    "zh": "政府・公共事務",
+    "ko": "정부·공공",
+    "en": "Government & Public Affairs",
+    "es": "Gobierno y asuntos públicos"
    },
    "items": [
     {
      "tier": 1,
      "name": {
-      "zh": "臺灣貿易中心",
-      "ko": "대만무역센터",
-      "en": "TAITRA",
-      "es": "TAITRA"
+      "zh": "駐韓國台北代表部",
+      "ko": "주한국타이베이대표부",
+      "en": "Taipei Mission in Korea",
+      "es": "Oficina de Taipéi en Corea"
      },
      "sub": {
-      "zh": "TAITRA",
-      "ko": "TAITRA",
-      "en": "Trade Center",
-      "es": "Comercio Taiwán"
+      "zh": "臺灣外交代表機構 · 等同大使館",
+      "ko": "대만 외교 대표 기관 · 대사관 기능",
+      "en": "Taiwan's de facto Embassy",
+      "es": "Embajada de facto de Taiwán"
+     }
+    },
+    {
+     "tier": 1,
+     "name": {
+      "zh": "公務人力發展學院",
+      "ko": "대만 공무인력발전학원",
+      "en": "Civil Service Development Institute",
+      "es": "Instituto de Desarrollo del Servicio Civil"
+     },
+     "sub": {
+      "zh": "行政院人事行政總處 · CSDI",
+      "ko": "행정원 인사행정총처 · CSDI",
+      "en": "Executive Yuan (Taiwan) · CSDI",
+      "es": "Yuan Ejecutivo (Taiwán) · CSDI"
+     }
+    },
+    {
+     "tier": 1,
+     "name": {
+      "zh": "桃園國際機場公司",
+      "ko": "타오위안 국제공항공사",
+      "en": "Taoyuan Int'l Airport",
+      "es": "Aeropuerto de Taoyuan"
+     },
+     "sub": {
+      "zh": "× 仁川國際機場公社",
+      "ko": "× 인천국제공항공사",
+      "en": "× Incheon Int'l Airport",
+      "es": "× Aeropuerto de Incheon"
+     }
+    },
+    {
+     "tier": 2,
+     "name": {
+      "zh": "法務部矯正署",
+      "ko": "대만 법무부 교정서",
+      "en": "Agency of Corrections (Taiwan)",
+      "es": "Agencia de Instituciones Penitenciarias (Taiwán)"
+     },
+     "sub": {
+      "zh": "",
+      "ko": "",
+      "en": "Ministry of Justice",
+      "es": "Ministerio de Justicia"
+     }
+    },
+    {
+     "tier": 2,
+     "name": {
+      "zh": "臺南市政府",
+      "ko": "대만 타이난시청",
+      "en": "Tainan City Government (Taiwan)",
+      "es": "Gobierno de la Ciudad de Tainan (Taiwán)"
+     },
+     "sub": {
+      "zh": "× 韓國忠清南道廳",
+      "ko": "× 충청남도청",
+      "en": "× Chungcheongnam-do",
+      "es": "× Chungcheongnam-do"
+     }
+    }
+   ]
+  },
+  {
+   "title": {
+    "zh": "影視・文化・體育",
+    "ko": "영상·문화·스포츠",
+    "en": "Media, Culture & Sports",
+    "es": "Medios, cultura y deporte"
+   },
+   "items": [
+    {
+     "tier": 1,
+     "name": {
+      "zh": "文化內容策進院",
+      "ko": "대만콘텐츠진흥원",
+      "en": "TAICCA",
+      "es": "TAICCA"
+     },
+     "sub": {
+      "zh": "TAICCA",
+      "ko": "TAICCA",
+      "en": "Content Agency",
+      "es": "Contenidos Culturales"
+     }
+    },
+    {
+     "tier": 1,
+     "name": {
+      "zh": "釜山國際影展",
+      "ko": "부산국제영화제",
+      "en": "Busan Int'l Film Festival",
+      "es": "Festival de Cine de Busan"
+     },
+     "sub": {
+      "zh": "BIFF · ACFM",
+      "ko": "BIFF · ACFM",
+      "en": "BIFF · ACFM",
+      "es": "BIFF · ACFM"
+     }
+    },
+    {
+     "tier": 1,
+     "name": {
+      "zh": "CJ ENM",
+      "ko": "CJ ENM",
+      "en": "CJ ENM",
+      "es": "CJ ENM"
+     },
+     "sub": {
+      "zh": "",
+      "ko": "",
+      "en": "",
+      "es": ""
+     }
+    },
+    {
+     "tier": 1,
+     "name": {
+      "zh": "三立電視 SETN",
+      "ko": "대만 SETN",
+      "en": "SETN Taiwan",
+      "es": "SETN Taiwán"
+     },
+     "sub": {
+      "zh": "《消失的國界》",
+      "ko": "<THE BORDERLESS WORLD>",
+      "en": "'The Borderless World'",
+      "es": "'The Borderless World'"
+     }
+    },
+    {
+     "tier": 2,
+     "name": {
+      "zh": "STUDIO DRAGON",
+      "ko": "STUDIO DRAGON",
+      "en": "STUDIO DRAGON",
+      "es": "STUDIO DRAGON"
+     },
+     "sub": {
+      "zh": "",
+      "ko": "",
+      "en": "",
+      "es": ""
+     }
+    },
+    {
+     "tier": 2,
+     "name": {
+      "zh": "韓國國立國樂院",
+      "ko": "국립국악원",
+      "en": "National Gugak Center",
+      "es": "Inst. Nacional de Música Coreana"
+     },
+     "sub": {
+      "zh": "× 國立臺灣國樂團",
+      "ko": "× 대만 국립타이완국악단",
+      "en": "× NCFTA Taiwan",
+      "es": "× NCFTA Taiwán"
+     }
+    },
+    {
+     "tier": 2,
+     "name": {
+      "zh": "中華職棒 CPBL",
+      "ko": "대만 프로야구 CPBL",
+      "en": "Taiwan CPBL",
+      "es": "Liga CPBL de Taiwán"
+     },
+     "sub": {
+      "zh": "× 韓國職棒 KBO",
+      "ko": "× 한국 프로야구 KBO",
+      "en": "× Korea KBO",
+      "es": "× KBO de Corea"
+     }
+    }
+   ]
+  },
+  {
+   "title": {
+    "zh": "經貿・產業",
+    "ko": "무역·산업",
+    "en": "Trade & Industry",
+    "es": "Comercio e industria"
+   },
+   "items": [
+    {
+     "tier": 1,
+     "name": {
+      "zh": "經濟部國際貿易署 × 外貿協會",
+      "ko": "대만 경제부 국제무역서 × 대만무역센터",
+      "en": "International Trade Administration × TAITRA",
+      "es": "Administración de Comercio Internacional × TAITRA"
+     },
+     "sub": {
+      "zh": "TITA × TAITRA",
+      "ko": "TITA × TAITRA",
+      "en": "TITA, Ministry of Economic Affairs (Taiwan)",
+      "es": "TITA, Ministerio de Asuntos Económicos (Taiwán)"
      }
     },
     {
@@ -1464,6 +1479,21 @@
       "ko": "대만 독점 오프라인 대리점",
       "en": "Exclusive Offline Distributor, Taiwan",
       "es": "Distribuidor exclusivo offline Taiwán"
+     }
+    },
+    {
+     "tier": 2,
+     "name": {
+      "zh": "數位發展部",
+      "ko": "대만 디지털부",
+      "en": "Ministry of Digital Affairs",
+      "es": "Min. Digital de Taiwán"
+     },
+     "sub": {
+      "zh": "moda × 資策會",
+      "ko": "moda × 정보산업연구원",
+      "en": "moda × III",
+      "es": "moda × III"
      }
     },
     {
@@ -1549,7 +1579,7 @@
     "desc": "비즈니스 매칭·공식 교류·전시 접수"
    },
    {
-    "org": "주한국대만대표부",
+    "org": "주한국타이베이대표부",
     "period": "2020–현재",
     "desc": "대만 외교 대표 기관 · 대사관 기능 · 공식 방문단·정부 교류·현장 지원"
    },
@@ -1897,7 +1927,7 @@
   "SETN (Taiwán) «The Borderless World» — Serie sobre la sociedad coreana",
   "Librería independiente GOL, Mapo — Entrevista («The Borderless World»)",
   "NEWMIX Café soluble — Entrevista de marca («The Borderless World»)",
-  "Concejala Cha Hae-young, Mapo (Corea) — Entrevista («The Borderless World»)",
+  "Concejala del distrito de Mapo (Corea) — Entrevista («The Borderless World»)",
   "Kim Sae-byeol («Move to Heaven») — Entrevista exclusiva («The Borderless World»)",
   "Gobernador del condado de Hwacheon (Corea) — Entrevista («The Borderless World»)",
   "Festival de Hielo de Hwacheon — Rodaje in situ («The Borderless World»)",
