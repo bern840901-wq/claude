@@ -133,6 +133,8 @@ export function lbInfo(s, opts) {
   });
   // country marker + institution (대만 행정원), person + title (양수륜 회장)
   each(/(?:^|[\s・·(（])(?:대만|한국|주한|대만의) (?=\S)/g, s, m => tieSpace(n, m.index + m[0].length - 1));
+  // a month stays with what follows it: 11 月教育部…, 11월 대만…, 5 月 NTCU…
+  each(/\d{1,2} ?[月월](?= ?[^\s\d・·,，、。）)])/g, s, m => { const e = m.index + m[0].length; if (s[e] === ' ') tieSpace(n, e); else n.add(e); });
   // a one-character Chinese word right after an opening bracket stays with what follows: （自 2019 年…
   each(/[（(][\u3400-\u9fff] (?=\S)/g, s, m => tieSpace(n, m.index + m[0].length - 1));
   each(/[가-힣]{2,4} (?=(?:회장|부회장|이사장|사장|부사장|시장|부시장|군수|구청장|교장|총장|원장|대표|차관|장관|대사|국장|처장|청장|의원)(?:$|[\s,·・)]))/g, s, m => tieSpace(n, m.index + m[0].length - 1));
