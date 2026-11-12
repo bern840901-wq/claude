@@ -30,6 +30,7 @@
 - 臺南市政府（2026-11-12 定案）：韓文「대만 타이난시청」（韓國人稱地方政府的習慣，與同列的 충청남도청 對稱；不用直譯的「시정부」）；英文 Tainan City Government (Taiwan)；西文 Gobierno de la Ciudad de Tainan (Taiwán)——照英文官方名翻譯，西語通用；不用 Ayuntamiento（西班牙用語，且在西班牙法律裡包含市議員，臺灣的市政府與市議會是分開的）。Tainan 不加重音（臺灣外交部與 RTI 西語皆寫 Tainan，雖然 Taipéi 有重音）。人的職稱：臺南市副市長／대만 타이난시 부시장／Deputy Mayor of Tainan (Taiwan)／vicealcaldesa de Tainan (Taiwán)。
 - 韓國忠清南道廳：충청남도청；英文 the Chungcheongnam-do Provincial Government (Korea)（句中加 the）；西文 Gobierno Provincial de Chungcheongnam-do (Corea)。舊寫法「忠清道廳／Chungcheong Province」不分南北，已改掉。
 - 文化部次長：英文 Deputy Minister of Culture（文化部與 Taiwan Today 的官方用法；不用 Vice Minister）；西文 viceministra de Cultura；韓文 문화부 차관。文策院董事長由次長兼任時，四語一律寫：文化內容策進院（TAICCA）董事長（由文化部次長兼任）／대만콘텐츠진흥원(TAICCA) 이사장(문화부 차관 겸임)／Chairperson of TAICCA (Taiwan), concurrently Deputy Minister of Culture／Presidenta de TAICCA (Taiwán), a la vez viceministra de Cultura（CV 曾服務對象寫 TAICCA 全名：Taiwan Creative Content Agency／Agencia de Contenidos Creativos de Taiwán）。韓文兼任一律「(○○ 겸임)」，不用「겸임직」。
+- 文化內容策進院：繁中「文化內容策進院（TAICCA）」或「文策院 TAICCA」，括號全形；韓文一律「대만콘텐츠진흥원(TAICCA)」（機關名在前、縮寫在括號，不寫「TAICCA(대만콘텐츠진흥원)」）。台灣之夜（影展酒會）韓文「대만 나이트(Taiwan Night)」，全站韓文一律用「대만」。
 - 釜山國際影展與市場展：釜山國際影展（BIFF）/ 亞洲內容暨電影市場展（ACFM）；부산국제영화제(BIFF) / 아시아콘텐츠&필름마켓(ACFM)；Busan International Film Festival (BIFF) / Asian Contents & Film Market (ACFM)；Festival Internacional de Cine de Busan (BIFF) / Mercado Asiático de Contenidos y Cine (ACFM)。ACFM 全名是「釜山亞洲內容暨電影市場展」，跟在「釜山國際影展」後面時省略第二個「釜山」。
 - 西文職稱照當事人性別（vicealcaldesa、viceministra、presidenta）；新案若不確定長官性別，先問使用者。
 
