@@ -30,6 +30,7 @@
 - 臺南市政府（2026-11-12 定案）：韓文「대만 타이난시청」（韓國人稱地方政府的習慣，與同列的 충청남도청 對稱；不用直譯的「시정부」）；英文 Tainan City Government (Taiwan)；西文 Gobierno de la Ciudad de Tainan (Taiwán)——照英文官方名翻譯，西語通用；不用 Ayuntamiento（西班牙用語，且在西班牙法律裡包含市議員，臺灣的市政府與市議會是分開的）。Tainan 不加重音（臺灣外交部與 RTI 西語皆寫 Tainan，雖然 Taipéi 有重音）。人的職稱：臺南市副市長／대만 타이난시 부시장／Deputy Mayor of Tainan (Taiwan)／vicealcaldesa de Tainan (Taiwán)。
 - 韓國忠清南道廳：충청남도청；英文 the Chungcheongnam-do Provincial Government (Korea)（句中加 the）；西文 Gobierno Provincial de Chungcheongnam-do (Corea)。舊寫法「忠清道廳／Chungcheong Province」不分南北，已改掉。
 - 文化部次長：英文 Deputy Minister of Culture（文化部與 Taiwan Today 的官方用法；不用 Vice Minister）；西文 viceministra de Cultura；韓文 문화부 차관。文策院董事長由次長兼任時，四語一律寫：文化內容策進院（TAICCA）董事長（由文化部次長兼任）／대만콘텐츠진흥원(TAICCA) 이사장(문화부 차관 겸임)／Chairperson of TAICCA (Taiwan), concurrently Deputy Minister of Culture／Presidenta de TAICCA (Taiwán), a la vez viceministra de Cultura（CV 曾服務對象寫 TAICCA 全名：Taiwan Creative Content Agency／Agencia de Contenidos Creativos de Taiwán）。韓文兼任一律「(○○ 겸임)」，不用「겸임직」。
+- 2026-05 臺中教育大學訪韓團：總括列全名「國立臺中教育大學（NTCU）智慧教育中心 × 國科會人文處數學教育學門 首爾教育科技國際研修代表團」；每場列簡稱「NTCU × 國科會研修團」／「대만 NTCU × NSTC 연수단」／「NTCU × NSTC (Taiwan) delegation」／「delegación de la NTCU y el NSTC (Taiwán)」（西文用 y 連接兩個機關）。
 - 文化內容策進院：繁中「文化內容策進院（TAICCA）」或「文策院 TAICCA」，括號全形；韓文一律「대만콘텐츠진흥원(TAICCA)」（機關名在前、縮寫在括號，不寫「TAICCA(대만콘텐츠진흥원)」）。台灣之夜（影展酒會）韓文「대만 나이트(Taiwan Night)」，全站韓文一律用「대만」。
 - 經濟部國際貿易署（2026-11-12 定案）：繁中「經濟部國際貿易署（TITA）」；韓「대만 경제부 국제무역서(TITA)」；英「International Trade Administration (TITA), Ministry of Economic Affairs (Taiwan)」；西「Administración de Comercio Internacional (TITA), Ministerio de Asuntos Económicos (Taiwán)」。縮寫照活動識別證用 TITA（維基百科等寫 ITA）。英西文一定寫出 Ministry of Economic Affairs／Ministerio de Asuntos Económicos，看得出是經濟部的機關。
 - 外貿協會：繁中「外貿協會（TAITRA）」，首爾辦事處「首爾臺灣貿易中心」；韓「대만무역센터(TAITRA)」；英西「TAITRA」，CV 曾服務對象寫全稱 Taiwan External Trade Development Council／Consejo de Desarrollo del Comercio Exterior de Taiwán。
@@ -64,7 +65,7 @@
 
 - `cv_data.json` 的 `FOR`：放在「聯繫」之後、「長期合作」之前，只在 /cv/ 與 PDF（首頁已有精選卡片）。每條：年份（可寫區間）→ 對象（人或機關，粗體）→ 案子一行；四語欄位 `who`／`what`。同一位長官兼兩個職位時合成一條（文化部次長 兼 TAICCA 董事長）。區塊名：曾服務對象 / INTERPRETED FOR・주요 통역 대상 / INTERPRETED FOR・INTERPRETED FOR・HE INTERPRETADO PARA。
 - 時間軸列不因此合併；對象若在列裡看不出來，補進列標題（如 2019 忠清道廳 → 加「臺南市副市長 隨行口譯」）。
-- 曾服務對象是「精選的前幾名」，不是全部列出（2026-11-12 定案）：入選條件為中央部會層級的機關或長官、國營事業、國際級企業，近三年的案子，重複合作的優先；上限約 9 條，超過時換掉排名最後的一條；排序依層級（同 §3b：中央部會 → 所屬機關 → 地方政府 → 國營事業 → 企業），同層先看位階再看日期。未入選的（如中華職棒、鐵道局、警政署、仁川海關）留在時間軸。
+- 曾服務對象是「精選的前幾名」，不是全部列出（2026-11-12 定案）：入選條件為中央部會層級的機關或長官、國營事業、國際級企業，近三年的案子，重複合作的優先；上限約 9 條，超過時換掉排名最後的一條；排序依層級（同 §3b：中央部會 → 所屬機關 → 地方政府 → 國營事業 → 企業），同層先看位階再看日期。未入選的（如中華職棒、鐵道局、警政署、仁川海關）留在時間軸。例外：重複合作的國際級企業可排在中央部會之後（2026-11-12：Google Korea 兩度為 Google for Education 韓國區負責人口譯，排在教育部之後；代表作同樣排在教育部卡之後）。對象寫出口譯對象的職稱（如「Google Korea（Google for Education 韓國區負責人）」），不寫姓名；西文依當事人性別（la responsable）。
 - 同一位長官在不同時期、不同職位都服務過（2026-11-12 定案）：每個職位各列一條（看得出服務過多種官位），兩條各在案件後加一句短註連結：新的一條「（自 2019 年其任臺南市副市長時起即擔任其口譯）」，舊的一條「（同一位長官，後任文化部次長兼文策院董事長）」——用「後任」不用「現任」，長官換職位也不會過時。不寫長官姓名，只寫職稱。
 
 ## 5. 流程

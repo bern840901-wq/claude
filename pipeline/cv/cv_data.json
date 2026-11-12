@@ -33,6 +33,21 @@
   {
    "year": "2026",
    "who": {
+    "zh": "Google Korea（Google for Education 韓國區負責人）",
+    "ko": "Google Korea(Google for Education 한국 총괄)",
+    "en": "Head of Google for Education Korea, Google Korea",
+    "es": "Responsable de Google for Education en Corea, Google Korea"
+   },
+   "what": {
+    "zh": "2026 年 5 月・11 月兩度參訪口譯 — NTCU × 國科會研修團會面・教育部考察團 AI in Education 工作坊",
+    "ko": "2026년 5월·11월 2회 방문 통역 — 대만 NTCU × NSTC 연수단 면담・대만 교육부 시찰단 AI in Education 워크숍",
+    "en": "Interpreting on two visits, May and November 2026 — meeting with the NTCU × NSTC delegation (Taiwan) · AI in Education workshop for the Ministry of Education delegation (Taiwan)",
+    "es": "Interpretación en dos visitas, mayo y noviembre de 2026 — reunión con la delegación de la NTCU y el NSTC (Taiwán) · taller AI in Education para la delegación del Ministerio de Educación (Taiwán)"
+   }
+  },
+  {
+   "year": "2026",
+   "who": {
     "zh": "法務部矯正署副署長",
     "ko": "대만 법무부 교정서 부서장(차장급)",
     "en": "Deputy Director-General, Agency of Corrections, Ministry of Justice (Taiwan)",
@@ -118,21 +133,6 @@
     "ko": "인천국제공항공사(IIAC) 방문",
     "en": "Visit to Incheon International Airport Corporation (IIAC)",
     "es": "Visita a la Corporación del Aeropuerto Internacional de Incheon (IIAC)"
-   }
-  },
-  {
-   "year": "2026",
-   "who": {
-    "zh": "Google Korea",
-    "ko": "Google Korea",
-    "en": "Google Korea",
-    "es": "Google Korea"
-   },
-   "what": {
-    "zh": "Google for Education 韓國區負責人會面・AI in Education 工作坊（NTCU 研修團・教育部考察團）",
-    "ko": "Google for Education 한국 총괄 면담·AI in Education 워크숍(NTCU 연수단·교육부 시찰단)",
-    "en": "Meeting with the Google for Education Korea Director · AI in Education workshop (NTCU and Ministry of Education delegations)",
-    "es": "Reunión con el responsable de Google for Education en Corea · taller AI in Education (delegaciones de la NTCU y del Ministerio de Educación)"
    }
   }
  ],
@@ -365,49 +365,49 @@
    2026,
    "esc",
    "business",
-   "Team Monolith (Codle.io) AI 程式教育平台 企業訪問・NTCU 研修團",
-   "Team Monolith(Codle.io) AI 코딩교육 플랫폼 기업 방문・대만 NTCU 연수단",
-   "Team Monolith (Codle.io), AI Coding Platform — NTCU (Taiwan) delegation"
+   "Team Monolith (Codle.io) AI 程式教育平台 企業訪問・NTCU × 國科會研修團",
+   "Team Monolith(Codle.io) AI 코딩교육 플랫폼 기업 방문・대만 NTCU × NSTC 연수단",
+   "Team Monolith (Codle.io), AI Coding Platform — NTCU × NSTC (Taiwan) delegation"
   ],
   [
    2026,
    "esc",
    "government",
-   "KERIS 首爾 Edtech 軟體實驗室 機構參訪（建國大學）・NTCU 研修團",
-   "KERIS 서울 에듀테크 소프트랩 기관 참관（건국대）・대만 NTCU 연수단",
-   "KERIS Seoul EdTech Software Lab (Konkuk Univ.) — NTCU (Taiwan) delegation"
+   "KERIS 首爾 Edtech 軟體實驗室 機構參訪（建國大學）・NTCU × 國科會研修團",
+   "KERIS 서울 에듀테크 소프트랩 기관 참관（건국대）・대만 NTCU × NSTC 연수단",
+   "KERIS Seoul EdTech Software Lab (Konkuk Univ.) — NTCU × NSTC (Taiwan) delegation"
   ],
   [
    2026,
    "esc",
    "government",
-   "首爾教育大學附小 數位學習課堂觀摩暨校長座談・NTCU 研修團",
-   "서울교대 부설초 디지털 수업 참관·교장 간담회・대만 NTCU 연수단",
-   "SNUE Affiliated Elementary (Korea), Class Observation — NTCU (Taiwan) delegation"
+   "首爾教育大學附小 數位學習課堂觀摩暨校長座談・NTCU × 國科會研修團",
+   "서울교대 부설초 디지털 수업 참관·교장 간담회・대만 NTCU × NSTC 연수단",
+   "SNUE Affiliated Elementary (Korea), Class Observation — NTCU × NSTC (Taiwan) delegation"
   ],
   [
    2026,
    "esc",
    "government",
-   "首爾教育大學(SNUE) 校長 正式會面・NTCU 研修團",
-   "서울교육대학교(SNUE) 총장 공식 면담・대만 NTCU 연수단",
-   "SNUE (Korea), Meeting with the President — NTCU (Taiwan) delegation"
+   "首爾教育大學(SNUE) 校長 正式會面・NTCU × 國科會研修團",
+   "서울교육대학교(SNUE) 총장 공식 면담・대만 NTCU × NSTC 연수단",
+   "SNUE (Korea), Meeting with the President — NTCU × NSTC (Taiwan) delegation"
   ],
   [
    2026,
    "esc",
    "business",
-   "韓國天才教育 Chunjae — Edtech AI 教科書產業交流・NTCU 研修團",
-   "천재교육 에듀테크 AI 교과서 사업 교류 방문・대만 NTCU 연수단",
-   "Chunjae Education (Korea), EdTech AI Textbooks — NTCU (Taiwan) delegation"
+   "韓國天才教育 Chunjae — Edtech AI 教科書產業交流・NTCU × 國科會研修團",
+   "천재교육 에듀테크 AI 교과서 사업 교류 방문・대만 NTCU × NSTC 연수단",
+   "Chunjae Education (Korea), EdTech AI Textbooks — NTCU × NSTC (Taiwan) delegation"
   ],
   [
    2026,
    "esc",
    "business",
-   "Google Korea 企業參訪 — Google for Education 韓國區負責人會面・NTCU 研修團",
-   "Google Korea 기업 방문 — Google for Education 한국 총괄 면담・대만 NTCU 연수단",
-   "Google Korea Company Visit — Meeting with the Google for Education Korea Director — NTCU (Taiwan) delegation"
+   "Google Korea 企業參訪 — Google for Education 韓國區負責人會面・NTCU × 國科會研修團",
+   "Google Korea 기업 방문 — Google for Education 한국 총괄 면담・대만 NTCU × NSTC 연수단",
+   "Google Korea Company Visit — Meeting with the Head of Google for Education Korea — NTCU × NSTC (Taiwan) delegation"
   ],
   [
    2026,
@@ -1885,12 +1885,12 @@
   "Visita del NAER (Taiwán) a Corea — organismos de evaluación internacional y reforma de las becas estatales (NIIED · KICE · KEDI)",
   "Centro de Educación Inteligente de la NTCU (Taiwán) × NSTC, División de Educación Matemática — Delegación de formación EdTech en Seúl",
   "NTCU (Taiwán) × KERIS (Servicio Coreano de Información Educativa y de Investigación) — Firma de MOU",
-  "Team Monolith (Codle.io), plataforma de programación con IA — delegación de la NTCU (Taiwán)",
-  "KERIS, Laboratorio EdTech de Seúl (Univ. Konkuk) — delegación de la NTCU (Taiwán)",
-  "Primaria anexa a la SNUE (Corea), observación de clases digitales — delegación de la NTCU (Taiwán)",
-  "SNUE (Corea), reunión con el rector — delegación de la NTCU (Taiwán)",
-  "Chunjae Education (Corea), libros de texto con IA — delegación de la NTCU (Taiwán)",
-  "Visita a Google Korea — Reunión con el responsable de Google for Education — delegación de la NTCU (Taiwán)",
+  "Team Monolith (Codle.io), plataforma de programación con IA — delegación de la NTCU y el NSTC (Taiwán)",
+  "KERIS, Laboratorio EdTech de Seúl (Univ. Konkuk) — delegación de la NTCU y el NSTC (Taiwán)",
+  "Primaria anexa a la SNUE (Corea), observación de clases digitales — delegación de la NTCU y el NSTC (Taiwán)",
+  "SNUE (Corea), reunión con el rector — delegación de la NTCU y el NSTC (Taiwán)",
+  "Chunjae Education (Corea), libros de texto con IA — delegación de la NTCU y el NSTC (Taiwán)",
+  "Visita a Google Korea — Reunión con la responsable de Google for Education — delegación de la NTCU y el NSTC (Taiwán)",
   "Foro académico internacional Taiwán–Corea de educación matemática con IA (NSTC de Taiwán × Univ. Hongik de Corea)",
   "LOE Perfume — renovación del contrato de distribución offline exclusiva en Taiwán (Yungfan) y registro PIF",
   "Beiming Industry (Taiwán) × Evertech (Corea) — Inspección de fábrica y negociación técnico-comercial",
