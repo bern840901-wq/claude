@@ -18,6 +18,21 @@
   {
    "year": "2026",
    "who": {
+    "zh": "教育部",
+    "ko": "대만 교육부",
+    "en": "Ministry of Education (Taiwan)",
+    "es": "Ministerio de Educación (Taiwán)"
+   },
+   "what": {
+    "zh": "115年AI教育暨數位學習韓國考察團 — 首爾・大邱 6 日・18 人團",
+    "ko": "2026년 AI교육·디지털 학습 한국 시찰단 — 서울·대구 6일·18명",
+    "en": "2026 Korea study delegation on AI education and digital learning — Seoul & Daegu, 6 days, 18 members",
+    "es": "Delegación de estudio 2026 sobre educación con IA y aprendizaje digital — Seúl y Daegu, 6 días, 18 integrantes"
+   }
+  },
+  {
+   "year": "2026",
+   "who": {
     "zh": "法務部矯正署副署長",
     "ko": "대만 법무부 교정서 부서장(차장급)",
     "en": "Deputy Director-General, Agency of Corrections, Ministry of Justice (Taiwan)",
@@ -28,6 +43,21 @@
     "ko": "서울남부구치소 보안 관리 시찰단 — 소장 환담·시설 견학·간담회",
     "en": "Study delegation at Seoul Nambu Detention Center — warden meeting, facility tour, roundtable",
     "es": "Delegación de estudio en el Centro de Detención de Seúl Nambu — reunión con el director, visita de instalaciones, coloquio"
+   }
+  },
+  {
+   "year": "2024–2026",
+   "who": {
+    "zh": "經濟部國際貿易署（TITA）× 外貿協會（TAITRA）",
+    "ko": "대만 경제부 국제무역서(TITA) × 대만무역센터(TAITRA)",
+    "en": "International Trade Administration (TITA), Ministry of Economic Affairs (Taiwan) × TAITRA (Taiwan External Trade Development Council)",
+    "es": "Administración de Comercio Internacional (TITA), Ministerio de Asuntos Económicos (Taiwán) × TAITRA (Consejo de Desarrollo del Comercio Exterior de Taiwán)"
+   },
+   "what": {
+    "zh": "臺灣食品暨生活用品採購洽談會（首爾） — 2024・2025 參展廠商駐攤口譯・2026 主辦單位機動口譯（2020 年起與首爾臺灣貿易中心長期合作）",
+    "ko": "대만식품 라이프스타일 비즈니스 상담회(서울) — 2024·2025년 참가 기업 부스 통역・2026년 주최 측 기동 통역(2020년부터 서울 대만무역센터와 장기 협력)",
+    "en": "Taiwan Food & Lifestyle Products Sourcing Meeting, Seoul — booth interpreter for exhibitors in 2024 and 2025, roving interpreter for the organizers in 2026 (long-term partner of TAITRA's Seoul office since 2020)",
+    "es": "Encuentro de Compras de Alimentos y Productos de Estilo de Vida de Taiwán (Seúl) — intérprete de stand para expositores en 2024 y 2025, intérprete itinerante de la organización en 2026 (colaboración estable con la oficina de TAITRA en Seúl desde 2020)"
    }
   },
   {
@@ -48,16 +78,16 @@
   {
    "year": "2026",
    "who": {
-    "zh": "教育部",
-    "ko": "대만 교육부",
-    "en": "Ministry of Education (Taiwan)",
-    "es": "Ministerio de Educación (Taiwán)"
+    "zh": "國家教育研究院（NAER）",
+    "ko": "대만 국가교육연구원(NAER)",
+    "en": "National Academy for Educational Research (NAER, Taiwan)",
+    "es": "Academia Nacional de Investigación Educativa (NAER, Taiwán)"
    },
    "what": {
-    "zh": "115年AI教育暨數位學習韓國考察團 — 首爾・大邱 6 日・18 人團",
-    "ko": "2026년 AI교육·디지털 학습 한국 시찰단 — 서울·대구 6일·18명",
-    "en": "2026 Korea study delegation on AI education and digital learning — Seoul & Daegu, 6 days, 18 members",
-    "es": "Delegación de estudio 2026 sobre educación con IA y aprendizaje digital — Seúl y Daegu, 6 días, 18 integrantes"
+    "zh": "訪韓 — NIIED・KICE・KEDI 三場拜會",
+    "ko": "방한 — NIIED·KICE·KEDI 3개 기관 방문",
+    "en": "Korea visit — NIIED · KICE · KEDI",
+    "es": "Visita a Corea — NIIED · KICE · KEDI"
    }
   },
   {
@@ -73,21 +103,6 @@
     "ko": "충청남도청 「2019 탈석탄 기후변화 대응 국제 컨퍼런스」 — 수행 통역(같은 분, 이후 문화부 차관 겸 TAICCA 이사장)",
     "en": "2019 International Conference on Coal Phase-out and Climate Change Response, hosted by the Chungcheongnam-do Provincial Government (Korea) — escort interpreting (the same official, later Deputy Minister of Culture and TAICCA Chairperson)",
     "es": "Conferencia Internacional sobre el Abandono del Carbón y la Respuesta al Cambio Climático 2019, organizada por el Gobierno Provincial de Chungcheongnam-do (Corea) — interpretación de acompañamiento (la misma autoridad, después viceministra de Cultura y presidenta de TAICCA)"
-   }
-  },
-  {
-   "year": "2026",
-   "who": {
-    "zh": "Google Korea",
-    "ko": "Google Korea",
-    "en": "Google Korea",
-    "es": "Google Korea"
-   },
-   "what": {
-    "zh": "Google for Education 韓國區負責人會面・AI in Education 工作坊（NTCU 研修團・教育部考察團）",
-    "ko": "Google for Education 한국 총괄 면담·AI in Education 워크숍(NTCU 연수단·교육부 시찰단)",
-    "en": "Meeting with the Google for Education Korea Director · AI in Education workshop (NTCU and Ministry of Education delegations)",
-    "es": "Reunión con el responsable de Google for Education en Corea · taller AI in Education (delegaciones de la NTCU y del Ministerio de Educación)"
    }
   },
   {
@@ -108,16 +123,16 @@
   {
    "year": "2026",
    "who": {
-    "zh": "國家教育研究院（NAER）",
-    "ko": "대만 국가교육연구원(NAER)",
-    "en": "National Academy for Educational Research (NAER, Taiwan)",
-    "es": "Academia Nacional de Investigación Educativa (NAER, Taiwán)"
+    "zh": "Google Korea",
+    "ko": "Google Korea",
+    "en": "Google Korea",
+    "es": "Google Korea"
    },
    "what": {
-    "zh": "訪韓 — NIIED・KICE・KEDI 三場拜會",
-    "ko": "방한 — NIIED·KICE·KEDI 3개 기관 방문",
-    "en": "Korea visit — NIIED · KICE · KEDI",
-    "es": "Visita a Corea — NIIED · KICE · KEDI"
+    "zh": "Google for Education 韓國區負責人會面・AI in Education 工作坊（NTCU 研修團・教育部考察團）",
+    "ko": "Google for Education 한국 총괄 면담·AI in Education 워크숍(NTCU 연수단·교육부 시찰단)",
+    "en": "Meeting with the Google for Education Korea Director · AI in Education workshop (NTCU and Ministry of Education delegations)",
+    "es": "Reunión con el responsable de Google for Education en Corea · taller AI in Education (delegaciones de la NTCU y del Ministerio de Educación)"
    }
   }
  ],
@@ -222,9 +237,9 @@
    2026,
    "mtg",
    "business",
-   "臺灣食品暨生活用品採購洽談會（首爾）經濟部國際貿易署 TITA × 外貿協會 TAITRA 口譯",
-   "대만식품 라이프스타일 비즈니스 상담회(서울) 대만 경제부 국제무역서(TITA) × 대만무역센터(TAITRA) 통역",
-   "Taiwan Food & Lifestyle Products Sourcing Meeting Seoul — TITA (Taiwan's Int'l Trade Administration) × TAITRA"
+   "經濟部國際貿易署（TITA）× 外貿協會（TAITRA） — 臺灣食品暨生活用品採購洽談會（首爾）主辦單位機動口譯",
+   "대만 경제부 국제무역서(TITA) × 대만무역센터(TAITRA) — 대만식품 라이프스타일 비즈니스 상담회(서울) 주최 측 기동 통역",
+   "International Trade Administration (TITA), Ministry of Economic Affairs (Taiwan) × TAITRA — Taiwan Food & Lifestyle Products Sourcing Meeting, Seoul · roving interpreter for the organizers"
   ],
   [
    2026,
@@ -510,9 +525,9 @@
    2025,
    "mtg",
    "business",
-   "首爾 TAITRA 臺灣食品商機媒合團（中華滷味）",
-   "TAITRA 서울 대만 식품 상담회（중화 루웨이）",
-   "TAITRA Seoul — Taiwan Food Matchmaking"
+   "經濟部國際貿易署（TITA）× 外貿協會（TAITRA） — 臺灣食品商機媒合團（首爾）參展廠商駐攤口譯（中華滷味）",
+   "대만 경제부 국제무역서(TITA) × 대만무역센터(TAITRA) — 대만 식품 상담회(서울) 참가 기업 부스 통역(중화 루웨이)",
+   "International Trade Administration (TITA), Ministry of Economic Affairs (Taiwan) × TAITRA — Taiwan Food Matchmaking, Seoul · booth interpreter for an exhibitor"
   ],
   [
    2025,
@@ -590,9 +605,9 @@
    2024,
    "mtg",
    "business",
-   "首爾臺灣食品商機媒合團 它好好國際",
-   "서울 대만 식품 상담회（它好好 국제）",
-   "Seoul Taiwan Food Matchmaking — Taho Int'l"
+   "經濟部國際貿易署（TITA）× 外貿協會（TAITRA） — 臺灣食品商機媒合團（首爾）參展廠商駐攤口譯（它好好國際）",
+   "대만 경제부 국제무역서(TITA) × 대만무역센터(TAITRA) — 대만 식품 상담회(서울) 참가 기업 부스 통역(它好好 국제)",
+   "International Trade Administration (TITA), Ministry of Economic Affairs (Taiwan) × TAITRA — Taiwan Food Matchmaking, Seoul · booth interpreter for an exhibitor (Taho Int'l)"
   ],
   [
    2024,
@@ -1854,7 +1869,7 @@
   "Instituto de Desarrollo de Funcionarios de Gobiernos Locales (LOGODI), Ministerio del Interior y Seguridad (Corea) — delegación del Instituto de Desarrollo del Servicio Civil (CSDI), Dirección General de Administración de Personal del Yuan Ejecutivo (Taiwán)",
   "Instituto Nacional de Desarrollo de Recursos Humanos (NHI), Ministerio de Gestión de Personal (Corea) — delegación del Instituto de Desarrollo del Servicio Civil (CSDI), Dirección General de Administración de Personal del Yuan Ejecutivo (Taiwán)",
   "Presidenta de TAICCA (Taiwán), a la vez viceministra de Cultura — Festival Internacional de Cine de Busan (BIFF) / Mercado Asiático de Contenidos y Cine (ACFM) · acompañamiento e interpretación susurrada",
-  "Encuentro de Compras de Alimentos y Productos de Estilo de Vida de Taiwán (Seúl) — TITA (Administración de Comercio Internacional de Taiwán) × TAITRA",
+  "Administración de Comercio Internacional (TITA), Ministerio de Asuntos Económicos (Taiwán) × TAITRA — Encuentro de Compras de Alimentos y Productos de Estilo de Vida de Taiwán (Seúl) · intérprete itinerante de la organización",
   "Oficina de Taipéi en Corea — renovación de alquiler de funcionario diplomático y traspaso a nuevo funcionario; representación en coreano",
   "Chosun Ilbo (Corea) × Taipei Music Center — entrevista exclusiva en video al presidente (ZH→KO consecutiva)",
   "CORINGCO — negociación de representación en Taiwán (Yungfan), consecutiva ZH↔KO",
@@ -1890,7 +1905,7 @@
   "Tienda «Corazón Cálido» de Seúl — Depto. contra la soledad («The Borderless World»)",
   "«Seúl sin soledad» — Centro de llamadas 120 («The Borderless World»)",
   "Dewei (Taiwán) × MORE ON ACADEMY (Corea) — Seminario de peluquería en Gangnam",
-  "TAITRA Seúl — Rueda de negocios de alimentos de Taiwán",
+  "Administración de Comercio Internacional (TITA), Ministerio de Asuntos Económicos (Taiwán) × TAITRA — Rueda de negocios de alimentos de Taiwán (Seúl) · intérprete de stand para un expositor",
   "Documental TCCF de TAICCA (Taiwán) — Subtítulos (COR→CH)",
   "Vicepresidente de la Corporación del Aeropuerto Internacional de Taoyuan (TIAC, Taiwán) — Visita a la Corporación del Aeropuerto Internacional de Incheon (IIAC)",
   "Presidenta de TAICCA (Taiwán), a la vez viceministra de Cultura — Festival Internacional de Cine de Busan (BIFF) / Mercado Asiático de Contenidos y Cine (ACFM) · programa oficial de cuatro días, acompañamiento en reuniones de alto nivel",
@@ -1900,7 +1915,7 @@
   "D.O. Monsant Grand Tasting Seúl — Interpretación ES-COR",
   "KCTU (Corea) × Sindicatos de Taiwán — Justicia climática",
   "Jing-Chi Estética (Taiwán) × K-BEAUTY EXPO Seúl",
-  "Rueda de negocios de alimentos de Taiwán en Seúl — Taho Int.",
+  "Administración de Comercio Internacional (TITA), Ministerio de Asuntos Económicos (Taiwán) × TAITRA — Rueda de negocios de alimentos de Taiwán (Seúl) · intérprete de stand para un expositor (Taho Int.)",
   "CPBL de Taiwán × KBO de Corea — Visita oficial",
   "Univ. Shih Chien (Taiwán) — Visita de la Facultad de Diseño a Corea",
   "Orquesta Nacional China de Taiwán — Gira por Corea",
