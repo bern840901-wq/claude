@@ -1807,7 +1807,7 @@ function sticksOut(node) {
   var el = node.parentElement; if (!el) return false;
   var blk = blockOf(el); var cs = getComputedStyle(blk);
   if (/nowrap|pre/.test(cs.whiteSpace) || !flatChain(blk)) return false;
-  var r = blk.getBoundingClientRect(); if (!r.width) return false;
+  var r = blk.getBoundingClientRect(); if (r.width < 24) return false;   // hidden helper text (1px boxes) is left alone
   var right = r.right - parseFloat(cs.paddingRight) - parseFloat(cs.borderRightWidth) + 1.5;
   var left = r.left + parseFloat(cs.paddingLeft) + parseFloat(cs.borderLeftWidth) - 1.5;
   var rg = document.createRange(); rg.selectNodeContents(node);
