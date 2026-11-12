@@ -1474,7 +1474,9 @@ const TERMS = [
 "國際會議",
 "出國報告書",
 "臺南市政府",
-"官方行程"
+"官方行程",
+"後任",
+"其口譯"
 ];
 // Multi-word names that must stay on one line, any language.
 const NAMES = [
@@ -1718,6 +1720,8 @@ function lbInfo(s, opts) {
   });
   // country marker + institution (대만 행정원), person + title (양수륜 회장)
   each(/(?:^|[\s・·(（])(?:대만|한국|주한|대만의) (?=\S)/g, s, m => tieSpace(n, m.index + m[0].length - 1));
+  // a one-character Chinese word right after an opening bracket stays with what follows: （自 2019 年…
+  each(/[（(][\u3400-\u9fff] (?=\S)/g, s, m => tieSpace(n, m.index + m[0].length - 1));
   each(/[가-힣]{2,4} (?=(?:회장|부회장|이사장|사장|부사장|시장|부시장|군수|구청장|교장|총장|원장|대표|차관|장관|대사|국장|처장|청장|의원)(?:$|[\s,·・)]))/g, s, m => tieSpace(n, m.index + m[0].length - 1));
 
   // 9. no short last line: the last word (or Chinese unit) stays with the one before
