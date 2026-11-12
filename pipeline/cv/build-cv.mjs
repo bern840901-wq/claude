@@ -201,6 +201,20 @@ const fmt = (v, boldRe) => {
   if (b) out += '</b>';
   return out;
 };
+// Copying text gives the plain text back: the invisible line-break characters
+// stay on the page and never reach the clipboard.
+document.addEventListener('copy', function (e) {
+  var sel = window.getSelection && window.getSelection();
+  if (!sel || sel.isCollapsed || !e.clipboardData) return;
+  var text = sel.toString();
+  if (!/[⁠​ ]/.test(text)) return;
+  var clean = function (s) { return s.replace(/[⁠​]/g, '').replace(/ /g, ' '); };
+  var div = document.createElement('div');
+  for (var i = 0; i < sel.rangeCount; i++) div.appendChild(sel.getRangeAt(i).cloneContents());
+  e.clipboardData.setData('text/plain', clean(text));
+  e.clipboardData.setData('text/html', clean(div.innerHTML));
+  e.preventDefault();
+});
 const HTML_LANG = { zh:'zh-Hant', ko:'ko', en:'en', es:'es' };
 function render(l){
   const d = DATA[l];
