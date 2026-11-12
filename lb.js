@@ -1474,7 +1474,12 @@ const TERMS = [
 "臺南市政府",
 "官方行程",
 "後任",
-"其口譯"
+"其口譯",
+"國立大學英語主修",
+"臺韓口筆譯員",
+"赴韓溝通顧問",
+"跨文化講座講師",
+"慶熙大學韓語博士候選人"
 ];
 // Multi-word names that must stay on one line, any language.
 const NAMES = [
@@ -1600,7 +1605,22 @@ const NAMES = [
  "한국 총괄 면담",
  "계약 연장",
  "국제 컨퍼런스",
- "한중 번역"
+ "한중 번역",
+ "대만인 통번역사",
+ "대만 비즈니스 커뮤니케이션 컨설턴트",
+ "문화 간 이해 강연자",
+ "경희대학교 한국어학 박사수료",
+ "학부 영어 전공",
+ "스페인어 고급(C1)",
+ "Communication Consultant",
+ "PhD Candidate",
+ "Kyung Hee University",
+ "C1 Spanish",
+ "Asesor de comunicación",
+ "grado en inglés",
+ "español C1",
+ "Doctorando en Lingüística Coreana",
+ "BA in English, C1 Spanish"
 ];
 
 const HAN = /[㐀-鿿豈-﫿]/;
