@@ -1831,6 +1831,7 @@ function apply(raw, koPage, large, level) {
       if (n.has(i) && (level === 0 || (HANC.test(a) && HANC.test(c)) || (WORDC.test(a) && WORDC.test(c) && !HANC.test(a) && !HANC.test(c)))) out += WJ;
       else if (!koPage && HG.test(a) && HG.test(c)) out += WJ;   // Korean words stay whole on every page
       else if ('・·/'.indexOf(a) >= 0) out += '\u200b';         // keep-all gives no break after an unspaced ・ · /
+      else if (a === '&' && (HG.test(c) || HANC.test(c))) out += '\u200b';   // …콘텐츠&필름마켓: a long Korean name may break after its &
     }
     if (c === ' ' && level === 0 && n.has(i + 1)) out += NBSP; else out += c;
   }
@@ -1860,6 +1861,33 @@ function sticksOut(node) {
   for (var k = 0; k < rs.length; k++) if (rs[k].width > 0 && (rs[k].right > right || rs[k].left < left)) return true;
   return false;
 }
+// Boxes that allow emergency breaks (overflow-wrap: anywhere / break-word) never stick
+// out: the browser cuts a too-long tied unit wherever it must ("(ACFM│)"). Such a forced
+// cut — at a gap the rules forbid, between two letters, or before closing punctuation —
+// also calls for looser rules.
+function forcedBreak(node) {
+  var el = node.parentElement; if (!el) return false;
+  var cs = getComputedStyle(el); if (!/anywhere|break-word/.test(cs.overflowWrap + ' ' + cs.wordWrap) && cs.wordBreak !== 'break-all') return false;
+  var v = node.nodeValue; if (v.length > 600) return false;
+  var raw = rawOf.get(node) || v.replace(INVIS, '');
+  var n = decodeN(lbInfo(raw, { latinTail: false, tail: !large.get(node.parentNode) }));
+  var rg = document.createRange(), ri = 0, lastMid = null, prev = '';
+  for (var i = 0; i < v.length; i++) {
+    var ch = v[i]; if (ch === '⁠' || ch === '​') continue;
+    if (!/s/.test(ch)) {
+      rg.setStart(node, i); rg.setEnd(node, i + 1); var rs = rg.getClientRects();
+      if (rs.length && rs[0].width > 0) {
+        var mid = rs[0].top + rs[0].height / 2;
+        if (lastMid !== null && mid - lastMid > Math.max(6, rs[0].height * 0.6) && prev && !/s/.test(raw[ri - 1] || ' ')) {
+          if (n.has(ri) || (/[A-Za-z0-9]/.test(prev) && /[A-Za-z0-9]/.test(ch)) || /^[)）」』,.、。:;!?]$/.test(ch)) return true;
+        }
+        lastMid = mid; prev = ch;
+      }
+    }
+    ri++;
+  }
+  return false;
+}
 function queueCheck(node) { checkQ.push(node); if (checkQueued) return; checkQueued = true; requestAnimationFrame(function () { requestAnimationFrame(runChecks); }); }
 // a box that is still sliding or growing (an opening card) is measured once it has settled
 var tries = new WeakMap(), lastW = new WeakMap();
@@ -1880,7 +1908,7 @@ function runChecks() {
     var bw = (function () { var bl = blockOf(t.parentElement); return bl ? Math.round(bl.getBoundingClientRect().width * 10) : 0; })();
     var settled = lastW.get(t) === bw; lastW.set(t, bw);
     if (moving(t) || !settled) { var n = (tries.get(t) || 0) + 1; tries.set(t, n); if (n < 25) later.push(t); continue; }
-    var L = lvl.get(t) || 0; if (L >= 2 || !sticksOut(t)) continue;
+    var L = lvl.get(t) || 0; if (L >= 2 || (!sticksOut(t) && !forcedBreak(t))) continue;
     L++; lvl.set(t, L);
     var p = t.parentNode, next = apply(rawOf.get(t) || t.nodeValue.replace(INVIS, ''), koPage, large.get(p), L);
     done.set(t, next); if (next !== t.nodeValue) t.nodeValue = next;
