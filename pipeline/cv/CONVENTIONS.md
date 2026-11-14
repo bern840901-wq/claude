@@ -70,6 +70,8 @@
 - 依「替對方翻譯的內容領域」分四欄，不看機構身分；每個機關只放一欄（教育部歸教育、Google Korea 歸教育、數位發展部的能源技術交流歸經貿）。四欄依序：教育・學術／교육·학술／Education & Academia／Educación y academia；政府・公共事務／정부·공공／Government & Public Affairs／Gobierno y asuntos públicos；影視・文化・體育／영상·문화·스포츠／Media, Culture & Sports／Medios, cultura y deporte；經貿・產業／무역·산업／Trade & Industry／Comercio e industria。
 - 每欄先放 tier 1（橘點），再放 tier 2；韓國對口單位寫在副標「× 韓國機關」（× 仁川國際機場公社、× 韓國職棒 KBO）。
 - `cv_data.json` 的 `CLIENTS` 與 `home/index.html` 的 `CLIENTS` 內容要完全一致（CV 網頁讀前者，首頁讀後者）。
+- 區塊名（2026-11-14 定案）：服務實績／수행 실적／Organizations Served／Instituciones y empresas；CV 標題 服務實績 / ORGANIZATIONS SERVED・수행 실적 / ORGANIZATIONS SERVED・ORGANIZATIONS SERVED・INSTITUCIONES Y EMPRESAS。不用「客戶／Clients／Clientes」：牆上有不少是接待方或對口單位，不是委託我的人。導覽列：中「服務實績」、韓「수행 실적」。
+- 方向標示：英西文一律 ZH／KO（不寫 KR）；雙向寫 ↔（KO↔ZH、한↔중）。
 
 ## 4. 學歷區
 

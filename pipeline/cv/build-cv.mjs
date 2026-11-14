@@ -21,7 +21,7 @@ const UI = {
     zh: '長期合作 / LONG-TERM', ko: '장기 협력 / LONG-TERM', en: 'LONG-TERM ENGAGEMENTS', es: 'COLABORACIONES DE LARGO PLAZO' },
   interpretedFor: { zh: '曾服務對象 / INTERPRETED FOR', ko: '주요 통역 대상 / INTERPRETED FOR', en: 'INTERPRETED FOR', es: 'HE INTERPRETADO PARA' },
   work: { zh: S.zh.tlHeading + ' / WORK', ko: S.ko.tlHeading + ' / WORK', en: 'WORK', es: 'TRAYECTORIA' },
-  clients: { zh: S.zh.clientsLabel + ' / CLIENTS', ko: S.ko.clientsLabel + ' / CLIENTS', en: 'SELECTED CLIENTS', es: 'CLIENTES DESTACADOS' },
+  clients: { zh: S.zh.clientsLabel + ' / ORGANIZATIONS SERVED', ko: S.ko.clientsLabel + ' / ORGANIZATIONS SERVED', en: 'ORGANIZATIONS SERVED', es: 'INSTITUCIONES Y EMPRESAS' },
   education: { zh: S.zh.eduDeg + ' / EDUCATION', ko: S.ko.eduDeg + ' / EDUCATION', en: 'EDUCATION', es: 'FORMACIÓN' },
   langstudy: { zh: S.zh.langStudyLabel + ' / LANGUAGE STUDY', ko: S.ko.langStudyLabel + ' / LANGUAGE STUDY', en: 'LANGUAGE STUDY', es: 'ESTUDIOS DE IDIOMAS' },
   research: { zh: '研究發表 / RESEARCH', ko: '연구 실적 / RESEARCH', en: 'RESEARCH', es: 'INVESTIGACIÓN' },
